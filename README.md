@@ -21,3 +21,7 @@ Used for Go, Python and some Ruby.
 - github.com/golangci/golangci-lint/cmd/golangci-lint@latest
 - golang.org/x/tools/cmd/goimports@latest
 - github.com/daixiang0/gci@latest
+
+# Screenshot
+
+![Screenshot](doc/screenshot.png)

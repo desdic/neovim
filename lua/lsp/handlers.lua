@@ -43,31 +43,23 @@ end
 
 local function lsp_keymaps(bufnr)
     local opts = {noremap = true, silent = true}
-    vim.api.nvim_set_keymap("n", "gd", " <cmd>lua vim.lsp.buf.definition()<CR>",
-                            {})
-    vim.api.nvim_set_keymap("n", "gD",
-                            " <cmd>lua vim.lsp.buf.declaration()<CR>", {})
-    vim.api.nvim_set_keymap("n", "gr", " <cmd>lua vim.lsp.buf.references()<CR>",
-                            {})
-    vim.api.nvim_set_keymap("n", "gi",
-                            " <cmd>lua vim.lsp.buf.implementation()<CR>", {})
-    vim.api.nvim_set_keymap("n", "K", " <cmd>lua vim.lsp.buf.hover()<CR>", {})
-    vim.api.nvim_set_keymap("n", "<S-Tab>",
-                            '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>',
-                            opts)
-    vim.api.nvim_set_keymap("n", "<Tab>",
-                            '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>',
-                            opts)
-    vim.api.nvim_set_keymap("n", "gl",
-                            '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })<CR>',
-                            opts)
-    vim.api.nvim_set_keymap("n", "<Leader>gr",
-                            "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-    vim.api.nvim_set_keymap("n", "<Leader>ca",
-                            "<cmd>lua vim.lsp.buf.code_action()<CR>",
-                            {noremap = true})
-    vim.api.nvim_set_keymap("n", "<Leader>gs",
-                            "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
+    local keymap = vim.api.nvim_set_keymap
+    keymap("n", "gd", " <cmd>lua vim.lsp.buf.definition()<CR>", {})
+    keymap("n", "gD", " <cmd>lua vim.lsp.buf.declaration()<CR>", {})
+    keymap("n", "gr", " <cmd>lua vim.lsp.buf.references()<CR>", {})
+    keymap("n", "gi", " <cmd>lua vim.lsp.buf.implementation()<CR>", {})
+    keymap("n", "K", " <cmd>lua vim.lsp.buf.hover()<CR>", {})
+    keymap("n", "<S-Tab>",
+           '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
+    keymap("n", "<Tab>",
+           '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
+    keymap("n", "gl",
+           '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })<CR>',
+           opts)
+    keymap("n", "<Leader>gr", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+    keymap("n", "<Leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>",
+           {noremap = true})
+    keymap("n", "<Leader>gs", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
     vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])
     vim.cmd(
         [[ command! FormatWrite execute 'lua vim.lsp.buf.formatting_sync(nil, 1000)' ]])

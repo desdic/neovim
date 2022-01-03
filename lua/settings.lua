@@ -9,19 +9,20 @@ local indent = 2
 
 -- vim.lsp.set_log_level("debug")
 
-global.mapleader = ',' -- Set leader
+global.mapleader = "," -- Set leader
+global.maplocalleader = "," -- Set local leader
 global.shada = "NONE"
 
 -- If using a Neovim version earlier than 0.6.0 (nathom/filetype.nvim)
 global.did_load_filetypes = 1
 
-option.shortmess = option.shortmess .. 'I' -- Turn off splash
-option.shortmess = option.shortmess .. 'c' -- Avoid showing message extra message when using completion
+option.shortmess = option.shortmess .. "I" -- Turn off splash
+option.shortmess = option.shortmess .. "c" -- Avoid showing message extra message when using completion
 
 option.cmdheight = 2 -- Set height to prevent 'press enter to continue'
 option.hidden = true -- Allow to switch buffer without saving
-option.iskeyword = option.iskeyword:gsub('_,', '') -- Setup word boundry on _
---option.completeopt = "menuone,noinsert,noselect"
+option.iskeyword = option.iskeyword:gsub("_,", "") -- Setup word boundry on _
+-- option.completeopt = "menuone,noinsert,noselect"
 option.completeopt = "menuone,noselect"
 option.updatetime = 300 -- Faster completion
 
@@ -45,12 +46,12 @@ option.undofile = true
 option.undolevels = 100
 option.undoreload = 100
 
-window_option.signcolumn = 'number' -- Always show signcolumn
+window_option.signcolumn = "number" -- Always show signcolumn
 window_option.number = true -- Show numbers
 window_option.relativenumber = true -- Show relative numbers
 window_option.signcolumn = "yes" -- Make room for gitsigns + numbers
 
-window_option.listchars = 'tab:▸ ,trail:·,nbsp:_,eol:↴' -- Hidden chars
+window_option.listchars = "tab:▸ ,trail:·,nbsp:_,eol:↴" -- Hidden chars
 
 window_option.list = true -- Show hidden chars
 
@@ -66,20 +67,19 @@ opt.termguicolors = true
 vim.wo.colorcolumn = "99999"
 
 -- Disable healthcheck
-global.loaded_perl_provider=0
+global.loaded_perl_provider = 0
 -- global.loaded_python_provider=0
 
-
-cmd 'syntax enable'
+cmd("syntax enable")
 -- option.background = 'dark'
 option.termguicolors = true
 window_option.cursorline = true
-cmd 'colorscheme catppuccin'
+cmd("colorscheme catppuccin")
 
 cmd("set noswapfile")
 cmd("filetype plugin on")
 
 -- Fix background in diagnostics and floating by using catppuccin1 as BG
 -- Would like to use #1E1E28 but since LspInfo doesn't have borders so I have chosen #1B1923
-vim.cmd [[ highlight DiagnosticError guibg=#1B1923 ]]
-vim.cmd [[ highlight NormalFloat guibg=#1B1923 ]]
+vim.cmd([[ highlight DiagnosticError guibg=#1B1923 ]])
+vim.cmd([[ highlight NormalFloat guibg=#1B1923 ]])

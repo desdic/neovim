@@ -17,8 +17,15 @@ if not handok then
 end
 
 local myconfigs = {
-    "bashls", "yamlls", "pyright", "solargraph", "gopls", "dockerls", "clangd",
-    "sumneko_lua", "jsonls"
+    ["bashls"] = true,
+    ["yamlls"] = true,
+    ["pyright"] = true,
+    ["solargraph"] = true,
+    ["gopls"] = true,
+    ["dockerls"] = true,
+    ["clangd"] = true,
+    ["sumneko_lua"] = true,
+    ["jsonls"] = true
 }
 
 local myservers = {
@@ -34,12 +41,6 @@ for _, myserver in ipairs(myservers) do
     end
 end
 
-local function has_config(tab, val)
-    for _, value in ipairs(tab) do if value == val then return true end end
-
-    return false
-end
-
 -- Register a handler that will be called for all installed servers.
 -- Alternatively, you may also register handlers on specific server instances instead (see example below).
 lsp_installer.on_server_ready(function(server)
@@ -49,7 +50,7 @@ lsp_installer.on_server_ready(function(server)
         debounce_text_changes = 150
     }
 
-    if has_config(myconfigs, server.name) then
+    if myconfigs[server.name] then
         local ok, srvopts = pcall(require, "lsp.settings." .. server.name)
         if not ok then
             vim.notify("Unable to require lsp.settings." .. server.name)

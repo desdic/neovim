@@ -4,26 +4,26 @@ if not ok then
     return
 end
 
-local ok, cmplsp = pcall(require, "cmp_nvim_lsp")
-if not ok then
+local cmpok, cmplsp = pcall(require, "cmp_nvim_lsp")
+if not cmpok then
     vim.notify("Unable to require cmp_nvim_lsp")
     return
 end
 
-local ok, lspkind = pcall(require, "lspkind")
-if not ok then
+local kindok, lspkind = pcall(require, "lspkind")
+if not kindok then
     vim.notify("Unable to require lspkind")
     return
 end
 
-local ok, compare = pcall(require, "cmp.config.compare")
-if not ok then
+local configok, compare = pcall(require, "cmp.config.compare")
+if not configok then
     vim.notify("Unable to require cmp.config.compare")
     return
 end
 
-local ok, i = pcall(require, "config.icons")
-if not ok then
+local iconok, i = pcall(require, "config.icons")
+if not iconok then
     vim.notify("Unable to require config.icons")
     return
 end

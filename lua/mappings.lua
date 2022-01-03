@@ -68,8 +68,6 @@ keymap("n", "<Leader>notes",
        ':lua require("config.telescope").grep_notes()<CR>', {noremap = true})
 
 keymap("n", "<Leader>p", ":Telescope diagnostics bufnr=0<CR>", {})
-keymap("n", "<Leader>s",
-       ':lua require("telescope.builtin").lsp_document_symbols()<CR>', {})
 keymap("n", "<Leader>bp", ":Telescope neoclip unnamed<CR>", {})
 -- }}
 

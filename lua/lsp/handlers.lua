@@ -60,6 +60,8 @@ local function lsp_keymaps(bufnr)
     keymap("n", "<Leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>",
            {noremap = true})
     keymap("n", "<Leader>gs", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
+    keymap("n", "<Leader>s",
+           ':lua require("telescope.builtin").lsp_document_symbols()<CR>', {})
     vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])
     vim.cmd(
         [[ command! FormatWrite execute 'lua vim.lsp.buf.formatting_sync(nil, 1000)' ]])

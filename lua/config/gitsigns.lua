@@ -1,6 +1,6 @@
 local ok, gitsigns = pcall(require, "gitsigns")
 if not ok then
-    vim.notify("Unable to require gitsigns")
+    vim.notify("Unable to require gitsigns", "error")
     return
 end
 

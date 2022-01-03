@@ -1,12 +1,12 @@
 local ok, ts = pcall(require, "telescope")
 if not ok then
-    vim.notify("Unable to require telescope")
+    vim.notify("Unable to require telescope", "error")
     return
 end
 
-local ok, actions = pcall(require, "telescope.actions")
-if not ok then
-    vim.notify("Unable to require telescope.actions")
+local actionok, actions = pcall(require, "telescope.actions")
+if not actionok then
+    vim.notify("Unable to require telescope.actions", "error")
     return
 end
 

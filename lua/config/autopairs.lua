@@ -1,6 +1,6 @@
 local ok, ap = pcall(require, "nvim-autopairs")
 if not ok then
-    vim.notify("Unable to require nvim-autopairs")
+    vim.notify("Unable to require nvim-autopairs", "error")
     return
 end
 

@@ -100,6 +100,8 @@ return packer.startup({
         use({"golang/vscode-go"})
         use({"rafamadriz/friendly-snippets"})
 
+        use({"goolord/alpha-nvim"})
+
         -- run sync on installation
         if packer_bootstrap then require("packer").sync() end
     end,

@@ -1,6 +1,6 @@
 local ok, focus = pcall(require, "focus")
 if not ok then
-    vim.notify("Unable to require focus")
+    vim.notify("Unable to require focus", "error")
     return
 end
 

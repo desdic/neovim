@@ -1,12 +1,12 @@
 local ok, lspkind = pcall(require, "lspkind")
 if not ok then
-    vim.notify("Unable to require lspkind")
+    vim.notify("Unable to require lspkind", "error")
     return
 end
 
-local ok, i = pcall(require, "config.icons")
-if not ok then
-    vim.notify("Unable to require config.icons")
+local iconsok, i = pcall(require, "config.icons", "error")
+if not iconsok then
+    vim.notify("Unable to require config.icons", "error")
     return
 end
 

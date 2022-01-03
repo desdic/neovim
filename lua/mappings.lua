@@ -62,6 +62,8 @@ keymap("n", "<Leader>fb", ':lua require("telescope.builtin").buffers()<CR>',
        opts)
 keymap("n", "<Leader>fh", ':lua require("telescope.builtin").help_tags()<CR>',
        opts)
+keymap("n", "<Leader>fn",
+       ':lua require("telescope").extensions.notify.notify({})<CR>', opts)
 keymap("n", "<Leader>fo",
        ':lua require("telescope.builtin").tags{ only_current_buffer = true }<CR>',
        opts)

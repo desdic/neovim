@@ -1,30 +1,35 @@
 local ok, cmp = pcall(require, "cmp")
 if not ok then
-    vim.notify("Unable to require cmp", "error")
+    vim.notify("Unable to require cmp", vim.lsp.log_levels.ERROR,
+               {title = "Plugin error"})
     return
 end
 
 local cmpok, cmplsp = pcall(require, "cmp_nvim_lsp")
 if not cmpok then
-    vim.notify("Unable to require cmp_nvim_lsp", "error")
+    vim.notify("Unable to require cmp_nvim_lsp", vim.lsp.log_levels.ERROR,
+               {title = "Plugin error"})
     return
 end
 
 local kindok, lspkind = pcall(require, "lspkind")
 if not kindok then
-    vim.notify("Unable to require lspkind", "error")
+    vim.notify("Unable to require lspkind", vim.lsp.log_levels.ERROR,
+               {title = "Plugin error"})
     return
 end
 
 local configok, compare = pcall(require, "cmp.config.compare")
 if not configok then
-    vim.notify("Unable to require cmp.config.compare", "error")
+    vim.notify("Unable to require cmp.config.compare", vim.lsp.log_levels.ERROR,
+               {title = "Plugin error"})
     return
 end
 
 local iconok, i = pcall(require, "config.icons")
 if not iconok then
-    vim.notify("Unable to require config.icons", "error")
+    vim.notify("Unable to require config.icons", vim.lsp.log_levels.ERROR,
+               {title = "Config error"})
     return
 end
 

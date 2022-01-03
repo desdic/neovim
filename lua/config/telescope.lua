@@ -1,12 +1,21 @@
 local ok, ts = pcall(require, "telescope")
 if not ok then
-    vim.notify("Unable to require telescope", "error")
+    vim.notify("Unable to require telescope", vim.lsp.log_levels.ERROR,
+               {title = "Plugin error"})
     return
 end
 
 local actionok, actions = pcall(require, "telescope.actions")
 if not actionok then
-    vim.notify("Unable to require telescope.actions", "error")
+    vim.notify("Unable to require telescope.actions", vim.lsp.log_levels.ERROR,
+               {title = "Plugin error"})
+    return
+end
+
+local buildok, tsbuildin = pcall(require, "telescope.builtin")
+if not buildok then
+    vim.notify("Unable to require telescope.builin", vim.lsp.log_levels.ERROR,
+               {title = "Plugin error"})
     return
 end
 
@@ -54,20 +63,20 @@ ts.setup({
     }
 })
 
-require("telescope").load_extension("fzy_native")
-require("telescope").load_extension("media_files")
+ts.load_extension("fzy_native")
+ts.load_extension("media_files")
 
 local M = {}
 
 M.find_files = function()
-    require("telescope.builtin").find_files({
+    tsbuildin.find_files({
         find_command = {"rg", "--files", "--hidden", "-g", "!.git"},
         previewer = false
     })
 end
 
 M.search_nvim = function()
-    require("telescope.builtin").find_files({
+    tsbuildin.find_files({
         prompt_title = "< VimRC >",
         cwd = "$HOME/.config/nvim/"
     })
@@ -78,7 +87,7 @@ function M.grep_notes()
     opts.search_dirs = {"~/notes/"}
     opts.prompt_prefix = "   "
     opts.prompt_title = "Search Notes"
-    require("telescope.builtin").live_grep(opts)
+    tsbuildin.live_grep(opts)
 end
 
 return M

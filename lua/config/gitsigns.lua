@@ -1,6 +1,7 @@
 local ok, gitsigns = pcall(require, "gitsigns")
 if not ok then
-    vim.notify("Unable to require gitsigns", "error")
+    vim.notify("Unable to require gitsigns", vim.lsp.log_levels.ERROR,
+               {title = "Plugin error"})
     return
 end
 

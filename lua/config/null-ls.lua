@@ -3,13 +3,15 @@ local M = {}
 function M.config()
     local ok, null_ls = pcall(require, "null-ls")
     if not ok then
-        vim.notify("Unable to require null-ls", "error")
+        vim.notify("Unable to require null-ls", vim.lsp.log_levels.ERROR,
+                   {title = "Plugin error"})
         return
     end
 
     local helpok, h = pcall(require, "null-ls.helpers")
     if not helpok then
-        vim.notify("Unable to require null-ls.helpers", "error")
+        vim.notify("Unable to require null-ls.helpers",
+                   vim.lsp.log_levels.ERROR, {title = "Plugin error"})
         return
     end
 

@@ -1,6 +1,7 @@
 local ok, lualine = pcall(require, "lualine")
 if not ok then
-    vim.notify("Unable to require lualine for evil lualine", "error")
+    vim.notify("Unable to require lualine for evil lualine",
+               vim.lsp.log_levels.ERROR, {title = "Plugin error"})
     return
 end
 

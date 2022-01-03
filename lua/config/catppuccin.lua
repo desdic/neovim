@@ -1,6 +1,7 @@
 local ok, catppuccin = pcall(require, "catppuccin")
 if not ok then
-    vim.notify("Unable to require catppuccin", "error")
+    vim.notify("Unable to require catppuccin", vim.lsp.log_levels.ERROR,
+               {title = "Plugin error"})
     return
 end
 

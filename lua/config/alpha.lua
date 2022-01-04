@@ -28,6 +28,9 @@ dashboard.section.buttons.val = {
     dashboard.button("t", "  Find text", ":Telescope live_grep <CR>"),
     dashboard.button("c", "  Configuration",
                      ":lua require('config.telescope').search_nvim()<CR>"),
+    dashboard.button("u", "  Update plugins", ":PackerSync<CR>"),
+    dashboard.button("n", "  Notes",
+                     ":lua require('config.telescope').grep_notes()<CR>"),
     dashboard.button("q", "  Quit Neovim", ":qa<CR>")
 }
 

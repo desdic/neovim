@@ -65,7 +65,7 @@ vim.wo.colorcolumn = "99999"
 
 -- Disable healthcheck
 global.loaded_perl_provider = 0
--- global.loaded_python_provider=0
+global.loaded_python_provider = 0
 
 option.termguicolors = true
 window_option.cursorline = true

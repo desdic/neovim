@@ -69,7 +69,6 @@ global.loaded_perl_provider = 0
 
 option.termguicolors = true
 window_option.cursorline = true
-cmd("colorscheme catppuccin")
 
 cmd("set noswapfile")
 cmd("filetype plugin on")

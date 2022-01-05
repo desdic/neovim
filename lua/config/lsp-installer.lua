@@ -32,13 +32,21 @@ local myconfigs = {
     ["jsonls"] = true
 }
 
-for myserver, _ in next, myconfigs do
+for myserver, enabled in pairs(myconfigs) do
     local _, requested_server = lsp_install_srv.get_server(myserver)
-    if not requested_server:is_installed() then
-        -- Queue the server to be installed
-        vim.notify("Queing " .. myserver, vim.lsp.log_levels.INFO,
-                   {title = "LSP installer"})
-        requested_server:install()
+    if enabled then
+        if not requested_server:is_installed() then
+            -- Queue the server to be installed
+            vim.notify("Queing " .. myserver, vim.lsp.log_levels.INFO,
+                       {title = "LSP installer"})
+            requested_server:install()
+        end
+    else
+        if requested_server:is_installed() then
+            vim.notify("Uninstalling " .. myserver, vim.lsp.log_levels.INFO,
+                       {title = "LSP installer"})
+            requested_server:uninstall()
+        end
     end
 end
 

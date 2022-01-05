@@ -13,9 +13,6 @@ global.mapleader = "," -- Set leader
 global.maplocalleader = "," -- Set local leader
 global.shada = "NONE"
 
--- If using a Neovim version earlier than 0.6.0 (nathom/filetype.nvim)
-global.did_load_filetypes = 1
-
 option.shortmess = option.shortmess .. "I" -- Turn off splash
 option.shortmess = option.shortmess .. "c" -- Avoid showing message extra message when using completion
 
@@ -70,8 +67,6 @@ vim.wo.colorcolumn = "99999"
 global.loaded_perl_provider = 0
 -- global.loaded_python_provider=0
 
-cmd("syntax enable")
--- option.background = 'dark'
 option.termguicolors = true
 window_option.cursorline = true
 cmd("colorscheme catppuccin")
@@ -83,3 +78,5 @@ cmd("filetype plugin on")
 -- Would like to use #1E1E28 but since LspInfo doesn't have borders so I have chosen #1B1923
 vim.cmd([[ highlight DiagnosticError guibg=#1B1923 ]])
 vim.cmd([[ highlight NormalFloat guibg=#1B1923 ]])
+
+vim.cmd("set iskeyword+=-") -- Words can include -

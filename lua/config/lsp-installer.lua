@@ -23,6 +23,7 @@ local myconfigs = {
     ["bashls"] = true,
     ["yamlls"] = true,
     ["pyright"] = true,
+    ["efm"] = true,
     ["solargraph"] = true,
     ["gopls"] = true,
     ["dockerls"] = true,
@@ -31,15 +32,12 @@ local myconfigs = {
     ["jsonls"] = true
 }
 
-local myservers = {
-    "bashls", "yamlls", "pyright", "efm", "solargraph", "gopls", "dockerls",
-    "clangd", "sumneko_lua", "jsonls"
-}
-
-for _, myserver in ipairs(myservers) do
+for myserver, _ in next, myconfigs do
     local _, requested_server = lsp_install_srv.get_server(myserver)
     if not requested_server:is_installed() then
         -- Queue the server to be installed
+        vim.notify("Queing " .. myserver, vim.lsp.log_levels.INFO,
+                   {title = "LSP installer"})
         requested_server:install()
     end
 end

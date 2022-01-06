@@ -7,6 +7,7 @@ if vim.fn.empty(vim.fn.glob(packer_path)) > 0 then
         "https://github.com/wbthomason/packer.nvim", packer_path
     })
     print("Installing packer, close and reopen ...")
+    vim.cmd([[packadd packer.nvim]])
 end
 
 vim.cmd([[

@@ -58,7 +58,6 @@ lsp_installer.on_server_ready(function(server)
         capabilities = lsphandlers.capabilities,
         debounce_text_changes = 150
     }
-
     if myconfigs[server.name] then
         local ok, srvopts = pcall(require, "lsp.settings." .. server.name)
         if not ok then

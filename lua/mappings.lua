@@ -22,8 +22,6 @@ keymap("", "<Leader>w", ":w!<CR>", opts)
 -- keymap('n', '<Leader>q', ':BufferClose<CR>', opts)
 keymap("", "<Leader>q", ":bp <BAR> bd #<CR>", opts)
 
-keymap("", "<Leader>t", ":terminal<CR>", opts)
-
 -- Indent in visual mode
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)

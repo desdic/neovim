@@ -56,6 +56,7 @@ return packer.startup({
         use({"nvim-treesitter/nvim-treesitter-textobjects"})
         use({"windwp/nvim-ts-autotag"})
         use({"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"})
+        use({"nvim-treesitter/playground"})
 
         -- clipboard manager
         use({"AckslD/nvim-neoclip.lua"})
@@ -101,6 +102,9 @@ return packer.startup({
         use({"golang/vscode-go"})
         use({"rafamadriz/friendly-snippets"})
 
+        use({"akinsho/toggleterm.nvim"})
+
+        -- splash
         use({"goolord/alpha-nvim"})
 
         -- run sync on installation

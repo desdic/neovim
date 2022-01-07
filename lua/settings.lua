@@ -45,7 +45,7 @@ option.undofile = true
 option.undolevels = 100
 option.undoreload = 100
 
-window_option.signcolumn = "number" -- Always show signcolumn
+window_option.signcolumn = "yes" -- Always show signcolumn // number
 window_option.number = true -- Show numbers
 window_option.relativenumber = true -- Show relative numbers
 window_option.signcolumn = "yes" -- Make room for gitsigns + numbers
@@ -70,11 +70,9 @@ global.loaded_perl_provider = 0
 global.loaded_python_provider = 0
 
 option.termguicolors = true
-window_option.cursorline = true
 
-cmd("set noswapfile")
+option.swapfile = false
+option.conceallevel = 0 -- so that `` is visible in markdown files
 
--- Fix background in diagnostics and floating by using catppuccin1 as BG
--- Would like to use #1E1E28 but since LspInfo doesn't have borders so I have chosen #1B1923
-vim.cmd([[ highlight DiagnosticError guibg=#1B1923 ]])
-vim.cmd([[ highlight NormalFloat guibg=#1B1923 ]])
+option.splitbelow = true
+option.splitright = true

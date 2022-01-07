@@ -68,8 +68,8 @@ local config = {
         lualine_v = {},
         lualine_y = {},
         lualine_z = {},
-        lualine_c = {},
-        lualine_x = {}
+        lualine_c = {"filename"},
+        lualine_x = {"location"}
     }
 }
 

@@ -46,3 +46,8 @@ catppuccin.setup({
 })
 
 vim.cmd("colorscheme catppuccin")
+
+-- Fix background in diagnostics and floating by using catppuccin1 as BG
+-- Only problem is that LspInfo does not have borders so its hard to read
+vim.cmd([[ highlight DiagnosticError guibg=#1E1D2D ]])
+vim.cmd([[ highlight NormalFloat guibg=#1E1D2D ]])

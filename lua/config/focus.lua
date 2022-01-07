@@ -7,7 +7,7 @@ end
 
 focus.setup({
     enable = true,
-    cursorline = true,
+    cursorline = false,
     signcolumn = true,
     number = false,
     hybridnumber = true,

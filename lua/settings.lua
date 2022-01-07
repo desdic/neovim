@@ -18,7 +18,9 @@ option.shortmess = option.shortmess .. "c" -- Avoid showing message extra messag
 
 option.cmdheight = 2 -- Set height to prevent 'press enter to continue'
 option.hidden = true -- Allow to switch buffer without saving
-option.iskeyword = option.iskeyword:gsub("_,", "") -- Setup word boundry on _
+option.iskeyword = option.iskeyword:gsub("_,", "") -- Remove word boundry on _
+option.iskeyword = option.iskeyword .. ",-" -- Words can include -
+
 -- option.completeopt = "menuone,noinsert,noselect"
 option.completeopt = "menuone,noselect"
 option.updatetime = 300 -- Faster completion
@@ -71,11 +73,8 @@ option.termguicolors = true
 window_option.cursorline = true
 
 cmd("set noswapfile")
-cmd("filetype plugin on")
 
 -- Fix background in diagnostics and floating by using catppuccin1 as BG
 -- Would like to use #1E1E28 but since LspInfo doesn't have borders so I have chosen #1B1923
 vim.cmd([[ highlight DiagnosticError guibg=#1B1923 ]])
 vim.cmd([[ highlight NormalFloat guibg=#1B1923 ]])
-
-vim.cmd("set iskeyword+=-") -- Words can include -

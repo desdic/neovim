@@ -1,5 +1,3 @@
-local cmd = vim.cmd
--- local api = vim.api
 local global = vim.g
 local option = vim.o
 local opt = vim.opt

@@ -22,6 +22,12 @@ Used for Go, Python and some Ruby.
 - golang.org/x/tools/cmd/goimports@latest
 - github.com/daixiang0/gci@latest
 
-# Screenshot
+# Screenshots
 
-![Screenshot](doc/screenshot.png)
+## Insert mode
+
+![Insert mode](doc/screenshot.png)
+
+## Normal mode
+
+![Normal mode](doc/screenshot2.png)

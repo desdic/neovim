@@ -10,8 +10,5 @@ focus.setup({
     cursorline = false,
     signcolumn = true,
     number = false,
-    hybridnumber = true,
-    absolutenumber_unfocussed = true,
     excluded_filetypes = {"toggleterm"}
-    -- excluded_buftypes = {'help', 'popup'}
 })

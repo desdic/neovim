@@ -28,6 +28,16 @@ local branch = {"branch", icons_enabled = true, icon = ""}
 
 local location = {"location", padding = 0}
 
+local lspclients = {
+    function()
+        local clients = vim.lsp.get_active_clients()
+        if next(clients) == nil then return "" end
+        return ""
+    end,
+    padding = {right = 1},
+    cond = hide_in_width
+}
+
 -- cool function for progress
 local progress = function()
     local current_line = vim.fn.line(".")
@@ -45,6 +55,12 @@ local spaces = function()
     return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
 end
 
+local filename = function()
+    local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
+    if buf_ft == "toggleterm" then return "terminal" end
+    return vim.fn.expand("%:t")
+end
+
 lualine.setup({
     options = {
         icons_enabled = true,
@@ -58,14 +74,14 @@ lualine.setup({
         lualine_a = {branch, diagnostics},
         lualine_b = {mode},
         lualine_c = {},
-        lualine_x = {diff, spaces, "encoding", filetype},
+        lualine_x = {diff, spaces, "encoding", filetype, lspclients},
         lualine_y = {location},
         lualine_z = {progress}
     },
     inactive_sections = {
         lualine_a = {},
         lualine_b = {},
-        lualine_c = {"filename"},
+        lualine_c = {filename},
         lualine_x = {"location"},
         lualine_y = {""},
         lualine_z = {}

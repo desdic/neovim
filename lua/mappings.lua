@@ -10,8 +10,8 @@ keymap("n", "<C-l>", " <C-W>l", opts)
 keymap("n", "fn", "]m", opts)
 keymap("n", "fp", "[m", opts)
 
-keymap("n", "<C-p>", ":BufferLineCyclePrev<CR>", opts)
-keymap("n", "<C-n>", ":BufferLineCycleNext<CR>", opts)
+keymap("n", "<S-l>", ":bnext<CR>", opts)
+keymap("n", "<S-h>", ":bprevious<CR>", opts)
 
 keymap("t", "<Esc>", "<C-\\><C-n>", opts)
 

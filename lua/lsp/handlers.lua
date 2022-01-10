@@ -49,9 +49,9 @@ local function lsp_keymaps(bufnr)
     keymap("n", "gr", " <cmd>lua vim.lsp.buf.references()<CR>", {})
     keymap("n", "gi", " <cmd>lua vim.lsp.buf.implementation()<CR>", {})
     keymap("n", "K", " <cmd>lua vim.lsp.buf.hover()<CR>", {})
-    keymap("n", "<S-Tab>",
+    keymap("n", "<C-p>",
            '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
-    keymap("n", "<Tab>",
+    keymap("n", "<C-n>",
            '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
     keymap("n", "gl",
            '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })<CR>',

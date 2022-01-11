@@ -107,6 +107,8 @@ return packer.startup({
         -- splash
         use({"goolord/alpha-nvim"})
 
+        use({"ahmedkhalf/project.nvim"})
+
         -- run sync on installation
         if packer_bootstrap then require("packer").sync() end
     end,

@@ -31,6 +31,7 @@ dashboard.section.buttons.val = {
     dashboard.button("u", "  Update plugins", ":PackerSync<CR>"),
     dashboard.button("n", "  Notes",
                      ":lua require('config.telescope').grep_notes()<CR>"),
+    dashboard.button("p", "  Projects", ":Telescope projects<CR>"),
     dashboard.button("q", "  Quit Neovim", ":qa<CR>")
 }
 

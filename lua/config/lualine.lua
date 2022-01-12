@@ -61,10 +61,21 @@ local filename = function()
     return vim.fn.expand("%:t")
 end
 
+-- override the inactive background for filename to be more visible
+local custom_catppuccin = {}
+local cstatus_ok, catcolors = pcall(require, "catppuccin.api.colors")
+if cstatus_ok then
+    cstatus_ok, custom_catppuccin = pcall(require, "lualine.themes.catppuccin")
+    if cstatus_ok then
+        local colors = catcolors.get_colors()
+        custom_catppuccin.inactive.c.bg = colors.black1
+    end
+end
+
 lualine.setup({
     options = {
         icons_enabled = true,
-        theme = "auto",
+        theme = custom_catppuccin,
         component_separators = {left = "", right = ""},
         section_separators = {left = "", right = ""},
         disabled_filetypes = {"dashboard", "NvimTree", "Outline"},
@@ -74,14 +85,14 @@ lualine.setup({
         lualine_a = {branch, diagnostics},
         lualine_b = {mode},
         lualine_c = {},
-        lualine_x = {diff, spaces, "encoding", filetype, lspclients},
+        lualine_x = {lspclients, "%=", diff, spaces, "encoding", filetype},
         lualine_y = {location},
         lualine_z = {progress}
     },
     inactive_sections = {
         lualine_a = {},
         lualine_b = {},
-        lualine_c = {filename},
+        lualine_c = {"%=", filename},
         lualine_x = {"location"},
         lualine_y = {""},
         lualine_z = {}

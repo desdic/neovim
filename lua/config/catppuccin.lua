@@ -45,9 +45,10 @@ catppuccin.setup({
     }
 })
 
-vim.cmd("colorscheme catppuccin")
+local colors = require("catppuccin.api.colors").get_colors()
+catppuccin.remap({
+    NormalFloat = {bg = colors.black2},
+    DiagnosticError = {bg = colors.black2}
+})
 
--- Fix background in diagnostics and floating by using catppuccin1 as BG
--- Only problem is that LspInfo does not have borders so its hard to read
-vim.cmd([[ highlight DiagnosticError guibg=#1E1D2D ]])
-vim.cmd([[ highlight NormalFloat guibg=#1E1D2D ]])
+vim.cmd("colorscheme catppuccin")

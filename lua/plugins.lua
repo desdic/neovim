@@ -66,7 +66,7 @@ return packer.startup({
         use({"Vimjas/vim-python-pep8-indent"}) -- python indentenation
         use({"numToStr/Comment.nvim"}) -- commenting
         use({"beauwilliams/focus.nvim"}) -- focus active window
-        use({"catppuccin/nvim"}) -- color theme
+        use({"catppuccin/nvim", as = "catppuccin"}) -- color theme
         use({"nvim-lualine/lualine.nvim"})
         use({"akinsho/nvim-bufferline.lua"})
         use({"kyazdani42/nvim-tree.lua"})

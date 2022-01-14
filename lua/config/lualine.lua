@@ -22,7 +22,15 @@ local diff = {
 
 local mode = {"mode", fmt = function(str) return "-- " .. str .. " --" end}
 
-local filetype = {"filetype", icons_enabled = false, icon = nil}
+local filetype = {
+    function()
+        local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
+        if buf_ft == "toggleterm" then return "" end
+        return buf_ft
+    end,
+    icons_enabled = false,
+    icon = nil
+}
 
 local branch = {"branch", icons_enabled = true, icon = ""}
 
@@ -52,6 +60,8 @@ local progress = function()
 end
 
 local spaces = function()
+    local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
+    if buf_ft == "toggleterm" then return "" end
     return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
 end
 
@@ -93,8 +103,8 @@ lualine.setup({
         lualine_a = {},
         lualine_b = {},
         lualine_c = {"%=", filename},
-        lualine_x = {"location"},
-        lualine_y = {""},
+        lualine_x = {},
+        lualine_y = {},
         lualine_z = {}
     },
     tabline = {},

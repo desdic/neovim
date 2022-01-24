@@ -64,7 +64,9 @@ local function lsp_keymaps(bufnr)
            ':lua require("telescope.builtin").lsp_document_symbols()<CR>', {})
     vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])
     vim.cmd(
-        [[ command! FormatWrite execute 'lua vim.lsp.buf.formatting_sync(nil, 1000)' ]])
+        [[ command! FormatSync execute 'lua vim.lsp.buf.formatting_sync()' ]])
+    vim.cmd(
+        [[ command! FormatRange execute 'lua vim.lsp.buf.range_formatting()' ]])
 end
 
 M.on_attach = function(client, bufnr)

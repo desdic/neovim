@@ -109,6 +109,13 @@ return packer.startup({
 
         use({"ahmedkhalf/project.nvim"})
 
+        -- Go development
+        use({"ray-x/go.nvim"})
+        use("mfussenegger/nvim-dap")
+        use("rcarriga/nvim-dap-ui")
+        use("theHamsta/nvim-dap-virtual-text")
+        use({"ray-x/guihua.lua", run = "cd lua/fzy && make"})
+
         -- run sync on installation
         if packer_bootstrap then require("packer").sync() end
     end,

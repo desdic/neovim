@@ -82,3 +82,17 @@ cmp.setup({
         {name = "vsnip"}, {name = "buffer", keyword_length = 3}, {name = "calc"}
     }
 })
+
+local keymap = vim.api.nvim_set_keymap
+local opts = {noremap = true, silent = true}
+
+keymap("i", "<Tab>", "vsnip#jumpable(1) ? '<Plug>(vsnip-jump-next)' : '<Tab>'",
+       {expr = true})
+keymap("s", "<Tab>", "vsnip#jumpable(1) ? '<Plug>(vsnip-jump-next)' : '<Tab>'",
+       {expr = true})
+keymap("i", "<S-Tab>",
+       "vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>'",
+       {expr = true})
+keymap("s", "<S-Tab>",
+       "vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>'",
+       {expr = true})

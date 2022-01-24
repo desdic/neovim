@@ -116,6 +116,8 @@ return packer.startup({
         use("theHamsta/nvim-dap-virtual-text")
         use({"ray-x/guihua.lua", run = "cd lua/fzy && make"})
 
+		use ({"ellisonleao/glow.nvim"})
+
         -- run sync on installation
         if packer_bootstrap then require("packer").sync() end
     end,

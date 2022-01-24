@@ -66,6 +66,36 @@ ts.setup({
 ts.load_extension("fzy_native")
 ts.load_extension("media_files")
 
+local keymap = vim.api.nvim_set_keymap
+local opts = {noremap = true, silent = true}
+
+keymap("n", "<Leader>a", ':lua require("telescope.builtin").marks()<CR>', opts)
+keymap("n", "<Leader>ff",
+       ':lua require("telescope.builtin").find_files({hidden=true})<CR>', opts)
+keymap("n", "<Leader>fv", ':lua require("telescope.builtin").treesitter()<CR>',
+       opts)
+keymap("n", "<Leader>fm",
+       ':lua require("telescope").extensions.media_files.media_files()<CR>',
+       opts)
+keymap("n", "<Leader>fg", ':lua require("telescope.builtin").live_grep()<CR>',
+       opts)
+keymap("n", "<Leader>fb", ':lua require("telescope.builtin").buffers()<CR>',
+       opts)
+keymap("n", "<Leader>fh", ':lua require("telescope.builtin").help_tags()<CR>',
+       opts)
+keymap("n", "<Leader>fn",
+       ':lua require("telescope").extensions.notify.notify({})<CR>', opts)
+keymap("n", "<Leader>fo",
+       ':lua require("telescope.builtin").tags{ only_current_buffer = true }<CR>',
+       opts)
+keymap("n", "<Leader>vrc", ':lua require("config.telescope").search_nvim()<CR>',
+       opts)
+keymap("n", "<Leader>notes",
+       ':lua require("config.telescope").grep_notes()<CR>', opts)
+keymap("n", "<Leader>p", ":Telescope diagnostics bufnr=0<CR>", opts)
+keymap("n", "<Leader>bp", ":Telescope neoclip unnamed<CR>", opts)
+keymap("n", "<Leader>fs", ":lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>", opts)
+
 local M = {}
 
 M.find_files = function()

@@ -111,9 +111,9 @@ return packer.startup({
 
         -- Go development
         use({"ray-x/go.nvim"})
-        use("mfussenegger/nvim-dap")
-        use("rcarriga/nvim-dap-ui")
-        use("theHamsta/nvim-dap-virtual-text")
+        use({"mfussenegger/nvim-dap"})
+        use({"rcarriga/nvim-dap-ui"})
+        use({"theHamsta/nvim-dap-virtual-text"})
         use({"ray-x/guihua.lua", run = "cd lua/fzy && make"})
 
 		use ({"ellisonleao/glow.nvim"})

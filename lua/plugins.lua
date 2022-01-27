@@ -118,6 +118,8 @@ return packer.startup({
 
 		use ({"ellisonleao/glow.nvim"})
 
+		use ({"stevearc/dressing.nvim"})
+
         -- run sync on installation
         if packer_bootstrap then require("packer").sync() end
     end,

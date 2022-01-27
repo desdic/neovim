@@ -96,7 +96,7 @@ return packer.startup({
         use("hrsh7th/cmp-nvim-lsp")
         use("hrsh7th/cmp-nvim-lua")
 
-        -- vsnip and snippts
+        -- vsnip and snippets
         use("hrsh7th/vim-vsnip")
         use("hrsh7th/vim-vsnip-integ")
         use({"golang/vscode-go"})

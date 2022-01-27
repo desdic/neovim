@@ -38,37 +38,37 @@ gitsigns.setup({
             linehl = "GitSignsChangeLn"
         }
     },
-    numhl = false,
-    linehl = false,
-    keymaps = {
-        -- Default keymap options
-        noremap = true,
-        buffer = true,
+    on_attach = function(bufnr)
+        local function map(mode, lhs, rhs, opts)
+            opts = vim.tbl_extend("force", {noremap = true, silent = true},
+                                  opts or {})
+            vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, opts)
+        end
 
-        ["n ]c"] = {
-            expr = true,
-            "&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'"
-        },
-        ["n [c"] = {
-            expr = true,
-            "&diff ? '[c' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'"
-        },
+        -- Navigation
+        map("n", "]c", "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'",
+            {expr = true})
+        map("n", "[c", "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'",
+            {expr = true})
 
-        ["n <leader>hs"] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
-        ["n <leader>hu"] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
-        ["n <leader>hr"] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
-        ["n <leader>hR"] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
-        ["n <leader>hp"] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
-        ["n <leader>hb"] = '<cmd>lua require"gitsigns".blame_line(true)<CR>',
+        -- Actions
+        map("n", "<leader>hs", "<cmd>Gitsigns stage_hunk<CR>")
+        map("v", "<leader>hs", "<cmd>Gitsigns stage_hunk<CR>")
+        map("n", "<leader>hr", "<cmd>Gitsigns reset_hunk<CR>")
+        map("v", "<leader>hr", "<cmd>Gitsigns reset_hunk<CR>")
+        map("n", "<leader>hS", "<cmd>Gitsigns stage_buffer<CR>")
+        map("n", "<leader>hu", "<cmd>Gitsigns undo_stage_hunk<CR>")
+        map("n", "<leader>hR", "<cmd>Gitsigns reset_buffer<CR>")
+        map("n", "<leader>hp", "<cmd>Gitsigns preview_hunk<CR>")
+        map("n", "<leader>hb",
+            '<cmd>lua require"gitsigns".blame_line{full=true}<CR>')
+        map("n", "<leader>tb", "<cmd>Gitsigns toggle_current_line_blame<CR>")
+        map("n", "<leader>hd", "<cmd>Gitsigns diffthis<CR>")
+        map("n", "<leader>hD", '<cmd>lua require"gitsigns".diffthis("~")<CR>')
+        map("n", "<leader>td", "<cmd>Gitsigns toggle_deleted<CR>")
 
-        -- Text objects
-        ["o ih"] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',
-        ["x ih"] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>'
-    },
-    watch_gitdir = {interval = 1000, follow_files = true},
-    current_line_blame = false,
-    sign_priority = 6,
-    update_debounce = 100,
-    status_formatter = nil, -- Use default
-    diff_opts = {internal = true} -- If luajit is present
+        -- Text object
+        map("o", "ih", ":<C-U>Gitsigns select_hunk<CR>")
+        map("x", "ih", ":<C-U>Gitsigns select_hunk<CR>")
+    end
 })

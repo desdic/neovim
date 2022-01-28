@@ -42,8 +42,7 @@ option.undodir = HOME_PATH .. "/.config/nvim/undo" -- Save and set undo/redo lev
 option.undofile = true
 option.undolevels = 100
 option.undoreload = 100
-
-option.listchars = "tab:  ,trail:·,nbsp:_" -- Hidden chars
+option.listchars = "tab:▸ ,trail:·,nbsp:␣,extends:❯,precedes:❮" -- Hidden chars
 
 window_option.signcolumn = "yes" -- Always show signcolumn // number
 window_option.number = true -- Show numbers

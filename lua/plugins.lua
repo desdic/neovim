@@ -117,8 +117,10 @@ return packer.startup({
         use({"theHamsta/nvim-dap-virtual-text"})
         use({"ray-x/guihua.lua", run = "cd lua/fzy && make"})
 
+		-- Markdown rendering
 		use ({"ellisonleao/glow.nvim"})
 
+		-- UI
 		use ({"stevearc/dressing.nvim"})
 
         -- run sync on installation

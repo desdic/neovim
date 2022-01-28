@@ -92,7 +92,7 @@ keymap("n", "<Leader>vrc", ':lua require("config.telescope").search_nvim()<CR>',
        opts)
 keymap("n", "<Leader>notes",
        ':lua require("config.telescope").grep_notes()<CR>', opts)
-keymap("n", "<Leader>p", ":Telescope diagnostics bufnr=0<CR>", opts)
+keymap("n", "<Leader>p", ":Telescope diagnostics<CR>", opts)
 keymap("n", "<Leader>bp", ":Telescope neoclip unnamed<CR>", opts)
 keymap("n", "<Leader>fs", ":lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>", opts)
 
@@ -113,11 +113,11 @@ M.search_nvim = function()
 end
 
 function M.grep_notes()
-    local opts = {}
-    opts.search_dirs = {"~/notes/"}
-    opts.prompt_prefix = "   "
-    opts.prompt_title = "Search Notes"
-    tsbuildin.live_grep(opts)
+    local optsgrep = {}
+    optsgrep.search_dirs = {"~/notes/"}
+    optsgrep.prompt_prefix = "   "
+    optsgrep.prompt_title = "Search Notes"
+    tsbuildin.live_grep(optsgrep)
 end
 
 return M

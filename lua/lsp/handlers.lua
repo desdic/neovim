@@ -45,6 +45,7 @@ local function lsp_keymaps(bufnr)
     local opts = {noremap = true, silent = true}
     local keymap = vim.api.nvim_set_keymap
     keymap("n", "gd", " <cmd>lua vim.lsp.buf.definition()<CR>", {})
+    keymap("n", "gt", " <cmd>lua vim.lsp.buf.type_definition()<CR>", {})
     keymap("n", "gD", " <cmd>lua vim.lsp.buf.declaration()<CR>", {})
     keymap("n", "gr", " <cmd>lua vim.lsp.buf.references()<CR>", {})
     keymap("n", "gi", " <cmd>lua vim.lsp.buf.implementation()<CR>", {})

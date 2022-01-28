@@ -54,6 +54,7 @@ return packer.startup({
 
         use({"nvim-treesitter/nvim-treesitter-refactor"})
         use({"nvim-treesitter/nvim-treesitter-textobjects"})
+		use({"JoosepAlviste/nvim-ts-context-commentstring"})
         use({"windwp/nvim-ts-autotag"})
         use({"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"})
         use({"nvim-treesitter/playground"})

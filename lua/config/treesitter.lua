@@ -55,7 +55,11 @@ ntconfig.setup({
                 ["ac"] = "@class.outer",
                 ["ic"] = "@class.inner",
                 ["al"] = "@loop.outer",
-                ["il"] = "@loop.inner"
+                ["il"] = "@loop.inner",
+                ["iC"] = "@conditional.inner",
+                ["aC"] = "@conditional.outer",
+                ["ib"] = "@block.inner",
+                ["ab"] = "@block.outer"
             }
         },
         swap = {
@@ -101,5 +105,6 @@ ntconfig.setup({
             goto_node = "<cr>",
             show_help = "?"
         }
-    }
+    },
+    context_commentstring = {enable = true}
 })

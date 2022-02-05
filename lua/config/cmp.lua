@@ -45,7 +45,7 @@ cmp.setup({
     },
     formatting = {
         format = lspkind.cmp_format({
-            with_text = true,
+            mode = "symbol_text",
             symbol_map = i.symbol_map,
             menu = {
                 buffer = "[buf]",

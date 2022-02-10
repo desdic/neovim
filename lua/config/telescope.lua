@@ -93,7 +93,6 @@ keymap("n", "<Leader>vrc", ':lua require("config.telescope").search_nvim()<CR>',
 keymap("n", "<Leader>notes",
        ':lua require("config.telescope").grep_notes()<CR>', opts)
 keymap("n", "<Leader>p", ":Telescope diagnostics<CR>", opts)
-keymap("n", "<Leader>bp", ":Telescope neoclip unnamed<CR>", opts)
 keymap("n", "<Leader>fs", ":lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>", opts)
 
 local M = {}

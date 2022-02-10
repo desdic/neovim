@@ -6,3 +6,7 @@ if not ok then
 end
 
 neoclip.setup()
+
+local keymap = vim.api.nvim_set_keymap
+local opts = {noremap = true, silent = true}
+keymap("n", "<Leader>bp", ":Telescope neoclip unnamed<CR>", opts)

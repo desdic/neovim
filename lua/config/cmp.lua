@@ -33,14 +33,24 @@ if not iconok then
     return
 end
 
+local luasnipok, luasnip = pcall(require, "luasnip")
+if not luasnipok then
+    vim.notify("Unable to require luasnip")
+    return
+end
+
+local check_backspace = function()
+    local col = vim.fn.col(".") - 1
+    return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
+end
+
 cmplsp.setup()
 
 cmp.setup({
     preselect = false,
     snippet = {
         expand = function(args)
-            -- You must install `vim-vsnip` if you use the following as-is.
-            vim.fn["vsnip#anonymous"](args.body)
+            luasnip.lsp_expand(args.body)
         end
     },
     formatting = {
@@ -52,8 +62,7 @@ cmp.setup({
                 nvim_lsp = "[LSP]",
                 nvim_lua = "[api]",
                 path = "[path]",
-                calc = "[calc]",
-                vsnip = "[vsnip]"
+                luasnip = "[snip]"
             }
         })
     },
@@ -66,32 +75,42 @@ cmp.setup({
     },
     min_length = 0, -- allow for `from package import _` in Python
     mapping = {
-        ["<S-Tab>"] = cmp.mapping.select_prev_item(),
-        ["<Tab>"] = cmp.mapping.select_next_item(),
-        ["<C-k>"] = cmp.mapping.confirm({
-            behavior = cmp.ConfirmBehavior.Insert,
-            select = true
+        ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), {"i", "c"}),
+        ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), {"i", "c"}),
+        ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), {"i", "c"}),
+        ["<C-e>"] = cmp.mapping({
+            i = cmp.mapping.abort(),
+            c = cmp.mapping.close()
         }),
-        ["<CR>"] = cmp.mapping.confirm({
-            behavior = cmp.ConfirmBehavior.Replace,
-            select = true
-        })
+        ["<C-y>"] = cmp.config.disable,
+        ["<C-k>"] = cmp.mapping.select_prev_item(),
+        ["<C-j>"] = cmp.mapping.select_next_item(),
+        ["<CR>"] = cmp.mapping.confirm({select = true}),
+        ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_next_item()
+            elseif luasnip.expandable() then
+                luasnip.expand()
+            elseif luasnip.expand_or_jumpable() then
+                luasnip.expand_or_jump()
+            elseif check_backspace() then
+                fallback()
+            else
+                fallback()
+            end
+        end, {"i", "s"}),
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
+                luasnip.jump(-1)
+            else
+                fallback()
+            end
+        end, {"i", "s"})
     },
     sources = {
         {name = "nvim_lsp"}, {name = "nvim_lua"}, {name = "path"},
-        {name = "vsnip"}, {name = "buffer", keyword_length = 3}, {name = "calc"}
-    }
+        {name = "luasnip"}, {name = "buffer", keyword_length = 3}
+    },
 })
-
-local keymap = vim.api.nvim_set_keymap
-
-keymap("i", "<Tab>", "vsnip#jumpable(1) ? '<Plug>(vsnip-jump-next)' : '<Tab>'",
-       {expr = true})
-keymap("s", "<Tab>", "vsnip#jumpable(1) ? '<Plug>(vsnip-jump-next)' : '<Tab>'",
-       {expr = true})
-keymap("i", "<S-Tab>",
-       "vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>'",
-       {expr = true})
-keymap("s", "<S-Tab>",
-       "vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>'",
-       {expr = true})

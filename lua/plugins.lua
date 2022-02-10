@@ -54,7 +54,7 @@ return packer.startup({
 
         use({"nvim-treesitter/nvim-treesitter-refactor"})
         use({"nvim-treesitter/nvim-treesitter-textobjects"})
-		use({"JoosepAlviste/nvim-ts-context-commentstring"})
+        use({"JoosepAlviste/nvim-ts-context-commentstring"})
         use({"windwp/nvim-ts-autotag"})
         use({"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"})
         use({"nvim-treesitter/playground"})
@@ -93,15 +93,13 @@ return packer.startup({
         use("hrsh7th/cmp-buffer") -- buffer completions
         use("hrsh7th/cmp-path") -- path completions
         use("hrsh7th/cmp-cmdline") -- cmdline completions
-        use("hrsh7th/cmp-vsnip") -- snippet completions
+        use("L3MON4D3/LuaSnip") -- snippet completions
         use("hrsh7th/cmp-nvim-lsp")
         use("hrsh7th/cmp-nvim-lua")
 
-        -- vsnip and snippets
-        use("hrsh7th/vim-vsnip")
-        use("hrsh7th/vim-vsnip-integ")
-        use({"golang/vscode-go"})
         use({"rafamadriz/friendly-snippets"})
+
+        use({"saadparwaiz1/cmp_luasnip"})
 
         use({"akinsho/toggleterm.nvim"})
 
@@ -117,11 +115,11 @@ return packer.startup({
         use({"theHamsta/nvim-dap-virtual-text"})
         use({"ray-x/guihua.lua", run = "cd lua/fzy && make"})
 
-		-- Markdown rendering
-		use ({"ellisonleao/glow.nvim"})
+        -- Markdown rendering
+        use({"ellisonleao/glow.nvim"})
 
-		-- UI
-		use ({"stevearc/dressing.nvim"})
+        -- UI
+        use({"stevearc/dressing.nvim"})
 
         -- run sync on installation
         if packer_bootstrap then require("packer").sync() end

@@ -6,9 +6,12 @@ end
 
 local s = ls.s
 local i = ls.insert_node
+local d = ls.dynamic_node
+local sn = ls.snippet_node
 local fmt = require("luasnip.extras.fmt").fmt
 local types = require("luasnip.util.types")
-local t = ls.text_node
+-- local t = ls.text_node
+-- local c = ls.choice_node
 -- local rep = require("luasnip.extras").rep
 
 ls.config.set_config({
@@ -27,9 +30,18 @@ ls.config.set_config({
     }
 })
 
+local date_input = function(_, _, old_state, format)
+  if not old_state then
+    old_state = {}
+  end
+
+  local cfmt = format or '%Y-%m-%d'
+  return sn(nil, i(1, os.date(cfmt)))
+end
+
 ls.snippets = {
     all = {
-        ls.parser.parse_snippet("$file$", "$TM_FILENAME")
+        ls.parser.parse_snippet("$file$", "$TM_FILENAME"),
     },
 
     lua = {},
@@ -48,7 +60,7 @@ ls.snippets = {
               {
                 i(1, "mypackage"), i(2, "0"), i(3, "systems-focal"),
                 i(4, "medium"), i(5, "<message>"), i(6, "kgn"), i(7, "one"),
-                i(8, "com"), i(0, os.date("%a, %d, %b %Y %H:%M:%S %z"))
+                i(8, "com"), d(9, date_input, {}, "%a, %d, %b %Y %H:%M:%S %z")
             }))
     }
 }

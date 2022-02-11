@@ -47,12 +47,8 @@ end
 cmplsp.setup()
 
 cmp.setup({
-    preselect = false,
-    snippet = {
-        expand = function(args)
-            luasnip.lsp_expand(args.body)
-        end
-    },
+    preselect = true,
+    snippet = {expand = function(args) luasnip.lsp_expand(args.body) end},
     formatting = {
         format = lspkind.cmp_format({
             mode = "symbol_text",
@@ -112,5 +108,5 @@ cmp.setup({
     sources = {
         {name = "nvim_lsp"}, {name = "nvim_lua"}, {name = "path"},
         {name = "luasnip"}, {name = "buffer", keyword_length = 3}
-    },
+    }
 })

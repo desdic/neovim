@@ -48,7 +48,7 @@ ls.snippets = {
 
     python = {
         s("main", fmt('if __name__ == "__main__":\n\t{}', i(0, "main()"))),
-        s("env", fmt("#!/usr/bin/env {}", i(0, "python3"))),
+        s("#!", fmt("#!/usr/bin/env {}", i(0, "python3"))),
         s("def", fmt("def {}({}) -> {}:\n\t{}\n",
                      {i(1, "name"), i(2), i(3, "None"), i(0, "pass")}))
     },

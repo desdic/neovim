@@ -68,6 +68,7 @@ return packer.startup({
         use({"numToStr/Comment.nvim"}) -- commenting
         use({"beauwilliams/focus.nvim"}) -- focus active window
         use({"catppuccin/nvim", as = "catppuccin"}) -- color theme
+        use({"folke/tokyonight.nvim"})
         use({"nvim-lualine/lualine.nvim"})
         use({"akinsho/nvim-bufferline.lua"})
         use({"kyazdani42/nvim-tree.lua"})
@@ -81,7 +82,6 @@ return packer.startup({
                 "go install golang.org/x/tools/cmd/goimports@latest"
             }
         })
-        use({"onsails/lspkind-nvim"})
         use({"nvim-telescope/telescope-fzy-native.nvim"})
         use({"nvim-telescope/telescope-media-files.nvim"})
         use({"nvim-telescope/telescope.nvim"})

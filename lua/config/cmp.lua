@@ -12,13 +12,6 @@ if not cmpok then
     return
 end
 
-local kindok, lspkind = pcall(require, "lspkind")
-if not kindok then
-    vim.notify("Unable to require lspkind", vim.lsp.log_levels.ERROR,
-               {title = "Plugin error"})
-    return
-end
-
 local configok, compare = pcall(require, "cmp.config.compare")
 if not configok then
     vim.notify("Unable to require cmp.config.compare", vim.lsp.log_levels.ERROR,
@@ -46,21 +39,51 @@ end
 
 cmplsp.setup()
 
+-- local kind_icons = {
+--     Text = "",
+--     Method = "m",
+--     Function = "",
+--     Constructor = "",
+--     Field = "",
+--     Variable = "",
+--     Class = "",
+--     Interface = "",
+--     Module = "",
+--     Property = "",
+--     Unit = "",
+--     Value = "",
+--     Enum = "",
+--     Keyword = "",
+--     Snippet = "",
+--     Color = "",
+--     File = "",
+--     Reference = "",
+--     Folder = "",
+--     EnumMember = "",
+--     Constant = "",
+--     Struct = "",
+--     Event = "",
+--     Operator = "",
+--     TypeParameter = ""
+-- }
+--
 cmp.setup({
     preselect = true,
     snippet = {expand = function(args) luasnip.lsp_expand(args.body) end},
     formatting = {
-        format = lspkind.cmp_format({
-            mode = "symbol_text",
-            symbol_map = i.symbol_map,
-            menu = {
-                buffer = "[buf]",
+        fields = {"kind", "abbr", "menu"},
+        format = function(entry, vim_item)
+            -- Kind icons
+            vim_item.kind = string.format("%s", i.symbol_map[vim_item.kind])
+            -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item ki
+            vim_item.menu = ({
                 nvim_lsp = "[LSP]",
-                nvim_lua = "[api]",
-                path = "[path]",
-                luasnip = "[snip]"
-            }
-        })
+                luasnip = "[Snippet]",
+                buffer = "[Buffer]",
+                path = "[Path]"
+            })[entry.source.name]
+            return vim_item
+        end
     },
     sorting = {
         priority_weight = 2.,

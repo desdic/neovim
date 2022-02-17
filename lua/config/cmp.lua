@@ -39,34 +39,6 @@ end
 
 cmplsp.setup()
 
--- local kind_icons = {
---     Text = "",
---     Method = "m",
---     Function = "",
---     Constructor = "",
---     Field = "",
---     Variable = "",
---     Class = "",
---     Interface = "",
---     Module = "",
---     Property = "",
---     Unit = "",
---     Value = "",
---     Enum = "",
---     Keyword = "",
---     Snippet = "",
---     Color = "",
---     File = "",
---     Reference = "",
---     Folder = "",
---     EnumMember = "",
---     Constant = "",
---     Struct = "",
---     Event = "",
---     Operator = "",
---     TypeParameter = ""
--- }
---
 cmp.setup({
     preselect = true,
     snippet = {expand = function(args) luasnip.lsp_expand(args.body) end},
@@ -131,5 +103,8 @@ cmp.setup({
     sources = {
         {name = "nvim_lsp"}, {name = "nvim_lua"}, {name = "path"},
         {name = "luasnip"}, {name = "buffer", keyword_length = 3}
+    },
+    documentation = {
+        border = {"╭", "─", "╮", "│", "╯", "─", "╰", "│"}
     }
 })

@@ -22,7 +22,7 @@ ls.config.set_config({
     -- Enable dynamic snippets
     updateevents = "TextChanged,TextChangedI",
 
-    enable_autosnippets = true,
+    enable_autosnippets = false,
 
     ext_opts = {
         [types.choiceNode] = {active = {virt_text = {{"●", "Question"}}}},
@@ -67,6 +67,8 @@ ls.snippets = {
 				return sn(nil, i(1, filename))
 			end, {}),
 			t({"", "#define "}), r(1),
+            t({"", "", ""}),
+			i(2),
             t({"", "", "#endif"})
         })
     },

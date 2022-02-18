@@ -37,14 +37,21 @@ local date_input = function(_, _, old_state, format)
     return sn(nil, i(1, os.date(cfmt)))
 end
 
-local function file_begin()
+local file_begin = function()
     local row, col = unpack(vim.api.nvim_win_get_cursor(0))
     return row == 1 and col == 1
 end
 
+local upper_filename = function()
+    -- Uppercase current filename and wrap in underscope
+    local filename = "__" .. string.upper(vim.fn.expand("%"):gsub("%.", "_")) .. "__"
+    return sn(nil, i(1, filename))
+end
+
 ls.snippets = {
     all = {
-        ls.parser.parse_snippet("$file$", "$TM_FILENAME"), s("#!", {
+        ls.parser.parse_snippet("$file$", "$TM_FILENAME"),
+		s("#!", {
             t("#!/usr/bin/env "),
             d(1, function(_) return sn(nil, i(1, vim.bo.filetype)) end, {}),
             t({"", ""}), i(0)
@@ -59,17 +66,15 @@ ls.snippets = {
     },
 
     cpp = {
-        s({trig = "#ifndef", name = "header guard"}, {
-            t("#ifndef "), d(1, function(_)
-                -- Uppercase filename and replace . with _
-                local filename = "__" ..
-                                     string.upper(
-                                         vim.fn.expand("%"):gsub("%.", "_")) ..
-                                     "__"
-                return sn(nil, i(1, filename))
-            end, {}), t({"", "#define "}), r(1), t({"", "", ""}), i(0),
-            t({"", "", "#endif"})
-        })
+        s({trig = "#ifndef",
+		   name = "header guard"},
+		   {
+            t("#ifndef "), d(1, upper_filename, {}),
+			t({"", "#define "}), r(1),
+            t({"", "", ""}), i(0),
+			t({"", "", "#endif"})
+           }
+		)
     },
 
     debchangelog = {

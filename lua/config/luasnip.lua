@@ -60,15 +60,14 @@ ls.snippets = {
 
     cpp = {
         s({trig = "#ifndef", name = "header guard"}, {
-            t("#ifndef "),
-			d(1, function(_)
-				-- Uppercase filename and replace . with _
-				local filename = "__" .. string.upper(vim.fn.expand("%"):gsub("%.", "_")) .. "__"
-				return sn(nil, i(1, filename))
-			end, {}),
-			t({"", "#define "}), r(1),
-            t({"", "", ""}),
-			i(2),
+            t("#ifndef "), d(1, function(_)
+                -- Uppercase filename and replace . with _
+                local filename = "__" ..
+                                     string.upper(
+                                         vim.fn.expand("%"):gsub("%.", "_")) ..
+                                     "__"
+                return sn(nil, i(1, filename))
+            end, {}), t({"", "#define "}), r(1), t({"", "", ""}), i(0),
             t({"", "", "#endif"})
         })
     },

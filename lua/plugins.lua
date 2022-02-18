@@ -121,6 +121,8 @@ return packer.startup({
         -- UI
         use({"stevearc/dressing.nvim"})
 
+		use ({"tpope/vim-surround"})
+
         -- run sync on installation
         if packer_bootstrap then require("packer").sync() end
     end,

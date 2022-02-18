@@ -9,7 +9,14 @@ hop.setup({
 })
 
 local keymap = vim.api.nvim_set_keymap
-local opts = {noremap = true, silent = true}
-keymap("n", "s", ":HopChar1<CR>", opts)
-keymap("n", "hw", "<cmd>lua require'hop'.hint_words()<cr>", opts)
-keymap("n", "hl", ":HopLine<CR>", opts)
+local opts = {}
+
+keymap('n', 'f', "<cmd>lua require'hop'.hint_char1()<CR>", opts)
+keymap('n', 'F', "<cmd>lua require'hop'.hint_words()<CR>", opts)
+
+keymap('o', 'f', "<cmd>lua require'hop'.hint_char1({ inclusive_jump = true })<CR>", opts)
+keymap('o', 'F', "<cmd>lua require'hop'.hint_words({ inclusive_jump = true })<CR>", opts)
+
+keymap('v', 'f', "<cmd>lua require'hop'.hint_words({ inclusive_jump = true })<CR>", opts)
+
+keymap("n", "<Leader>hl", "<cmd>lua require'hop'.hint_lines()<CR>", opts)

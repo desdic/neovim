@@ -122,6 +122,7 @@ return packer.startup({
         use({"stevearc/dressing.nvim"})
 
 		use ({"tpope/vim-surround"})
+		use ({"tpope/vim-fugitive"})
 
         -- run sync on installation
         if packer_bootstrap then require("packer").sync() end

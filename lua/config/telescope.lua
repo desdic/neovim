@@ -21,32 +21,27 @@ end
 
 ts.setup({
     defaults = {
-        -- set_env = {['COLORTERM'] = 'truecolor'}, -- default = nil,
+        prompt_prefix = " ",
+        selection_caret = " ",
+        path_display = {"smart"},
 
         mappings = {
             i = {
                 ["<C-j>"] = actions.move_selection_next,
                 ["<C-k>"] = actions.move_selection_previous,
                 ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
-                -- To disable a keymap, put [map] = false
-                -- So, to not map "<C-n>", just put
-                -- ["<c-x>"] = false,
                 ["<esc>"] = actions.close,
-
-                -- Otherwise, just set the mapping to the function that you want it to be.
-                -- ["<C-i>"] = actions.select_horizontal,
-
-                -- Add up multiple actions
-                ["<CR>"] = actions.select_default + actions.center
+                ["<CR>"] = actions.select_default + actions.center,
 
                 -- You can perform as many actions in a row as you like
                 -- ["<CR>"] = actions.select_default + actions.center + my_cool_custom_action,
+                ["<C-h>"] = actions.which_key -- keys from pressing <C-/>
             },
             n = {
                 ["<C-j>"] = actions.move_selection_next,
                 ["<C-k>"] = actions.move_selection_previous,
-                ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist
-                -- ["<C-i>"] = my_cool_custom_action,
+                ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+                ["<C-h>"] = actions.which_key
             }
         }
     },
@@ -93,7 +88,10 @@ keymap("n", "<Leader>vrc", ':lua require("config.telescope").search_nvim()<CR>',
 keymap("n", "<Leader>notes",
        ':lua require("config.telescope").grep_notes()<CR>', opts)
 keymap("n", "<Leader>p", ":Telescope diagnostics<CR>", opts)
-keymap("n", "<Leader>fs", ":lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>", opts)
+keymap("n", "<Leader>fs",
+       ":lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>", opts)
+keymap("n", "<Leader>gS",
+       ":lua require('telescope.builtin').git_status()<CR>", opts)
 
 local M = {}
 

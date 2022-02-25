@@ -40,7 +40,7 @@ catppuccin.setup({
         indent_blankline = {enabled = false, colored_indent_levels = false},
         bufferline = false,
         markdown = false,
-        lightspeed = true,
+        lightspeed = false,
         ts_rainbow = true
     }
 })

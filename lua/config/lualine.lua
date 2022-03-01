@@ -98,6 +98,7 @@ lualine.setup({
         lualine_c = {},
         lualine_x = {lspclients, "%=", diff, spaces, "encoding", filetype},
         lualine_y = {location},
+        lualine_z = {}
         -- lualine_z = {progress}
     },
     inactive_sections = {

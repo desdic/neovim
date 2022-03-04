@@ -66,6 +66,13 @@ cmp.setup({
     },
     min_length = 0, -- allow for `from package import _` in Python
     mapping = {
+        ['<C-E>'] = function()
+            if luasnip.choice_active() then
+                luasnip.change_choice(-1)
+            else
+                cmp.mapping.select_prev_item()
+            end
+        end,
         ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), {"i", "c"}),
         ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), {"i", "c"}),
         ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), {"i", "c"}),
@@ -80,8 +87,6 @@ cmp.setup({
         ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
-            elseif luasnip.expandable() then
-                luasnip.expand()
             elseif luasnip.expand_or_jumpable() then
                 luasnip.expand_or_jump()
             elseif check_backspace() then
@@ -98,7 +103,7 @@ cmp.setup({
             else
                 fallback()
             end
-        end, {"i", "s"})
+        end, {"i", "s"}),
     },
     sources = {
         {name = "nvim_lsp"}, {name = "nvim_lua"}, {name = "path"},

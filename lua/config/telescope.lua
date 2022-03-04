@@ -90,8 +90,10 @@ keymap("n", "<Leader>notes",
 keymap("n", "<Leader>p", ":Telescope diagnostics<CR>", opts)
 keymap("n", "<Leader>fs",
        ":lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>", opts)
-keymap("n", "<Leader>gS",
-       ":lua require('telescope.builtin').git_status()<CR>", opts)
+keymap("n", "<Leader>gS", ":lua require('telescope.builtin').git_status()<CR>",
+       opts)
+keymap("n", "<Leader>m",
+       ':lua require("config.telescope").list_methods()<CR>', opts)
 
 local M = {}
 
@@ -115,6 +117,12 @@ function M.grep_notes()
     optsgrep.prompt_prefix = "   "
     optsgrep.prompt_title = "Search Notes"
     tsbuildin.live_grep(optsgrep)
+end
+
+function M.list_methods()
+    local symopts = {symbols = {"function", "method", "constructor"}}
+    if vim.bo.filetype == "vim" then symopts.symbols = {"function"} end
+    tsbuildin.lsp_document_symbols(symopts)
 end
 
 return M

@@ -11,6 +11,7 @@ hop.setup({
 local keymap = vim.api.nvim_set_keymap
 local opts = {}
 
+keymap('n', 's', "<cmd>lua require'hop'.hint_char1()<CR>", opts)
 keymap('n', 'f', "<cmd>lua require'hop'.hint_char1()<CR>", opts)
 keymap('n', 'F', "<cmd>lua require'hop'.hint_words()<CR>", opts)
 

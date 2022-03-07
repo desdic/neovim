@@ -58,7 +58,7 @@ ntconfig.setup({
                 ["il"] = "@loop.inner",
                 -- ["aC"] = "@conditional.outer",
                 ["fi"] = "@conditional.inner",
-                ["fb"] = "@block.inner",
+                ["fb"] = "@block.inner"
                 -- ["ab"] = "@block.outer"
             }
         },
@@ -76,7 +76,7 @@ ntconfig.setup({
                 ["fl"] = "@loop.outer",
                 ["fp"] = "@parameter.inner",
                 ["fi"] = "@conditional.outer",
-                ["fo"] = "@call.outer",
+                ["fo"] = "@call.outer"
             },
             goto_previous_start = {
                 ["FF"] = "@function.outer",
@@ -84,14 +84,14 @@ ntconfig.setup({
                 ["Fl"] = "@loop.outer",
                 ["Fp"] = "@parameter.inner",
                 ["Fi"] = "@conditional.outer",
-                ["Fo"] = "@call.outer",
+                ["Fo"] = "@call.outer"
             },
             goto_next_end = {
                 ["fF"] = "@function.outer",
                 ["fC"] = "@class.outer",
                 ["fL"] = "@loop.outer",
-                ["fP"] = "@parameter.inner",
-            },
+                ["fP"] = "@parameter.inner"
+            }
         }
     },
     playground = {

@@ -69,6 +69,7 @@ return packer.startup({
         use({"beauwilliams/focus.nvim"}) -- focus active window
         use({"catppuccin/nvim", as = "catppuccin"}) -- color theme
         use({"folke/tokyonight.nvim"})
+		use({"EdenEast/nightfox.nvim"})
         use({"nvim-lualine/lualine.nvim"})
         use({"akinsho/nvim-bufferline.lua"})
         use({"kyazdani42/nvim-tree.lua"})

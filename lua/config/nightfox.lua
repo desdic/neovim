@@ -5,4 +5,8 @@ if not ok then
     return
 end
 
-nightfox.load("nightfox")
+nightfox.setup({
+	-- fox = "dayfox"
+	fox = "nightfox"
+})
+nightfox.load()

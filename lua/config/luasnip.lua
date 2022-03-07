@@ -12,7 +12,7 @@ local sn = ls.snippet_node
 local fmt = require("luasnip.extras.fmt").fmt
 local types = require("luasnip.util.types")
 local r = require("luasnip.extras").rep
--- local c = ls.choice_node
+local c = ls.choice_node
 -- local rep = require("luasnip.extras").rep
 
 ls.config.set_config({
@@ -25,8 +25,8 @@ ls.config.set_config({
     enable_autosnippets = false,
 
     ext_opts = {
-        [types.choiceNode] = {active = {virt_text = {{"●", "Question"}}}},
-        [types.insertNode] = {active = {virt_text = {{"●", "Question"}}}}
+        [types.choiceNode] = {active = {virt_text = {{"●", "Operator"}}}},
+        [types.insertNode] = {active = {virt_text = {{"●", "DiffAdd"}}}}
     }
 })
 
@@ -44,14 +44,14 @@ end
 
 local upper_filename = function()
     -- Uppercase current filename and wrap in underscope
-    local filename = "__" .. string.upper(vim.fn.expand("%"):gsub("%.", "_")) .. "__"
+    local filename = "__" .. string.upper(vim.fn.expand("%"):gsub("%.", "_")) ..
+                         "__"
     return sn(nil, i(1, filename))
 end
 
 ls.snippets = {
     all = {
-        ls.parser.parse_snippet("$file$", "$TM_FILENAME"),
-		s("#!", {
+        ls.parser.parse_snippet("$file$", "$TM_FILENAME"), s("#!", {
             t("#!/usr/bin/env "),
             d(1, function(_) return sn(nil, i(1, vim.bo.filetype)) end, {}),
             t({"", ""}), i(0)
@@ -62,19 +62,16 @@ ls.snippets = {
 
     python = {
         s("def", fmt("def {}({}) -> {}:\n\t{}\n",
-                     {i(1, "name"), i(2), i(3, "None"), i(0, "pass")}))
+                     {i(1, "name"), i(2), i(3, "None"), i(0, "pass")})),
+        s("#!", {t("#!/usr/bin/env python3")},
+          {condition = file_begin, show_condition = file_begin})
     },
 
     cpp = {
-        s({trig = "#ifndef",
-		   name = "header guard"},
-		   {
-            t("#ifndef "), d(1, upper_filename, {}),
-			t({"", "#define "}), r(1),
-            t({"", "", ""}), i(0),
-			t({"", "", "#endif"})
-           }
-		)
+        s({trig = "#ifndef", name = "header guard"}, {
+            t("#ifndef "), d(1, upper_filename, {}), t({"", "#define "}), r(1),
+            t({"", "", ""}), i(0), t({"", "", "#endif"})
+        })
     },
 
     debchangelog = {

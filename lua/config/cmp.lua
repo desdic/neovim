@@ -66,11 +66,18 @@ cmp.setup({
     },
     min_length = 0, -- allow for `from package import _` in Python
     mapping = {
-        ['<C-E>'] = function()
+        ['<C-k>'] = function()
             if luasnip.choice_active() then
                 luasnip.change_choice(-1)
             else
                 cmp.mapping.select_prev_item()
+            end
+        end,
+        ['<C-j>'] = function()
+            if luasnip.choice_active() then
+                luasnip.change_choice(1)
+            else
+                cmp.mapping.select_next_item()
             end
         end,
         ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), {"i", "c"}),
@@ -81,8 +88,8 @@ cmp.setup({
             c = cmp.mapping.close()
         }),
         ["<C-y>"] = cmp.config.disable,
-        ["<C-k>"] = cmp.mapping.select_prev_item(),
-        ["<C-j>"] = cmp.mapping.select_next_item(),
+        -- ["<C-k>"] = cmp.mapping.select_prev_item(),
+        -- ["<C-j>"] = cmp.mapping.select_next_item(),
         ["<CR>"] = cmp.mapping.confirm({select = true}),
         ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then

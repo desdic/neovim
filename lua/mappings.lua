@@ -46,3 +46,5 @@ keymap("n", "<Leader>pack", ":PackerSync<CR>", opts)
 
 vim.cmd(
     'command! -nargs=0 LspVirtualTextToggle lua require("lsp/virtual_text").toggle()')
+
+keymap("n", "<Leader>r", ":e!<CR>", opts)

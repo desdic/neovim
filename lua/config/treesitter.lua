@@ -50,47 +50,47 @@ ntconfig.setup({
             lookahead = true,
 
             keymaps = {
-                ["af"] = "@function.outer",
+                ["ff"] = "@function.outer",
                 ["if"] = "@function.inner",
-                ["ac"] = "@class.outer",
+                ["fc"] = "@class.outer",
                 ["ic"] = "@class.inner",
-                ["al"] = "@loop.outer",
+                ["fl"] = "@loop.outer",
                 ["il"] = "@loop.inner",
-                ["iC"] = "@conditional.inner",
-                ["aC"] = "@conditional.outer",
-                ["ib"] = "@block.inner",
-                ["ab"] = "@block.outer"
+                -- ["aC"] = "@conditional.outer",
+                ["fi"] = "@conditional.inner",
+                ["fb"] = "@block.inner",
+                -- ["ab"] = "@block.outer"
             }
         },
         swap = {
             enable = true,
-            swap_next = {["<leader>a"] = "@parameter.inner"},
-            swap_previous = {["<leader>A"] = "@parameter.inner"}
+            swap_next = {["fa"] = "@parameter.inner"},
+            swap_previous = {["fA"] = "@parameter.inner"}
         },
         move = {
             enable = true,
             set_jumps = true, -- whether to set jumps in the jumplist
             goto_next_start = {
-                ["[f"] = "@function.outer",
-                ["[c"] = "@class.outer",
-                ["[l"] = "@loop.outer",
-                ["[p"] = "@parameter.inner",
-                ["[i"] = "@conditional.outer",
-                ["[,"] = "@call.outer",
+                ["ff"] = "@function.outer",
+                ["fc"] = "@class.outer",
+                ["fl"] = "@loop.outer",
+                ["fp"] = "@parameter.inner",
+                ["fi"] = "@conditional.outer",
+                ["fo"] = "@call.outer",
             },
             goto_previous_start = {
-                ["]f"] = "@function.outer",
-                ["]c"] = "@class.outer",
-                ["]l"] = "@loop.outer",
-                ["]p"] = "@parameter.inner",
-                ["]i"] = "@conditional.outer",
-                ["],"] = "@call.outer",
+                ["FF"] = "@function.outer",
+                ["Fc"] = "@class.outer",
+                ["Fl"] = "@loop.outer",
+                ["Fp"] = "@parameter.inner",
+                ["Fi"] = "@conditional.outer",
+                ["Fo"] = "@call.outer",
             },
             goto_next_end = {
-                ["[F"] = "@function.outer",
-                ["[C"] = "@class.outer",
-                ["[L"] = "@loop.outer",
-                ["[P"] = "@parameter.inner",
+                ["fF"] = "@function.outer",
+                ["fC"] = "@class.outer",
+                ["fL"] = "@loop.outer",
+                ["fP"] = "@parameter.inner",
             },
         }
     },

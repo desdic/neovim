@@ -7,9 +7,6 @@ keymap("n", "<C-j>", " <C-W>j", opts)
 keymap("n", "<C-k>", " <C-W>k", opts)
 keymap("n", "<C-l>", " <C-W>l", opts)
 
-keymap("n", "fn", "]m", opts)
-keymap("n", "fp", "[m", opts)
-
 keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
 

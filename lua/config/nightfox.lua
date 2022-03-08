@@ -6,7 +6,7 @@ if not ok then
 end
 
 nightfox.setup({
-	-- fox = "dayfox"
-	fox = "nightfox"
+	-- fox = "dawnfox"
+	fox = "nordfox"
 })
 nightfox.load()

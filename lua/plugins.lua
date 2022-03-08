@@ -67,9 +67,12 @@ return packer.startup({
         use({"Vimjas/vim-python-pep8-indent"}) -- python indentenation
         use({"numToStr/Comment.nvim"}) -- commenting
         use({"beauwilliams/focus.nvim"}) -- focus active window
+
+		-- Theming
         use({"catppuccin/nvim", as = "catppuccin"}) -- color theme
         use({"folke/tokyonight.nvim"})
 		use({"EdenEast/nightfox.nvim"})
+
         use({"nvim-lualine/lualine.nvim"})
         use({"akinsho/nvim-bufferline.lua"})
         use({"kyazdani42/nvim-tree.lua"})
@@ -102,6 +105,7 @@ return packer.startup({
 
         use({"saadparwaiz1/cmp_luasnip"})
 
+		-- terminal
         use({"akinsho/toggleterm.nvim"})
 
         -- splash

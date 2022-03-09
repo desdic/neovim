@@ -40,7 +40,7 @@ end
 cmplsp.setup()
 
 cmp.setup({
-    preselect = true,
+    preselect = false,
     snippet = {expand = function(args) luasnip.lsp_expand(args.body) end},
     formatting = {
         fields = {"kind", "abbr", "menu"},
@@ -117,6 +117,6 @@ cmp.setup({
         {name = "luasnip"}, {name = "buffer", keyword_length = 3}
     },
     documentation = {
-        border = {"╭", "─", "╮", "│", "╯", "─", "╰", "│"}
+		border = "single"
     }
 })

@@ -36,8 +36,8 @@ keymap("n", "<Leader>qa", ":qa!<CR>", opts)
 -- CTRL+Backspace to delete word
 keymap("i", "<C-H>", "<C-W>", opts)
 
--- jj as escape
-keymap("i", "jj", "<ESC>", opts)
+-- jk as escape
+keymap("i", "jk", "<ESC>", opts)
 
 keymap("n", "<Leader><space>", ":nohlsearch<CR>",
        {noremap = true, silent = false, expr = false})

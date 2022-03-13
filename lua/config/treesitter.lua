@@ -9,7 +9,7 @@ ntconfig.setup({
     -- ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
     ensure_installed = {
         "bash", "c", "cpp", "dockerfile", "go", "json", "lua", "python", "ruby",
-        "yaml", "toml"
+        "yaml", "toml", "markdown"
     },
     ignore_install = {"javascript", "haskell"}, -- List of parsers to ignore installing
     indent = {enable = true, disable = {"python"}},
@@ -72,6 +72,7 @@ ntconfig.setup({
             set_jumps = true, -- whether to set jumps in the jumplist
             goto_next_start = {
                 ["ff"] = "@function.outer",
+                ["fb"] = "@block.inner",
                 ["fc"] = "@class.outer",
                 ["fl"] = "@loop.outer",
                 ["fp"] = "@parameter.inner",
@@ -80,6 +81,7 @@ ntconfig.setup({
             },
             goto_previous_start = {
                 ["FF"] = "@function.outer",
+                ["Fb"] = "@block.inner",
                 ["Fc"] = "@class.outer",
                 ["Fl"] = "@loop.outer",
                 ["Fp"] = "@parameter.inner",
@@ -88,6 +90,7 @@ ntconfig.setup({
             },
             goto_next_end = {
                 ["fF"] = "@function.outer",
+                ["fB"] = "@block.inner",
                 ["fC"] = "@class.outer",
                 ["fL"] = "@loop.outer",
                 ["fP"] = "@parameter.inner"

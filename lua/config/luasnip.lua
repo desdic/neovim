@@ -13,7 +13,7 @@ local fmt = require("luasnip.extras.fmt").fmt
 local types = require("luasnip.util.types")
 local r = require("luasnip.extras").rep
 local c = ls.choice_node
--- local rep = require("luasnip.extras").rep
+local f = ls.function_node
 
 ls.config.set_config({
     -- Keep last snippet to jump around
@@ -30,13 +30,6 @@ ls.config.set_config({
     }
 })
 
-local date_input = function(_, _, old_state, format)
-    if not old_state then old_state = {} end
-
-    local cfmt = format or "%Y-%m-%d"
-    return sn(nil, i(1, os.date(cfmt)))
-end
-
 local file_begin = function()
     local row, col = unpack(vim.api.nvim_win_get_cursor(0))
     return row == 1 and col == 1
@@ -49,11 +42,37 @@ local upper_filename = function()
     return sn(nil, i(1, filename))
 end
 
+local get_debchangelog = function(position)
+    return d(position, function()
+        local ret = {
+            i(1, "mypackage"), t(" ("), i(2, "1"),
+            t(") systems-focal; urgency=medium")
+        }
+
+        local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+        for index = #lines, 1, -1 do
+            for dname, dversion, dpart in
+                string.gmatch(lines[index], "([%w%p]+)%s%((%d+)%)%s(.+)") do
+                ret = {i(1, dname), t(" (" .. dversion + 1 .. ") " .. dpart)}
+            end
+        end
+        return sn(nil, ret)
+    end, {})
+end
+
+local get_file_type = function()
+	local ftype = vim.bo.filetype
+	if ftype == "python" then
+		ftype = "python3"
+	end
+	return sn(nil, i(1, ftype))
+end
+
 ls.snippets = {
     all = {
         ls.parser.parse_snippet("$file$", "$TM_FILENAME"), s("#!", {
             t("#!/usr/bin/env "),
-            d(1, function(_) return sn(nil, i(1, vim.bo.filetype)) end, {}),
+            d(1, get_file_type, {}),
             t({"", ""}), i(0)
         }, {condition = file_begin, show_condition = file_begin})
     },
@@ -61,30 +80,40 @@ ls.snippets = {
     lua = {},
 
     python = {
-        s("def", fmt("def {}({}) -> {}:\n\t{}\n",
-                     {i(1, "name"), i(2), i(3, "None"), i(0, "pass")})),
-        s("#!", {t("#!/usr/bin/env python3")},
-          {condition = file_begin, show_condition = file_begin})
+        s("def", fmt([[def {}({}) -> {}:
+{}
+		]], {i(1, "name"), i(2), i(3, "None"), i(0, "pass")}))
     },
 
     cpp = {
-        s({trig = "#ifndef", name = "header guard"}, {
-            t("#ifndef "), d(1, upper_filename, {}), t({"", "#define "}), r(1),
-            t({"", "", ""}), i(0), t({"", "", "#endif"})
-        })
+        s({trig = "#ifndef", name = "header guard"}, fmt([[
+#ifndef {}
+#define {}
+
+{}
+
+#endif
+		]], {d(1, upper_filename, {}), r(1), i(0)}))
     },
 
     debchangelog = {
-        s("cl",
-          fmt(
-              "{} ({}) {}; urgency={}\n\n  * {}\n\n -- Kim Nielsen <{}@{}.{}> {}\n\n",
-              {
-                i(1, "mypackage"), i(2, "0"), i(3, "systems-focal"),
-                i(4, "medium"), i(5, "<message>"), i(6, "kgn"), i(7, "one"),
-                i(8, "com"), d(9, date_input, {}, "%a, %d, %b %Y %H:%M:%S %z")
-            }))
+        s({trig = "cl", name = "debian changelog"}, fmt([[
+{}
+
+  * {}
+
+ -- {} <{}> {}
+
+			]], {
+            get_debchangelog(1), i(2, "<change>"),
+			f(function() return os.getenv("DEBFULLNAME") end),
+			f(function() return os.getenv("DEBEMAIL") end),
+            f(function() return os.date("%a, %d, %b %Y %H:%M:%S %z") end)
+        }))
     }
 }
+
+ls.snippets.changelog = ls.snippets.debchangelog
 
 require("luasnip.loaders.from_vscode").lazy_load()
 

@@ -88,6 +88,7 @@ return packer.startup({
         use({"nvim-telescope/telescope-media-files.nvim"})
         use({"nvim-telescope/telescope.nvim"})
         use({"ray-x/lsp_signature.nvim"})
+
         use({"kshenoy/vim-signature"})
         use({"lewis6991/gitsigns.nvim"})
 

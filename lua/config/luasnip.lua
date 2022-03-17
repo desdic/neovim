@@ -17,7 +17,7 @@ local f = ls.function_node
 
 ls.config.set_config({
     -- Keep last snippet to jump around
-    history = true,
+    history = false,
 
     -- Enable dynamic snippets
     updateevents = "TextChanged,TextChangedI",
@@ -25,8 +25,8 @@ ls.config.set_config({
     enable_autosnippets = false,
 
     ext_opts = {
-        [types.choiceNode] = {active = {virt_text = {{"●", "Operator"}}}},
-        [types.insertNode] = {active = {virt_text = {{"●", "DiffAdd"}}}}
+        -- [types.insertNode] = {active = {virt_text = {{"●", "DiffAdd"}}}},
+        [types.choiceNode] = {active = {virt_text = {{"<-- choice", "Operator"}}}}
     }
 })
 
@@ -60,21 +60,22 @@ local get_debchangelog = function(position)
     end, {})
 end
 
-local get_file_type = function()
-	local ftype = vim.bo.filetype
-	if ftype == "python" then
-		ftype = "python3"
-	end
-	return sn(nil, i(1, ftype))
+local get_file_type = function(position)
+	return d(position, function()
+		local ftype = vim.bo.filetype
+		local nodes = {}
+		if ftype == "python" then
+			table.insert(nodes, t("python3"))
+		end
+		table.insert(nodes, t(ftype))
+		return sn(nil, {c(1, {t("#!/usr/bin/env "), t("#!/sbin/env ")}), c(2, nodes), t({"", "", ""}), i(3, "")})
+	end, {})
 end
 
 ls.snippets = {
     all = {
-        ls.parser.parse_snippet("$file$", "$TM_FILENAME"), s("#!", {
-            t("#!/usr/bin/env "),
-            d(1, get_file_type, {}),
-            t({"", ""}), i(0)
-        }, {condition = file_begin, show_condition = file_begin})
+        ls.parser.parse_snippet("$file$", "$TM_FILENAME"),
+		s("#!", get_file_type(1) , {condition = file_begin, show_condition = file_begin})
     },
 
     lua = {},

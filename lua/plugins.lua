@@ -70,6 +70,7 @@ return packer.startup({
 
 		-- Theming
         use({"catppuccin/nvim", as = "catppuccin"}) -- color theme
+		use({"EdenEast/nightfox.nvim"})
 
         use({"nvim-lualine/lualine.nvim"})
         use({"akinsho/nvim-bufferline.lua"})

@@ -1,5 +1,6 @@
 require("config.notify")
-require("config.nightfox")
+-- require("config.nightfox")
+require("config.tokyonight")
 -- require("config.catppuccin")
 require("config.lualine")
 require("config.cmp")

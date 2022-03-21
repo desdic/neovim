@@ -48,7 +48,12 @@ local function lsp_keymaps(bufnr)
 	local tsbuildin, _ = pcall(require, "telescope.builtin")
 	if tsbuildin then
 		keymap("n", "gr", '<cmd>lua require("telescope.builtin").lsp_references()<CR>', {})
-		keymap("n", "<Leader>ca", ":lua require('telescope.builtin').lsp_code_actions()<CR>", opts)
+		-- keymap("n", "<Leader>ca", ":lua require('telescope.builtin').lsp_code_actions()<CR>", opts)
+	end
+
+	local go, _ = pcall(require, "go")
+	if go then
+		keymap("n", "<Leader>ca", ":GoCodeAction<CR>", opts)
 	end
 
     -- keymap("n", "gr", " <cmd>lua vim.lsp.buf.references()<CR>", {})

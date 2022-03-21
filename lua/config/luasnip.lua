@@ -26,7 +26,9 @@ ls.config.set_config({
 
     ext_opts = {
         -- [types.insertNode] = {active = {virt_text = {{"●", "DiffAdd"}}}},
-        [types.choiceNode] = {active = {virt_text = {{"<-- choice", "Operator"}}}}
+        [types.choiceNode] = {
+            active = {virt_text = {{"<-- choice", "Operator"}}}
+        }
     }
 })
 
@@ -61,33 +63,32 @@ local get_debchangelog = function(position)
 end
 
 local get_file_type = function(position)
-	return d(position, function()
-		local ftype = vim.bo.filetype
-		local nodes = {}
-		if ftype == "python" then
-			table.insert(nodes, t("python3"))
-		end
-		table.insert(nodes, t(ftype))
-		return sn(nil, {c(1, {t("#!/usr/bin/env "), t("#!/sbin/env ")}), c(2, nodes), t({"", "", ""}), i(3, "")})
-	end, {})
+    return d(position, function()
+        local ftype = vim.bo.filetype
+        local nodes = {}
+        if ftype == "python" then table.insert(nodes, t("python3")) end
+        table.insert(nodes, t(ftype))
+        return sn(nil, {
+            c(1, {t("#!/usr/bin/env "), t("#!/sbin/env ")}), c(2, nodes),
+            t({"", "", ""}), i(3, "")
+        })
+    end, {})
 end
 
-ls.snippets = {
-    all = {
-        ls.parser.parse_snippet("$file$", "$TM_FILENAME"),
-		s("#!", get_file_type(1) , {condition = file_begin, show_condition = file_begin})
-    },
+ls.add_snippets("all", {
+    ls.parser.parse_snippet("$file$", "$TM_FILENAME"),
+    s("#!", get_file_type(1),
+      {condition = file_begin, show_condition = file_begin})
+})
 
-    lua = {},
-
-    python = {
-        s("def", fmt([[def {}({}) -> {}:
+ls.add_snippets("python", {
+    s("def", fmt([[def {}({}) -> {}:
 {}
 		]], {i(1, "name"), i(2), i(3, "None"), i(0, "pass")}))
-    },
+})
 
-    cpp = {
-        s({trig = "#ifndef", name = "header guard"}, fmt([[
+ls.add_snippets("cpp", {
+    s({trig = "#ifndef", name = "header guard"}, fmt([[
 #ifndef {}
 #define {}
 
@@ -95,30 +96,30 @@ ls.snippets = {
 
 #endif
 		]], {d(1, upper_filename, {}), r(1), i(0)}))
-    },
+})
 
-    debchangelog = {
-        s({trig = "cl", name = "debian changelog"}, fmt([[
+ls.add_snippets("debchangelog", {
+    s({trig = "cl", name = "debian changelog"}, fmt([[
 {}
 
   * {}
 
- -- {} <{}> {}
+ -- {} <{}>  {}
 
 			]], {
-            get_debchangelog(1), i(2, "<change>"),
-			f(function() return os.getenv("DEBFULLNAME") end),
-			f(function() return os.getenv("DEBEMAIL") end),
-            f(function() return os.date("%a, %d, %b %Y %H:%M:%S %z") end)
-        }))
-    }
-}
+        get_debchangelog(1), i(2, "<change>"),
+        f(function() return os.getenv("DEBFULLNAME") end),
+        f(function() return os.getenv("DEBEMAIL") end),
+        f(function() return os.date("%a, %d %b %Y %H:%M:%S %z") end)
+    }))
+})
 
-ls.snippets.changelog = ls.snippets.debchangelog
+-- Extend changelog with debchangelog
+ls.filetype_extend("changelog", {"debchangelog"})
 
 require("luasnip.loaders.from_vscode").lazy_load()
 
 local keymap = vim.api.nvim_set_keymap
 
 keymap("n", "<Leader><Leader>s",
-       "<cmd>source ~/.config/nvim/lua/config/luasnip.lua<CR>", {silent = false})
+       ":luafile ~/.config/nvim/lua/config/luasnip.lua<CR>", {silent = false})

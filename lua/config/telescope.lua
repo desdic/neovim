@@ -19,6 +19,14 @@ if not buildok then
     return
 end
 
+local teleuiok, _ = pcall(require, "telescope-ui-select")
+if not buildok then
+    vim.notify("Unable to require telescope-ui-select", vim.lsp.log_levels.ERROR,
+               {title = "Plugin error"})
+    return
+end
+
+
 ts.setup({
     defaults = {
         prompt_prefix = " ",

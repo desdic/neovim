@@ -12,7 +12,8 @@ ntconfig.setup({
         "yaml", "toml", "markdown"
     },
     ignore_install = {"javascript", "haskell"}, -- List of parsers to ignore installing
-    indent = {enable = true, disable = {"python"}},
+    -- indent = {enable = true, disable = {"python"}},
+    indent = {enable = true, disable = {}},
     highlight = {
         enable = true, -- false will disable the whole extension
         disable = {"rust"} -- list of language that will be disabled

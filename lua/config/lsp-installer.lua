@@ -29,7 +29,8 @@ local myconfigs = {
     ["dockerls"] = true,
     ["clangd"] = true,
     ["sumneko_lua"] = true,
-    ["jsonls"] = true
+    ["jsonls"] = true,
+	["perlnavigator"] = true
 }
 
 for myserver, enabled in pairs(myconfigs) do

@@ -1,5 +1,9 @@
 local status_ok, toggleterm = pcall(require, "toggleterm")
-if not status_ok then return end
+if not status_ok then
+    vim.notify("Unable to require toggleterm", vim.lsp.log_levels.ERROR,
+               {title = "Plugin error"})
+    return
+end
 
 toggleterm.setup({
     size = 20,

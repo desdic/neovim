@@ -17,7 +17,7 @@ local f = ls.function_node
 
 ls.config.set_config({
     -- Keep last snippet to jump around
-    history = false,
+    history = true,
 
     -- Enable dynamic snippets
     updateevents = "TextChanged,TextChangedI",
@@ -83,8 +83,8 @@ ls.add_snippets("all", {
 
 ls.add_snippets("python", {
     s("def", fmt([[def {}({}) -> {}:
-{}
-		]], {i(1, "name"), i(2), i(3, "None"), i(0, "pass")}))
+	{}
+		]], {i(1, "name"), i(2), i(3, "None"), i(0, "raise NotImplementedError(\"To be implemented\")")}))
 })
 
 ls.add_snippets("cpp", {
@@ -123,3 +123,5 @@ local keymap = vim.api.nvim_set_keymap
 
 keymap("n", "<Leader><Leader>s",
        ":luafile ~/.config/nvim/lua/config/luasnip.lua<CR>", {silent = false})
+
+keymap("i", "<c-k>", "<cmd>lua require('luasnip').expand()<CR>", {})

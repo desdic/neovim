@@ -1,50 +1,40 @@
-local keymap = vim.api.nvim_set_keymap
-local opts = {noremap = true, silent = true}
+vim.keymap.set("n", "<C-h>", "<C-W>h", {silent = true})
+vim.keymap.set("n", "<C-j>", "<C-W>j", {silent = true})
+vim.keymap.set("n", "<C-k>", "<C-W>k", {silent = true})
+vim.keymap.set("n", "<C-l>", "<C-W>l", {silent = true})
 
--- Easy navigation
-keymap("n", "<C-h>", " <C-W>h", opts)
-keymap("n", "<C-j>", " <C-W>j", opts)
-keymap("n", "<C-k>", " <C-W>k", opts)
-keymap("n", "<C-l>", " <C-W>l", opts)
+vim.keymap.set("n", "<S-l>", ":bnext<CR>", {silent = true})
+vim.keymap.set("n", "<S-h>", ":bprevious<CR>", {silent = true})
 
-keymap("n", "<S-l>", ":bnext<CR>", opts)
-keymap("n", "<S-h>", ":bprevious<CR>", opts)
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", {silent = true})
 
-keymap("t", "<Esc>", "<C-\\><C-n>", opts)
+vim.keymap.set("", "<Leader>c", ":close<CR>", {silent = true})
+vim.keymap.set("", "<Leader>w", ":w!<CR>", {silent = true})
+vim.keymap.set("", "<Leader>q", ":br <BAR> bd #<CR>", {silent = true})
 
--- Close, write and quit buffers
--- keymap('', '<Leader>c', ':close<CR>', opts)
-keymap("", "<Leader>c", ":close<CR>", opts)
-keymap("", "<Leader>w", ":w!<CR>", opts)
--- keymap('n', '<Leader>q', ':BufferClose<CR>', opts)
-keymap("", "<Leader>q", ":bp <BAR> bd #<CR>", opts)
+vim.keymap.set("v", "<", "<gv", {silent = true})
+vim.keymap.set("v", ">", ">gv", {silent = true})
 
--- Indent in visual mode
-keymap("v", "<", "<gv", opts)
-keymap("v", ">", ">gv", opts)
+vim.keymap.set("n", "<C-m-j>", ":m .+1<CR>==", {silent = true})
+vim.keymap.set("n", "<C-m-k>", ":m .-2<CR>==", {silent = true})
+vim.keymap.set("i", "<C-m-j>", "<Esc>:m .+1<CR>==gi", {silent = true})
+vim.keymap.set("i", "<C-m-k>", "<Esc>:m .-2<CR>==gi", {silent = true})
+vim.keymap.set("v", "<C-m-j>", ":m '>+1<CR>gv=gv", {silent = true})
+vim.keymap.set("v", "<C-m-k>", ":m '<-2<CR>gv=gv", {silent = true})
 
--- Move with CTRL+Meta (Alt)
-keymap("n", "<C-m-j>", ":m .+1<CR>==", opts)
-keymap("n", "<C-m-k>", ":m .-2<CR>==", opts)
-keymap("i", "<C-m-j>", "<Esc>:m .+1<CR>==gi", opts)
-keymap("i", "<C-m-k>", "<Esc>:m .-2<CR>==gi", opts)
-keymap("v", "<C-m-j>", ":m '>+1<CR>gv=gv", opts)
-keymap("v", "<C-m-k>", ":m '<-2<CR>gv=gv", opts)
+vim.keymap.set("n", "<Leader>qa", ":qa!<CR>", {silent = true})
 
-keymap("n", "<Leader>qa", ":qa!<CR>", opts)
-
--- CTRL+Backspace to delete word
-keymap("i", "<C-H>", "<C-W>", opts)
+vim.keymap.set("i", "<C-H>", "<C-W>", {silent = true})
 
 -- jk as escape
-keymap("i", "jk", "<ESC>", opts)
+vim.keymap.set("i", "jk", "<ESC>", {silent = true})
 
-keymap("n", "<Leader><space>", ":nohlsearch<CR>",
-       {noremap = true, silent = false, expr = false})
+vim.keymap.set("n", "<Leader><space>", ":nohlsearch<CR>",
+               {noremap = true, silent = false, expr = false})
 
-keymap("n", "<Leader>pack", ":PackerSync<CR>", opts)
+vim.keymap.set("n", "<Leader>pack", ":PackerSync<CR>", {silent = true})
 
 vim.cmd(
     'command! -nargs=0 LspVirtualTextToggle lua require("lsp/virtual_text").toggle()')
 
-keymap("n", "<Leader>r", ":e!<CR>", opts)
+vim.keymap.set("n", "<Leader>r", ":e!<CR>", {silent = true})

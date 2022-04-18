@@ -45,9 +45,7 @@ cmp.setup({
     formatting = {
         fields = {"kind", "abbr", "menu"},
         format = function(entry, vim_item)
-            -- Kind icons
             vim_item.kind = string.format("%s", i.symbol_map[vim_item.kind])
-            -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item ki
             vim_item.menu = ({
                 nvim_lsp = "[LSP]",
                 luasnip = "[Snippet]",
@@ -65,31 +63,26 @@ cmp.setup({
         }
     },
     min_length = 0, -- allow for `from package import _` in Python
-    mapping = {
-        ['<C-k>'] = function()
+    mapping = cmp.mapping.preset.insert({
+        ["<C-k>"] = function()
             if luasnip.choice_active() then
                 luasnip.change_choice(-1)
             else
                 cmp.mapping.select_prev_item()
             end
         end,
-        ['<C-j>'] = function()
+        ["<C-j>"] = function()
             if luasnip.choice_active() then
                 luasnip.change_choice(1)
             else
                 cmp.mapping.select_next_item()
             end
         end,
-        ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), {"i", "c"}),
-        ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), {"i", "c"}),
-        ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), {"i", "c"}),
-        ["<C-e>"] = cmp.mapping({
-            i = cmp.mapping.abort(),
-            c = cmp.mapping.close()
-        }),
+        ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-f>"] = cmp.mapping.scroll_docs(4),
+        ["<C-Space>"] = cmp.mapping.complete(),
+        ["<C-e>"] = cmp.mapping.abort(),
         ["<C-y>"] = cmp.config.disable,
-        -- ["<C-k>"] = cmp.mapping.select_prev_item(),
-        -- ["<C-j>"] = cmp.mapping.select_next_item(),
         ["<CR>"] = cmp.mapping.confirm({select = true}),
         ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
@@ -110,13 +103,11 @@ cmp.setup({
             else
                 fallback()
             end
-        end, {"i", "s"}),
-    },
+        end, {"i", "s"})
+    }),
     sources = {
         {name = "nvim_lsp"}, {name = "nvim_lua"}, {name = "path"},
         {name = "luasnip"}, {name = "buffer", keyword_length = 3}
     },
-	window = {
-		documentation = "native"
-	}
+    -- window = {documentation = "native"} -- broken
 })

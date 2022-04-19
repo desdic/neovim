@@ -10,7 +10,8 @@ vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", {silent = true, noremap = true})
 
 vim.keymap.set("", "<Leader>c", ":close<CR>", {silent = true, noremap = true})
 vim.keymap.set("", "<Leader>w", ":w!<CR>", {silent = true, noremap = true})
-vim.keymap.set("", "<Leader>q", ":br <BAR> bd #<CR>", {silent = true, noremap = true})
+-- vim.keymap.set("", "<Leader>q", ":br <BAR> bd #<CR>", {silent = true, noremap = true})
+vim.keymap.set("", "<Leader>q", ":bd<CR>", {silent = true, noremap = true})
 
 vim.keymap.set("v", "<", "<gv", {silent = true, noremap = true})
 vim.keymap.set("v", ">", ">gv", {silent = true, noremap = true})

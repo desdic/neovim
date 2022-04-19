@@ -19,6 +19,14 @@ if not buildok then
     return
 end
 
+-- local cfgtsok, cfgts = pcall(require, "config.telescope")
+-- if not cfgtsok then
+--     vim.notify("Unable to require config.telescope", vim.lsp.log_levels.ERROR,
+--                {title = "Plugin error"})
+--     return
+-- end
+
+
 ts.setup({
     defaults = {
 		file_ignore_patterns = {".git"},
@@ -68,39 +76,55 @@ ts.load_extension("fzy_native")
 ts.load_extension("media_files")
 ts.load_extension("ui-select")
 
-local keymap = vim.api.nvim_set_keymap
 local opts = {noremap = true, silent = true}
 
-keymap("n", "<Leader>a", ':lua require("telescope.builtin").marks()<CR>', opts)
-keymap("n", "<Leader>ff",
-       ':lua require("telescope.builtin").find_files({hidden=true})<CR>', opts)
-keymap("n", "<Leader>fv", ':lua require("telescope.builtin").treesitter()<CR>',
-       opts)
-keymap("n", "<Leader>fm",
-       ':lua require("telescope").extensions.media_files.media_files()<CR>',
-       opts)
-keymap("n", "<Leader>fg", ':lua require("telescope.builtin").live_grep()<CR>',
-       opts)
-keymap("n", "<Leader>fb", ':lua require("telescope.builtin").buffers()<CR>',
-       opts)
-keymap("n", "<Leader>fh", ':lua require("telescope.builtin").help_tags()<CR>',
-       opts)
-keymap("n", "<Leader>fn",
-       ':lua require("telescope").extensions.notify.notify({})<CR>', opts)
-keymap("n", "<Leader>fo",
-       ':lua require("telescope.builtin").tags{ only_current_buffer = true }<CR>',
-       opts)
-keymap("n", "<Leader>vrc", ':lua require("config.telescope").search_nvim()<CR>',
-       opts)
-keymap("n", "<Leader>notes",
-       ':lua require("config.telescope").grep_notes()<CR>', opts)
-keymap("n", "<Leader>p", ":Telescope diagnostics<CR>", opts)
-keymap("n", "<Leader>fs",
-       ":lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>", opts)
-keymap("n", "<Leader>gS", ":lua require('telescope.builtin').git_status()<CR>",
-       opts)
-keymap("n", "<Leader>m",
-       ':lua require("config.telescope").list_methods()<CR>', opts)
+vim.keymap.set("n", "<Leader>a", function()
+	tsbuildin.marks()
+end, opts)
+
+vim.keymap.set("n", "<Leader>ff", function()
+	tsbuildin.find_files({hidden=true})
+end, opts)
+
+vim.keymap.set("n", "<Leader>fv", function()
+	tsbuildin.treesitter()
+end, opts)
+
+vim.keymap.set("n", "<Leader>fm", function()
+	ts.extensions.media_files.media_files()
+end, opts)
+
+vim.keymap.set("n", "<Leader>fg", function()
+	tsbuildin.live_grep()
+end, opts)
+
+vim.keymap.set("n", "<Leader>fb", function()
+	tsbuildin.buffers()
+end, opts)
+
+vim.keymap.set("n", "<Leader>fh", function()
+	tsbuildin.help_tags()
+end, opts)
+
+vim.keymap.set("n", "<Leader>fn", function()
+	ts.extensions.notify.notify({})
+end, opts)
+
+vim.keymap.set("n", "<Leader>fo", function()
+	tsbuildin.tags{ only_current_buffer = true }
+end, opts)
+
+vim.keymap.set("n", "<Leader>fs", function()
+	tsbuildin.current_buffer_fuzzy_find()
+end, opts)
+
+vim.keymap.set("n", "<Leader>gS", function()
+	tsbuildin.git_status()
+end, opts)
+
+vim.keymap.set("n", "<Leader>p", function()
+	tsbuildin.diagnostics()
+end, opts)
 
 local M = {}
 
@@ -131,5 +155,17 @@ function M.list_methods()
     if vim.bo.filetype == "vim" then symopts.symbols = {"function"} end
     tsbuildin.lsp_document_symbols(symopts)
 end
+
+vim.keymap.set("n", "<Leader>vrc", function()
+	M.search_nvim()
+end, opts)
+
+vim.keymap.set("n", "<Leader>notes", function()
+	M.grep_notes()
+end, opts)
+
+vim.keymap.set("n", "<Leader>m", function()
+	M.list_methods()
+end, opts)
 
 return M

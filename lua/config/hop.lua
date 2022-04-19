@@ -8,14 +8,13 @@ hop.setup({
 	-- jump_on_sole_occurrence = false,
 })
 
-local keymap = vim.api.nvim_set_keymap
 local opts = {}
 
-keymap('n', 's', "<cmd>lua require'hop'.hint_char1()<CR>", opts)
-keymap('n', 'F', "<cmd>lua require'hop'.hint_words()<CR>", opts)
+vim.keymap.set('n', 's', "<cmd>lua require'hop'.hint_char1()<CR>", opts)
+vim.keymap.set('n', 'F', "<cmd>lua require'hop'.hint_words()<CR>", opts)
 
-keymap('o', 's', "<cmd>lua require'hop'.hint_char1({ inclusive_jump = true })<CR>", opts)
-keymap('o', 'F', "<cmd>lua require'hop'.hint_words({ inclusive_jump = true })<CR>", opts)
+vim.keymap.set('o', 's', "<cmd>lua require'hop'.hint_char1({ inclusive_jump = true })<CR>", opts)
+vim.keymap.set('o', 'F', "<cmd>lua require'hop'.hint_words({ inclusive_jump = true })<CR>", opts)
 
-keymap('v', 's', "<cmd>lua require'hop'.hint_words({ inclusive_jump = true })<CR>", opts)
-keymap("n", "<Leader>hl", "<cmd>lua require'hop'.hint_lines()<CR>", opts)
+vim.keymap.set('v', 's', "<cmd>lua require'hop'.hint_words({ inclusive_jump = true })<CR>", opts)
+vim.keymap.set("n", "<Leader>hl", "<cmd>lua require'hop'.hint_lines()<CR>", opts)

@@ -13,10 +13,9 @@ focus.setup({
     excluded_filetypes = {"toggleterm"}
 })
 
-local keymap = vim.api.nvim_set_keymap
 local opts = {noremap = true, silent = true}
 
-keymap("n", "<Leader>h", ":FocusSplitLeft<CR>", opts)
-keymap("n", "<Leader>j", ":FocusSplitDown<CR>", opts)
-keymap("n", "<Leader>k", ":FocusSplitUp<CR>", opts)
-keymap("n", "<Leader>l", ":FocusSplitRight<CR>", opts)
+vim.keymap.set("n", "<Leader>h", ":FocusSplitLeft<CR>", opts)
+vim.keymap.set("n", "<Leader>j", ":FocusSplitDown<CR>", opts)
+vim.keymap.set("n", "<Leader>k", ":FocusSplitUp<CR>", opts)
+vim.keymap.set("n", "<Leader>l", ":FocusSplitRight<CR>", opts)

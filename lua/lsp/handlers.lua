@@ -1,106 +1,125 @@
 local M = {}
 
 M.setup = function()
-    local signs = {
-        {name = "DiagnosticSignError", text = ""},
-        {name = "DiagnosticSignWarn", text = ""},
-        {name = "DiagnosticSignHint", text = ""},
-        {name = "DiagnosticSignInfo", text = ""}
-    }
+	local signs = {
+		{ name = "DiagnosticSignError", text = "" },
+		{ name = "DiagnosticSignWarn", text = "" },
+		{ name = "DiagnosticSignHint", text = "" },
+		{ name = "DiagnosticSignInfo", text = "" },
+	}
 
-    for _, sign in ipairs(signs) do
-        vim.fn.sign_define(sign.name,
-                           {texthl = sign.name, text = sign.text, numhl = ""})
-    end
+	for _, sign in ipairs(signs) do
+		vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+	end
 
-    local config = {
-        -- disable virtual text
-        virtual_text = false,
-        -- show signs
-        signs = {active = signs},
-        update_in_insert = true,
-        underline = true,
-        severity_sort = true,
-        float = {
-            focusable = false,
-            style = "minimal",
-            border = "rounded",
-            source = "always",
-            header = "",
-            prefix = ""
-        }
-    }
+	local config = {
+		-- disable virtual text
+		virtual_text = false,
+		-- show signs
+		signs = { active = signs },
+		update_in_insert = true,
+		underline = true,
+		severity_sort = true,
+		float = {
+			focusable = false,
+			style = "minimal",
+			border = "rounded",
+			source = "always",
+			header = "",
+			prefix = "",
+		},
+	}
 
-    vim.diagnostic.config(config)
+	vim.diagnostic.config(config)
 
-    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-                                                 vim.lsp.handlers.hover,
-                                                 {border = "rounded"})
+	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
 
-    vim.lsp.handlers["textDocument/signatureHelp"] =
-        vim.lsp.with(vim.lsp.handlers.signature_help, {border = "rounded"})
+	vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+		vim.lsp.handlers.signature_help,
+		{ border = "rounded" }
+	)
 end
 
 local function lsp_keymaps(bufnr)
-    local opts = {noremap = true, silent = true}
-    local keymap = vim.api.nvim_set_keymap
-
-	local tsbuildin, _ = pcall(require, "telescope.builtin")
-	if tsbuildin then
-		keymap("n", "gr", '<cmd>lua require("telescope.builtin").lsp_references()<CR>', {})
-		-- keymap("n", "<Leader>ca", ":lua require('telescope.builtin').lsp_code_actions()<CR>", opts)
+	local tsbuildinok, tsbuildin = pcall(require, "telescope.builtin")
+	if tsbuildinok then
+		vim.keymap.set("n", "gr", function()
+			tsbuildin.lsp_references()
+		end)
 	end
 
 	local go, _ = pcall(require, "go")
 	if go then
-		keymap("n", "<Leader>ca", ":GoCodeAction<CR>", opts)
+		vim.keymap.set("n", "<Leader>ca", ":GoCodeAction<CR>", {silent = true, noremap = true})
 	end
 
-    -- keymap("n", "gr", " <cmd>lua vim.lsp.buf.references()<CR>", {})
+	vim.keymap.set("n", "gd", function()
+		vim.lsp.buf.definition()
+	end)
 
-    keymap("n", "gd", " <cmd>lua vim.lsp.buf.definition()<CR>", {})
-    keymap("n", "gt", " <cmd>lua vim.lsp.buf.type_definition()<CR>", {})
-    keymap("n", "gD", " <cmd>lua vim.lsp.buf.declaration()<CR>", {})
-    keymap("n", "gi", " <cmd>lua vim.lsp.buf.implementation()<CR>", {})
-    keymap("n", "K", " <cmd>lua vim.lsp.buf.hover()<CR>", {})
-    keymap("n", "<C-p>",
-           '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
-    keymap("n", "<C-n>",
-           '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
-    keymap("n", "gl",
-           '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })<CR>',
-           opts)
-    keymap("n", "<Leader>gr", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-    -- keymap("n", "<Leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>",
-    --        {noremap = true})
-    keymap("n", "<Leader>gs", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-    keymap("n", "<Leader>s",
-           ':lua require("telescope.builtin").lsp_document_symbols()<CR>', {})
-    vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])
-    vim.cmd(
-        [[ command! FormatSync execute 'lua vim.lsp.buf.formatting_sync()' ]])
-    vim.cmd(
-        [[ command! FormatRange execute 'lua vim.lsp.buf.range_formatting()' ]])
+	vim.keymap.set("n", "gt", function()
+		vim.lsp.buf.type_definition()
+	end)
+
+	vim.keymap.set("n", "gD", function()
+		vim.lsp.buf.declaration()
+	end)
+
+	vim.keymap.set("n", "gi", function()
+		vim.lsp.buf.implementation()
+	end)
+
+	vim.keymap.set("n", "K", function()
+		vim.lsp.buf.hover()
+	end)
+
+	vim.keymap.set("n", "<C-p>", function()
+		vim.diagnostic.goto_prev({ border = "rounded" })
+	end, { noremap = true, silent = true })
+
+	vim.keymap.set("n", "<C-n>", function()
+		vim.diagnostic.goto_next({ border = "rounded" })
+	end, { noremap = true, silent = true })
+
+	vim.keymap.set("n", "gl", function()
+		vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })
+	end, { noremap = true, silent = true })
+
+	vim.keymap.set("n", "<Leader>gr", function()
+		vim.lsp.buf.rename()
+	end, { noremap = true, silent = true })
+
+	vim.keymap.set("n", "<Leader>gs", function()
+		vim.lsp.buf.signature_help()
+	end, { noremap = true, silent = true })
+
+	vim.keymap.set("n", "<Leader>s", function()
+		tsbuildin.lsp_document_symbols()
+	end, { noremap = true, silent = true })
+
+	vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])
+	vim.cmd([[ command! FormatSync execute 'lua vim.lsp.buf.formatting_sync()' ]])
+	vim.cmd([[ command! FormatRange execute 'lua vim.lsp.buf.range_formatting()' ]])
 end
 
 M.on_attach = function(client, bufnr)
-    if client.name == "tsserver" then
-        client.resolved_capabilities.document_formatting = false
-    end
-    if client.name == "gopls" then
-        client.resolved_capabilities.document_formatting = false
-        client.resolved_capabilities.document_range_formatting = false
-    end
+	if client.name == "tsserver" then
+		client.resolved_capabilities.document_formatting = false
+	end
+	if client.name == "gopls" then
+		client.resolved_capabilities.document_formatting = false
+		client.resolved_capabilities.document_range_formatting = false
+	end
 
-    lsp_keymaps(bufnr)
+	lsp_keymaps(bufnr)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if not status_ok then
-    vim.notify("Unable to require cmp_nvim_lsp", "error")
-    return
+	vim.notify("Unable to require cmp_nvim_lsp", "error")
+	return
 end
 
 M.capabilities = cmp_nvim_lsp.update_capabilities(capabilities)

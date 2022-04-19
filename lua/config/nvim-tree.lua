@@ -7,8 +7,7 @@ end
 
 ntree.setup({})
 
-local keymap = vim.api.nvim_set_keymap
 local opts = {noremap = true, silent = true}
 
-keymap("n", "<Leader>n", ":NvimTreeToggle<CR>", opts)
-keymap("n", "<Leader>r", ":NvimTreeRefresh<CR>", opts)
+vim.keymap.set("n", "<Leader>n", ":NvimTreeToggle<CR>", opts)
+vim.keymap.set("n", "<Leader>r", ":NvimTreeRefresh<CR>", opts)

@@ -119,9 +119,10 @@ ls.filetype_extend("changelog", {"debchangelog"})
 
 require("luasnip.loaders.from_vscode").lazy_load()
 
-local keymap = vim.api.nvim_set_keymap
-
-keymap("n", "<Leader><Leader>s",
+vim.keymap.set("n", "<Leader><Leader>s",
        ":luafile ~/.config/nvim/lua/config/luasnip.lua<CR>", {silent = false})
 
-keymap("i", "<c-k>", "<cmd>lua require('luasnip').expand()<CR>", {})
+-- TODO not working
+vim.keymap.set("i", "<c-k>", function()
+	ls.expand()
+end, {})

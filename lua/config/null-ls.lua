@@ -30,8 +30,7 @@ function M.config()
         on_attach = function(client)
             if client.resolved_capabilities.document_formatting then
                 -- vim.cmd("autocmd BufWritePre <buffer> FormatWrite")
-                local keymap = vim.api.nvim_set_keymap
-                keymap("n", "<leader>f", ":FormatSync<CR>", {})
+                vim.keymap.set("n", "<leader>f", ":FormatSync<CR>", {})
             end
         end,
         sources = {

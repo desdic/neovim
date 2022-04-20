@@ -15,9 +15,12 @@ Used for Go, Python and some Ruby.
 
 # Requirements
 
-- Neovim +0.6
-- lua-format
-- stylua-bin
-- github.com/golangci/golangci-lint/cmd/golangci-lint@latest
-- golang.org/x/tools/cmd/goimports@latest
-- github.com/daixiang0/gci@latest
+- Neovim 0.7+
+
+# Formating
+```sh
+# yay -S stylua lua-format python-black
+# go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+# go install golang.org/x/tools/cmd/goimports@latest
+# go install github.com/daixiang0/gci@latest
+```

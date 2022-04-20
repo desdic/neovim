@@ -45,57 +45,62 @@ local function lsp_keymaps(bufnr)
 	if tsbuildinok then
 		vim.keymap.set("n", "gr", function()
 			tsbuildin.lsp_references()
-		end)
+		end, { noremap = true, desc = "Show references" })
 	end
 
 	local go, _ = pcall(require, "go")
 	if go then
-		vim.keymap.set("n", "<Leader>ca", ":GoCodeAction<CR>", { silent = true, noremap = true })
+		vim.keymap.set(
+			"n",
+			"<Leader>ca",
+			":GoCodeAction<CR>",
+			{ silent = true, noremap = true, desc = "Show code actions" }
+		)
 	end
 
 	vim.keymap.set("n", "gd", function()
 		vim.lsp.buf.definition()
-	end)
+	end, { noremap = true, desc = "Goto definition" })
 
 	vim.keymap.set("n", "gt", function()
 		vim.lsp.buf.type_definition()
-	end)
+	end, { noremap = true, desc = "Goto type definition" })
 
 	vim.keymap.set("n", "gD", function()
 		vim.lsp.buf.declaration()
-	end)
+	end, { noremap = true, desc = "Goto declaration" })
 
 	vim.keymap.set("n", "gi", function()
 		vim.lsp.buf.implementation()
-	end)
+	end, { noremap = true, desc = "Goto implementation" })
 
 	vim.keymap.set("n", "K", function()
 		vim.lsp.buf.hover()
-	end)
+	end, { noremap = true, desc = "Show documentation" })
 
 	vim.keymap.set("n", "<C-p>", function()
 		vim.diagnostic.goto_prev({ border = "rounded" })
-	end, { noremap = true, silent = true })
+	end, { noremap = true, silent = true, desc = "Goto previous diagnostic" })
 
 	vim.keymap.set("n", "<C-n>", function()
 		vim.diagnostic.goto_next({ border = "rounded" })
-	end, { noremap = true, silent = true })
+	end, { noremap = true, silent = true, desc = "Goto next diagnostic" })
 
 	vim.keymap.set("n", "gl", function()
-		vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })
-	end, { noremap = true, silent = true })
+		vim.diagnostic.open_float()
+	end, { noremap = true, silent = true, desc = "Open diagnostic" })
 
 	vim.keymap.set("n", "<Leader>gr", function()
 		vim.lsp.buf.rename()
-	end, { noremap = true, silent = true })
+	end, { noremap = true, silent = true, desc = "LSP rename" })
 
 	vim.keymap.set("n", "<Leader>gs", function()
 		vim.lsp.buf.signature_help()
-	end, { noremap = true, silent = true })
+	end, { noremap = true, silent = true, desc = "Show signature help" })
 
 	vim.keymap.set("n", "<Leader>s", function()
 		tsbuildin.lsp_document_symbols()
-	end, { noremap = true, silent = true })
+	end, { noremap = true, silent = true, desc = "Show symbols" })
 
 	vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])
 	vim.cmd([[ command! FormatSync execute 'lua vim.lsp.buf.formatting_sync()' ]])

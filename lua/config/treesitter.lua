@@ -6,13 +6,11 @@ if not ok then
 end
 
 ntconfig.setup({
-    -- ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
     ensure_installed = {
         "bash", "c", "cpp", "dockerfile", "go", "json", "lua", "python", "ruby",
         "yaml", "toml", "markdown"
     },
     ignore_install = {"javascript", "haskell"}, -- List of parsers to ignore installing
-    -- indent = {enable = true, disable = {"python"}},
     indent = {enable = true, disable = {}},
     highlight = {
         enable = true, -- false will disable the whole extension

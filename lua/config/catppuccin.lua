@@ -5,6 +5,13 @@ if not ok then
     return
 end
 
+local colok, catcolors = pcall(require, "catppuccin.api.colors")
+if not colok then
+    vim.notify("Unable to require catppuccin.api.colors", vim.lsp.log_levels.ERROR,
+               {title = "Plugin error"})
+    return
+end
+
 -- configure it
 catppuccin.setup({
     transparent_background = false,
@@ -45,7 +52,7 @@ catppuccin.setup({
     }
 })
 
-local colors = require("catppuccin.api.colors").get_colors()
+local colors = catcolors.get_colors()
 catppuccin.remap({
     NormalFloat = {bg = colors.black2},
     DiagnosticError = {bg = colors.black2}

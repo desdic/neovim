@@ -4,6 +4,12 @@ if not status_ok then
 	return
 end
 
+local termok, term = pcall(require, "toggleterm.terminal")
+if not termok then
+	vim.notify("Unable to require toggleterm.terminal", vim.lsp.log_levels.ERROR, { title = "Plugin error" })
+	return
+end
+
 toggleterm.setup({
 	size = 20,
 	open_mapping = [[<c-t>]],
@@ -51,9 +57,7 @@ end
 
 vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
 
-local Terminal = require("toggleterm.terminal").Terminal
-
-local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
+local lazygit = term.Terminal:new({ cmd = "lazygit", hidden = true })
 function _LAZYGIT_TOGGLE()
 	lazygit:toggle()
 end

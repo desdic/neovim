@@ -4,6 +4,12 @@ if not lsok then
 	return
 end
 
+local lsvsok, lsvscode = pcall(require, "luasnip.loaders.from_vscode")
+if not lsvsok then
+	vim.notify("Unable to require luasnip.loaders.from_vscode")
+	return
+end
+
 local s = ls.s
 local i = ls.insert_node
 local d = ls.dynamic_node
@@ -145,7 +151,7 @@ ls.add_snippets("debchangelog", {
 -- Extend changelog with debchangelog
 ls.filetype_extend("changelog", { "debchangelog" })
 
-require("luasnip.loaders.from_vscode").lazy_load()
+lsvscode.lazy_load()
 
 vim.keymap.set(
 	"n",

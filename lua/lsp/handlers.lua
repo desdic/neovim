@@ -50,7 +50,7 @@ local function lsp_keymaps(bufnr)
 
 	local go, _ = pcall(require, "go")
 	if go then
-		vim.keymap.set("n", "<Leader>ca", ":GoCodeAction<CR>", {silent = true, noremap = true})
+		vim.keymap.set("n", "<Leader>ca", ":GoCodeAction<CR>", { silent = true, noremap = true })
 	end
 
 	vim.keymap.set("n", "gd", function()
@@ -105,8 +105,9 @@ end
 M.on_attach = function(client, bufnr)
 	if client.name == "tsserver" then
 		client.resolved_capabilities.document_formatting = false
-	end
-	if client.name == "gopls" then
+	elseif client.name == "sumneko_lua" then
+		client.resolved_capabilities.document_formatting = false
+	elseif client.name == "gopls" then
 		client.resolved_capabilities.document_formatting = false
 		client.resolved_capabilities.document_range_formatting = false
 	end

@@ -7,5 +7,4 @@ end
 
 neoclip.setup()
 
-local opts = {noremap = true, silent = true}
-vim.keymap.set("n", "<Leader>bp", ":Telescope neoclip unnamed<CR>", opts)
+vim.keymap.set("n", "<Leader>bp", ":Telescope neoclip unnamed<CR>", {noremap = true, silent = true, desc = "Show clipboard buffers"})

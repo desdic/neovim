@@ -17,7 +17,7 @@ Used for Go, Python and some Ruby.
 
 - Neovim 0.7+
 
-# Formating
+# Formatting
 ```sh
 # yay -S stylua lua-format python-black
 # go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest

@@ -109,8 +109,6 @@ cmp.setup({
 				fallback()
 			end
 		end, { "i", "s" }),
-		["<C-p>"] = cmp.mapping.select_prev_item(),
-		["<C-n>"] = cmp.mapping.select_next_item(),
 	}),
 	sources = {
 		{ name = "nvim_lsp" },
@@ -120,6 +118,6 @@ cmp.setup({
 		{ name = "buffer", keyword_length = 3 },
 	},
 	window = {
-		documentation = cmp.config.window.bordered()
-	}
+		documentation = cmp.config.window.bordered(),
+	},
 })

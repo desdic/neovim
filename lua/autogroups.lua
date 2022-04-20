@@ -50,14 +50,6 @@ local autogroups = {
             }
         }
     },
-    ["_systemd"] = {
-        [{"BufNewFile", "BufRead"}] = {
-            [{
-                "*/systemd/*.{automount,mount,path,service,socket,swap,target,timer}",
-                "/etc/systemd/system/*.d/*.conf", "/etc/systemd/system/*.d/.#*"
-            }] = {"setfiletype systemd"}
-        }
-    },
     ["_toml"] = {
         [{"FileType"}] = {
             [{"_toml"}] = {

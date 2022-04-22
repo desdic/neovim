@@ -117,13 +117,6 @@ local autogroups = {
             }
         }
     },
-    ["_highlight"] = {
-        [{"TextYankPost"}] = {
-            [{"*"}] = {
-                "silent! lua vim.highlight.on_yank {on_visual = false, higroup='IncSearch', timeout=200}" -- Highlight on yank
-            }
-        }
-    }
 }
 
 for autogrp, autovalues in pairs(autogroups) do
@@ -141,3 +134,5 @@ for autogrp, autovalues in pairs(autogroups) do
         end
     end
 end
+
+vim.api.nvim_create_autocmd({"TextYankPost"}, {callback = function() vim.highlight.on_yank ({on_visual = false, higroup='IncSearch', timeout=200}) end})

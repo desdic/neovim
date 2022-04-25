@@ -1,7 +1,6 @@
 local ok, ap = pcall(require, "nvim-autopairs")
 if not ok then
-	vim.notify("Unable to require nvim-autopairs", vim.lsp.log_levels.ERROR,
-		{ title = "Plugin error" })
+	vim.notify("Unable to require nvim-autopairs", vim.lsp.log_levels.ERROR, { title = "Plugin error" })
 	return
 end
 
@@ -18,13 +17,13 @@ ap.setup({
 		keys = "qwertyuiopzxcvbnmasdfghjkl",
 		check_comma = true,
 		highlight = "PmenuSel",
-		highlight_grey = "LineNr"
-	}
+		highlight_grey = "LineNr",
+	},
 })
 
-local cmp_autopairs = require "nvim-autopairs.completion.cmp"
+local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 local cmp_status_ok, cmp = pcall(require, "cmp")
 if not cmp_status_ok then
 	return
 end
-cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = { tex = "" } })
+cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))

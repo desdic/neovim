@@ -3,12 +3,6 @@ if not status_ok then
 	return
 end
 
-local ok, gps = pcall(require, "nvim-gps")
-if not ok then
-	vim.notify("Unable to require nvim-gps", vim.lsp.log_levels.ERROR, { title = "Plugin error" })
-	return
-end
-
 local hide_in_width = function()
 	return vim.fn.winwidth(0) > 80
 end
@@ -81,6 +75,18 @@ local filename = function()
 	return vim.fn.expand("%:t")
 end
 
+local gpsok, gps = pcall(require, "nvim-gps")
+local gpsnvim = {
+	function()
+		if gpsok and gps.is_available() then
+			return gps.get_location()
+		end
+		return ""
+	end,
+	padding = { right = 1 },
+	cond = hide_in_width,
+}
+
 -- override the inactive background for filename to be more visible
 local custom_catppuccin = {}
 local cstatus_ok, catcolors = pcall(require, "catppuccin.api.colors")
@@ -107,9 +113,7 @@ lualine.setup({
 	sections = {
 		lualine_a = { branch, diagnostics },
 		lualine_b = { mode },
-		lualine_c = {
-			{ gps.get_location, cond = gps.is_available },
-		},
+		lualine_c = { gpsnvim },
 		lualine_x = { lspclients, "%=", diff, spaces, "encoding", filetype },
 		lualine_y = { location },
 		lualine_z = {},

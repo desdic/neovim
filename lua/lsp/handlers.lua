@@ -105,9 +105,26 @@ local function lsp_keymaps(bufnr)
 	vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])
 	vim.cmd([[ command! FormatSync execute 'lua vim.lsp.buf.formatting_sync()' ]])
 	vim.cmd([[ command! FormatRange execute 'lua vim.lsp.buf.range_formatting()' ]])
+
 end
 
+-- Prepare for next version of lsp-config
+-- local util = require("vim.lsp.util")
+-- local formatting_callback = function(client, bufnr)
+-- 	vim.keymap.set("n", "<leader>f", function()
+-- 		local params = util.make_formatting_params({})
+-- 		client.request("textDocument/formatting", params, nil, bufnr)
+-- 		vim.lsp.buf.formatting()
+-- 	end, { buffer = bufnr })
+-- end
+
 M.on_attach = function(client, bufnr)
+	-- Alternativ solution for lsp_config update
+	-- https://github.com/b0o/nvim-conf/commit/50a9478334f9cfffde9ce889980f9585a69c54f2
+	vim.keymap.set("n", "<Leader>f", function()
+		vim.lsp.buf.formatting()
+	end, { noremap = true, silent = true, desc = "Do formatting" })
+
 	if client.name == "tsserver" then
 		client.resolved_capabilities.document_formatting = false
 	elseif client.name == "sumneko_lua" then
@@ -116,6 +133,14 @@ M.on_attach = function(client, bufnr)
 		client.resolved_capabilities.document_formatting = false
 		client.resolved_capabilities.document_range_formatting = false
 	end
+
+
+
+	-- Prepare for next version of lsp-config
+	-- if client.name ~= "gopls" and client.name ~= "tsserver" and client.name ~= "sumneko_lua" then
+	-- 	print(client.name)
+	-- 	formatting_callback(client, bufnr)
+	-- end
 
 	lsp_keymaps(bufnr)
 end

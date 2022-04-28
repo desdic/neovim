@@ -25,12 +25,6 @@ function M.config()
 
 	null_ls.setup({
 		-- debug = true,
-		on_attach = function(client)
-			if client.resolved_capabilities.document_formatting then
-				-- vim.cmd("autocmd BufWritePre <buffer> FormatWrite")
-				vim.keymap.set("n", "<leader>f", ":FormatSync<CR>", { desc = "Format code" })
-			end
-		end,
 		sources = {
 			null_ls.builtins.formatting.stylua,
 			null_ls.builtins.formatting.lua_format,

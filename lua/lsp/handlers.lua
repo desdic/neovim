@@ -135,7 +135,6 @@ M.on_attach = function(client, bufnr)
 	end
 
 
-
 	-- Prepare for next version of lsp-config
 	-- if client.name ~= "gopls" and client.name ~= "tsserver" and client.name ~= "sumneko_lua" then
 	-- 	print(client.name)

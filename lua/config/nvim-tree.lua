@@ -4,7 +4,7 @@ if not ok then
 	return
 end
 
-ntree.setup({})
+ntree.setup()
 
 vim.keymap.set("n", "<Leader>n", ":NvimTreeToggle<CR>", { noremap = true, silent = true, desc = "Show nvim tree" })
 vim.keymap.set("n", "<Leader>r", ":NvimTreeRefresh<CR>", { noremap = true, silent = true, desc = "Refresh nvim tree" })

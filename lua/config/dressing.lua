@@ -4,4 +4,4 @@ if not status_ok then
 	return
 end
 
-dressing.setup({})
+dressing.setup()

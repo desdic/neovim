@@ -4,9 +4,7 @@ if not lsok then
 	return
 end
 
-hop.setup({
-	-- jump_on_sole_occurrence = false,
-})
+hop.setup()
 
 vim.keymap.set("n", "s", function()
 	hop.hint_char1()

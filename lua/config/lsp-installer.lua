@@ -40,7 +40,7 @@ local myconfigs = {
     ["perlnavigator"] = true
 }
 
-lsp_installer.setup({})
+lsp_installer.setup()
 
 for myserver, enabled in pairs(myconfigs) do
     local _, requested_server = lsp_install_srv.get_server(myserver)
@@ -66,8 +66,7 @@ for myserver, enabled in pairs(myconfigs) do
             opts = vim.tbl_deep_extend("force", srvopts, opts)
         end
 
-		lspconfig[myserver].setup(opts)
-
+        lspconfig[myserver].setup(opts)
     else
         if requested_server:is_installed() then
             vim.notify("Uninstalling " .. myserver, vim.lsp.log_levels.INFO,

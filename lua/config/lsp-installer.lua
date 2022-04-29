@@ -19,6 +19,13 @@ if not handok then
     return
 end
 
+local lspconfigok, lspconfig = pcall(require, "lspconfig")
+if not lspconfigok then
+    vim.notify("Unable to require lspconfig", vim.lsp.log_levels.ERROR,
+               {title = "Config error"})
+    return
+end
+
 local myconfigs = {
     ["bashls"] = true,
     ["yamlls"] = true,
@@ -34,8 +41,6 @@ local myconfigs = {
 }
 
 lsp_installer.setup({})
-
-local lspconfig = require("lspconfig")
 
 for myserver, enabled in pairs(myconfigs) do
     local _, requested_server = lsp_install_srv.get_server(myserver)
@@ -61,7 +66,7 @@ for myserver, enabled in pairs(myconfigs) do
             opts = vim.tbl_deep_extend("force", srvopts, opts)
         end
 
-		lspconfig[myserver].setup{opts}
+		lspconfig[myserver].setup(opts)
 
     else
         if requested_server:is_installed() then

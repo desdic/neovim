@@ -122,7 +122,7 @@ M.on_attach = function(client, bufnr)
 	-- Alternativ solution for lsp_config update
 	-- https://github.com/b0o/nvim-conf/commit/50a9478334f9cfffde9ce889980f9585a69c54f2
 	vim.keymap.set("n", "<Leader>f", function()
-		vim.lsp.buf.formatting()
+		vim.lsp.buf.formatting_sync()
 	end, { noremap = true, silent = true, desc = "Do formatting" })
 
 	if client.name == "tsserver" then

@@ -2,7 +2,7 @@ local packer_path = vim.fn.stdpath("data") ..
                         "/site/pack/packer/start/packer.nvim"
 
 if vim.fn.empty(vim.fn.glob(packer_path)) > 0 then
-    packer_bootstrap = vim.fn.system({
+    PACKER_BOOTSTRAP = vim.fn.system({
         "git", "clone", "--depth", "1",
         "https://github.com/wbthomason/packer.nvim", packer_path
     })
@@ -34,6 +34,8 @@ packer.init({
 return packer.startup({
     function(use)
         use({"wbthomason/packer.nvim"})
+
+		use({"lewis6991/impatient.nvim"})
 
         -- used by other plugins
         use({"nvim-lua/plenary.nvim"})
@@ -130,7 +132,7 @@ return packer.startup({
         use({"tpope/vim-fugitive"})
 
         -- run sync on installation
-        if packer_bootstrap then require("packer").sync() end
+        if PACKER_BOOTSTRAP then require("packer").sync() end
     end,
     config = {python_cmd = "python3"}
 })

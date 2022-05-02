@@ -1,3 +1,4 @@
+require("config.impatient")
 require("config.notify")
 -- require("config.nightfox")
 require("config.tokyonight")

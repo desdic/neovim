@@ -2,7 +2,7 @@ return {
     cmd = {
         "node",
         DATA_PATH ..
-            "/lsp_servers/python/node_modules/pyright/langserver.index.js",
+            "/lsp_servers/pyright/node_modules/pyright/dist/pyright-langserver.js",
         "--stdio"
     },
     settings = {

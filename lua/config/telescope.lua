@@ -22,7 +22,7 @@ end
 ts.setup({
     defaults = {
         file_ignore_patterns = {
-            ".git/", ".cache", "%.o", "%.a", "%.out", "%.class", "%.pdf",
+            ".git/", ".cache/", "%.o", "%.a", "%.out", "%.class", "%.pdf",
             "%.mkv", "%.mp4", "%.zip"
         },
         prompt_prefix = " ",

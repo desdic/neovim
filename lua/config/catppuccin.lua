@@ -56,4 +56,5 @@ catppuccin.remap({
 	DiagnosticError = { bg = colors.black2 },
 })
 
+vim.g.catppuccin_flavour = "macchiato"
 vim.cmd("colorscheme catppuccin")

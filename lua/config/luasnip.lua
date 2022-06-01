@@ -45,7 +45,7 @@ end
 
 local upper_filename = function()
 	-- Uppercase current filename and wrap in underscope
-	local filename = "__" .. string.upper(vim.fn.expand("%"):gsub("%.", "_")) .. "__"
+	local filename = "__" .. string.upper(vim.fn.expand("%:t"):gsub("%.", "_")) .. "__"
 	return sn(nil, i(1, filename))
 end
 

@@ -4,12 +4,6 @@ if not ok then
 	return
 end
 
-local colok, catcolors = pcall(require, "catppuccin.api.colors")
-if not colok then
-	vim.notify("Unable to require catppuccin.api.colors", vim.lsp.log_levels.ERROR, { title = "Plugin error" })
-	return
-end
-
 -- configure it
 catppuccin.setup({
 	transparent_background = false,
@@ -50,11 +44,24 @@ catppuccin.setup({
 	},
 })
 
-local colors = catcolors.get_colors()
-catppuccin.remap({
-	NormalFloat = { bg = colors.black2 },
-	DiagnosticError = { bg = colors.black2 },
-})
-
 vim.g.catppuccin_flavour = "macchiato"
-vim.cmd("colorscheme catppuccin")
+
+vim.cmd[[colorscheme catppuccin]]
+
+-- local colok, catcolors = pcall(require, "catppuccin.api.colors")
+-- if not colok then
+-- 	vim.notify("Unable to require catppuccin.api.colors", vim.lsp.log_levels.ERROR, { title = "Plugin error" })
+-- 	return
+-- end
+--
+-- local colors = catcolors.get_colors()
+-- require('catppuccin').remap({
+-- 	NormalFloat = { bg = colors.black2 },
+-- 	DiagnosticError = { bg = colors.black2 },
+-- 	DiagnosticWarn = { bg = colors.Base },
+-- })
+
+-- For some reason the remap does not work on macchiato
+vim.cmd[[hi NormalFloat guibg=Base]]
+vim.cmd[[hi DiagnosticError guibg=Base]]
+vim.cmd[[hi DiagnosticWarn guibg=Base]]

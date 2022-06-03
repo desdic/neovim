@@ -88,21 +88,24 @@ local gpsnvim = {
 }
 
 -- override the inactive background for filename to be more visible
-local custom_catppuccin = {}
-local cstatus_ok, catcolors = pcall(require, "catppuccin.api.colors")
-if cstatus_ok then
-	cstatus_ok, custom_catppuccin = pcall(require, "lualine.themes.catppuccin")
-	if cstatus_ok then
-		local colors = catcolors.get_colors()
-		custom_catppuccin.inactive.c.bg = colors.black1
-	end
-end
+-- local custom_catppuccin = {}
+-- local cstatus_ok, catcolors = pcall(require, "catppuccin.api.colors")
+-- if cstatus_ok then
+-- 	cstatus_ok, custom_catppuccin = pcall(require, "lualine.themes.catppuccin")
+-- 	if cstatus_ok then
+-- 		local colors = catcolors.get_colors()
+-- 		custom_catppuccin.inactive.c.bg = colors.black1
+-- 		-- hi DiagnosticWarn guifg=DarkOrange
+-- 		-- custom_catppuccin.DiagnosticWarning.bg = colors.black1
+-- 	end
+-- end
 
 lualine.setup({
 	options = {
 		icons_enabled = true,
 		-- theme = "tokyonight",
-		theme = custom_catppuccin,
+		-- theme = custom_catppuccin,
+		theme = "catppuccin",
 		-- theme = "nightfox",
 		component_separators = { left = "", right = "" },
 		section_separators = { left = "", right = "" },

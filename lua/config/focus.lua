@@ -12,18 +12,18 @@ focus.setup({
 	excluded_filetypes = { "toggleterm" },
 })
 
-vim.keymap.set("n", "<Leader>h", function()
+vim.keymap.set("n", "<Leader>sh", function()
 	focus.split_command("h")
 end, { noremap = true, silent = true, desc = "Split left" })
 
-vim.keymap.set("n", "<Leader>j", function()
+vim.keymap.set("n", "<Leader>sj", function()
 	focus.split_command("j")
 end, { noremap = true, silent = true, desc = "Split down" })
 
-vim.keymap.set("n", "<Leader>k", function()
+vim.keymap.set("n", "<Leader>sk", function()
 	focus.split_command("k")
 end, { noremap = true, silent = true, desc = "Split up" })
 
-vim.keymap.set("n", "<Leader>l", function()
+vim.keymap.set("n", "<Leader>sl", function()
 	focus.split_command("l")
 end, { noremap = true, silent = true, desc = "Split right" })

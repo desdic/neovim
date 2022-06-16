@@ -131,6 +131,8 @@ return packer.startup({
         use({"tpope/vim-surround"})
         use({"tpope/vim-fugitive"})
 
+		use({"ziontee113/syntax-tree-surfer"})
+
         -- run sync on installation
         if PACKER_BOOTSTRAP then require("packer").sync() end
     end,

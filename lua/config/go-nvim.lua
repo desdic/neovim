@@ -13,7 +13,7 @@ end
 go.setup({ dap_debug = true, dap_debug_gui = true })
 
 -- Run gofmt + goimport on save
--- vim.api.nvim_create_autocmd({"BufWritePre"}, {pattern = "*.go", callback = function() goformat.goimport() end})
+vim.api.nvim_create_autocmd({"BufWritePre"}, {pattern = "*.go", callback = function() goformat.goimport() end})
 --
 
 local function org_imports()

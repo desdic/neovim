@@ -133,6 +133,8 @@ return packer.startup({
 
 		use({"ziontee113/syntax-tree-surfer"})
 
+		use({"lukas-reineke/indent-blankline.nvim"})
+
         -- run sync on installation
         if PACKER_BOOTSTRAP then require("packer").sync() end
     end,

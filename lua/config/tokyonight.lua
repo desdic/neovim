@@ -1,4 +1,4 @@
-local ok, tn = pcall(require, "tokyonight")
+local ok, _ = pcall(require, "tokyonight")
 if not ok then
 	vim.notify("Unable to require tokyonight", vim.lsp.log_levels.ERROR, { title = "Plugin error" })
 	return

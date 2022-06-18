@@ -42,6 +42,7 @@ option.scrolloff = 10 -- Always keep 10 lines visible
 option.errorbells = false -- Disable error bells
 option.showcmd = true -- Show the (partial) command as it’s being typed
 
+HOME_PATH = "/home/" .. vim.fn.expand("$USER")
 option.undodir = HOME_PATH .. "/.config/nvim/undo" -- Save and set undo/redo levels
 option.undofile = true
 option.undolevels = 100

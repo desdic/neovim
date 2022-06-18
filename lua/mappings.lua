@@ -11,7 +11,7 @@ vim.keymap.set("n", "<S-h>", ":bprevious<CR>", { silent = true, noremap = true, 
 vim.keymap.set("", "<Leader>c", ":close<CR>", { silent = true, noremap = true, desc = "Close window" })
 vim.keymap.set("", "<Leader>w", ":w!<CR>", { silent = true, noremap = true, desc = "Write buffer" })
 -- vim.keymap.set("", "<Leader>q", ":br <BAR> bd #<CR>", {silent = true, noremap = true})
-vim.keymap.set("", "<Leader>q", ":bd<CR>", { silent = true, noremap = true, desc = "Close buffer" })
+vim.keymap.set("", "<Leader>q", ":bdelete!<CR>", { silent = true, noremap = true, desc = "Close buffer" })
 
 vim.keymap.set("v", "<", "<gv", { silent = true, noremap = true, desc = "Align to left" })
 vim.keymap.set("v", ">", ">gv", { silent = true, noremap = true, desc = "Align to right" })

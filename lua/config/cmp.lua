@@ -32,11 +32,6 @@ if not luasnipok then
     return
 end
 
-local check_backspace = function()
-    local col = vim.fn.col(".") - 1
-    return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
-end
-
 cmplsp.setup()
 
 cmp.setup({
@@ -85,45 +80,6 @@ cmp.setup({
                 fallback()
             end
         end, {"i", "s"})
-
-        -- ["<Tab>"] = cmp.mapping(function(fallback)
-        -- 	if cmp.visible() then
-        -- 		cmp.select_next_item()
-        -- 	elseif luasnip.expand_or_jumpable() then
-        -- 		luasnip.expand_or_jump()
-        -- 	elseif check_backspace() then
-        -- 		fallback()
-        -- 	else
-        -- 		fallback()
-        -- 	end
-        -- end, { "i", "s" }),
-        -- ["<S-Tab>"] = cmp.mapping(function(fallback)
-        -- 	if cmp.visible() then
-        -- 		cmp.select_prev_item()
-        -- 	elseif luasnip.jumpable(-1) then
-        -- 		luasnip.jump(-1)
-        -- 	else
-        -- 		fallback()
-        -- 	end
-        -- end, { "i", "s" }),
-        -- ["C-k"] = cmp.mapping(function(fallback)
-        -- 	if cmp.visible() then
-        -- 		cmp.select_prev_item()
-        -- 	elseif luasnip.jumpable(-1) then
-        -- 		luasnip.jump(-1)
-        -- 	else
-        -- 		fallback()
-        -- 	end
-        -- end, {"i", "s"}),
-        -- ["C-j"] = cmp.mapping(function(fallback)
-        -- 	if cmp.visible() then
-        -- 		cmp.select_next_item()
-        -- 	elseif luasnip.expand_or_jumpable() then
-        -- 		luasnip.expand_or_jump()
-        -- 	else
-        -- 		fallback()
-        -- 	end
-        -- end, {"i", "s"}),
     }),
     sources = {
         {name = "nvim_lsp"}, {name = "nvim_lua"}, {name = "path"},

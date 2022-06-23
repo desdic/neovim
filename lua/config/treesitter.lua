@@ -18,6 +18,7 @@ ntconfig.setup({
 		"yaml",
 		"toml",
 		"markdown",
+		"glsl"
 	},
 	ignore_install = { "javascript", "haskell" }, -- List of parsers to ignore installing
 	indent = { enable = true, disable = {} },

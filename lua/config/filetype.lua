@@ -17,3 +17,11 @@ vim.filetype.add({
 		["~/.config/systemd/user/.*.%.swap"] = "systemd",
 	},
 })
+
+
+vim.filetype.add({
+	extension = {
+		frag = "glsl",
+		vert = "glsl",
+	}
+})

@@ -12,19 +12,7 @@ end
 
 ap.setup({
 	check_ts = true,
-	ts_config = { lua = { "string", "source" } },
-	disable_filetype = { "TelescopePrompt" },
-	fast_wrap = {
-		map = "<M-e>",
-		chars = { "{", "[", "(", '"', "'" },
-		pattern = string.gsub([[ [%'%"%)%>%]%)%}%,] ]], "%s+", ""),
-		offset = -1, -- Offset from pattern match
-		end_key = "$",
-		keys = "qwertyuiopzxcvbnmasdfghjkl",
-		check_comma = true,
-		highlight = "PmenuSel",
-		highlight_grey = "LineNr",
-	},
+	ts_config = { lua = { "string", "source" } }
 })
 
 cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))

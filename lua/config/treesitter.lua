@@ -32,26 +32,13 @@ ntconfig.setup({
 		extended = true,
 		max_file_lines = 5000, -- Do not enable for files with more than 5000 lines, int
 	},
-	incremental_selection = {
-		enable = true,
-		keymaps = {
-			init_selection = "gnn",
-			node_incremental = "grn",
-			scope_incremental = "grc",
-			node_decremental = "grm",
-		},
-	},
 	refactor = {
-		navigation = {
+		smart_rename = {
 			enable = true,
 			keymaps = {
-				goto_definition = "gnd",
-				list_definitions = "gnD",
-				list_definitions_toc = "gO",
-				goto_next_usage = "<a-*>",
-				goto_previous_usage = "<a-#>",
-			},
-		},
+				smart_rename = "grr"
+			}
+		}
 	},
 	textobjects = {
 		select = {
@@ -62,15 +49,13 @@ ntconfig.setup({
 
 			keymaps = {
 				["ff"] = "@function.outer",
-				["if"] = "@function.inner",
-				["fc"] = "@class.outer",
-				["ic"] = "@class.inner",
-				["fl"] = "@loop.outer",
-				["il"] = "@loop.inner",
-				-- ["aC"] = "@conditional.outer",
-				["fi"] = "@conditional.inner",
 				["fb"] = "@block.inner",
-				-- ["ab"] = "@block.outer"
+				["fc"] = "@class.outer",
+				["fl"] = "@loop.outer",
+				["if"] = "@function.inner",
+				["ic"] = "@class.inner",
+				["il"] = "@loop.inner",
+				["fi"] = "@conditional.inner",
 			},
 		},
 		swap = {
@@ -86,8 +71,8 @@ ntconfig.setup({
 				["fb"] = "@block.inner",
 				["fc"] = "@class.outer",
 				["fl"] = "@loop.outer",
-				["fp"] = "@parameter.inner",
 				["fi"] = "@conditional.outer",
+				["fp"] = "@parameter.inner",
 				["fo"] = "@call.outer",
 			},
 			goto_previous_start = {
@@ -95,8 +80,8 @@ ntconfig.setup({
 				["Fb"] = "@block.inner",
 				["Fc"] = "@class.outer",
 				["Fl"] = "@loop.outer",
-				["Fp"] = "@parameter.inner",
 				["Fi"] = "@conditional.outer",
+				["Fp"] = "@parameter.inner",
 				["Fo"] = "@call.outer",
 			},
 			goto_next_end = {

@@ -83,8 +83,8 @@ local function lsp_keymaps(bufnr)
     vim.keymap.set("n", "gl", function() vim.diagnostic.open_float() end,
                    {noremap = true, silent = true, desc = "Open diagnostic"})
 
-    vim.keymap.set("n", "<Leader>gr", function() vim.lsp.buf.rename() end,
-                   {noremap = true, silent = true, desc = "LSP rename"})
+    -- vim.keymap.set("n", "<Leader>gr", function() vim.lsp.buf.rename() end,
+    --                {noremap = true, silent = true, desc = "LSP rename"})
 
     vim.keymap.set("n", "<Leader>gs",
                    function() vim.lsp.buf.signature_help() end, {

@@ -31,6 +31,8 @@ dapgo.setup()
 dappy.setup("~/.virtualenvs/debugpy/bin/python")
 dapui.setup()
 
+vim.fn.sign_define('DapBreakpoint', {text='🛑', texthl='', linehl='', numhl=''})
+
 vim.keymap.set("n", "<F4>", function() dapui.toggle() end,
 	{noremap = true, desc = "Toggle debugging"})
 

@@ -115,12 +115,14 @@ return packer.startup({
 
         use({"ahmedkhalf/project.nvim"})
 
-        -- Go development
+        -- Development/debug
         use({"ray-x/go.nvim"})
         use({"mfussenegger/nvim-dap"})
         use({"rcarriga/nvim-dap-ui"})
         use({"theHamsta/nvim-dap-virtual-text"})
         use({"ray-x/guihua.lua", run = "cd lua/fzy && make"})
+		use({"mfussenegger/nvim-dap-python"})
+		use({"leoluz/nvim-dap-go"})
 
         -- Markdown rendering
         use({"ellisonleao/glow.nvim"})

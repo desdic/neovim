@@ -32,6 +32,10 @@ vim.keymap.set("n", "gf", function()
 	stf.targeted_jump({ "function", "function_definition", "function_declaration" })
 end, opts)
 
+vim.keymap.set("n", "ge", function()
+	stf.targeted_jump({"if_statement", "else_clause", "else_statement"})
+end, opts)
+
 vim.keymap.set("n", "vx", function()
 	stf.select()
 end, opts)

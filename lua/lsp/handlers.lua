@@ -1,5 +1,12 @@
 local M = {}
 
+local nok, navic = pcall(require, "nvim-navic")
+if not nok then
+    vim.notify("Unable to require nvim-navic", vim.lsp.log_levels.ERROR,
+			   {title = "Plugin error"})
+    return
+end
+
 M.setup = function()
     local signs = {
         {name = "DiagnosticSignError", text = ""},
@@ -115,6 +122,7 @@ end
 -- end
 
 M.on_attach = function(client, bufnr)
+
     -- Alternativ solution for lsp_config update
     -- https://github.com/b0o/nvim-conf/commit/50a9478334f9cfffde9ce889980f9585a69c54f2
     vim.keymap.set("n", "<Leader>f",
@@ -129,6 +137,11 @@ M.on_attach = function(client, bufnr)
         client.resolved_capabilities.document_formatting = false
         client.resolved_capabilities.document_range_formatting = false
     end
+
+	-- Avoid attaching multiple times
+	if client.name ~= "pylsp" and client.name ~= "null-ls" then
+		navic.attach(client, bufnr)
+	end
 
     -- Prepare for next version of lsp-config
     -- if client.name ~= "gopls" and client.name ~= "tsserver" and client.name ~= "sumneko_lua" then

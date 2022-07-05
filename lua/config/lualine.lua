@@ -75,11 +75,11 @@ local filename = function()
 	return vim.fn.expand("%:t")
 end
 
-local gpsok, gps = pcall(require, "nvim-gps")
+local gpsok, navic = pcall(require, "nvim-navic")
 local gpsnvim = {
 	function()
-		if gpsok and gps.is_available() then
-			return gps.get_location()
+		if gpsok and navic.is_available() then
+			return navic.get_location()
 		end
 		return ""
 	end,

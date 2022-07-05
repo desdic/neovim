@@ -57,7 +57,7 @@ return packer.startup({
         use({"windwp/nvim-ts-autotag"})
         use({"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"})
         use({"nvim-treesitter/playground"})
-		use({"SmiteshP/nvim-gps"})
+		use({"SmiteshP/nvim-navic"})
 
         -- clipboard manager
         use({"AckslD/nvim-neoclip.lua"})

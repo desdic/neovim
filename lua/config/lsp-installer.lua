@@ -30,6 +30,7 @@ local myconfigs = {
     ["bashls"] = true,
     ["yamlls"] = true,
     ["pyright"] = true,
+	["pylsp"] = true,
     ["efm"] = false,
     ["solargraph"] = true,
     ["gopls"] = true,

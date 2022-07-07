@@ -62,7 +62,7 @@ return packer.startup({
         -- clipboard manager
         use({"AckslD/nvim-neoclip.lua"})
 
-        use({"phaazon/hop.nvim", branch = "v1"})
+        use({"phaazon/hop.nvim", branch = "v2"})
         use({"gpanders/editorconfig.nvim"}) -- use editorconfig
         use({"Vimjas/vim-python-pep8-indent"}) -- python indentenation
         use({"numToStr/Comment.nvim"}) -- commenting

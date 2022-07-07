@@ -134,8 +134,6 @@ return packer.startup({
         use({"tpope/vim-surround"})
         use({"tpope/vim-fugitive"})
 
-		use({"ziontee113/syntax-tree-surfer"})
-
 		use({"lukas-reineke/indent-blankline.nvim"})
 
         -- run sync on installation

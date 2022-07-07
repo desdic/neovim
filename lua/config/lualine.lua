@@ -75,11 +75,11 @@ local filename = function()
 	return vim.fn.expand("%:t")
 end
 
-local gpsok, navic = pcall(require, "nvim-navic")
-local gpsnvim = {
+local navicok, navic = pcall(require, "nvim-navic")
+local nagivnvim = {
 	function()
-		if gpsok and navic.is_available() then
-			return navic.get_location()
+		if navicok and navic.is_available() then
+			return " " .. navic.get_location()
 		end
 		return ""
 	end,
@@ -116,7 +116,7 @@ lualine.setup({
 	sections = {
 		lualine_a = { branch, diagnostics },
 		lualine_b = { mode },
-		lualine_c = { gpsnvim },
+		lualine_c = { nagivnvim },
 		lualine_x = { lspclients, "%=", diff, spaces, "encoding", filetype },
 		lualine_y = { location },
 		lualine_z = {},

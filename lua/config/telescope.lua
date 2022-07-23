@@ -22,7 +22,7 @@ end
 ts.setup({
     defaults = {
         file_ignore_patterns = {
-            ".git/", ".cache/", ".o$"
+            ".git/", ".cache/", "%.o"
         },
         prompt_prefix = " ",
         selection_caret = " ",

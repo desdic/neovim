@@ -6,31 +6,16 @@ end
 
 -- configure it
 catppuccin.setup({
+	compile = {
+		enabled = true,
+		path = vim.fn.stdpath "cache" .. "/catppuccin",
+	},
 	transparent_background = false,
 	term_colors = false,
-	styles = {
-		comments = "italic",
-		functions = "italic",
-		keywords = "italic",
-		strings = "NONE",
-		variables = "NONE",
-	},
 	integrations = {
 		treesitter = true,
 		native_lsp = {
 			enabled = true,
-			virtual_text = {
-				errors = "italic",
-				hints = "italic",
-				warnings = "italic",
-				information = "italic",
-			},
-			underlines = {
-				errors = "underline",
-				hints = "underline",
-				warnings = "underline",
-				information = "underline",
-			},
 		},
 		gitsigns = true,
 		telescope = true,
@@ -39,6 +24,12 @@ catppuccin.setup({
 		bufferline = true,
 		markdown = false,
 		ts_rainbow = true,
+		dap = {
+			enabled = true,
+			enable_ui = true,
+		},
+		notify = true,
+		hop = true,
 	},
 })
 

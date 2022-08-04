@@ -27,20 +27,6 @@ if not lspconfigok then
 end
 
 mason.setup()
-masonlsp.setup({
-	ensure_installed = {
-		"gopls",
-		"sumneko_lua",
-		"bashls",
-		"yamlls",
-		"pyright", "pylsp",
-		"solargraph",
-		"dockerls",
-		"clangd",
-		"jsonls",
-		"perlnavigator"
-	}
-})
 
 local myconfigs = {
     ["gopls"] = true,
@@ -56,6 +42,17 @@ local myconfigs = {
     ["jsonls"] = true,
     ["perlnavigator"] = true
 }
+
+local shouldinstall = {}
+for myserver, enabled in pairs(myconfigs) do
+	if enabled then
+		table.insert(shouldinstall, myserver)
+	end
+end
+
+masonlsp.setup({
+	ensure_installed = shouldinstall,
+})
 
 for myserver, enabled in pairs(myconfigs) do
     -- local _, requested_server = lsp_install_srv.get_server(myserver)

@@ -35,7 +35,7 @@ return packer.startup({
     function(use)
         use({"wbthomason/packer.nvim"})
 
-		use({"lewis6991/impatient.nvim"})
+        use({"lewis6991/impatient.nvim"})
 
         -- used by other plugins
         use({"nvim-lua/plenary.nvim"})
@@ -57,7 +57,7 @@ return packer.startup({
         use({"windwp/nvim-ts-autotag"})
         use({"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"})
         use({"nvim-treesitter/playground"})
-		use({"SmiteshP/nvim-navic"})
+        use({"SmiteshP/nvim-navic"})
 
         -- clipboard manager
         use({"AckslD/nvim-neoclip.lua"})
@@ -68,16 +68,18 @@ return packer.startup({
         use({"numToStr/Comment.nvim"}) -- commenting
         use({"beauwilliams/focus.nvim"}) -- focus active window
 
-		-- Theming
+        -- Theming
         use({"catppuccin/nvim", as = "catppuccin"}) -- color theme
-		use({"EdenEast/nightfox.nvim"})
-		use({"folke/tokyonight.nvim"})
+        use({"EdenEast/nightfox.nvim"})
+        use({"folke/tokyonight.nvim"})
 
         use({"nvim-lualine/lualine.nvim"})
         use({"akinsho/nvim-bufferline.lua"})
         use({"kyazdani42/nvim-tree.lua"})
         use({"neovim/nvim-lspconfig"})
-        use({"williamboman/nvim-lsp-installer"})
+
+        use({"williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim"})
+        --
         use({
             "jose-elias-alvarez/null-ls.nvim",
             run = {
@@ -89,7 +91,7 @@ return packer.startup({
         use({"nvim-telescope/telescope-fzy-native.nvim"})
         use({"nvim-telescope/telescope-media-files.nvim"})
         use({"nvim-telescope/telescope.nvim"})
-		use({"nvim-telescope/telescope-ui-select.nvim"})
+        use({"nvim-telescope/telescope-ui-select.nvim"})
 
         use({"ray-x/lsp_signature.nvim"})
 
@@ -108,7 +110,7 @@ return packer.startup({
 
         use({"saadparwaiz1/cmp_luasnip"})
 
-		-- terminal
+        -- terminal
         use({"akinsho/toggleterm.nvim"})
 
         -- splash
@@ -122,8 +124,8 @@ return packer.startup({
         use({"rcarriga/nvim-dap-ui"})
         use({"theHamsta/nvim-dap-virtual-text"})
         use({"ray-x/guihua.lua", run = "cd lua/fzy && make"})
-		use({"mfussenegger/nvim-dap-python"})
-		use({"leoluz/nvim-dap-go"})
+        use({"mfussenegger/nvim-dap-python"})
+        use({"leoluz/nvim-dap-go"})
 
         -- Markdown rendering
         use({"ellisonleao/glow.nvim"})
@@ -134,7 +136,7 @@ return packer.startup({
         use({"tpope/vim-surround"})
         use({"tpope/vim-fugitive"})
 
-		use({"lukas-reineke/indent-blankline.nvim"})
+        use({"lukas-reineke/indent-blankline.nvim"})
 
         -- run sync on installation
         if PACKER_BOOTSTRAP then require("packer").sync() end

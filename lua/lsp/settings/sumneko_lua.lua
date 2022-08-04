@@ -1,7 +1,7 @@
 return {
     cmd = {
         DATA_PATH ..
-            "/lsp_servers/sumneko_lua/extension/server/bin/lua-language-server"
+            "/mason/bin/lua-language-server"
     },
     settings = {
         Lua = {

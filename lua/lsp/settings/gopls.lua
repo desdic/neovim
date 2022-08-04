@@ -7,7 +7,7 @@ if not status_ok then
 end
 
 return {
-    cmd = {DATA_PATH .. "/lsp_servers/gopls/gopls", "serve"},
+    cmd = {DATA_PATH .. "/mason/bin/gopls", "serve"},
     settings = {
         gopls = {
             analyses = {unusedparams = true},

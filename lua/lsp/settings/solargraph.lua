@@ -1,4 +1,4 @@
 return {
-    cmd = {DATA_PATH .. "/lsp_servers/solargraph/bin/solargraph", "stdio"},
+    cmd = {DATA_PATH .. "/mason/bin/solargraph", "stdio"},
     filetypes = {"ruby", "rb", "erb", "rakefile"}
 }

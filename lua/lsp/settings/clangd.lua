@@ -1,1 +1,1 @@
-return {cmd = {DATA_PATH .. "/lsp_servers/clangd/clangd/bin/clangd"}}
+return {cmd = {DATA_PATH .. "/mason/bin/clangd"}}

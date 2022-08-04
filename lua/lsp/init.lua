@@ -19,9 +19,17 @@ if statusui then
     end
 end
 
-status_ok, _ = pcall(require, "config.lsp-installer")
+-- status_ok, _ = pcall(require, "config.lsp-installer")
+-- if not status_ok then
+--     vim.notify("Unable to requre config.lsp-installer",
+--                vim.lsp.log_levels.ERROR, {title = "Config error"})
+--     return
+-- end
+--
+
+status_ok, _ = pcall(require, "config.mason")
 if not status_ok then
-    vim.notify("Unable to requre config.lsp-installer",
+    vim.notify("Unable to requre config.mason",
                vim.lsp.log_levels.ERROR, {title = "Config error"})
     return
 end

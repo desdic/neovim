@@ -1,9 +1,7 @@
 return {
     cmd = {
-        "node",
         DATA_PATH ..
-            "/lsp_servers/bashls/node_modules/bash-language-server/bin/main.js",
-        "start"
+            "/mason/bin/bash-language-server", "start"
     },
     filetypes = {"sh", "zsh"}
 }

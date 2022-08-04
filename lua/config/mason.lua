@@ -1,14 +1,14 @@
-local status_ok, lsp_installer = pcall(require, "nvim-lsp-installer")
-if not status_ok then
-    vim.notify("Unable to require nvim-lsp-installer", vim.lsp.log_levels.ERROR,
-               {title = "Plugin error"})
+local ok, mason = pcall(require, "mason")
+if not ok then
+    vim.notify("Unable to require mason", vim.lsp.log_levels.ERROR,
+			   {title = "Plugin error"})
     return
 end
 
-local servok, lsp_install_srv = pcall(require, "nvim-lsp-installer.servers")
-if not servok then
-    vim.notify("Unable to require nvim-lsp-installer.servers",
-               vim.lsp.log_levels.ERROR, {title = "Plugin error"})
+local oklsp, masonlsp = pcall(require, "mason-lspconfig")
+if not oklsp then
+    vim.notify("Unable to require mason-lspconfig", vim.lsp.log_levels.ERROR,
+			   {title = "Plugin error"})
     return
 end
 
@@ -26,32 +26,46 @@ if not lspconfigok then
     return
 end
 
+mason.setup()
+masonlsp.setup({
+	ensure_installed = {
+		"gopls",
+		"sumneko_lua",
+		"bashls",
+		"yamlls",
+		"pyright", "pylsp",
+		"solargraph",
+		"dockerls",
+		"clangd",
+		"jsonls",
+		"perlnavigator"
+	}
+})
+
 local myconfigs = {
+    ["gopls"] = true,
+    ["sumneko_lua"] = true,
     ["bashls"] = true,
     ["yamlls"] = true,
     ["pyright"] = true,
 	["pylsp"] = true,
     ["efm"] = false,
     ["solargraph"] = true,
-    ["gopls"] = true,
     ["dockerls"] = true,
     ["clangd"] = true,
-    ["sumneko_lua"] = true,
     ["jsonls"] = true,
     ["perlnavigator"] = true
 }
 
-lsp_installer.setup()
-
 for myserver, enabled in pairs(myconfigs) do
-    local _, requested_server = lsp_install_srv.get_server(myserver)
+    -- local _, requested_server = lsp_install_srv.get_server(myserver)
     if enabled then
-        if not requested_server:is_installed() then
-            -- Queue the server to be installed
-            vim.notify("Queing " .. myserver, vim.lsp.log_levels.INFO,
-                       {title = "LSP installer"})
-            requested_server:install()
-        end
+        -- if not requested_server:is_installed() then
+        --     -- Queue the server to be installed
+        --     vim.notify("Queing " .. myserver, vim.lsp.log_levels.INFO,
+        --                {title = "LSP installer"})
+        --     requested_server:install()
+        -- end
 
         local opts = {
             on_attach = lsphandlers.on_attach,
@@ -66,13 +80,13 @@ for myserver, enabled in pairs(myconfigs) do
         else
             opts = vim.tbl_deep_extend("force", srvopts, opts)
         end
+		lspconfig[myserver].setup(opts)
 
-        lspconfig[myserver].setup(opts)
-    else
-        if requested_server:is_installed() then
-            vim.notify("Uninstalling " .. myserver, vim.lsp.log_levels.INFO,
-                       {title = "LSP installer"})
-            requested_server:uninstall()
-        end
+    -- else
+    --     if requested_server:is_installed() then
+    --         vim.notify("Uninstalling " .. myserver, vim.lsp.log_levels.INFO,
+    --                    {title = "LSP installer"})
+    --         requested_server:uninstall()
+    --     end
     end
 end

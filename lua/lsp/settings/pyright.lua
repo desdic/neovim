@@ -1,8 +1,7 @@
 return {
     cmd = {
-        "node",
         DATA_PATH ..
-            "/lsp_servers/pyright/node_modules/pyright/dist/pyright-langserver.js",
+            "/mason/bin/pyright-langserver",
         "--stdio"
     },
     settings = {

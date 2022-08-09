@@ -133,7 +133,7 @@ return packer.startup({
         -- UI
         use({"stevearc/dressing.nvim"})
 
-        use({"tpope/vim-surround"})
+        use({"kylechui/nvim-surround"})
         use({"tpope/vim-fugitive"})
 
         use({"lukas-reineke/indent-blankline.nvim"})

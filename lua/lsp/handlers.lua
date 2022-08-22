@@ -79,6 +79,9 @@ local function lsp_keymaps(bufnr)
     vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end,
                    {noremap = true, desc = "Show documentation"})
 
+    vim.keymap.set("n", "<Leader>rr", function() vim.lsp.buf.rename() end,
+                   {noremap = true, desc = "Rename via LSP"})
+
     vim.keymap.set("n", "<C-p>", function()
         vim.diagnostic.goto_prev({border = "rounded"})
     end, {noremap = true, silent = true, desc = "Goto previous diagnostic"})

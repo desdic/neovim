@@ -3,8 +3,10 @@ vim.keymap.set("n", "<C-j>", "<C-W>j", { silent = true, noremap = true, desc = "
 vim.keymap.set("n", "<C-k>", "<C-W>k", { silent = true, noremap = true, desc = "Move to window above" })
 vim.keymap.set("n", "<C-l>", "<C-W>l", { silent = true, noremap = true, desc = "Move to window on right" })
 
-vim.keymap.set("n", "<S-l>", ":bnext<CR>", { silent = true, noremap = true, desc = "Move to next buffer" })
-vim.keymap.set("n", "<S-h>", ":bprevious<CR>", { silent = true, noremap = true, desc = "Move to previous buffer" })
+-- vim.keymap.set("n", "<S-l>", ":bnext<CR>", { silent = true, noremap = true, desc = "Move to next buffer" })
+-- vim.keymap.set("n", "<S-h>", ":bprevious<CR>", { silent = true, noremap = true, desc = "Move to previous buffer" })
+vim.keymap.set("n", "<S-l>", ":BufferLineCycleNext<CR>", { silent = true, noremap = true, desc = "Move to next buffer" })
+vim.keymap.set("n", "<S-h>", ":BufferLineCyclePrev<CR>", { silent = true, noremap = true, desc = "Move to previous buffer" })
 
 -- vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", {silent = true, noremap = true, desc = "Easy escape in terminal mode"})
 

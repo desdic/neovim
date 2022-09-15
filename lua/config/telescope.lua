@@ -21,9 +21,7 @@ end
 
 ts.setup({
     defaults = {
-        file_ignore_patterns = {
-            ".git/" , ".cache/", "vendor"
-        },
+        file_ignore_patterns = {".git/", ".cache/", "vendor"},
         prompt_prefix = " ",
         selection_caret = " ",
         path_display = {"smart"},
@@ -57,18 +55,12 @@ ts.setup({
             -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
             filetypes = {"png", "webp", "jpg", "jpeg", "pdf"},
             find_cmd = "rg" -- find command (defaults to `fd`)
-        },
-        ["ui-select"] = {
-            require("telescope.themes").get_dropdown({
-                -- even more opts
-            })
         }
     }
 })
 
 ts.load_extension("fzy_native")
 ts.load_extension("media_files")
-ts.load_extension("ui-select")
 
 vim.keymap.set("n", "<Leader>a", function() tsbuildin.marks() end,
                {noremap = true, silent = true, desc = "Show marks"})
@@ -115,8 +107,10 @@ local M = {}
 
 M.find_files = function()
     tsbuildin.find_files({
-        find_command = {"rg", "--files", "--hidden", "-g", "!.git"},
-        previewer = false
+        find_command = {"fd", "-t=f", "-a"},
+        path_display = {"absolute"},
+        wrap_results = true,
+        -- previewer = false
     })
 end
 

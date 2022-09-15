@@ -43,6 +43,6 @@ vim.keymap.set("n", "<Leader>pack", ":PackerSync<CR>", { silent = true, noremap 
 
 vim.cmd('command! -nargs=0 LspVirtualTextToggle lua require("lsp/virtual_text").toggle()')
 
-vim.keymap.set("n", "<Leader>r", ":e!<CR>", { silent = true, noremap = true, desc = "Reload file" })
+-- vim.keymap.set("n", "<Leader>r", ":e!<CR>", { silent = true, noremap = true, desc = "Reload file" })
 
 vim.keymap.set("n", "<Leader>cm", ":delmarks a-zA-Z0-9<CR>", { silent = true, noremap = true, desc = "Clear all marks" })

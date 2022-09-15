@@ -23,6 +23,8 @@ function M.config()
 		}),
 	}
 
+	HOME_PATH = "/home/" .. vim.fn.expand("$USER")
+
 	null_ls.setup({
 		-- debug = true,
 		sources = {
@@ -51,7 +53,7 @@ function M.config()
 					"--auto-correct",
 					"-f",
 					"-c",
-					"~/.work-rubocop.yml",
+					HOME_PATH .. "/.work-rubocop.yml",
 					"quiet",
 					"--stderr",
 					"--stdin",
@@ -61,7 +63,7 @@ function M.config()
 			null_ls.builtins.diagnostics.rubocop.with({
 				args = {
 					"-c",
-					"~/.work-rubocop.yml",
+					HOME_PATH .. "/.work-rubocop.yml",
 					"-f",
 					"json",
 					"--stdin",

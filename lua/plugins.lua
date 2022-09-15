@@ -133,14 +133,16 @@ return packer.startup({
         -- UI
         use({"stevearc/dressing.nvim"})
 
-        use({"kylechui/nvim-surround",
-		config=function()
-				require("nvim-surround").setup({})
-		end})
+        use({
+            "kylechui/nvim-surround",
+            config = function() require("nvim-surround").setup({}) end
+        })
 
         use({"tpope/vim-fugitive"})
 
         use({"lukas-reineke/indent-blankline.nvim"})
+
+        use({"desdic/greyjoy.nvim"})
 
         -- run sync on installation
         if PACKER_BOOTSTRAP then require("packer").sync() end

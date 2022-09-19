@@ -30,19 +30,19 @@ ts.setup({
             i = {
                 ["<C-j>"] = actions.move_selection_next,
                 ["<C-k>"] = actions.move_selection_previous,
-                ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+                -- ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
                 ["<esc>"] = actions.close,
-                ["<CR>"] = actions.select_default + actions.center,
+                -- ["<CR>"] = actions.select_default + actions.center,
 
                 -- You can perform as many actions in a row as you like
                 -- ["<CR>"] = actions.select_default + actions.center + my_cool_custom_action,
-                ["<C-h>"] = actions.which_key -- keys from pressing <C-/>
+                -- ["<C-h>"] = actions.which_key -- keys from pressing <C-/>
             },
             n = {
                 ["<C-j>"] = actions.move_selection_next,
                 ["<C-k>"] = actions.move_selection_previous,
-                ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
-                ["<C-h>"] = actions.which_key
+                -- ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+                -- ["<C-h>"] = actions.which_key
             }
         }
     },
@@ -55,12 +55,24 @@ ts.setup({
             -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
             filetypes = {"png", "webp", "jpg", "jpeg", "pdf"},
             find_cmd = "rg" -- find command (defaults to `fd`)
+        },
+        file_browser = {
+            hijack_netrw = true,
+             mappings = {
+                 ["i"] = {
+                     -- your custom insert mode mappings
+                 },
+                 ["n"] = {
+                     -- your custom normal mode mappings
+                 }
+             }
         }
     }
 })
 
 ts.load_extension("fzy_native")
 ts.load_extension("media_files")
+ts.load_extension("file_browser")
 
 vim.keymap.set("n", "<Leader>a", function() tsbuildin.marks() end,
                {noremap = true, silent = true, desc = "Show marks"})
@@ -103,13 +115,16 @@ vim.keymap.set("n", "<Leader>gS", function() tsbuildin.git_status() end,
 vim.keymap.set("n", "<Leader>p", function() tsbuildin.diagnostics() end,
                {noremap = true, silent = true, desc = "Show diagnostics"})
 
+vim.keymap.set("n", "<Leader>n", ":Telescope file_browser<CR>",
+               {noremap = true, silent = true, desc = "Start file browser"})
+
 local M = {}
 
 M.find_files = function()
     tsbuildin.find_files({
         find_command = {"fd", "-t=f", "-a"},
-        path_display = {"absolute"},
-        wrap_results = true,
+        -- path_display = {"absolute"},
+        wrap_results = true
         -- previewer = false
     })
 end

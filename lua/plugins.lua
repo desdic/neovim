@@ -75,7 +75,6 @@ return packer.startup({
 
         use({"nvim-lualine/lualine.nvim"})
         use({"akinsho/nvim-bufferline.lua"})
-        use({"kyazdani42/nvim-tree.lua"})
         use({"neovim/nvim-lspconfig"})
 
         use({"williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim"})
@@ -90,6 +89,7 @@ return packer.startup({
         })
         use({"nvim-telescope/telescope-fzy-native.nvim"})
         use({"nvim-telescope/telescope-media-files.nvim"})
+		use {"nvim-telescope/telescope-file-browser.nvim"}
         use({"nvim-telescope/telescope.nvim"})
         use({"nvim-telescope/telescope-ui-select.nvim"})
 

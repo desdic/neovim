@@ -73,6 +73,7 @@ ts.setup({
 ts.load_extension("fzy_native")
 ts.load_extension("media_files")
 ts.load_extension("file_browser")
+ts.load_extension('harpoon')
 
 vim.keymap.set("n", "<Leader>a", function() tsbuildin.marks() end,
                {noremap = true, silent = true, desc = "Show marks"})
@@ -117,6 +118,11 @@ vim.keymap.set("n", "<Leader>p", function() tsbuildin.diagnostics() end,
 
 vim.keymap.set("n", "<Leader>n", ":Telescope file_browser<CR>",
                {noremap = true, silent = true, desc = "Start file browser"})
+
+-- <C+d> to delete
+-- <C+n> move down
+vim.keymap.set("n", "hm", ":Telescope harpoon marks<CR>",
+               {noremap = true, silent = true, desc = "Harpoon marks"})
 
 local M = {}
 

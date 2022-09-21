@@ -144,6 +144,8 @@ return packer.startup({
 
         use({"desdic/greyjoy.nvim"})
 
+		use({"ThePrimeagen/harpoon"})
+
         -- run sync on installation
         if PACKER_BOOTSTRAP then require("packer").sync() end
     end,

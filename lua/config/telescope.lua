@@ -75,7 +75,7 @@ ts.load_extension("media_files")
 ts.load_extension("file_browser")
 ts.load_extension('harpoon')
 
-vim.keymap.set("n", "<Leader>a", function() tsbuildin.marks() end,
+vim.keymap.set("n", "<Leader>fa", function() tsbuildin.marks() end,
                {noremap = true, silent = true, desc = "Show marks"})
 
 vim.keymap.set("n", "<Leader>ff",
@@ -121,7 +121,7 @@ vim.keymap.set("n", "<Leader>n", ":Telescope file_browser<CR>",
 
 -- <C+d> to delete
 -- <C+n> move down
-vim.keymap.set("n", "hm", ":Telescope harpoon marks<CR>",
+vim.keymap.set("n", "<Leader>hm", ":Telescope harpoon marks<CR>",
                {noremap = true, silent = true, desc = "Harpoon marks"})
 
 local M = {}

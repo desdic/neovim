@@ -19,8 +19,8 @@ bufferline.setup({
     }
 })
 
-for i = 1, 9 do
-vim.keymap.set("n", "<Leader>" .. i,
-               function() bufferline.go_to_buffer(i, true) end,
-               {noremap = true, silent = true, desc = "Find files"})
-end
+-- for i = 1, 9 do
+-- vim.keymap.set("n", "<Leader>" .. i,
+--                function() bufferline.go_to_buffer(i, true) end,
+--                {noremap = true, silent = true, desc = "Find files"})
+-- end

@@ -34,3 +34,10 @@ for i = 1, 9 do
     vim.keymap.set("n", "<Leader>" .. i, function() harpoonui.nav_file(i) end,
                    {noremap = true, silent = true, desc = "Navigate to file"})
 end
+
+vim.keymap.set("n", "<Leader>.", function() harpoonui.nav_file(1) end,
+               {noremap = true, silent = true, desc = "Navigate to file"})
+
+vim.keymap.set("n", "<Leader>/", function() harpoonui.nav_file(2) end,
+               {noremap = true, silent = true, desc = "Navigate to file"})
+

@@ -40,7 +40,7 @@ local myconfigs = {
     ["dockerls"] = true,
     ["clangd"] = true,
     ["jsonls"] = true,
-    ["perlnavigator"] = true
+    ["perlnavigator"] = true,
 }
 
 local shouldinstall = {}

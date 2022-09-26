@@ -7,6 +7,7 @@ end
 
 greyjoy.setup({
     output_results = "toggleterm",
+	last_first= true,
     extensions = {
         generic = {
             commands = {
@@ -18,7 +19,7 @@ greyjoy.setup({
             }
         },
 		kitchen = {
-			targets = {"converge", "verify", "destroy"},
+			targets = {"converge", "verify", "destroy", "test"},
 			include_all = false,
 		}
     }

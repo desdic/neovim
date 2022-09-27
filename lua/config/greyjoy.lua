@@ -15,7 +15,12 @@ greyjoy.setup({
                     command = {"./test.py"},
                     filetype = "python",
                     filename = "test.py"
-                }
+                },
+				["run main.go"] = {
+					command = {"go", "run", "main.go"},
+                    filetype = "go",
+                    filename = "main.go"
+				}
             }
         },
 		kitchen = {

@@ -121,7 +121,7 @@ vim.keymap.set("n", "<Leader>n", ":Telescope file_browser<CR>",
 
 -- <C+d> to delete
 -- <C+n> move down
-vim.keymap.set("n", "<Leader>hm", ":Telescope harpoon marks<CR>",
+vim.keymap.set("n", "<Leader>l", ":Telescope harpoon marks<CR>",
                {noremap = true, silent = true, desc = "Harpoon marks"})
 
 local M = {}

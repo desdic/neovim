@@ -133,24 +133,18 @@ M.on_attach = function(client, bufnr)
                    {noremap = true, silent = true, desc = "Do formatting"})
 
     if client.name == "tsserver" then
-        client.resolved_capabilities.document_formatting = false
+        client.server_capabilities.document_formatting = false
     elseif client.name == "sumneko_lua" then
-        client.resolved_capabilities.document_formatting = false
+        client.server_capabilities.document_formatting = false
     elseif client.name == "gopls" then
-        client.resolved_capabilities.document_formatting = false
-        client.resolved_capabilities.document_range_formatting = false
+        client.server_capabilities.document_formatting = false
+        client.server_capabilities.document_range_formatting = false
     end
 
 	-- Avoid attaching multiple times
 	if client.name ~= "pylsp" and client.name ~= "null-ls" then
 		navic.attach(client, bufnr)
 	end
-
-    -- Prepare for next version of lsp-config
-    -- if client.name ~= "gopls" and client.name ~= "tsserver" and client.name ~= "sumneko_lua" then
-    -- 	print(client.name)
-    -- 	formatting_callback(client, bufnr)
-    -- end
 
 	-- Highlight based on LSP
     if client.server_capabilities.documentHighlightProvider then

@@ -11,10 +11,6 @@ global.mapleader = "," -- Set leader
 global.maplocalleader = "," -- Set local leader
 global.shada = "NONE"
 
--- load filetype.lua and only the lua version
-global.do_filetype_lua = 1
-global.did_load_filetypes = 0
-
 option.shortmess = option.shortmess .. "I" -- Turn off splash
 option.shortmess = option.shortmess .. "c" -- Avoid showing message extra message when using completion
 
@@ -77,3 +73,6 @@ option.conceallevel = 0 -- so that `` is visible in markdown files
 
 option.splitbelow = true
 option.splitright = true
+
+option.winbar = "%=%m %f"
+option.mouse = ""

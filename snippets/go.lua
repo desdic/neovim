@@ -28,7 +28,7 @@ local ifshort = s({trig = "ifns", name = "short if not nil"},
 table.insert(snippets, ifshort)
 
 -- From TJ
-local ts_locals = require("nvim-treesitter.locals")
+-- local ts_locals = require("nvim-treesitter.locals")
 local ts_utils = require("nvim-treesitter.ts_utils")
 
 local get_node_text = vim.treesitter.get_node_text
@@ -105,17 +105,32 @@ local function_node_types = {
     func_literal = true
 }
 
+local function getmethod(expr)
+    if not expr then return nil end
+
+    while expr do
+        if function_node_types[expr:type()] then return expr end
+        expr = expr:parent()
+    end
+
+    return nil
+end
+
 local function go_result_type(info)
     local cursor_node = ts_utils.get_node_at_cursor()
-    local scope = ts_locals.get_scope_tree(cursor_node, 0)
 
-    local function_node
-    for _, v in ipairs(scope) do
-        if function_node_types[v:type()] then
-            function_node = v
-            break
-        end
-    end
+	local function_node = getmethod(cursor_node)
+
+	-- This only returns a source_file and no longer decends into tree
+    -- local scope = ts_locals.get_scope_tree(cursor_node, 0)
+    --
+    -- local function_node
+    -- for _, v in ipairs(scope) do
+    --     if function_node_types[v:type()] then
+    --         function_node = v
+    --         break
+    --     end
+    -- end
 
     if not function_node then
         print("Not inside of a function")

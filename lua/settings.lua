@@ -20,7 +20,7 @@ option.iskeyword = option.iskeyword:gsub("_,", "") -- Remove word boundry on _
 option.iskeyword = option.iskeyword .. ",-" -- Words can include -
 
 -- option.completeopt = "menuone,noinsert,noselect"
-option.completeopt = "menuone,noselect"
+option.completeopt = "menu,menuone,noselect"
 option.updatetime = 300 -- Faster completion
 
 option.showmode = false -- We don't need to see things like -- INSERT -- anymore

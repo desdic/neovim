@@ -64,7 +64,7 @@ cmp.setup({
         ["<C-Space>"] = cmp.mapping.complete(),
         ["<C-e>"] = cmp.mapping.abort(),
         ["<C-y>"] = cmp.config.disable,
-        ["<CR>"] = cmp.mapping.confirm({select = true}),
+        ["<CR>"] = cmp.mapping.confirm({select = false}),
 
         ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then

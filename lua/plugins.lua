@@ -51,13 +51,21 @@ return packer.startup({
         -- quoting
         use({"windwp/nvim-autopairs"})
 
+        -- use({"nvim-treesitter/nvim-treesitter", run = {":TSUpdate", ":TSInstall query"}})
+
+		use({
+			"nvim-treesitter/nvim-treesitter",
+			run = function()
+				require("nvim-treesitter.install").update({ with_sync = true })
+			end,
+		})
+
         use({"nvim-treesitter/nvim-treesitter-refactor"})
         use({"nvim-treesitter/nvim-treesitter-textobjects"})
         use({"nvim-treesitter/nvim-treesitter-context"})
         use({"JoosepAlviste/nvim-ts-context-commentstring"})
-        -- use({"windwp/nvim-ts-autotag"})
-        use({"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"})
         use({"nvim-treesitter/playground"})
+
         use({"SmiteshP/nvim-navic"})
 
         -- clipboard manager
@@ -116,8 +124,6 @@ return packer.startup({
 
         -- splash
         use({"goolord/alpha-nvim"})
-
-        -- use({"ahmedkhalf/project.nvim"})
 
         -- Development/debug
         use({"ray-x/go.nvim"})

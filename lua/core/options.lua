@@ -18,8 +18,8 @@ option.shortmess = option.shortmess .. "c" -- Avoid showing message extra messag
 
 option.cmdheight = 2 -- Set height to prevent 'press enter to continue'
 option.hidden = true -- Allow to switch buffer without saving
-option.iskeyword = option.iskeyword:gsub("_,", "") -- Remove word boundry on _
-option.iskeyword = option.iskeyword .. ",-" -- Words can include -
+
+opt.iskeyword:append("-")
 
 -- option.completeopt = "menuone,noinsert,noselect"
 option.completeopt = "menu,menuone,noselect"

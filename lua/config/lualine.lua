@@ -72,7 +72,7 @@ local filename = function()
 	if buf_ft == "toggleterm" then
 		return "terminal"
 	end
-	return vim.fn.expand("%:t")
+	return vim.fn.expand("%:.")
 end
 
 local navicok, navic = pcall(require, "nvim-navic")
@@ -109,7 +109,24 @@ lualine.setup({
 		-- theme = "nightfox",
 		component_separators = { left = "", right = "" },
 		section_separators = { left = "", right = "" },
-		disabled_filetypes = { "dashboard", "NvimTree", "Outline" },
+		disabled_filetypes = {
+			statusline = {"dashboard", "NvimTree", "Outline"},
+			winbar = {
+				'help',
+				'startify',
+				'dashboard',
+				'packer',
+				'neogitstatus',
+				'NvimTree',
+				'Trouble',
+				'alpha',
+				'lir',
+				'Outline',
+				'spectre_panel',
+				'toggleterm',
+				'qf',
+			}
+		},
 		always_divide_middle = true,
 		globalstatus = true,
 	},
@@ -129,6 +146,22 @@ lualine.setup({
 		lualine_x = {},
 		lualine_y = {},
 		lualine_z = {},
+	},
+	winbar = {
+		lualine_a = {},
+		lualine_b = {},
+		lualine_c = {},
+		lualine_x = {},
+		lualine_y = {},
+		lualine_z = { filename }
+	},
+	inactive_winbar = {
+		lualine_a = {},
+		lualine_b = {},
+		lualine_c = {},
+		lualine_x = {},
+		lualine_y = {},
+		lualine_z = { filename }
 	},
 	tabline = {},
 	extensions = {},

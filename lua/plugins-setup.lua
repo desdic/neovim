@@ -145,10 +145,7 @@ return packer.startup({
         -- UI
         use({"stevearc/dressing.nvim"})
 
-        use({
-            "kylechui/nvim-surround",
-            config = function() require("nvim-surround").setup({}) end
-        })
+        use("kylechui/nvim-surround")
 
         use("nvim-tree/nvim-tree.lua")
 

@@ -55,8 +55,6 @@ return packer.startup({
         -- quoting
         use({"windwp/nvim-autopairs"})
 
-        -- use({"nvim-treesitter/nvim-treesitter", run = {":TSUpdate", ":TSInstall query"}})
-
         use({
             "nvim-treesitter/nvim-treesitter",
             run = function()

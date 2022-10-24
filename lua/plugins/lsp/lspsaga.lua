@@ -11,5 +11,9 @@ saga.init_lsp_saga({
     -- use enter to open file with finder
     finder_action_keys = {open = "<CR>"},
     -- use enter to open file with definition preview
-    definition_action_keys = {edit = "<CR>"}
+    definition_action_keys = {edit = "<CR>"},
+	-- disable virtual text
+	code_action_lightbulb = {
+		virtual_text = false,
+	}
 })

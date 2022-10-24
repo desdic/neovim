@@ -37,23 +37,23 @@ packer.init({
 
 return packer.startup({
     function(use)
-        use({"wbthomason/packer.nvim"})
+		use("wbthomason/packer.nvim")
 
-        use({"lewis6991/impatient.nvim"})
+		use("lewis6991/impatient.nvim")
 
         -- used by other plugins
-        use({"nvim-lua/plenary.nvim"})
-        use({"kyazdani42/nvim-web-devicons"})
-        use({"rcarriga/nvim-notify"})
+		use("nvim-lua/plenary.nvim")
+		use("kyazdani42/nvim-web-devicons")
+		use("rcarriga/nvim-notify")
 
         -- stabilize cursor after open/close
-        use({"luukvbaal/stabilize.nvim"})
+		use("luukvbaal/stabilize.nvim")
 
         -- rainbow ({[]})
-        use({"p00f/nvim-ts-rainbow"})
+		use("p00f/nvim-ts-rainbow")
 
         -- quoting
-        use({"windwp/nvim-autopairs"})
+		use("windwp/nvim-autopairs")
 
         use({
             "nvim-treesitter/nvim-treesitter",
@@ -62,29 +62,29 @@ return packer.startup({
             end
         })
 
-        use({"nvim-treesitter/nvim-treesitter-refactor"})
-        use({"nvim-treesitter/nvim-treesitter-textobjects"})
-        use({"nvim-treesitter/nvim-treesitter-context"})
-        use({"JoosepAlviste/nvim-ts-context-commentstring"})
-        use({"nvim-treesitter/playground"})
+		use("nvim-treesitter/nvim-treesitter-refactor")
+		use("nvim-treesitter/nvim-treesitter-textobjects")
+		use("nvim-treesitter/nvim-treesitter-context")
+		use("JoosepAlviste/nvim-ts-context-commentstring")
+		use("nvim-treesitter/playground")
 
-        use({"SmiteshP/nvim-navic"})
+		use("SmiteshP/nvim-navic")
 
         -- clipboard manager
-        use({"AckslD/nvim-neoclip.lua"})
+		use("AckslD/nvim-neoclip.lua")
 
         use({"phaazon/hop.nvim", branch = "v2"})
-        use({"gpanders/editorconfig.nvim"}) -- use editorconfig
-        use({"Vimjas/vim-python-pep8-indent"}) -- python indentenation
-        use({"numToStr/Comment.nvim"}) -- commenting
-        use({"beauwilliams/focus.nvim"}) -- focus active window
+		use("gpanders/editorconfig.nvim") -- use editorconfig
+		use("Vimjas/vim-python-pep8-indent") -- python indentenation
+		use("numToStr/Comment.nvim") -- commenting
+		use("beauwilliams/focus.nvim") -- focus active window
 
         -- Theming
         use({"catppuccin/nvim", as = "catppuccin"}) -- color theme
 
-        use({"nvim-lualine/lualine.nvim"})
-        use({"akinsho/nvim-bufferline.lua"})
-        use({"neovim/nvim-lspconfig"})
+		use("nvim-lualine/lualine.nvim")
+		use("akinsho/nvim-bufferline.lua")
+		use("neovim/nvim-lspconfig")
 
         use("williamboman/mason.nvim")
         use("williamboman/mason-lspconfig.nvim")
@@ -98,15 +98,15 @@ return packer.startup({
                 "go install golang.org/x/tools/cmd/goimports@latest"
             }
         })
-        use({"nvim-telescope/telescope-fzy-native.nvim"})
-        use({"nvim-telescope/telescope-media-files.nvim"})
-        use({"nvim-telescope/telescope.nvim"})
-        use({"nvim-telescope/telescope-ui-select.nvim"})
+		use("nvim-telescope/telescope-fzy-native.nvim")
+		use("nvim-telescope/telescope-media-files.nvim")
+		use("nvim-telescope/telescope.nvim")
+		use("nvim-telescope/telescope-ui-select.nvim")
 
-        use({"ray-x/lsp_signature.nvim"})
+		use("ray-x/lsp_signature.nvim")
 
-        use({"kshenoy/vim-signature"})
-        use({"lewis6991/gitsigns.nvim"})
+		use("kshenoy/vim-signature")
+		use("lewis6991/gitsigns.nvim")
 
         use("hrsh7th/nvim-cmp") -- The completion plugin
         use("hrsh7th/cmp-buffer") -- buffer completions
@@ -118,42 +118,44 @@ return packer.startup({
         use({"glepnir/lspsaga.nvim", branch = "main"})
         use("onsails/lspkind.nvim")
 
-        use({"rafamadriz/friendly-snippets"})
+		use("rafamadriz/friendly-snippets")
 
-        use({"saadparwaiz1/cmp_luasnip"})
+		use("saadparwaiz1/cmp_luasnip")
 
         -- terminal
-        use({"akinsho/toggleterm.nvim"})
+		use("akinsho/toggleterm.nvim")
 
         -- splash
-        use({"goolord/alpha-nvim"})
+		use("goolord/alpha-nvim")
 
         -- Development/debug
-        use({"ray-x/go.nvim"})
-        use({"mfussenegger/nvim-dap"})
-        use({"rcarriga/nvim-dap-ui"})
-        use({"theHamsta/nvim-dap-virtual-text"})
+		use("ray-x/go.nvim")
+		use("mfussenegger/nvim-dap")
+		use("rcarriga/nvim-dap-ui")
+		use("theHamsta/nvim-dap-virtual-text")
         use({"ray-x/guihua.lua", run = "cd lua/fzy && make"})
-        use({"mfussenegger/nvim-dap-python"})
-        use({"leoluz/nvim-dap-go"})
+		use("mfussenegger/nvim-dap-python")
+		use("leoluz/nvim-dap-go")
 
         -- Markdown rendering
-        use({"ellisonleao/glow.nvim"})
+		use("ellisonleao/glow.nvim")
 
         -- UI
-        use({"stevearc/dressing.nvim"})
+		use("stevearc/dressing.nvim")
 
         use("kylechui/nvim-surround")
 
         use("nvim-tree/nvim-tree.lua")
 
-        use({"tpope/vim-fugitive"})
+		use("tpope/vim-fugitive")
 
-        use({"lukas-reineke/indent-blankline.nvim"})
+		use("lukas-reineke/indent-blankline.nvim")
 
-        use({"desdic/greyjoy.nvim"})
+		use("desdic/greyjoy.nvim")
 
-        use({"ThePrimeagen/harpoon"})
+		use("ThePrimeagen/harpoon")
+
+		use({"toppair/peek.nvim", run = "deno task --quiet build:fast"})
 
         -- run sync on installation
         if packer_bootstrap then require("packer").sync() end

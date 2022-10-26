@@ -77,3 +77,4 @@ option.splitbelow = true
 option.splitright = true
 
 option.mouse = ""
+vim.wo.cursorline = true

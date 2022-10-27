@@ -53,11 +53,11 @@ local function lsp_keymaps(bufnr)
     vim.keymap.set("n", "<Leader>rr", function() vim.lsp.buf.rename() end,
                    {noremap = true, desc = "Rename via LSP"})
 
-    vim.keymap.set("n", "<C-p>", function()
+    vim.keymap.set("n", "<C-k>", function()
         vim.diagnostic.goto_prev({border = "rounded"})
     end, {noremap = true, silent = true, desc = "Goto previous diagnostic"})
 
-    vim.keymap.set("n", "<C-n>", function()
+    vim.keymap.set("n", "<C-j>", function()
         vim.diagnostic.goto_next({border = "rounded"})
     end, {noremap = true, silent = true, desc = "Goto next diagnostic"})
 
@@ -206,8 +206,14 @@ lspconfig["bashls"].setup({
     root_dir = vim.loop.cwd
 })
 
+
 -- C
-lspconfig["clangd"].setup({capabilities = capabilities, on_attach = on_attach})
+local utf16cap = capabilities
+utf16cap.offsetEncoding = { "utf-16" }
+lspconfig["clangd"].setup({
+    capabilities = utf16cap,
+    on_attach = on_attach,
+})
 
 lspconfig["efm"].setup({capabilities = capabilities, on_attach = on_attach})
 

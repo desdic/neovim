@@ -13,8 +13,8 @@ local snippets, autosnippets = {}, {}
 
 local def = s({trig = "def", name = "definition"}, fmt(
                   [[def {}({}) -> {}:
-	{}
-		]], {
+    {}
+        ]], {
         i(1, "name"), i(2), i(3, "None"),
         i(0, 'raise NotImplementedError("To be implemented")')
     }))

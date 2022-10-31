@@ -22,7 +22,7 @@ local guard = s({trig = "#ifndef", name = "header guard"}, fmt([[
 {}
 
 #endif
-		]], {d(1, upper_filename, {}), r(1), i(0)}))
+        ]], {d(1, upper_filename, {}), r(1), i(0)}))
 
 table.insert(snippets, guard)
 

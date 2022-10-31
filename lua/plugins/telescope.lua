@@ -101,7 +101,7 @@ vim.keymap.set("n", "<Leader>fs",
 vim.keymap.set("n", "<Leader>gS", function() tsbuildin.git_status() end,
                {noremap = true, silent = true, desc = "Git status"})
 
-vim.keymap.set("n", "<Leader>p", function() tsbuildin.diagnostics() end,
+vim.keymap.set("n", "<Leader>fp", function() tsbuildin.diagnostics() end,
                {noremap = true, silent = true, desc = "Show diagnostics"})
 
 -- <C+d> to delete

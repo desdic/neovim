@@ -11,13 +11,17 @@ greyjoy.setup({
     extensions = {
         generic = {
             commands = {
-                ["run test.py"] = {
-                    command = {"./test.py"},
+                ["run {filename}"] = {
+                    command = {"python3", "{filename}"},
                     filetype = "python",
-                    filename = "test.py"
                 },
                 ["run main.go"] = {
                     command = {"go", "run", "main.go"},
+                    filetype = "go",
+                    filename = "main.go"
+                },
+                ["build main.go"] = {
+                    command = {"go", "build", "main.go"},
                     filetype = "go",
                     filename = "main.go"
                 }
@@ -27,12 +31,19 @@ greyjoy.setup({
             targets = {"converge", "verify", "destroy", "test"},
             include_all = false
         }
+    },
+    run_groups = {
+        fast = {"generic", "makefile"},
     }
 })
+
+greyjoy.load_extension("kitchen")
 greyjoy.load_extension("generic")
 -- greyjoy.load_extension("vscode_tasks")
 greyjoy.load_extension("makefile")
-greyjoy.load_extension("kitchen")
 
-vim.keymap.set("n", "<Leader>r", ":Greyjoy<CR>",
-               {noremap = true, silent = true, desc = "List methods"})
+vim.keymap.set("n", "<Leader>gr", ":Greyjoy<CR>",
+               {noremap = true, silent = true, desc = "Run greyjoy"})
+
+vim.keymap.set("n", "<Leader>gf", ":Greyjoy fast<CR>",
+               {noremap = true, silent = true, desc = "Run greyjoy"})

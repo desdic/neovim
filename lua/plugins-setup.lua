@@ -47,6 +47,8 @@ return packer.startup({
         use("rcarriga/nvim-notify")
 
         -- stabilize cursor after open/close
+        -- no longer neede in 0.9 or nightly due to
+        -- set splitkeep=screen
         use("luukvbaal/stabilize.nvim")
 
         -- rainbow ({[]})
@@ -148,8 +150,6 @@ return packer.startup({
         use("nvim-tree/nvim-tree.lua")
 
         use("tpope/vim-fugitive")
-
-        -- use("lukas-reineke/indent-blankline.nvim")
 
         use("desdic/greyjoy.nvim")
 

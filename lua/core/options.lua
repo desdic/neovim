@@ -38,7 +38,7 @@ option.wrap = false -- Don't wrap lines
 option.textwidth = 0 -- Don't add newline after 80 chars
 option.scrolloff = 10 -- Always keep 10 lines visible
 option.errorbells = false -- Disable error bells
-option.showcmd = true -- Show the (partial) command as it’s being typed
+option.showcmd = false -- Don't show commands
 
 HOME_PATH = "/home/" .. vim.fn.expand("$USER")
 option.undodir = HOME_PATH .. "/.config/nvim/undo" -- Save and set undo/redo levels

@@ -51,22 +51,22 @@ ntconfig.setup({
             enable = true,
             set_jumps = true, -- whether to set jumps in the jumplist
             goto_next_start = {
-                ["]f"] = "@function.outer",
-                ["]b"] = "@block.inner",
-                ["]c"] = "@class.outer",
-                ["]l"] = "@loop.outer",
-                ["]i"] = "@conditional.outer",
-                ["]p"] = "@parameter.inner",
-                ["]o"] = "@call.outer"
+                ["ff"] = "@function.outer",
+                ["fb"] = "@block.inner",
+                ["fc"] = "@class.outer",
+                ["fl"] = "@loop.outer",
+                ["fi"] = "@conditional.outer",
+                ["fp"] = "@parameter.inner",
+                ["fo"] = "@call.outer"
             },
             goto_previous_start = {
-                ["[f"] = "@function.outer",
-                ["[b"] = "@block.inner",
-                ["[c"] = "@class.outer",
-                ["[l"] = "@loop.outer",
-                ["[i"] = "@conditional.outer",
-                ["[p"] = "@parameter.inner",
-                ["[o"] = "@call.outer"
+                ["Ff"] = "@function.outer",
+                ["Fb"] = "@block.inner",
+                ["Fc"] = "@class.outer",
+                ["Fl"] = "@loop.outer",
+                ["Fi"] = "@conditional.outer",
+                ["Fp"] = "@parameter.inner",
+                ["Fo"] = "@call.outer"
             }
             -- goto_next_end = {
             -- 	["fF"] = "@function.outer",

@@ -27,7 +27,7 @@ vim.keymap.set("n", "<Leader>hl", function() hop.hint_lines() end,
 vim.keymap.set("n", "vo", function()
     hop.hint_lines_skip_whitespace()
     vim.schedule(function()
-        vim.cmd([[normal! o]])
+        vim.cmd([[normal! zzzvo]])
         vim.cmd([[startinsert]])
     end)
 end, {desc = "Jump to line and go into insert mode"})

@@ -24,6 +24,15 @@ ntconfig.setup({
     refactor = {
         smart_rename = {enable = true, keymaps = {smart_rename = "grr"}}
     },
+    incremental_selection = {
+        enable = true,
+        keymaps = {
+            init_selection = "<M-l>",
+            node_incremental = "<M-l>",
+            node_decremental = "<M-h>",
+            scope_incremental = "<M-c>",
+        }
+    },
     textobjects = {
         select = {
             enable = true,

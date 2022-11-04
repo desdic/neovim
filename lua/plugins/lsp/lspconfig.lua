@@ -206,14 +206,10 @@ lspconfig["bashls"].setup({
     root_dir = vim.loop.cwd
 })
 
-
 -- C
 local utf16cap = capabilities
-utf16cap.offsetEncoding = { "utf-16" }
-lspconfig["clangd"].setup({
-    capabilities = utf16cap,
-    on_attach = on_attach,
-})
+utf16cap.offsetEncoding = {"utf-16"}
+lspconfig["clangd"].setup({capabilities = utf16cap, on_attach = on_attach})
 
 lspconfig["efm"].setup({capabilities = capabilities, on_attach = on_attach})
 
@@ -231,3 +227,10 @@ lspconfig["solargraph"].setup({
     on_attach = on_attach,
     filetypes = {"ruby", "rb", "erb", "rakefile"}
 })
+
+lspconfig["rust_analyzer"].setup({
+    capabilities = capabilities,
+    on_attach = on_attach
+})
+
+vim.cmd([[autocmd BufWritePre *.rs,*.lua,*.rb lua vim.lsp.buf.format()]])

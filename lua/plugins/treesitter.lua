@@ -8,13 +8,13 @@ end
 ntconfig.setup({
     ensure_installed = {
         "bash", "c", "cpp", "dockerfile", "go", "json", "lua", "python", "ruby",
-        "yaml", "toml", "markdown", "markdown_inline", "glsl"
+        "yaml", "toml", "markdown", "markdown_inline", "glsl", "rust"
     },
     ignore_install = {"javascript", "haskell"}, -- List of parsers to ignore installing
     indent = {enable = true, disable = {}},
     highlight = {
-        enable = true, -- false will disable the whole extension
-        disable = {"rust"} -- list of language that will be disabled
+        enable = true -- false will disable the whole extension
+        -- disable = {"rust"} -- list of language that will be disabled
     },
     rainbow = {
         enable = true,
@@ -30,7 +30,7 @@ ntconfig.setup({
             init_selection = "<M-l>",
             node_incremental = "<M-l>",
             node_decremental = "<M-h>",
-            scope_incremental = "<M-c>",
+            scope_incremental = "<M-c>"
         }
     },
     textobjects = {
@@ -60,22 +60,22 @@ ntconfig.setup({
             enable = true,
             set_jumps = true, -- whether to set jumps in the jumplist
             goto_next_start = {
-                ["ff"] = "@function.outer",
-                ["fb"] = "@block.inner",
-                ["fc"] = "@class.outer",
-                ["fl"] = "@loop.outer",
-                ["fi"] = "@conditional.outer",
-                ["fp"] = "@parameter.inner",
-                ["fo"] = "@call.outer"
+                ["]f"] = "@function.outer",
+                ["]b"] = "@block.inner",
+                ["]c"] = "@class.outer",
+                ["]l"] = "@loop.outer",
+                ["]i"] = "@conditional.outer",
+                ["]p"] = "@parameter.inner",
+                ["]o"] = "@call.outer"
             },
             goto_previous_start = {
-                ["Ff"] = "@function.outer",
-                ["Fb"] = "@block.inner",
-                ["Fc"] = "@class.outer",
-                ["Fl"] = "@loop.outer",
-                ["Fi"] = "@conditional.outer",
-                ["Fp"] = "@parameter.inner",
-                ["Fo"] = "@call.outer"
+                ["[f"] = "@function.outer",
+                ["[b"] = "@block.inner",
+                ["[c"] = "@class.outer",
+                ["[l"] = "@loop.outer",
+                ["[i"] = "@conditional.outer",
+                ["[p"] = "@parameter.inner",
+                ["[o"] = "@call.outer"
             }
             -- goto_next_end = {
             -- 	["fF"] = "@function.outer",

@@ -28,8 +28,8 @@ null_ls.setup({
     -- setup formatters & linters
     sources = {
         formatting.stylua, formatting.lua_format, formatting.black,
-        formatting.gofmt, formatting.gofumpt, formatting.goimports,
-        diagnostics.golangci_lint.with({
+        formatting.rustfmt, formatting.gofmt, formatting.gofumpt,
+        formatting.goimports, diagnostics.golangci_lint.with({
             args = {
                 "run", "--enable-all", "--disable", "lll", "--disable", "godot",
                 "--out-format=json", "$DIRNAME", "--path-prefix", "$ROOT"

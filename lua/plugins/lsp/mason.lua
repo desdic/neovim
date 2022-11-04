@@ -25,7 +25,7 @@ mason.setup()
 masonlsp.setup({
     ensure_installed = {
         "gopls", "sumneko_lua", "bashls", "yamlls", "pyright", "pylsp", "efm",
-        "solargraph", "dockerls", "clangd", "jsonls", "perlnavigator"
+        "solargraph", "dockerls", "clangd", "jsonls", "perlnavigator", "rust_analyzer"
     },
     automatic_installation = true
 })

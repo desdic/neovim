@@ -13,9 +13,10 @@ if not pok then
 end
 
 local macchiato = palettes.get_palette("macchiato")
+local mocha = palettes.get_palette("mocha")
 
 catppuccin.setup({
-    compile = {enabled = false, path = vim.fn.stdpath("cache") .. "/catppuccin"},
+    compile = {enabled = true, path = vim.fn.stdpath("cache") .. "/catppuccin"},
     transparent_background = false,
     term_colors = false,
     integrations = {
@@ -28,7 +29,8 @@ catppuccin.setup({
         bufferline = true,
         markdown = false,
         ts_rainbow = true,
-        navic = true,
+        -- navic = {enabled = true, custom_bg = "#181825"},
+        navic = {enabled = true, custom_bg = mocha.mantle},
         dap = {enabled = true, enable_ui = true},
         notify = true,
         hop = true

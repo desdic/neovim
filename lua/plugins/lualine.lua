@@ -63,7 +63,7 @@ local filename = function()
 end
 
 local navicok, navic = pcall(require, "nvim-navic")
-local nagivnvim = {
+local navicinfo = {
     function()
         if navicok and navic.is_available() then
             return " " .. navic.get_location()
@@ -73,19 +73,6 @@ local nagivnvim = {
     padding = {right = 1},
     cond = hide_in_width
 }
-
--- override the inactive background for filename to be more visible
--- local custom_catppuccin = {}
--- local cstatus_ok, catcolors = pcall(require, "catppuccin.api.colors")
--- if cstatus_ok then
--- 	cstatus_ok, custom_catppuccin = pcall(require, "lualine.themes.catppuccin")
--- 	if cstatus_ok then
--- 		local colors = catcolors.get_colors()
--- 		custom_catppuccin.inactive.c.bg = colors.black1
--- 		-- hi DiagnosticWarn guifg=DarkOrange
--- 		-- custom_catppuccin.DiagnosticWarning.bg = colors.black1
--- 	end
--- end
 
 lualine.setup({
     options = {
@@ -110,7 +97,7 @@ lualine.setup({
     sections = {
         lualine_a = {branch, diagnostics},
         lualine_b = {mode},
-        lualine_c = {nagivnvim},
+        lualine_c = {},
         lualine_x = {lspclients, "%=", diff, spaces, "encoding", filetype},
         lualine_y = {location},
         lualine_z = {}
@@ -128,7 +115,7 @@ lualine.setup({
         lualine_a = {},
         lualine_b = {},
         lualine_c = {},
-        lualine_x = {},
+        lualine_x = {navicinfo},
         lualine_y = {},
         lualine_z = {filename}
     },

@@ -233,4 +233,4 @@ lspconfig["rust_analyzer"].setup({
     on_attach = on_attach
 })
 
-vim.cmd([[autocmd BufWritePre *.rs,*.lua,*.rb lua vim.lsp.buf.format()]])
+vim.cmd([[autocmd BufWritePre *.rs,*.lua lua vim.lsp.buf.format()]])

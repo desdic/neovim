@@ -76,7 +76,7 @@ cmp.setup({
         {name = "luasnip"}, {name = "buffer", keyword_length = 3}
     },
     window = {
-		documentation = cmp.config.window.bordered(),
-		completion = cmp.config.window.bordered(),
-	},
+        documentation = cmp.config.window.bordered(),
+        completion = cmp.config.window.bordered()
+    }
 })

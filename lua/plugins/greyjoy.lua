@@ -13,7 +13,7 @@ greyjoy.setup({
             commands = {
                 ["run {filename}"] = {
                     command = {"python3", "{filename}"},
-                    filetype = "python",
+                    filetype = "python"
                 },
                 ["run main.go"] = {
                     command = {"go", "run", "main.go"},
@@ -32,15 +32,14 @@ greyjoy.setup({
             include_all = false
         }
     },
-    run_groups = {
-        fast = {"generic", "makefile"},
-    }
+    run_groups = {fast = {"generic", "makefile", "cargo"}}
 })
 
 greyjoy.load_extension("kitchen")
 greyjoy.load_extension("generic")
 -- greyjoy.load_extension("vscode_tasks")
 greyjoy.load_extension("makefile")
+greyjoy.load_extension("cargo")
 
 vim.keymap.set("n", "<Leader>gr", ":Greyjoy<CR>",
                {noremap = true, silent = true, desc = "Run greyjoy"})

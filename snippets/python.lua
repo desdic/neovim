@@ -34,8 +34,7 @@ local empty_python = function(position)
             c(1, {t("#!/usr/bin/env "), t("#!/sbin/env ")}), c(2, nodes),
             t({"", "", ""}), t({[[import argparse]], [[import logging]]}),
             t({"", "", ""}), t("logger = logging.getLogger(__name__)"),
-            t({"", ""}),
-            t({"", "", ""}), t({
+            t({"", ""}), t({"", "", ""}), t({
                 [[def main():]], [[	arg_parser = argparse.ArgumentParser()]],
                 [[	arg_parser.add_argument("--debug", "-d", action="store_true", help="enable debug")]],
                 [[	args = arg_parser.parse_args()]], [[]],

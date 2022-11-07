@@ -29,11 +29,12 @@ end
 
 local snippets, autosnippets = {}, {}
 
-local all = ls.parser.parse_snippet({trig = "$file$", name ="Current filename" }, "$TM_FILENAME")
+local all = ls.parser.parse_snippet(
+                {trig = "$file$", name = "Current filename"}, "$TM_FILENAME")
 table.insert(snippets, all)
 
-local fs = s({ trig = "#!", name = "Shebang"}, get_file_type(1),
-      {condition = file_begin, show_condition = file_begin})
+local fs = s({trig = "#!", name = "Shebang"}, get_file_type(1),
+             {condition = file_begin, show_condition = file_begin})
 table.insert(snippets, fs)
 
 return snippets, autosnippets

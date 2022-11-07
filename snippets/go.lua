@@ -119,9 +119,9 @@ end
 local function go_result_type(info)
     local cursor_node = ts_utils.get_node_at_cursor()
 
-	local function_node = getmethod(cursor_node)
+    local function_node = getmethod(cursor_node)
 
-	-- This only returns a source_file and no longer decends into tree
+    -- This only returns a source_file and no longer decends into tree
     -- local scope = ts_locals.get_scope_tree(cursor_node, 0)
     --
     -- local function_node

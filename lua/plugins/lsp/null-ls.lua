@@ -34,17 +34,16 @@ null_ls.setup({
                 "run", "--enable-all", "--disable", "lll", "--disable", "godot",
                 "--out-format=json", "$DIRNAME", "--path-prefix", "$ROOT"
             }
-        }), gci_format
-        -- , null_ls.builtins.formatting.rubocop.with({
-        --     args = {
-        --         "--auto-correct", "-f", "-c", HOME_PATH .. "/.work-rubocop.yml",
-        --         "quiet", "--stderr", "--stdin", "$FILENAME"
-        --     }
-        -- }), null_ls.builtins.diagnostics.rubocop.with({
-        --     args = {
-        --         "-c", HOME_PATH .. "/.work-rubocop.yml", "-f", "json",
-        --         "--stdin", "$FILENAME"
-        --     }
-        -- }),
+        }), gci_format, null_ls.builtins.formatting.rubocop.with({
+            args = {
+                "--auto-correct", "-f", "-c", HOME_PATH .. "/.work-rubocop.yml",
+                "quiet", "--stderr", "--stdin", "$FILENAME"
+            }
+        }), null_ls.builtins.diagnostics.rubocop.with({
+            args = {
+                "-c", HOME_PATH .. "/.work-rubocop.yml", "-f", "json",
+                "--stdin", "$FILENAME"
+            }
+        })
     }
 })

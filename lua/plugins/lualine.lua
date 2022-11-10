@@ -97,7 +97,7 @@ lualine.setup({
     sections = {
         lualine_a = {branch, diagnostics},
         lualine_b = {mode},
-        lualine_c = {},
+        lualine_c = {navicinfo},
         lualine_x = {lspclients, "%=", diff, spaces, "encoding", filetype},
         lualine_y = {location},
         lualine_z = {}
@@ -115,7 +115,7 @@ lualine.setup({
         lualine_a = {},
         lualine_b = {},
         lualine_c = {},
-        lualine_x = {navicinfo},
+        lualine_x = {},
         lualine_y = {},
         lualine_z = {filename}
     },

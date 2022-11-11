@@ -139,9 +139,6 @@ return packer.startup({
         use("mfussenegger/nvim-dap-python")
         use("leoluz/nvim-dap-go")
 
-        -- Markdown rendering
-        use("ellisonleao/glow.nvim")
-
         -- UI
         use("stevearc/dressing.nvim")
 
@@ -155,6 +152,7 @@ return packer.startup({
 
         use("ThePrimeagen/harpoon")
 
+        -- Markdown rendering
         use({"toppair/peek.nvim", run = "deno task --quiet build:fast"})
 
         -- run sync on installation

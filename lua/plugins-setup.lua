@@ -146,8 +146,6 @@ return packer.startup({
 
         use("nvim-tree/nvim-tree.lua")
 
-        use("tpope/vim-fugitive")
-
         use("desdic/greyjoy.nvim")
 
         use("ThePrimeagen/harpoon")

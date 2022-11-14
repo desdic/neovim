@@ -10,6 +10,43 @@ nm.setup_defaults({height_toggle = {12, 36}, hl_group = "DiagnosticWarn"})
 nm.source_on_save("/home/kgn/.config/nvim/lua/plugins/neo-minimap.lua")
 
 -- Markdown
+nm.set({"zi", "zo", "zu"}, {"docker-compose*.yml"}, {
+    events = {"BufEnter"},
+
+    query = {
+        [[
+        ;; query for finding names of containers
+        (
+            block_mapping (
+                block_mapping_pair
+                    key: ( flow_node( plain_scalar(string_scalar)))
+                    value: (block_node(
+                        block_mapping (
+                            block_mapping_pair
+                                key: ( flow_node( plain_scalar(string_scalar) @cap (#not-eq? @cap "build") ))
+                                value: (block_node(
+                                    block_mapping(block_mapping_pair key: ( flow_node( plain_scalar(string_scalar))))
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
+    ]], [[
+        ;; query for functions/function declarations
+        ((comment) @cap)
+    ]], 1
+    },
+
+    -- auto_jump = false,
+    -- open_win_opts = { border = "double" },
+    win_opts = {scrolloff = 1},
+
+    disable_indentaion = true
+})
+
+-- Markdown
 nm.set({"zi", "zo", "zu"}, {"*.md"}, {
     events = {"BufEnter"},
 

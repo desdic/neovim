@@ -153,6 +153,8 @@ return packer.startup({
         -- Markdown rendering
         use({"toppair/peek.nvim", run = "deno task --quiet build:fast"})
 
+        use("ziontee113/neo-minimap")
+
         -- run sync on installation
         if packer_bootstrap then require("packer").sync() end
     end,

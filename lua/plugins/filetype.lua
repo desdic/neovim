@@ -5,7 +5,8 @@ vim.filetype.add({
         automount = "systemd",
         mount = "systemd",
         target = "systemd",
-        path = "systemd"
+        path = "systemd",
+        rules = "make"
     },
     pattern = {
         [".*/etc/systemd/.*.%.socket"] = "systemd",

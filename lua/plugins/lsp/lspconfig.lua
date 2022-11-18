@@ -209,7 +209,11 @@ lspconfig["bashls"].setup({
 -- C
 local utf16cap = capabilities
 utf16cap.offsetEncoding = {"utf-16"}
-lspconfig["clangd"].setup({capabilities = utf16cap, on_attach = on_attach})
+lspconfig["clangd"].setup({
+    cmd = {"clangd", "--background-index"},
+    capabilities = utf16cap,
+    on_attach = on_attach
+})
 
 lspconfig["efm"].setup({capabilities = capabilities, on_attach = on_attach})
 

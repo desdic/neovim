@@ -29,7 +29,8 @@ null_ls.setup({
     sources = {
         formatting.stylua, formatting.lua_format, formatting.black,
         formatting.rustfmt, formatting.gofmt, formatting.gofumpt,
-        formatting.goimports, diagnostics.golangci_lint.with({
+        formatting.clang_format, formatting.goimports,
+        diagnostics.golangci_lint.with({
             args = {
                 "run", "--enable-all", "--disable", "lll", "--disable", "godot",
                 "--out-format=json", "$DIRNAME", "--path-prefix", "$ROOT"

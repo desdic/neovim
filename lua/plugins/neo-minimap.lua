@@ -43,7 +43,7 @@ nm.set({"zi", "zo", "zu"}, {"docker-compose*.yml"}, {
     -- open_win_opts = { border = "double" },
     win_opts = {scrolloff = 1},
 
-    disable_indentaion = true
+    disable_indentation = true
 })
 
 -- Markdown
@@ -64,7 +64,7 @@ nm.set({"zi", "zo", "zu"}, {"*.md"}, {
     -- open_win_opts = { border = "double" },
     win_opts = {scrolloff = 1},
 
-    disable_indentaion = true
+    disable_indentation = true
 })
 
 -- Python
@@ -88,11 +88,11 @@ nm.set({"zi", "zo", "zu"}, {"*.py"}, {
     -- open_win_opts = { border = "double" },
     win_opts = {scrolloff = 1},
 
-    disable_indentaion = true
+    disable_indentation = true
 })
 
 -- C/CPP
-nm.set({"zi", "zo", "zu"}, {"*.c", "*.h", "*.hpp", "*.cpp"}, {
+nm.set({"zi", "zo", "zu"}, {"*.c", "*.h", "*.hpp", "*.cpp", "*.cc"}, {
     events = {"BufEnter"},
 
     query = {
@@ -119,7 +119,7 @@ nm.set({"zi", "zo", "zu"}, {"*.c", "*.h", "*.hpp", "*.cpp"}, {
     -- open_win_opts = { border = "double" },
     win_opts = {scrolloff = 1},
 
-    disable_indentaion = true
+    disable_indentation = true
 })
 
 -- Go
@@ -147,7 +147,7 @@ nm.set({"zi", "zo", "zu"}, "*.go", {
     -- open_win_opts = { border = "double" },
     win_opts = {scrolloff = 1}
 
-    -- disable_indentaion = true,
+    -- disable_indentation = true
 })
 
 -- Lua
@@ -193,5 +193,5 @@ nm.set({"zi", "zo", "zu"}, "*.lua", {
     -- open_win_opts = { border = "double" },
     win_opts = {scrolloff = 1}
 
-    -- disable_indentaion = true,
+    -- disable_indentation = true
 })

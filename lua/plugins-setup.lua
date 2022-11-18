@@ -76,6 +76,7 @@ return packer.startup({
         use("AckslD/nvim-neoclip.lua")
 
         use({"phaazon/hop.nvim", branch = "v2"})
+        use("ggandor/leap.nvim")
         use("gpanders/editorconfig.nvim") -- use editorconfig
         use("Vimjas/vim-python-pep8-indent") -- python indentenation
         use("numToStr/Comment.nvim") -- commenting
@@ -154,6 +155,8 @@ return packer.startup({
         use({"toppair/peek.nvim", run = "deno task --quiet build:fast"})
 
         use("ziontee113/neo-minimap")
+
+        use("booperlv/nvim-gomove")
 
         -- run sync on installation
         if packer_bootstrap then require("packer").sync() end

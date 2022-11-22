@@ -77,6 +77,7 @@ return packer.startup({
 
         use({"phaazon/hop.nvim", branch = "v2"})
         use("ggandor/leap.nvim")
+        use("ggandor/leap-spooky.nvim")
         use("gpanders/editorconfig.nvim") -- use editorconfig
         use("Vimjas/vim-python-pep8-indent") -- python indentenation
         use("numToStr/Comment.nvim") -- commenting

@@ -7,7 +7,7 @@ end
 
 nm.setup_defaults({height_toggle = {12, 36}, hl_group = "DiagnosticWarn"})
 
-nm.source_on_save("/home/kgn/.config/nvim/lua/plugins/neo-minimap.lua")
+nm.source_on_save("~/.config/nvim/lua/plugins/neo-minimap.lua")
 
 -- Markdown
 nm.set({"zi", "zo", "zu"}, {"docker-compose*.yml"}, {

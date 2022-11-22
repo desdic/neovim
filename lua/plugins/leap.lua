@@ -12,7 +12,7 @@ local function leap_multi_win()
         end, vim.api.nvim_tabpage_list_wins(0))
     })
 
-    vim.schedule(function() vim.cmd([[norm zzzv]]) end)
+    -- vim.schedule(function() vim.cmd([[norm zzzv]]) end)
 end
 
 vim.keymap.set("n", "s", function() leap_multi_win() end, {})

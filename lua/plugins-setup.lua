@@ -75,7 +75,6 @@ return packer.startup({
         -- clipboard manager
         use("AckslD/nvim-neoclip.lua")
 
-        use({"phaazon/hop.nvim", branch = "v2"})
         use("ggandor/leap.nvim")
         use("ggandor/leap-spooky.nvim")
         use("gpanders/editorconfig.nvim") -- use editorconfig
@@ -103,7 +102,6 @@ return packer.startup({
             }
         })
         use("nvim-telescope/telescope-fzy-native.nvim")
-        use("nvim-telescope/telescope-media-files.nvim")
         use("nvim-telescope/telescope.nvim")
         use("nvim-telescope/telescope-ui-select.nvim")
 

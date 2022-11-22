@@ -50,17 +50,11 @@ ts.setup({
         fzy_native = {
             override_generic_sorter = false,
             override_file_sorter = true
-        },
-        media_files = {
-            -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
-            filetypes = {"png", "webp", "jpg", "jpeg", "pdf"},
-            find_cmd = "rg" -- find command (defaults to `fd`)
         }
     }
 })
 
 ts.load_extension("fzy_native")
-ts.load_extension("media_files")
 ts.load_extension("harpoon")
 
 vim.keymap.set("n", "<Leader>fa", function() tsbuildin.marks() end,

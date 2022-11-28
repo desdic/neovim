@@ -1,7 +1,7 @@
 local setup, nvimtree = pcall(require, "nvim-tree")
 if not setup then
     vim.notify("Unable to require nvim-tree", vim.lsp.log_levels.ERROR,
-               {title = "Plugin error"})
+        { title = "Plugin error" })
     return
 end
 
@@ -15,11 +15,11 @@ vim.g.loaded_netrwPlugin = 1
 -- configure nvim-tree
 nvimtree.setup({
     renderer = {
-        icons = {glyphs = {folder = {arrow_closed = "", arrow_open = ""}}}
+        icons = { glyphs = { folder = { arrow_closed = "", arrow_open = "" } } }
     },
-    actions = {open_file = {window_picker = {enable = false}}}
+    actions = { open_file = { window_picker = { enable = false } } }
 })
 
 -- Nvim-tree
 vim.keymap.set("n", "<Leader>n", ":NvimTreeToggle<CR>",
-               {noremap = true, silent = true, desc = "Start file browser"})
+    { noremap = true, silent = true, desc = "Start file browser" })

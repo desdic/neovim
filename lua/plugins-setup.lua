@@ -104,6 +104,7 @@ return packer.startup({
         use("nvim-telescope/telescope-fzy-native.nvim")
         use("nvim-telescope/telescope.nvim")
         use("nvim-telescope/telescope-ui-select.nvim")
+        use("desdic/telescope-rooter.nvim")
 
         use("ray-x/lsp_signature.nvim")
 

@@ -27,10 +27,10 @@ ntconfig.setup({
     incremental_selection = {
         enable = true,
         keymaps = {
-            init_selection = "<M-l>",
-            node_incremental = "<M-l>",
-            node_decremental = "<M-h>",
-            scope_incremental = "<M-c>"
+            init_selection = "<CR>",
+            scope_incremental = "<CR>",
+            node_incremental = "<TAB>",
+            node_decremental = "<S-TAB>"
         }
     },
     textobjects = {

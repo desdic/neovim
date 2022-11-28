@@ -22,10 +22,6 @@ tsc.setup({
         -- Patterns for specific filetypes
         -- If a pattern is missing, *open a PR* so everyone can benefit.
         markdown = {"section"},
-        elixir = {
-            "anonymous_function", "arguments", "block", "do_block", "list",
-            "map", "tuple", "quoted_content"
-        },
         json = {"pair"},
         yaml = {"block_mapping_pair"}
     },

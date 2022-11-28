@@ -50,12 +50,14 @@ ts.setup({
         fzy_native = {
             override_generic_sorter = false,
             override_file_sorter = true
-        }
+        },
+        rooter = {patterns = {".git", "go.sum"}}
     }
 })
 
 ts.load_extension("fzy_native")
 ts.load_extension("harpoon")
+ts.load_extension("rooter")
 
 vim.keymap.set("n", "<Leader>fa", function() tsbuildin.marks() end,
                {noremap = true, silent = true, desc = "Show marks"})

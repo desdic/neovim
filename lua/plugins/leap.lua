@@ -5,6 +5,9 @@ if not leapok then
     return
 end
 
+leap.add_default_mappings()
+leap.opts.safe_labels = {}
+
 local function leap_multi_win()
     leap.leap({
         target_windows = vim.tbl_filter(function(win)

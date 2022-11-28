@@ -41,9 +41,10 @@ cmp.setup({
         format = lspkind.cmp_format({maxwidth = 50, ellipsis_char = "..."})
     },
     sorting = {
-        priority_weight = 2.,
+        priority_weight = 1.0,
         comparators = {
-            compare.offset, compare.exact, compare.score, compare.kind,
+            compare.scopes, compare.offset, compare.exact, compare.score,
+            compare.recently_used, compare.locality, compare.kind,
             compare.sort_text, compare.length, compare.order
         }
     },
@@ -72,8 +73,11 @@ cmp.setup({
         end, {"i", "s"})
     }),
     sources = {
-        {name = "nvim_lsp"}, {name = "nvim_lua"}, {name = "path"},
-        {name = "luasnip"}, {name = "buffer", keyword_length = 3}
+        {name = "nvim_lsp", priority = 10, keyword_length = 2},
+        {name = "buffer", priority = 8, keyword_length = 2},
+        {name = "luasnip", priority = 6, keyword_length = 2},
+        {name = "nvim_lua", priority_weight = 4, keyword_length = 2},
+        {name = "path", priority = 2, keyword_length = 2}
     },
     window = {
         documentation = cmp.config.window.bordered(),

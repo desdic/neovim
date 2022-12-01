@@ -154,8 +154,10 @@ return packer.startup({
         -- Markdown rendering
         use({"toppair/peek.nvim", run = "deno task --quiet build:fast"})
 
+        -- treesitter queries
         use("ziontee113/neo-minimap")
 
+        -- move blocks of text
         use("booperlv/nvim-gomove")
 
         -- run sync on installation

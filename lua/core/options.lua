@@ -76,5 +76,5 @@ option.conceallevel = 0 -- so that `` is visible in markdown files
 option.splitbelow = true
 option.splitright = true
 
-option.mouse = ""
+option.mouse = "a"
 vim.wo.cursorline = true

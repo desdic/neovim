@@ -74,7 +74,7 @@ local function lsp_keymaps(bufnr)
         desc = "Show signature help"
     })
 
-    vim.keymap.set("n", "<Leader>s", ":LSoutlineToggle<CR>")
+    vim.keymap.set("n", "<Leader>s", ":Lspsaga outline<CR>")
 
     vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])
     vim.cmd(

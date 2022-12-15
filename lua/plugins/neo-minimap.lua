@@ -192,3 +192,24 @@ nm.set({"zi", "zo", "zu"}, "*.lua", {
 
     -- disable_indentation = true
 })
+
+-- Rust
+nm.set({"zi", "zo"}, "*.rs", {
+    events = {"BufEnter"},
+
+    query = {
+        [[
+         ((function_item) @cap)
+        ]], [[
+        ((identifier) @cap (#eq? @cap "{cursorword}"))
+        ]]
+    },
+
+    search_patterns = {{"fn", "<C-j>", true}, {"fn", "<C-k>", false}},
+
+    -- auto_jump = false,
+    -- open_win_opts = { border = "double" },
+    win_opts = {scrolloff = 1}
+
+    -- disable_indentation = true
+})

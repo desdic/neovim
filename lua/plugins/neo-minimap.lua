@@ -95,7 +95,8 @@ nm.set({"zi", "zo", "zu"}, {"*.py"}, {
 })
 
 -- C/CPP
-nm.set({"zi", "zo", "zu"}, {"*.c", "*.h", "*.hpp", "*.cpp", "*.cc"}, {
+nm.set({"zi", "zo", "zu"},
+       {"*.c", "*.h", "*.hpp", "*.cpp", "*.cc", "*.frag", "*.vert"}, {
     events = {"BufEnter"},
 
     query = {

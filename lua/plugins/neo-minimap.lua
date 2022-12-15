@@ -9,7 +9,7 @@ nm.setup_defaults({height_toggle = {12, 36}, hl_group = "DiagnosticWarn"})
 
 nm.source_on_save("~/.config/nvim/lua/plugins/neo-minimap.lua")
 
--- Markdown
+-- Yaml
 nm.set({"zi", "zo", "zu"}, {"docker-compose*.yml"}, {
     events = {"BufEnter"},
 
@@ -77,10 +77,13 @@ nm.set({"zi", "zo", "zu"}, {"*.py"}, {
         ((function_definition) @cap)
     ]], [[
         ;; query for comments
-        ((comment) @cap)
+        ((identifier) @cap (#eq? @cap "{cursorword}"))
     ]], [[
         ;; query for structs /classes
         ((class_definition) @cap)
+        ]], [[
+        ;; query for function calls
+        (call function: (identifier) @cap)
         ]]
     },
 
@@ -101,12 +104,14 @@ nm.set({"zi", "zo", "zu"}, {"*.c", "*.h", "*.hpp", "*.cpp", "*.cc"}, {
         ((function_definition) @cap)
         (declaration declarator: (function_declarator)) @cap
     ]], [[
-        ;; query for comments
-        ((comment) @cap)
+        ((identifier) @cap (#eq? @cap "{cursorword}"))
     ]], [[
         ;; query for structs /classes
         ((struct_specifier) @cap)
         ((class_specifier) @cap)
+        ]], [[
+        ;; query for function calls
+        (call_expression function: (identifier) @cap)
         ]]
     },
 
@@ -125,19 +130,22 @@ nm.set({"zi", "zo", "zu"}, {"*.c", "*.h", "*.hpp", "*.cpp", "*.cc"}, {
 -- Go
 nm.set({"zi", "zo", "zu"}, "*.go", {
     events = {"BufEnter"},
-
+    -- ((function_call (dot_index_expression) @field (#eq? @field "vim.keymap.set")) @cap)
     query = {
         [[
         ;; query
         ((method_declaration) @cap)
         ((function_declaration) @cap)
         (call_expression function: (func_literal) @cap)
+        ;;(method_declaration name: (field_identifier) @name (#eq? @name "{cursorword}")) @cap
     ]], [[
-        ;; query for comments
-        ((comment) @cap)
+        ((identifier) @cap (#eq? @cap "{cursorword}"))
     ]], [[
         ;; query for structs
         (type_declaration (type_spec name: (type_identifier) @cap type: (struct_type))) 
+    ]], [[
+        ;; query for function calls
+        (call_expression function: (selector_expression) @cap)
     ]]
     },
 
@@ -156,27 +164,16 @@ nm.set({"zi", "zo", "zu"}, "*.lua", {
 
     query = {
         [[
-    ;; query
-    ((function_declaration) @cap)
-    ((assignment_statement(expression_list((function_definition) @cap))))
-    ]], 1, [[
-    ;; query
-    ((function_declaration) @cap)
-    ((assignment_statement(expression_list((function_definition) @cap))))
-    ((field (identifier) @cap) (#eq? @cap "keymaps"))
-    ]], [[
-    ;; query
-    ((for_statement) @cap)
-    ((function_declaration) @cap)
-    ((assignment_statement(expression_list((function_definition) @cap))))
-    ((function_call (identifier)) @cap (#vim-match? @cap "^__*" ))
-    ((function_call (dot_index_expression) @field (#eq? @field "vim.keymap.set")) @cap)
-    ]], [[
-    ;; query
-    ((for_statement) @cap)
-    ((function_declaration) @cap)
-    ((assignment_statement(expression_list((function_definition) @cap))))
-    ]]
+         ((function_declaration) @cap)
+         ((function_definition) @cap)
+        ]], [[
+        ((identifier) @cap (#eq? @cap "{cursorword}"))
+        ]], [[
+        ((for_statement) @cap)
+        ((assignment_statement(expression_list((function_definition) @cap))))
+        ((function_call (identifier)) @cap (#vim-match? @cap "^__*" ))
+        ((function_call (dot_index_expression) @field (#eq? @field "vim.keymap.set")) @cap)
+        ]]
     },
 
     regex = {

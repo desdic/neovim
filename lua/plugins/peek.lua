@@ -1,7 +1,6 @@
 local peek_status, peek = pcall(require, "peek")
 if not peek_status then
-    vim.notify("Unable to require peek", vim.lsp.log_levels.ERROR,
-               {title = "Plugin error"})
+    vim.notify("Unable to require peek", vim.lsp.log_levels.ERROR, {title = "Plugin error"})
     return
 end
 

@@ -1,14 +1,13 @@
 local ok, ntconfig = pcall(require, "nvim-treesitter.configs")
 if not ok then
-    vim.notify("Unable to require nvim-treesitter.configs",
-               vim.lsp.log_levels.ERROR, {title = "Plugin error"})
+    vim.notify("Unable to require nvim-treesitter.configs", vim.lsp.log_levels.ERROR, {title = "Plugin error"})
     return
 end
 
 ntconfig.setup({
     ensure_installed = {
-        "bash", "c", "cpp", "dockerfile", "go", "json", "lua", "python", "ruby",
-        "yaml", "toml", "markdown", "markdown_inline", "glsl", "rust"
+        "bash", "c", "cpp", "dockerfile", "go", "json", "lua", "python", "ruby", "yaml", "toml", "markdown",
+        "markdown_inline", "glsl", "rust"
     },
     ignore_install = {"javascript", "haskell"}, -- List of parsers to ignore installing
     indent = {enable = true, disable = {}},
@@ -21,9 +20,7 @@ ntconfig.setup({
         extended = true,
         max_file_lines = 5000 -- Do not enable for files with more than 5000 lines, int
     },
-    refactor = {
-        smart_rename = {enable = true, keymaps = {smart_rename = "grr"}}
-    },
+    refactor = {smart_rename = {enable = true, keymaps = {smart_rename = "grr"}}},
     incremental_selection = {
         enable = true,
         keymaps = {
@@ -51,11 +48,7 @@ ntconfig.setup({
                 ["fi"] = "@conditional.inner"
             }
         },
-        swap = {
-            enable = true,
-            swap_next = {["fa"] = "@parameter.inner"},
-            swap_previous = {["fA"] = "@parameter.inner"}
-        },
+        swap = {enable = true, swap_next = {["fa"] = "@parameter.inner"}, swap_previous = {["fA"] = "@parameter.inner"}},
         move = {
             enable = true,
             set_jumps = true, -- whether to set jumps in the jumplist

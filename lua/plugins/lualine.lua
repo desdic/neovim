@@ -1,7 +1,6 @@
 local status_ok, lualine = pcall(require, "lualine")
 if not status_ok then
-    vim.notify("Unable to require lualine", vim.lsp.log_levels.ERROR,
-               {title = "Plugin error"})
+    vim.notify("Unable to require lualine", vim.lsp.log_levels.ERROR, {title = "Plugin error"})
     return
 end
 
@@ -65,9 +64,7 @@ end
 local navicok, navic = pcall(require, "nvim-navic")
 local navicinfo = {
     function()
-        if navicok and navic.is_available() then
-            return " " .. navic.get_location()
-        end
+        if navicok and navic.is_available() then return " " .. navic.get_location() end
         return ""
     end,
     padding = {right = 1},
@@ -86,9 +83,8 @@ lualine.setup({
         disabled_filetypes = {
             statusline = {"dashboard", "NvimTree", "Outline"},
             winbar = {
-                "help", "startify", "dashboard", "packer", "neogitstatus",
-                "NvimTree", "Trouble", "alpha", "lir", "Outline",
-                "spectre_panel", "toggleterm", "qf"
+                "help", "startify", "dashboard", "packer", "neogitstatus", "NvimTree", "Trouble", "alpha", "lir",
+                "Outline", "spectre_panel", "toggleterm", "qf"
             }
         },
         always_divide_middle = true,
@@ -111,14 +107,7 @@ lualine.setup({
         lualine_y = {},
         lualine_z = {}
     },
-    winbar = {
-        lualine_a = {},
-        lualine_b = {},
-        lualine_c = {},
-        lualine_x = {},
-        lualine_y = {},
-        lualine_z = {filename}
-    },
+    winbar = {lualine_a = {}, lualine_b = {}, lualine_c = {}, lualine_x = {}, lualine_y = {}, lualine_z = {filename}},
     inactive_winbar = {
         lualine_a = {},
         lualine_b = {},

@@ -1,7 +1,6 @@
 local nmok, nm = pcall(require, "neo-minimap")
 if not nmok then
-    vim.notify("Unable to require neo-minimap", vim.lsp.log_levels.ERROR,
-               {title = "Plugin error"})
+    vim.notify("Unable to require neo-minimap", vim.lsp.log_levels.ERROR, {title = "Plugin error"})
     return
 end
 
@@ -95,8 +94,7 @@ nm.set({"zi", "zo", "zu"}, {"*.py"}, {
 })
 
 -- C/CPP
-nm.set({"zi", "zo", "zu"},
-       {"*.c", "*.h", "*.hpp", "*.cpp", "*.cc", "*.frag", "*.vert"}, {
+nm.set({"zi", "zo", "zu"}, {"*.c", "*.h", "*.hpp", "*.cpp", "*.cc", "*.frag", "*.vert"}, {
     events = {"BufEnter"},
 
     query = {
@@ -177,14 +175,10 @@ nm.set({"zi", "zo", "zu"}, "*.lua", {
         ]]
     },
 
-    regex = {
-        {}, {[[^\s*---*\s\+\w\+]], [[--\s*=]]},
-        {[[^\s*---*\s\+\w\+]], [[--\s*=]]}, {}
-    },
+    regex = {{}, {[[^\s*---*\s\+\w\+]], [[--\s*=]]}, {[[^\s*---*\s\+\w\+]], [[--\s*=]]}, {}},
 
     search_patterns = {
-        {"function", "<C-j>", true}, {"function", "<C-k>", false},
-        {"keymap", "<A-j>", true}, {"keymap", "<A-k>", false}
+        {"function", "<C-j>", true}, {"function", "<C-k>", false}, {"keymap", "<A-j>", true}, {"keymap", "<A-k>", false}
     },
 
     -- auto_jump = false,

@@ -78,3 +78,5 @@ option.splitright = true
 
 option.mouse = "a"
 vim.wo.cursorline = true
+
+opt.isfname:append("@-@")

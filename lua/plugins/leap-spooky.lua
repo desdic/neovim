@@ -1,7 +1,6 @@
 local spok, sp = pcall(require, "leap-spooky")
 if not spok then
-    vim.notify("Unable to require library leap-spooky",
-               vim.lsp.log_levels.ERROR, {title = "Plugin error"})
+    vim.notify("Unable to require library leap-spooky", vim.lsp.log_levels.ERROR, {title = "Plugin error"})
     return
 end
 

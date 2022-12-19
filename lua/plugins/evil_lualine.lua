@@ -1,7 +1,6 @@
 local ok, lualine = pcall(require, "lualine")
 if not ok then
-    vim.notify("Unable to require lualine for evil lualine",
-               vim.lsp.log_levels.ERROR, {title = "Plugin error"})
+    vim.notify("Unable to require lualine for evil lualine", vim.lsp.log_levels.ERROR, {title = "Plugin error"})
     return
 end
 
@@ -26,9 +25,7 @@ local colors = {
 }
 
 local conditions = {
-    buffer_not_empty = function()
-        return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
-    end,
+    buffer_not_empty = function() return vim.fn.empty(vim.fn.expand("%:t")) ~= 1 end,
     hide_in_width = function() return vim.fn.winwidth(0) > 80 end,
     check_git_workspace = function()
         local filepath = vim.fn.expand("%:p:h")
@@ -74,14 +71,10 @@ local config = {
 }
 
 -- Inserts a component in lualine_c at left section
-local function ins_left(component)
-    table.insert(config.sections.lualine_c, component)
-end
+local function ins_left(component) table.insert(config.sections.lualine_c, component) end
 
 -- Inserts a component in lualine_x ot right section
-local function ins_right(component)
-    table.insert(config.sections.lualine_x, component)
-end
+local function ins_right(component) table.insert(config.sections.lualine_x, component) end
 
 ins_left({
     function() return "▊" end,
@@ -115,9 +108,7 @@ ins_left({
             ["!"] = colors.red,
             t = colors.red
         }
-        vim.api.nvim_command("hi! LualineMode guifg=" ..
-                                 mode_color[vim.fn.mode()] .. " guibg=" ..
-                                 colors.bg)
+        vim.api.nvim_command("hi! LualineMode guifg=" .. mode_color[vim.fn.mode()] .. " guibg=" .. colors.bg)
         return ""
     end,
     color = "LualineMode",
@@ -130,11 +121,7 @@ ins_left({
     cond = conditions.buffer_not_empty
 })
 
-ins_left({
-    "filename",
-    cond = conditions.buffer_not_empty,
-    color = {fg = colors.magenta, gui = "bold"}
-})
+ins_left({"filename", cond = conditions.buffer_not_empty, color = {fg = colors.magenta, gui = "bold"}})
 
 ins_left({"location"})
 
@@ -164,9 +151,7 @@ ins_left({
         if next(clients) == nil then return msg end
         for _, client in ipairs(clients) do
             local filetypes = client.config.filetypes
-            if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-                return client.name
-            end
+            if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then return client.name end
         end
         return msg
     end,
@@ -195,19 +180,11 @@ ins_right({
     "diff",
     -- Is it me or the symbol for modified us really weird
     symbols = {added = " ", modified = "柳 ", removed = " "},
-    diff_color = {
-        added = {fg = colors.green},
-        modified = {fg = colors.orange},
-        removed = {fg = colors.red}
-    },
+    diff_color = {added = {fg = colors.green}, modified = {fg = colors.orange}, removed = {fg = colors.red}},
     cond = conditions.hide_in_width
 })
 
-ins_right({
-    function() return "▊" end,
-    color = {fg = colors.blue},
-    padding = {left = 1}
-})
+ins_right({function() return "▊" end, color = {fg = colors.blue}, padding = {left = 1}})
 
 -- Now don't forget to initialize lualine
 lualine.setup(config)

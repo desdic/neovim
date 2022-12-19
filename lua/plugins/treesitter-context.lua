@@ -1,7 +1,6 @@
 local ok, tsc = pcall(require, "treesitter-context")
 if not ok then
-    vim.notify("Unable to require treesitter-context", vim.lsp.log_levels.ERROR,
-               {title = "Plugin error"})
+    vim.notify("Unable to require treesitter-context", vim.lsp.log_levels.ERROR, {title = "Plugin error"})
     return
 end
 
@@ -15,10 +14,7 @@ tsc.setup({
         -- Note that setting an entry here replaces all other patterns for this entry.
         -- By setting the 'default' entry below, you can control which nodes you want to
         -- appear in the context window.
-        default = {
-            "class", "function", "method", "for", "while", "if", "switch",
-            "case"
-        },
+        default = {"class", "function", "method", "for", "while", "if", "switch", "case"},
         -- Patterns for specific filetypes
         -- If a pattern is missing, *open a PR* so everyone can benefit.
         markdown = {"section"},

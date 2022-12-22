@@ -21,9 +21,9 @@ dashboard.section.buttons.val = {
     dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
     dashboard.button("r", "  Recently used files", ":Telescope oldfiles <CR>"),
     dashboard.button("t", "  Find text", ":Telescope live_grep <CR>"),
-    dashboard.button("c", "  Configuration", ":lua require('config.telescope').search_nvim()<CR>"),
+    dashboard.button("c", "  Configuration", ":lua require('plugins.telescope').search_nvim()<CR>"),
     dashboard.button("u", "  Update plugins", ":PackerSync<CR>"),
-    dashboard.button("n", "  Notes", ":lua require('config.telescope').grep_notes()<CR>"),
+    dashboard.button("n", "  Notes", ":lua require('plugins.telescope').grep_notes()<CR>"),
     -- dashboard.button("p", "  Projects", ":Telescope projects<CR>"),
     dashboard.button("h", "  Harpoon", ":Telescope harpoon marks<CR>"),
     dashboard.button("q", "  Quit Neovim", ":qa<CR>")

@@ -38,14 +38,21 @@ ntconfig.setup({
             lookahead = true,
 
             keymaps = {
-                ["ff"] = "@function.outer",
-                ["fb"] = "@block.inner",
-                ["fc"] = "@class.outer",
-                ["fl"] = "@loop.outer",
+                -- ["ff"] = "@function.outer",
+                -- ["fb"] = "@block.inner",
+                -- ["fc"] = "@class.outer",
+                -- ["fl"] = "@loop.outer",
+                -- ["if"] = "@function.inner",
+                -- ["ic"] = "@class.inner",
+                -- ["il"] = "@loop.inner",
+                -- ["fi"] = "@conditional.inner"
+
+                ["aa"] = "@parameter.outer",
+                ["ia"] = "@parameter.inner",
+                ["af"] = "@function.outer",
                 ["if"] = "@function.inner",
-                ["ic"] = "@class.inner",
-                ["il"] = "@loop.inner",
-                ["fi"] = "@conditional.inner"
+                ["ac"] = "@class.outer",
+                ["ic"] = "@class.inner"
             }
         },
         swap = {enable = true, swap_next = {["fa"] = "@parameter.inner"}, swap_previous = {["fA"] = "@parameter.inner"}},

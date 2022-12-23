@@ -1,12 +1,8 @@
 local ensure_packer = function()
     local fn = vim.fn
-    local install_path = fn.stdpath("data") ..
-                             "/site/pack/packer/start/packer.nvim"
+    local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
     if fn.empty(fn.glob(install_path)) > 0 then
-        fn.system({
-            "git", "clone", "--depth", "1",
-            "https://github.com/wbthomason/packer.nvim", install_path
-        })
+        fn.system({"git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path})
         vim.cmd([[packadd packer.nvim]])
         return true
     end
@@ -27,13 +23,7 @@ vim.cmd([[
 local status, packer = pcall(require, "packer")
 if not status then return end
 
-packer.init({
-    display = {
-        open_fn = function()
-            return require("packer.util").float({border = "rounded"})
-        end
-    }
-})
+packer.init({display = {open_fn = function() return require("packer.util").float({border = "rounded"}) end}})
 
 return packer.startup({
     function(use)
@@ -59,9 +49,7 @@ return packer.startup({
 
         use({
             "nvim-treesitter/nvim-treesitter",
-            run = function()
-                require("nvim-treesitter.install").update({with_sync = true})
-            end
+            run = function() require("nvim-treesitter.install").update({with_sync = true}) end
         })
 
         use("nvim-treesitter/nvim-treesitter-refactor")

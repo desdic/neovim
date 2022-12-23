@@ -76,7 +76,7 @@ option.conceallevel = 0 -- so that `` is visible in markdown files
 option.splitbelow = true
 option.splitright = true
 
-option.mouse = "a"
+option.mouse = ""
 vim.wo.cursorline = true
 
 opt.isfname:append("@-@")

@@ -2,7 +2,7 @@ local ensure_packer = function()
     local fn = vim.fn
     local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
     if fn.empty(fn.glob(install_path)) > 0 then
-        fn.system({"git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path})
+        fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
         vim.cmd([[packadd packer.nvim]])
         return true
     end
@@ -23,9 +23,9 @@ vim.cmd([[
 local status, packer = pcall(require, "packer")
 if not status then return end
 
-packer.init({display = {open_fn = function() return require("packer.util").float({border = "rounded"}) end}})
+packer.init({ display = { open_fn = function() return require("packer.util").float({ border = "rounded" }) end } })
 
-return packer.startup({
+packer.startup({
     function(use)
         use("wbthomason/packer.nvim")
 
@@ -41,27 +41,22 @@ return packer.startup({
         -- set splitkeep=screen
         use("luukvbaal/stabilize.nvim")
 
-        -- rainbow ({[]})
-        use("p00f/nvim-ts-rainbow")
-
         -- quoting
         use("windwp/nvim-autopairs")
 
         use({
             "nvim-treesitter/nvim-treesitter",
-            run = function() require("nvim-treesitter.install").update({with_sync = true}) end
+            run = function() require("nvim-treesitter.install").update({ with_sync = true }) end
         })
 
-        use("nvim-treesitter/nvim-treesitter-refactor")
-        use("nvim-treesitter/nvim-treesitter-textobjects")
-        use("nvim-treesitter/nvim-treesitter-context")
-        use("JoosepAlviste/nvim-ts-context-commentstring")
-        use("nvim-treesitter/playground")
+        use({ "nvim-treesitter/nvim-treesitter-refactor", after = { "nvim-treesitter" } })
+        use({ "nvim-treesitter/nvim-treesitter-textobjects", after = { "nvim-treesitter" } })
+        use({ "nvim-treesitter/nvim-treesitter-context", after = { "nvim-treesitter" } })
+        use({ "JoosepAlviste/nvim-ts-context-commentstring", after = { "nvim-treesitter" } })
+        use({ "nvim-treesitter/playground", after = { "nvim-treesitter" } })
 
-        use("SmiteshP/nvim-navic")
-
-        -- clipboard manager
-        use("AckslD/nvim-neoclip.lua")
+        -- rainbow ({[]})
+        use({ "p00f/nvim-ts-rainbow", after = { "nvim-treesitter" } })
 
         use("ggandor/leap.nvim")
         use("ggandor/leap-spooky.nvim")
@@ -71,11 +66,13 @@ return packer.startup({
         use("beauwilliams/focus.nvim") -- focus active window
 
         -- Theming
-        use({"catppuccin/nvim", as = "catppuccin"}) -- color theme
+        use({ "catppuccin/nvim", as = "catppuccin" }) -- color theme
 
         use("nvim-lualine/lualine.nvim")
         use("akinsho/nvim-bufferline.lua")
         use("neovim/nvim-lspconfig")
+
+        use({ "SmiteshP/nvim-navic", requires = { "neovim/nvim-lspconfig" } })
 
         use("williamboman/mason.nvim")
         use("williamboman/mason-lspconfig.nvim")
@@ -89,12 +86,16 @@ return packer.startup({
                 "go install golang.org/x/tools/cmd/goimports@latest"
             }
         })
-        use("nvim-telescope/telescope-fzy-native.nvim")
         use("nvim-telescope/telescope.nvim")
+
+        use("nvim-telescope/telescope-fzy-native.nvim")
         use("nvim-telescope/telescope-ui-select.nvim")
         use("desdic/telescope-rooter.nvim")
 
-        use("ray-x/lsp_signature.nvim")
+        -- clipboard manager
+        use({ "AckslD/nvim-neoclip.lua", requires = { "nvim-telescope/telescope.nvim" } })
+
+        use({ "ray-x/lsp_signature.nvim", requires = { "neovim/nvim-lspconfig" } })
 
         use("kshenoy/vim-signature")
         use("lewis6991/gitsigns.nvim")
@@ -106,7 +107,7 @@ return packer.startup({
         use("L3MON4D3/LuaSnip") -- snippet completions
         use("hrsh7th/cmp-nvim-lsp")
         use("hrsh7th/cmp-nvim-lua")
-        use({"glepnir/lspsaga.nvim", branch = "main"})
+        use({ "glepnir/lspsaga.nvim", branch = "main" })
         use("onsails/lspkind.nvim")
 
         use("rafamadriz/friendly-snippets")
@@ -124,7 +125,7 @@ return packer.startup({
         use("mfussenegger/nvim-dap")
         use("rcarriga/nvim-dap-ui")
         use("theHamsta/nvim-dap-virtual-text")
-        use({"ray-x/guihua.lua", run = "cd lua/fzy && make"})
+        use({ "ray-x/guihua.lua", run = "cd lua/fzy && make" })
         use("mfussenegger/nvim-dap-python")
         use("leoluz/nvim-dap-go")
 
@@ -140,10 +141,10 @@ return packer.startup({
         use("ThePrimeagen/harpoon")
 
         -- Markdown rendering
-        use({"toppair/peek.nvim", run = "deno task --quiet build:fast"})
+        use({ "toppair/peek.nvim", run = "deno task --quiet build:fast" })
 
         -- treesitter queries
-        use("ziontee113/neo-minimap")
+        use({ "ziontee113/neo-minimap", after = { "nvim-treesitter" } })
 
         -- move blocks of text
         use("booperlv/nvim-gomove")
@@ -151,5 +152,5 @@ return packer.startup({
         -- run sync on installation
         if packer_bootstrap then require("packer").sync() end
     end,
-    config = {python_cmd = "python3"}
+    config = { python_cmd = "python3" }
 })

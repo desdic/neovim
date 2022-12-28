@@ -2,3 +2,4 @@ lua/packer_compiled.lua
 undo/
 plugin/
 packer_compiled.lua
+lazy-lock.json

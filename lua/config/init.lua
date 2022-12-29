@@ -1,12 +1,10 @@
 return {
     {"catppuccin/nvim", name = "catppuccin", priority = 1000}, -- color scheme
     "nvim-lua/plenary.nvim", -- lua functions for other plugins
-    -- {"stevearc/dressing.nvim", event = "VeryLazy"}, -- UI used by plugins
     "kyazdani42/nvim-web-devicons", -- font icons
     {"ray-x/guihua.lua", build = "cd lua/fzy && make"}, -- LUA gui
     "rcarriga/nvim-notify", -- notifier
     "windwp/nvim-autopairs", -- pair quotes and brackets
-    "nvim-lualine/lualine.nvim", -- status line
     {
         "nvim-treesitter/nvim-treesitter",
         build = function() require("nvim-treesitter.install").update({with_sync = true}) end
@@ -18,7 +16,6 @@ return {
     {"p00f/nvim-ts-rainbow", dependencies = {"nvim-treesitter"}}, -- color scope
     "gpanders/editorconfig.nvim", -- use editorconfig
     "Vimjas/vim-python-pep8-indent", -- python indentenation
-    "numToStr/Comment.nvim", -- commenting
     "beauwilliams/focus.nvim", -- focus active window
     "neovim/nvim-lspconfig", -- LSP config
     {"SmiteshP/nvim-navic", dependencies = {"neovim/nvim-lspconfig"}}, -- statusline/winbar LSP
@@ -32,10 +29,7 @@ return {
             "go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest",
             "go install golang.org/x/tools/cmd/goimports@latest"
         }
-    }, "nvim-telescope/telescope.nvim", -- fast navigation
-    "nvim-telescope/telescope-fzy-native.nvim", "nvim-telescope/telescope-ui-select.nvim",
-    "desdic/telescope-rooter.nvim", {"AckslD/nvim-neoclip.lua", dependencies = {"nvim-telescope/telescope.nvim"}},
-    {"ray-x/lsp_signature.nvim", dependencies = {"neovim/nvim-lspconfig"}}, "kshenoy/vim-signature",
+    }, {"ray-x/lsp_signature.nvim", dependencies = {"neovim/nvim-lspconfig"}}, "kshenoy/vim-signature",
     "lewis6991/gitsigns.nvim", "hrsh7th/nvim-cmp", -- The completion plugin
     "hrsh7th/cmp-buffer", -- buffer completions
     "hrsh7th/cmp-path", -- path completions
@@ -49,7 +43,5 @@ return {
     "saadparwaiz1/cmp_luasnip", -- snippet engine in lua
     "akinsho/toggleterm.nvim", -- terminal
     "goolord/alpha-nvim", -- start screen
-    "nvim-tree/nvim-tree.lua", -- file browsing
-    "ThePrimeagen/harpoon", -- marks but better
-    "ziontee113/neo-minimap" -- treesitter queries
+    "nvim-tree/nvim-tree.lua" -- file browsing
 }

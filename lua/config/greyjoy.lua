@@ -1,7 +1,5 @@
 local M = {
     "desdic/greyjoy.nvim",
-    event = "VeryLazy",
-
     keys = {
         {"<Leader>gr", ":Greyjoy<CR>", desc = "[G]reyjoy [r]un"},
         {"<Leader>gf", ":Greyjoy fast<CR>", desc = "[G]reyjoy run [f]ast"}

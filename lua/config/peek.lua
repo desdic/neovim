@@ -1,8 +1,22 @@
-local M = {"toppair/peek.nvim", build = "deno task --quiet build:fast", event = "VeryLazy", config = {}}
+local M = {
+    "toppair/peek.nvim",
+    build = "deno task --quiet build:fast",
+    config = {},
 
-function M.init()
-    vim.api.nvim_create_user_command("PeekOpen", require("peek").open, {})
-    vim.api.nvim_create_user_command("PeekClose", require("peek").close, {})
-end
+    keys = {
+        {
+            "<Leader>op",
+            function()
+                local peek = require("peek")
+                if peek.is_open() then
+                    peek.close()
+                else
+                    peek.open()
+                end
+            end,
+            desc = "Peek (Markdown Preview)"
+        }
+    }
+}
 
 return M

@@ -1,6 +1,6 @@
 local M = {
     "mfussenegger/nvim-dap",
-    -- event = "VeryLazy",
+    ft = {"go", "python", "c", "cpp"},
 
     dependencies = {
         {"theHamsta/nvim-dap-virtual-text"}, -- virtual text for debugger

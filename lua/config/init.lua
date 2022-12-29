@@ -1,7 +1,7 @@
 return {
     {"catppuccin/nvim", name = "catppuccin", priority = 1000}, -- color scheme
     "nvim-lua/plenary.nvim", -- lua functions for other plugins
-    {"stevearc/dressing.nvim", event = "VeryLazy"}, -- UI used by plugins
+    -- {"stevearc/dressing.nvim", event = "VeryLazy"}, -- UI used by plugins
     "kyazdani42/nvim-web-devicons", -- font icons
     {"ray-x/guihua.lua", build = "cd lua/fzy && make"}, -- LUA gui
     "rcarriga/nvim-notify", -- notifier
@@ -49,12 +49,6 @@ return {
     "saadparwaiz1/cmp_luasnip", -- snippet engine in lua
     "akinsho/toggleterm.nvim", -- terminal
     "goolord/alpha-nvim", -- start screen
-    "ray-x/go.nvim", -- go development
-    "mfussenegger/nvim-dap", -- debugger
-    "rcarriga/nvim-dap-ui", -- debugger UI
-    "theHamsta/nvim-dap-virtual-text", -- virtual text for debugger
-    "mfussenegger/nvim-dap-python", -- python debugger
-    "leoluz/nvim-dap-go", -- go debugger
     "nvim-tree/nvim-tree.lua", -- file browsing
     "ThePrimeagen/harpoon", -- marks but better
     "ziontee113/neo-minimap" -- treesitter queries

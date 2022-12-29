@@ -1,12 +1,12 @@
 return {
     {"catppuccin/nvim", name = "catppuccin", priority = 1000}, -- color scheme
     "nvim-lua/plenary.nvim", -- lua functions for other plugins
-    "stevearc/dressing.nvim", -- UI used by plugins
+    {"stevearc/dressing.nvim", event = "VeryLazy"}, -- UI used by plugins
     "kyazdani42/nvim-web-devicons", -- font icons
     {"ray-x/guihua.lua", build = "cd lua/fzy && make"}, -- LUA gui
     "rcarriga/nvim-notify", -- notifier
-    "luukvbaal/stabilize.nvim", -- stabilize location until next release
     "windwp/nvim-autopairs", -- pair quotes and brackets
+    "nvim-lualine/lualine.nvim", -- status line
     {
         "nvim-treesitter/nvim-treesitter",
         build = function() require("nvim-treesitter.install").update({with_sync = true}) end
@@ -16,14 +16,10 @@ return {
     {"JoosepAlviste/nvim-ts-context-commentstring", dependencies = {"nvim-treesitter"}},
     {"nvim-treesitter/playground", dependencies = {"nvim-treesitter"}},
     {"p00f/nvim-ts-rainbow", dependencies = {"nvim-treesitter"}}, -- color scope
-    "ggandor/leap.nvim", -- fast jumps
-    "ggandor/leap-spooky.nvim", -- actions at distance
     "gpanders/editorconfig.nvim", -- use editorconfig
     "Vimjas/vim-python-pep8-indent", -- python indentenation
     "numToStr/Comment.nvim", -- commenting
     "beauwilliams/focus.nvim", -- focus active window
-    "nvim-lualine/lualine.nvim", -- status line
-    "akinsho/nvim-bufferline.lua", -- buffer line
     "neovim/nvim-lspconfig", -- LSP config
     {"SmiteshP/nvim-navic", dependencies = {"neovim/nvim-lspconfig"}}, -- statusline/winbar LSP
     "williamboman/mason.nvim", -- installer for LSP servers
@@ -59,9 +55,7 @@ return {
     "theHamsta/nvim-dap-virtual-text", -- virtual text for debugger
     "mfussenegger/nvim-dap-python", -- python debugger
     "leoluz/nvim-dap-go", -- go debugger
-    "kylechui/nvim-surround", -- surrounding pairs of quote/brackets
     "nvim-tree/nvim-tree.lua", -- file browsing
-    "desdic/greyjoy.nvim", "ThePrimeagen/harpoon", -- marks but better
-    {"toppair/peek.nvim", build = "deno task --quiet build:fast"}, -- preview markdown
-    "booperlv/nvim-gomove", "ziontee113/neo-minimap" -- treesitter queries
+    "ThePrimeagen/harpoon", -- marks but better
+    "ziontee113/neo-minimap" -- treesitter queries
 }

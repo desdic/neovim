@@ -12,7 +12,7 @@ if not lazyok then
     return
 end
 
-lazy.setup("plugins.install-plugins", {
+lazy.setup("config", {
     defaults = {lazy = true}, -- be lazy
     ui = {border = "rounded"}, -- show borders
     performance = {

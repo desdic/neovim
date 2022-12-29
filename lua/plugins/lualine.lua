@@ -1,6 +1,6 @@
 local status_ok, lualine = pcall(require, "lualine")
 if not status_ok then
-    vim.notify("Unable to require lualine", vim.lsp.log_levels.ERROR, {title = "Plugin error"})
+    vim.notify("Unable to require lualine", vim.lsp.log_levels.ERROR, { title = "Plugin error" })
     return
 end
 
@@ -8,9 +8,9 @@ local hide_in_width = function() return vim.fn.winwidth(0) > 80 end
 
 local diagnostics = {
     "diagnostics",
-    sources = {"nvim_diagnostic"},
-    sections = {"error", "warn"},
-    symbols = {error = " ", warn = " "},
+    sources = { "nvim_diagnostic" },
+    sections = { "error", "warn" },
+    symbols = { error = " ", warn = " " },
     colored = false,
     update_in_insert = false,
     always_visible = true
@@ -19,11 +19,11 @@ local diagnostics = {
 local diff = {
     "diff",
     colored = false,
-    symbols = {added = " ", modified = " ", removed = " "}, -- changes diff symbols
+    symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
     cond = hide_in_width
 }
 
-local mode = {"mode", fmt = function(str) return "-- " .. str .. " --" end}
+local mode = { "mode", fmt = function(str) return "-- " .. str .. " --" end }
 
 local filetype = {
     function()
@@ -35,9 +35,9 @@ local filetype = {
     icon = nil
 }
 
-local branch = {"branch", icons_enabled = true, icon = ""}
+local branch = { "branch", icons_enabled = true, icon = "" }
 
-local location = {"location", padding = 0}
+local location = { "location", padding = 0 }
 
 local lspclients = {
     function()
@@ -45,7 +45,7 @@ local lspclients = {
         if next(clients) == nil then return "" end
         return ""
     end,
-    padding = {right = 1},
+    padding = { right = 1 },
     cond = hide_in_width
 }
 
@@ -67,7 +67,7 @@ local navicinfo = {
         if navicok and navic.is_available() then return " " .. navic.get_location() end
         return ""
     end,
-    padding = {right = 1},
+    padding = { right = 1 },
     cond = hide_in_width
 }
 
@@ -78,10 +78,10 @@ lualine.setup({
         -- theme = custom_catppuccin,
         theme = "catppuccin",
         -- theme = "nightfox",
-        component_separators = {left = "", right = ""},
-        section_separators = {left = "", right = ""},
+        component_separators = { left = "", right = "" },
+        section_separators = { left = "", right = "" },
         disabled_filetypes = {
-            statusline = {"dashboard", "NvimTree", "Outline"},
+            statusline = { "dashboard", "NvimTree", "Outline", "lazy" },
             winbar = {
                 "help", "startify", "dashboard", "packer", "neogitstatus", "NvimTree", "Trouble", "alpha", "lir",
                 "Outline", "spectre_panel", "toggleterm", "qf"
@@ -91,30 +91,30 @@ lualine.setup({
         globalstatus = true
     },
     sections = {
-        lualine_a = {branch, diagnostics},
-        lualine_b = {mode},
-        lualine_c = {navicinfo},
-        lualine_x = {lspclients, "%=", diff, spaces, "encoding", filetype},
-        lualine_y = {location},
+        lualine_a = { branch, diagnostics },
+        lualine_b = { mode },
+        lualine_c = { navicinfo },
+        lualine_x = { lspclients, "%=", diff, spaces, "encoding", filetype },
+        lualine_y = { location },
         lualine_z = {}
         -- lualine_z = {progress}
     },
     inactive_sections = {
         lualine_a = {},
         lualine_b = {},
-        lualine_c = {"%=", filename},
+        lualine_c = { "%=", filename },
         lualine_x = {},
         lualine_y = {},
         lualine_z = {}
     },
-    winbar = {lualine_a = {}, lualine_b = {}, lualine_c = {}, lualine_x = {}, lualine_y = {}, lualine_z = {filename}},
+    winbar = { lualine_a = {}, lualine_b = {}, lualine_c = {}, lualine_x = {}, lualine_y = {}, lualine_z = { filename } },
     inactive_winbar = {
         lualine_a = {},
         lualine_b = {},
         lualine_c = {},
         lualine_x = {},
         lualine_y = {},
-        lualine_z = {filename}
+        lualine_z = { filename }
     },
     tabline = {},
     extensions = {}

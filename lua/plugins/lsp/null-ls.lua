@@ -5,7 +5,7 @@ if not setup then return end
 local helpok, h = pcall(require, "null-ls.helpers")
 if not helpok then
     vim.notify("Unable to require null-ls.helpers", vim.lsp.log_levels.ERROR,
-               {title = "Plugin error"})
+        { title = "Plugin error" })
     return
 end
 
@@ -15,10 +15,10 @@ local diagnostics = null_ls.builtins.diagnostics -- to setup linters
 
 local gci_format = {
     method = null_ls.methods.FORMATTING,
-    filetypes = {"go"},
+    filetypes = { "go" },
     generator = h.formatter_factory({
         command = "gci",
-        args = {"-w", "$FILENAME"},
+        args = { "-w", "$FILENAME" },
         to_temp_file = true
     })
 }

@@ -15,7 +15,6 @@ return {
     {"nvim-treesitter/playground", dependencies = {"nvim-treesitter"}},
     {"p00f/nvim-ts-rainbow", dependencies = {"nvim-treesitter"}}, -- color scope
     "gpanders/editorconfig.nvim", -- use editorconfig
-    "Vimjas/vim-python-pep8-indent", -- python indentenation
     "neovim/nvim-lspconfig", -- LSP config
     {"SmiteshP/nvim-navic", dependencies = {"neovim/nvim-lspconfig"}}, -- statusline/winbar LSP
     "williamboman/mason.nvim", -- installer for LSP servers
@@ -29,18 +28,17 @@ return {
             "go install golang.org/x/tools/cmd/goimports@latest"
         }
     }, {"ray-x/lsp_signature.nvim", dependencies = {"neovim/nvim-lspconfig"}}, "kshenoy/vim-signature",
-    "lewis6991/gitsigns.nvim", "hrsh7th/nvim-cmp", -- The completion plugin
+    "hrsh7th/nvim-cmp", -- The completion plugin
     "hrsh7th/cmp-buffer", -- buffer completions
     "hrsh7th/cmp-path", -- path completions
     "hrsh7th/cmp-cmdline", -- cmdline completions
-    "L3MON4D3/LuaSnip", -- snippet completions
     "hrsh7th/cmp-nvim-lsp", -- completion using LSP
     "hrsh7th/cmp-nvim-lua", -- Lua completion
+    "saadparwaiz1/cmp_luasnip", -- snippet engine in lua
+    "L3MON4D3/LuaSnip", -- snippet completions
     {"glepnir/lspsaga.nvim", branch = "main"}, -- UI for diagnostics
     "onsails/lspkind.nvim", -- pictograms for LSP
     "rafamadriz/friendly-snippets", -- collection of snippets
-    "saadparwaiz1/cmp_luasnip", -- snippet engine in lua
     "akinsho/toggleterm.nvim", -- terminal
-    "goolord/alpha-nvim", -- start screen
-    "nvim-tree/nvim-tree.lua" -- file browsing
+    "goolord/alpha-nvim" -- start screen
 }

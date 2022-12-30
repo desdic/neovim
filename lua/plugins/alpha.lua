@@ -24,14 +24,12 @@ dashboard.section.buttons.val = {
     dashboard.button("c", "  Configuration", ":lua require('plugins.telescope').search_nvim()<CR>"),
     dashboard.button("u", "  Update plugins", ":Lazy sync<CR>"),
     dashboard.button("n", "  Notes", ":lua require('plugins.telescope').grep_notes()<CR>"),
-    -- dashboard.button("p", "  Projects", ":Telescope projects<CR>"),
     dashboard.button("h", "  Harpoon", ":Telescope harpoon marks<CR>"),
     dashboard.button("q", "  Quit Neovim", ":qa<CR>")
 }
 
-local plugin_dir = string.format("%s/lazy/", vim.fn.stdpath("data"))
-local total_plugins = vim.fn.len(vim.fn.globpath(plugin_dir, "*", 0, 1))
-dashboard.section.footer.val = "Loaded " .. total_plugins .. " plugins  "
+local lazystats = require("lazy").stats()
+dashboard.section.footer.val = "Loaded " .. lazystats.loaded .. " of " .. lazystats.count .. " plugins "
 
 dashboard.section.footer.opts.hl = "Type"
 dashboard.section.header.opts.hl = "Include"

@@ -4,7 +4,6 @@ return {
     "kyazdani42/nvim-web-devicons", -- font icons
     {"ray-x/guihua.lua", build = "cd lua/fzy && make"}, -- LUA gui
     "rcarriga/nvim-notify", -- notifier
-    "windwp/nvim-autopairs", -- pair quotes and brackets
     {
         "nvim-treesitter/nvim-treesitter",
         build = function() require("nvim-treesitter.install").update({with_sync = true}) end
@@ -16,7 +15,6 @@ return {
     {"p00f/nvim-ts-rainbow", dependencies = {"nvim-treesitter"}}, -- color scope
     "gpanders/editorconfig.nvim", -- use editorconfig
     "neovim/nvim-lspconfig", -- LSP config
-    {"SmiteshP/nvim-navic", dependencies = {"neovim/nvim-lspconfig"}}, -- statusline/winbar LSP
     "williamboman/mason.nvim", -- installer for LSP servers
     "williamboman/mason-lspconfig.nvim", -- easy setup for LSP servers
     "jayp0521/mason-null-ls.nvim", -- Mason integration with null-ls

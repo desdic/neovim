@@ -16,7 +16,6 @@ return {
     {"p00f/nvim-ts-rainbow", dependencies = {"nvim-treesitter"}}, -- color scope
     "gpanders/editorconfig.nvim", -- use editorconfig
     "Vimjas/vim-python-pep8-indent", -- python indentenation
-    "beauwilliams/focus.nvim", -- focus active window
     "neovim/nvim-lspconfig", -- LSP config
     {"SmiteshP/nvim-navic", dependencies = {"neovim/nvim-lspconfig"}}, -- statusline/winbar LSP
     "williamboman/mason.nvim", -- installer for LSP servers

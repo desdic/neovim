@@ -37,6 +37,5 @@ return {
     {"glepnir/lspsaga.nvim", branch = "main"}, -- UI for diagnostics
     "onsails/lspkind.nvim", -- pictograms for LSP
     "rafamadriz/friendly-snippets", -- collection of snippets
-    "akinsho/toggleterm.nvim", -- terminal
     "goolord/alpha-nvim" -- start screen
 }

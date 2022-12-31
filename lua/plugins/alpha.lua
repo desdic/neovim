@@ -25,7 +25,7 @@ dashboard.section.buttons.val = {
     dashboard.button("u", "  Update plugins", ":Lazy sync<CR>"),
     dashboard.button("n", "  Notes", ":lua require('plugins.telescope').grep_notes()<CR>"),
     dashboard.button("h", "  Harpoon", ":Telescope harpoon marks<CR>"),
-    dashboard.button("q", "  Quit Neovim", ":qa<CR>")
+    dashboard.button("m", "  Mason", ":Mason<CR>"), dashboard.button("q", "  Quit Neovim", ":qa<CR>")
 }
 
 local lazystats = require("lazy").stats()

@@ -11,6 +11,14 @@ local M = {
 }
 
 function M.config()
+    require("mason-lspconfig").setup({
+        ensure_installed = {
+            "gopls", "sumneko_lua", "bashls", "yamlls", "pyright", "pylsp", "efm", "solargraph", "dockerls", "clangd",
+            "jsonls", "perlnavigator", "rust_analyzer"
+        },
+        automatic_installation = true
+    })
+
     local lspconfig = require("lspconfig")
 
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
@@ -150,7 +158,7 @@ function M.config()
         settings = { -- custom settings for lua
             Lua = {
                 -- make the language server recognize "vim" global
-                diagnostics = {globals = {"vim"}},
+                diagnostics = {globals = {"vim", "require"}},
                 workspace = {
                     -- make language server aware of runtime files
                     library = {[vim.fn.expand("$VIMRUNTIME/lua")] = true, [vim.fn.stdpath("config") .. "/lua"] = true}

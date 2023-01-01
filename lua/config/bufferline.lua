@@ -2,15 +2,13 @@ local M = {
     "akinsho/nvim-bufferline.lua",
     event = "VeryLazy",
     keys = {
-        {"<S-l>", ":BufferLineCycleNext<CR>", desc = "Move to next buffer"},
-        {"<S-h>", ":BufferLineCyclePrev<CR>", desc = "Move to previous buffer"}
+        { "<S-l>", ":BufferLineCycleNext<CR>", desc = "Move to next buffer" },
+        { "<S-h>", ":BufferLineCyclePrev<CR>", desc = "Move to previous buffer" }
     }
 }
 
 function M.config()
-    local bufferline = require("bufferline")
-
-    bufferline.setup({
+    require("bufferline").setup({
         options = {
             show_buffer_close_icons = false,
             show_buffer_icons = false,

@@ -6,25 +6,11 @@ local M = {
 }
 
 function M.config()
-    local lsok, ls = pcall(require, "luasnip")
-    if not lsok then
-        vim.notify("Unable to require luasnip", vim.lsp.log_levels.ERROR, {title = "Plugin error"})
-        return
-    end
+    local ls = require("luasnip")
+    local lsvscode = require("luasnip.loaders.from_vscode")
+    local lsloader = require("luasnip.loaders.from_lua")
 
-    local lsvsok, lsvscode = pcall(require, "luasnip.loaders.from_vscode")
-    if not lsvsok then
-        vim.notify("Unable to require luasnip.loaders.from_vscode", vim.lsp.log_levels.ERROR, {title = "Plugin error"})
-        return
-    end
-
-    local lsloadok, lsloader = pcall(require, "luasnip.loaders.from_lua")
-    if not lsloadok then
-        vim.notify("Unable to require luasnip.loaders.from_lua", vim.lsp.log_levels.ERROR, {title = "Plugin error"})
-        return
-    end
-
-    lsloader.load({paths = "~/.config/nvim/snippets"})
+    lsloader.load({ paths = "~/.config/nvim/snippets" })
 
     local types = require("luasnip.util.types")
 
@@ -39,22 +25,22 @@ function M.config()
 
         ext_opts = {
             -- [types.insertNode] = {active = {virt_text = {{"●", "DiffAdd"}}}},
-            [types.choiceNode] = {active = {virt_text = {{"●", "Operator"}}}}
+            [types.choiceNode] = { active = { virt_text = { { "●", "Operator" } } } }
         }
     })
 
     -- Extend changelog with debchangelog
-    ls.filetype_extend("changelog", {"debchangelog"})
+    ls.filetype_extend("changelog", { "debchangelog" })
 
     lsvscode.lazy_load()
 
     vim.keymap.set("n", "<Leader><Leader>s", ":luafile ~/.config/nvim/lua/config/luasnippet.lua<CR>",
-                   {silent = false, desc = "Reload snippets"})
+        { silent = false, desc = "Reload snippets" })
 
-    vim.keymap.set({"i", "s"}, "<c-j>", function() if ls.expand_or_jumpable() then ls.expand_or_jump() end end,
-                   {silent = true})
+    vim.keymap.set({ "i", "s" }, "<c-j>", function() if ls.expand_or_jumpable() then ls.expand_or_jump() end end,
+        { silent = true })
 
-    vim.keymap.set({"i", "s"}, "<c-k>", function() if ls.jumpable(-1) then ls.jump(-1) end end, {silent = true})
+    vim.keymap.set({ "i", "s" }, "<c-k>", function() if ls.jumpable(-1) then ls.jump(-1) end end, { silent = true })
 
     vim.keymap.set("i", "<c-l>", function() if ls.choice_active() then ls.change_choice(1) end end)
 end

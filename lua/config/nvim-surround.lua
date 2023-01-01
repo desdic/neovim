@@ -1,3 +1,3 @@
-local M = {"kylechui/nvim-surround", event = "VeryLazy", config = {}}
+local M = { "kylechui/nvim-surround", event = "VeryLazy", config = {} }
 
 return M

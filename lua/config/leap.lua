@@ -11,7 +11,7 @@ local function get_line_starts(winid)
         if fold_end ~= -1 then
             lnum = fold_end + 1
         else
-            if lnum ~= cur_line then table.insert(targets, {pos = {lnum, 1}}) end
+            if lnum ~= cur_line then table.insert(targets, { pos = { lnum, 1 } }) end
             lnum = lnum + 1
         end
     end
@@ -43,7 +43,7 @@ local M = {
         }, {
             "vo", function()
                 local winid = vim.api.nvim_get_current_win()
-                require("leap").leap({target_windows = {winid}, targets = get_line_starts(winid)})
+                require("leap").leap({ target_windows = { winid }, targets = get_line_starts(winid) })
                 vim.schedule(function() vim.cmd([[norm o]]) end)
                 vim.schedule(function() vim.cmd([[startinsert]]) end)
             end

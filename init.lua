@@ -1,6 +1,6 @@
 require("core.options")
 require("core.keymaps")
-require("plugins-setup")
+require("plugins.lazy")
 require("core.autogroups")
 require("plugins.notify")
 require("plugins.filetype")

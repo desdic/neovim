@@ -1,9 +1,4 @@
-local M = {
-    "catppuccin/nvim",
-    name = "catppuccin",
-    priority = 1000, -- color scheme
-    event = "VimEnter"
-}
+local M = {"catppuccin/nvim", name = "catppuccin", priority = 1000, lazy = false}
 
 function M.config()
     local ok, catppuccin = pcall(require, "catppuccin")

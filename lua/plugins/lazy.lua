@@ -21,5 +21,6 @@ lazy.setup("config", {
                 "gzip", "matchit", "matchparen", "netrwPlugin", "tarPlugin", "tohtml", "tutor", "zipPlugin"
             }
         }
-    }
+    },
+    install = {colorscheme = {"catppuccin", "habamax"}}
 })

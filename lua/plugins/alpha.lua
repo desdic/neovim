@@ -1,17 +1,8 @@
 local M = {"goolord/alpha-nvim", lazy = false}
 
 function M.config()
-    local status_ok, alpha = pcall(require, "alpha")
-    if not status_ok then
-        vim.notify("Unable to require alpha", vim.lsp.log_levels.ERROR, {title = "Plugin error"})
-        return
-    end
-
-    local dashok, dashboard = pcall(require, "alpha.themes.dashboard")
-    if not dashok then
-        vim.notify("Unable to require alpha.themes.dashboard", vim.lsp.log_levels.ERROR, {title = "Plugin error"})
-        return
-    end
+    local alpha = require("alpha")
+    local dashboard = require("alpha.themes.dashboard")
 
     dashboard.section.header.val = {
         [[                         .__          ]], [[  ____   ____  _______  _|__| _____   ]],

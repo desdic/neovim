@@ -3,7 +3,7 @@ local M = {
     cmd = "Telescope",
     dependencies = {
         {"nvim-telescope/telescope-fzy-native.nvim"}, {"nvim-telescope/telescope-ui-select.nvim"},
-        {"desdic/telescope-rooter.nvim"}
+        {"desdic/telescope-rooter.nvim"}, {"nvim-lua/plenary.nvim"}, {"kyazdani42/nvim-web-devicons"}
     }
 }
 

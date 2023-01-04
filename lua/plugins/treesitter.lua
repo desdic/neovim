@@ -1,21 +1,27 @@
 local M = {
     "nvim-treesitter/nvim-treesitter",
-    build = function() require("nvim-treesitter.install").update({ with_sync = true }) end,
+    build = function()
+        require("nvim-treesitter.install").update({with_sync = true})
+    end,
     dependencies = {
-        { "nvim-treesitter/nvim-treesitter-refactor" }, { "nvim-treesitter/nvim-treesitter-textobjects" },
-        { "nvim-treesitter/nvim-treesitter-context" }, { "JoosepAlviste/nvim-ts-context-commentstring" },
-        { "nvim-treesitter/playground" }, { "p00f/nvim-ts-rainbow" }
-    }
+        {"nvim-treesitter/nvim-treesitter-refactor"},
+        {"nvim-treesitter/nvim-treesitter-textobjects"},
+        {"nvim-treesitter/nvim-treesitter-context"},
+        {"JoosepAlviste/nvim-ts-context-commentstring"},
+        {"nvim-treesitter/playground"}, {"p00f/nvim-ts-rainbow"}
+    },
+    event = "VeryLazy"
 }
 
 function M.config()
     require("nvim-treesitter.configs").setup({
         ensure_installed = {
-            "bash", "c", "cpp", "dockerfile", "go", "json", "lua", "python", "ruby", "yaml", "toml", "markdown",
-            "markdown_inline", "glsl", "rust"
+            "bash", "c", "cpp", "dockerfile", "go", "json", "lua", "python",
+            "ruby", "yaml", "toml", "markdown", "markdown_inline", "glsl",
+            "rust"
         },
-        ignore_install = { "javascript", "haskell" }, -- List of parsers to ignore installing
-        indent = { enable = true, disable = {} },
+        ignore_install = {"javascript", "haskell"}, -- List of parsers to ignore installing
+        indent = {enable = true, disable = {}},
         highlight = {
             enable = true -- false will disable the whole extension
             -- disable = {"rust"} -- list of language that will be disabled
@@ -25,7 +31,9 @@ function M.config()
             extended = true,
             max_file_lines = 5000 -- Do not enable for files with more than 5000 lines, int
         },
-        refactor = { smart_rename = { enable = true, keymaps = { smart_rename = "grr" } } },
+        refactor = {
+            smart_rename = {enable = true, keymaps = {smart_rename = "grr"}}
+        },
         incremental_selection = {
             enable = true,
             keymaps = {
@@ -62,8 +70,8 @@ function M.config()
             },
             swap = {
                 enable = true,
-                swap_next = { ["fa"] = "@parameter.inner" },
-                swap_previous = { ["fA"] = "@parameter.inner" }
+                swap_next = {["fa"] = "@parameter.inner"},
+                swap_previous = {["fA"] = "@parameter.inner"}
             },
             move = {
                 enable = true,
@@ -113,12 +121,13 @@ function M.config()
                 show_help = "?"
             }
         },
-        context_commentstring = { enable = true }
+        context_commentstring = {enable = true}
     })
 
     local ok, tsc = pcall(require, "treesitter-context")
     if not ok then
-        vim.notify("Unable to require treesitter-context", vim.lsp.log_levels.ERROR, { title = "Plugin error" })
+        vim.notify("Unable to require treesitter-context",
+                   vim.lsp.log_levels.ERROR, {title = "Plugin error"})
         return
     end
 
@@ -132,12 +141,15 @@ function M.config()
             -- Note that setting an entry here replaces all other patterns for this entry.
             -- By setting the 'default' entry below, you can control which nodes you want to
             -- appear in the context window.
-            default = { "class", "function", "method", "for", "while", "if", "switch", "case" },
+            default = {
+                "class", "function", "method", "for", "while", "if", "switch",
+                "case"
+            },
             -- Patterns for specific filetypes
             -- If a pattern is missing, *open a PR* so everyone can benefit.
-            markdown = { "section" },
-            json = { "pair" },
-            yaml = { "block_mapping_pair" }
+            markdown = {"section"},
+            json = {"pair"},
+            yaml = {"block_mapping_pair"}
         },
         exact_patterns = {
             -- Example for a specific filetype with Lua patterns

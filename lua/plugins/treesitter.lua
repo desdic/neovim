@@ -3,8 +3,7 @@ local M = {
     build = function() require("nvim-treesitter.install").update({with_sync = true}) end,
     dependencies = {
         {"nvim-treesitter/nvim-treesitter-refactor"}, {"nvim-treesitter/nvim-treesitter-textobjects"},
-        {"nvim-treesitter/nvim-treesitter-context"}, {"JoosepAlviste/nvim-ts-context-commentstring"},
-        {"nvim-treesitter/playground"}
+        {"nvim-treesitter/nvim-treesitter-context"}, {"nvim-treesitter/playground"}
     },
     event = "VeryLazy"
 }
@@ -109,7 +108,7 @@ function M.config()
                 show_help = "?"
             }
         },
-        context_commentstring = {enable = true}
+        context_commentstring = {enable = true, enable_autocmd = false}
     })
 
     local ok, tsc = pcall(require, "treesitter-context")

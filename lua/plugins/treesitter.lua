@@ -3,7 +3,7 @@ local M = {
     build = function() require("nvim-treesitter.install").update({with_sync = true}) end,
     dependencies = {
         {"nvim-treesitter/nvim-treesitter-refactor"}, {"nvim-treesitter/nvim-treesitter-textobjects"},
-        {"nvim-treesitter/nvim-treesitter-context"}, {"nvim-treesitter/playground"}
+        {"nvim-treesitter/nvim-treesitter-context"}, {"nvim-treesitter/playground"}, {"mrjones2014/nvim-ts-rainbow"}
     },
     event = "VeryLazy"
 }
@@ -19,6 +19,11 @@ function M.config()
         highlight = {
             enable = true -- false will disable the whole extension
             -- disable = {"rust"} -- list of language that will be disabled
+        },
+        rainbow = {
+            enable = true,
+            extended = true,
+            max_file_lines = 5000 -- Do not enable for files with more than 5000 lines, int
         },
         refactor = {smart_rename = {enable = true, keymaps = {smart_rename = "grr"}}},
         incremental_selection = {

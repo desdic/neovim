@@ -29,6 +29,7 @@ function M.config()
             indent_blankline = {enabled = false, colored_indent_levels = false},
             bufferline = true,
             markdown = false,
+            ts_rainbow = true,
             navic = {enabled = true, custom_bg = mocha.mantle},
             dap = {enabled = true, enable_ui = true},
             notify = true,

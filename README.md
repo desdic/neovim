@@ -11,16 +11,14 @@
 
 # My Neovim config
 
-Used for Go, Python and some Ruby. 
+Used for Go, Python and some Ruby.
 
 # Requirements
 
-- Neovim 0.7+
-
-# Formatting
-```sh
-# yay -S stylua lua-format python-black
-# go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
-# go install golang.org/x/tools/cmd/goimports@latest
-# go install github.com/daixiang0/gci@latest
+- Neovim 0.8+
+- fd
+- fzf
+- carbo
+- golang
+- python 3+
 ```

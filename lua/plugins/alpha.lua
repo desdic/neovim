@@ -23,7 +23,7 @@ function M.config()
     }
 
     local lazystats = require("lazy").stats()
-    dashboard.section.footer.val = "Loaded " .. lazystats.loaded .. " of " .. lazystats.count .. " plugins "
+    dashboard.section.footer.val = lazystats.count .. " plugins "
 
     dashboard.section.footer.opts.hl = "Type"
     dashboard.section.header.opts.hl = "Include"

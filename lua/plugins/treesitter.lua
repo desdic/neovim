@@ -1,7 +1,7 @@
 return {
 
     -- playground
-    {"nvim-treesitter/playground", cmd = "TSPlaygroundToggle"}, -- context
+    { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" }, -- context
     {
         "nvim-treesitter/nvim-treesitter-context",
         event = "BufReadPre",
@@ -12,10 +12,10 @@ return {
             trim_scope = "outer", -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
             min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
             patterns = { -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
-                default = {"class", "function", "method", "for", "while", "if", "switch", "case"},
-                markdown = {"section"},
-                json = {"pair"},
-                yaml = {"block_mapping_pair"}
+                default = { "class", "function", "method", "for", "while", "if", "switch", "case" },
+                markdown = { "section" },
+                json = { "pair" },
+                yaml = { "block_mapping_pair" }
             },
             zindex = 20, -- The Z-index of the context window
             mode = "cursor", -- Line used to calculate context. Choices: 'cursor', 'topline'
@@ -24,10 +24,10 @@ return {
     }, -- treesitter
     {
         "nvim-treesitter/nvim-treesitter",
-        build = function() require("nvim-treesitter.install").update({with_sync = true}) end,
+        build = function() require("nvim-treesitter.install").update({ with_sync = true }) end,
         dependencies = {
-            {"nvim-treesitter/nvim-treesitter-refactor"}, {"nvim-treesitter/nvim-treesitter-textobjects"},
-            {"mrjones2014/nvim-ts-rainbow"}
+            { "nvim-treesitter/nvim-treesitter-refactor" }, { "nvim-treesitter/nvim-treesitter-textobjects" },
+            { "mrjones2014/nvim-ts-rainbow" }
         },
         config = function()
             require("nvim-treesitter.configs").setup({
@@ -35,7 +35,7 @@ return {
                     "bash", "c", "cpp", "dockerfile", "go", "json", "lua", "python", "ruby", "yaml", "toml", "markdown",
                     "markdown_inline", "glsl", "rust"
                 },
-                indent = {enable = true, disable = {}},
+                indent = { enable = true, disable = {} },
                 highlight = {
                     enable = true -- false will disable the whole extension
                     -- disable = {"rust"} -- list of language that will be disabled
@@ -45,7 +45,7 @@ return {
                     extended = true,
                     max_file_lines = 5000 -- Do not enable for files with more than 5000 lines, int
                 },
-                refactor = {smart_rename = {enable = true, keymaps = {smart_rename = "grr"}}},
+                refactor = { smart_rename = { enable = true, keymaps = { smart_rename = "grr" } } },
                 incremental_selection = {
                     enable = true,
                     keymaps = {
@@ -73,8 +73,8 @@ return {
                     },
                     swap = {
                         enable = true,
-                        swap_next = {["fa"] = "@parameter.inner"},
-                        swap_previous = {["fA"] = "@parameter.inner"}
+                        swap_next = { ["fa"] = "@parameter.inner" },
+                        swap_previous = { ["fA"] = "@parameter.inner" }
                     },
                     move = {
                         enable = true,
@@ -117,7 +117,7 @@ return {
                         show_help = "?"
                     }
                 },
-                context_commentstring = {enable = true, enable_autocmd = false}
+                context_commentstring = { enable = true, enable_autocmd = false }
             })
         end
     }

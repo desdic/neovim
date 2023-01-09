@@ -1,13 +1,13 @@
-local M = {"nvim-lualine/lualine.nvim", lazy = false}
+local M = { "nvim-lualine/lualine.nvim", lazy = false }
 
 function M.config()
     local hide_in_width = function() return vim.fn.winwidth(0) > 80 end
 
     local diagnostics = {
         "diagnostics",
-        sources = {"nvim_diagnostic"},
-        sections = {"error", "warn"},
-        symbols = {error = " ", warn = " "},
+        sources = { "nvim_diagnostic" },
+        sections = { "error", "warn" },
+        symbols = { error = " ", warn = " " },
         colored = false,
         update_in_insert = false,
         always_visible = true
@@ -16,11 +16,11 @@ function M.config()
     local diff = {
         "diff",
         colored = false,
-        symbols = {added = " ", modified = " ", removed = " "}, -- changes diff symbols
+        symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
         cond = hide_in_width
     }
 
-    local mode = {"mode", fmt = function(str) return "-- " .. str .. " --" end}
+    local mode = { "mode", fmt = function(str) return "-- " .. str .. " --" end }
 
     local filetype = {
         function()
@@ -32,9 +32,9 @@ function M.config()
         icon = nil
     }
 
-    local branch = {"branch", icons_enabled = true, icon = ""}
+    local branch = { "branch", icons_enabled = true, icon = "" }
 
-    local location = {"location", padding = 0}
+    local location = { "location", padding = 0 }
 
     local lspclients = {
         function()
@@ -42,7 +42,7 @@ function M.config()
             if next(clients) == nil then return "" end
             return ""
         end,
-        padding = {right = 1},
+        padding = { right = 1 },
         cond = hide_in_width
     }
 
@@ -64,7 +64,7 @@ function M.config()
             if navicok and navic.is_available() then return " " .. navic.get_location() end
             return ""
         end,
-        padding = {right = 1},
+        padding = { right = 1 },
         cond = hide_in_width
     }
 
@@ -75,31 +75,31 @@ function M.config()
             -- theme = custom_catppuccin,
             theme = "catppuccin",
             -- theme = "nightfox",
-            component_separators = {left = "", right = ""},
-            section_separators = {left = "", right = ""},
+            component_separators = { left = "", right = "" },
+            section_separators = { left = "", right = "" },
             disabled_filetypes = {
-                statusline = {"dashboard", "NvimTree", "Outline", "lazy"},
+                statusline = { "alpha", "NvimTree", "Outline", "lazy" },
                 winbar = {
-                    "help", "startify", "dashboard", "packer", "neogitstatus", "NvimTree", "Trouble", "alpha", "lir",
-                    "Outline", "spectre_panel", "toggleterm", "qf"
+                    "help", "startify", "packer", "neogitstatus", "NvimTree", "Trouble", "alpha", "lir", "Outline",
+                    "spectre_panel", "toggleterm", "qf"
                 }
             },
             always_divide_middle = true,
             globalstatus = true
         },
         sections = {
-            lualine_a = {branch, diagnostics},
-            lualine_b = {mode},
-            lualine_c = {navicinfo},
-            lualine_x = {lspclients, "%=", diff, spaces, "encoding", filetype},
-            lualine_y = {location},
+            lualine_a = { branch, diagnostics },
+            lualine_b = { mode },
+            lualine_c = { navicinfo },
+            lualine_x = { lspclients, "%=", diff, spaces, "encoding", filetype },
+            lualine_y = { location },
             lualine_z = {}
             -- lualine_z = {progress}
         },
         inactive_sections = {
             lualine_a = {},
             lualine_b = {},
-            lualine_c = {"%=", filename},
+            lualine_c = { "%=", filename },
             lualine_x = {},
             lualine_y = {},
             lualine_z = {}
@@ -110,7 +110,7 @@ function M.config()
             lualine_c = {},
             lualine_x = {},
             lualine_y = {},
-            lualine_z = {filename}
+            lualine_z = { filename }
         },
         inactive_winbar = {
             lualine_a = {},
@@ -118,7 +118,7 @@ function M.config()
             lualine_c = {},
             lualine_x = {},
             lualine_y = {},
-            lualine_z = {filename}
+            lualine_z = { filename }
         },
         tabline = {},
         extensions = {}

@@ -1,4 +1,4 @@
-local M = {
+return {
     "beauwilliams/focus.nvim",
     opts = {enable = true, cursorline = false, signcolumn = true, number = false, excluded_filetypes = {"toggleterm"}},
     keys = {
@@ -6,5 +6,3 @@ local M = {
         {"<Leader>sr", function() require("focus").split_command("l") end, desc = "[S]plit window [r]ight"}
     }
 }
-
-return M

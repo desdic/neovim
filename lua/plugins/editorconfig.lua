@@ -1,3 +1,1 @@
-local M = {"gpanders/editorconfig.nvim", event = "BufEnter"}
-
-return M
+return {"gpanders/editorconfig.nvim", event = "BufEnter"}

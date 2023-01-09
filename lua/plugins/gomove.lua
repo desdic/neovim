@@ -1,4 +1,4 @@
-local M = {
+return {
     "booperlv/nvim-gomove",
     opts = {map_defaults = false, reindent = true, undojoin = true, move_past_end_col = false},
     keys = {
@@ -8,5 +8,3 @@ local M = {
         {"<S-l>", "<Plug>GoVSMRight", mode = {"x"}, desc = "Move visual line right"}
     }
 }
-
-return M

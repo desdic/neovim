@@ -13,7 +13,7 @@ local function show()
     dashboard.section.buttons.val = {
         dashboard.button("f", "  Find file", ":Telescope find_files <CR>"),
         dashboard.button("r", "  Recently used files", ":Telescope oldfiles <CR>"),
-        dashboard.button("t", "  Find text", ":Telescope live_grep <CR>"),
+        dashboard.button("g", "  Grep text", ":Telescope live_grep <CR>"),
         dashboard.button("c", "  Configuration", ":lua require('custom.telescope').search_nvim()<CR>"),
         dashboard.button("u", "  Update plugins", ":Lazy sync<CR>"),
         dashboard.button("n", "  Notes", ":lua require('custom.telescope').grep_notes()<CR>"),

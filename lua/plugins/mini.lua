@@ -1,4 +1,5 @@
 return {
+    -- comments
     {
         "echasnovski/mini.comment",
         event = "VeryLazy",
@@ -10,7 +11,10 @@ return {
                 end}
             })
         end
-    }, {"echasnovski/mini.pairs", event = "VeryLazy", config = function() require("mini.pairs").setup({}) end}, {
+    }, -- pairs
+    {"echasnovski/mini.pairs", event = "VeryLazy", config = function() require("mini.pairs").setup({}) end},
+    -- surround
+    {
         "echasnovski/mini.surround",
         event = "VeryLazy",
         config = function()
@@ -26,7 +30,8 @@ return {
                 }
             })
         end
-    }, {
+    }, -- bufremove
+    {
         "echasnovski/mini.bufremove",
         event = "VeryLazy",
         keys = {

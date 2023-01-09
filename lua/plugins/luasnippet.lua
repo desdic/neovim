@@ -10,7 +10,7 @@ function M.config()
     local lsvscode = require("luasnip.loaders.from_vscode")
     local lsloader = require("luasnip.loaders.from_lua")
 
-    lsloader.load({ paths = "~/.config/nvim/snippets" })
+    lsloader.load({paths = "~/.config/nvim/snippets"})
 
     local types = require("luasnip.util.types")
 
@@ -25,22 +25,22 @@ function M.config()
 
         ext_opts = {
             -- [types.insertNode] = {active = {virt_text = {{"●", "DiffAdd"}}}},
-            [types.choiceNode] = { active = { virt_text = { { "●", "Operator" } } } }
+            [types.choiceNode] = {active = {virt_text = {{"●", "Operator"}}}}
         }
     })
 
     -- Extend changelog with debchangelog
-    ls.filetype_extend("changelog", { "debchangelog" })
+    ls.filetype_extend("changelog", {"debchangelog"})
 
     lsvscode.lazy_load()
 
     vim.keymap.set("n", "<Leader><Leader>s", ":luafile ~/.config/nvim/lua/config/luasnippet.lua<CR>",
-        { silent = false, desc = "Reload snippets" })
+                   {silent = false, desc = "Reload snippets"})
 
-    vim.keymap.set({ "i", "s" }, "<c-j>", function() if ls.expand_or_jumpable() then ls.expand_or_jump() end end,
-        { silent = true })
+    vim.keymap.set({"i", "s"}, "<c-j>", function() if ls.expand_or_jumpable() then ls.expand_or_jump() end end,
+                   {silent = true})
 
-    vim.keymap.set({ "i", "s" }, "<c-k>", function() if ls.jumpable(-1) then ls.jump(-1) end end, { silent = true })
+    vim.keymap.set({"i", "s"}, "<c-k>", function() if ls.jumpable(-1) then ls.jump(-1) end end, {silent = true})
 
     vim.keymap.set("i", "<c-l>", function() if ls.choice_active() then ls.change_choice(1) end end)
 end

@@ -1,6 +1,6 @@
 local M = {"goolord/alpha-nvim", lazy = false}
 
-function M.config()
+local function show()
     local alpha = require("alpha")
     local dashboard = require("alpha.themes.dashboard")
 
@@ -12,18 +12,18 @@ function M.config()
 
     dashboard.section.buttons.val = {
         dashboard.button("f", "  Find file", ":Telescope find_files <CR>"),
-        dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
         dashboard.button("r", "  Recently used files", ":Telescope oldfiles <CR>"),
         dashboard.button("t", "  Find text", ":Telescope live_grep <CR>"),
-        dashboard.button("c", "  Configuration", ":lua require('plugins.telescope').search_nvim()<CR>"),
+        dashboard.button("c", "  Configuration", ":lua require('custom.telescope').search_nvim()<CR>"),
         dashboard.button("u", "  Update plugins", ":Lazy sync<CR>"),
-        dashboard.button("n", "  Notes", ":lua require('plugins.telescope').grep_notes()<CR>"),
+        dashboard.button("n", "  Notes", ":lua require('custom.telescope').grep_notes()<CR>"),
         dashboard.button("h", "  Harpoon", ":Telescope harpoon marks<CR>"),
         dashboard.button("m", "  Mason", ":Mason<CR>"), dashboard.button("q", "  Quit Neovim", ":qa<CR>")
     }
 
     local lazystats = require("lazy").stats()
-    dashboard.section.footer.val = lazystats.count .. " plugins "
+    dashboard.section.footer.val = lazystats.loaded .. "/" .. lazystats.count .. " plugins  " ..
+                                       (math.floor(lazystats.startuptime * 100 + 0.5) / 100) .. "ms"
 
     dashboard.section.footer.opts.hl = "Type"
     dashboard.section.header.opts.hl = "Include"
@@ -31,6 +31,11 @@ function M.config()
 
     dashboard.opts.opts.noautocmd = true
     alpha.setup(dashboard.opts)
+end
+
+function M.config()
+    vim.api.nvim_create_autocmd("User", {pattern = "LazyVimStarted", callback = function() show() end})
+    show()
 end
 
 return M

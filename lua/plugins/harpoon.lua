@@ -1,13 +1,13 @@
 local M = {
     "ThePrimeagen/harpoon",
     cmd = "Harpoon",
-    config = {},
+    opts = {},
     keys = {
-        { "<Leader>a", ":Harpoon add_file<CR>", desc = "Add file to harpoon" },
-        { "<Leader>/", ":Harpoon nav_next<CR>", desc = "Next file in harpoon" },
-        { "<Leader>.", ":Harpoon nav_prev<CR>", desc = "Previous file in harpoon" },
-        { "<Leader>1", ":Harpoon file1<CR>", desc = "file 1" }, { "<Leader>2", ":Harpoon file2<CR>", desc = "file2" },
-        { "<Leader>3", ":Harpoon file3<CR>", desc = "file 3" }, { "<Leader>4", ":Harpoon file4<CR>", desc = "file 4" }
+        {"<Leader>a", ":Harpoon add_file<CR>", desc = "Add file to harpoon"},
+        {"<Leader>/", ":Harpoon nav_next<CR>", desc = "Next file in harpoon"},
+        {"<Leader>.", ":Harpoon nav_prev<CR>", desc = "Previous file in harpoon"},
+        {"<Leader>1", ":Harpoon file1<CR>", desc = "file 1"}, {"<Leader>2", ":Harpoon file2<CR>", desc = "file2"},
+        {"<Leader>3", ":Harpoon file3<CR>", desc = "file 3"}, {"<Leader>4", ":Harpoon file4<CR>", desc = "file 4"}
     }
 }
 
@@ -30,7 +30,7 @@ function M.init()
         elseif args.args == "file4" then
             require("harpoon.ui").nav_file(4)
         end
-    end, { nargs = "*", desc = "Run harpoon" })
+    end, {nargs = "*", desc = "Run harpoon"})
 end
 
 return M

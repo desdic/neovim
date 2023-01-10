@@ -20,7 +20,7 @@ function M.on_attach(client, buffer)
     self:map("]w", M.diagnostic_goto(true, "WARNING"), {desc = "Next Warning"})
     self:map("[w", M.diagnostic_goto(false, "WARNING"), {desc = "Prev Warning"})
     self:map("<leader>ca", M.code_action, {desc = "Code Action", expr = true, mode = {"n", "v"}, has = "codeAction"})
-    --
+
     local format = require("plugins.lsp.format").format
     self:map("<leader>f", format, {desc = "Format Document", has = "documentFormatting"})
     self:map("<leader>f", format, {desc = "Format Range", mode = "v", has = "documentRangeFormatting"})
@@ -35,7 +35,6 @@ function M:map(lhs, rhs, opts)
     opts = opts or {}
     if opts.has and not self:has(opts.has) then return end
     vim.keymap.set(opts.mode or "n", lhs, type(rhs) == "string" and ("<cmd>%s<cr>"):format(rhs) or rhs,
-    ---@diagnostic disable-next-line: no-unknown
                    {silent = true, buffer = self.buffer, expr = opts.expr, desc = opts.desc})
 end
 

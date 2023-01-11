@@ -20,6 +20,7 @@ return {
             dashboard.button("l", "  Lazy", ":Lazy<CR>"), dashboard.button("m", "  Mason", ":Mason<CR>"),
             dashboard.button("n", "  Notes", ":lua require('custom.telescope').grep_notes()<CR>"),
             dashboard.button("r", "  Recently used files", ":Telescope oldfiles <CR>"),
+            dashboard.button("t", "  Update treesitter", ":TSUpdateSync<CR>"),
             dashboard.button("u", "  Update plugins", ":Lazy sync<CR>"),
             dashboard.button("q", "  Quit Neovim", ":qa<CR>")
         }

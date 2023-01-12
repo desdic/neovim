@@ -218,7 +218,7 @@ return {
                 return vim.ui.input(...)
             end
         end
-    }, {"luukvbaal/stabilize.nvim", event = "VeryLazy", opts = {}}, {
+    }, {
         "beauwilliams/focus.nvim",
         opts = {
             enable = true,

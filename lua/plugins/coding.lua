@@ -2,11 +2,13 @@ return {
     {
         "L3MON4D3/LuaSnip", -- snippet completions
         dependencies = {
-            "rafamadriz/friendly-snippets" -- collection of snippets
+            "rafamadriz/friendly-snippets", -- collection of snippets
+            config = function()
+                require("luasnip.loaders.from_vscode").lazy_load()
+            end
         },
         config = function()
             local ls = require("luasnip")
-            local lsvscode = require("luasnip.loaders.from_vscode")
             local lsloader = require("luasnip.loaders.from_lua")
 
             lsloader.load({paths = "~/.config/nvim/snippets"})
@@ -30,11 +32,6 @@ return {
 
             -- Extend changelog with debchangelog
             ls.filetype_extend("changelog", {"debchangelog"})
-
-            lsvscode.lazy_load()
-
-            vim.keymap.set("n", "<Leader><Leader>s", ":luafile ~/.config/nvim/lua/config/luasnippet.lua<CR>",
-                           {silent = false, desc = "Reload snippets"})
 
             vim.keymap.set({"i", "s"}, "<c-j>", function()
                 if ls.expand_or_jumpable() then ls.expand_or_jump() end

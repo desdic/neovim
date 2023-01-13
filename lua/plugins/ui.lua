@@ -53,7 +53,7 @@ return {
                 callback = function()
                     local stats = require("lazy").stats()
                     local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-                    dashboard.section.footer.val = "⚡ Neovim loaded " .. stats.count .. " plugins in " .. ms .. "ms"
+                    dashboard.section.footer.val = "⚡ Neovim loaded " .. stats.count .. " plugins"
                     pcall(vim.cmd.AlphaRedraw)
                 end
             })
@@ -227,6 +227,9 @@ return {
             number = false,
             excluded_filetypes = {"toggleterm"}
         },
+        config = function(_, opts)
+            require("focus").setup(opts)
+        end,
         keys = {
             {"<Leader>sl", function() require("focus").split_command("h") end, desc = "[S]plit window [l]eft"},
             {"<Leader>sr", function() require("focus").split_command("l") end, desc = "[S]plit window [r]ight"}

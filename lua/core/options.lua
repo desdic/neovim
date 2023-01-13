@@ -80,3 +80,5 @@ option.mouse = ""
 vim.wo.cursorline = true
 
 opt.isfname:append("@-@")
+
+option.pumheight = 10 -- Maximum number of entries in a popup

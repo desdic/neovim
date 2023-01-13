@@ -1,63 +1,110 @@
 return {
     {
+        "glepnir/lspsaga.nvim",
+        branch = "main",
+        event = "BufRead",
+        opts = {symbol_in_winbar = {enable = false}, lightbulb = {enable = true, virtual_text = false}},
+        config = function(_, opts) require("lspsaga").setup(opts) end
+    }, {
         "neovim/nvim-lspconfig",
         dependencies = {
             {
-                {"ray-x/lsp_signature.nvim"}, {"glepnir/lspsaga.nvim", branch = "main"}, {"hrsh7th/cmp-nvim-lsp"},
-                {"SmiteshP/nvim-navic", opts = {highlight = true}}, {"williamboman/mason.nvim"},
-                {"williamboman/mason-lspconfig.nvim"}
+                {"ray-x/lsp_signature.nvim"}, {"hrsh7th/cmp-nvim-lsp"},
+                {"SmiteshP/nvim-navic", opts = {highlight = true}},
+                {"williamboman/mason.nvim", cmd = "Mason", opts = {}}, {"williamboman/mason-lspconfig.nvim"}
+            }
+        },
+        opts = {
+            servers = {
+                gopls = {
+                    settings = {gopls = {analyses = {unusedparams = true}, staticcheck = true, gofumpt = true}},
+                    root_dir = function()
+                        return vim.fs.dirname(vim.fs.find({".git", "go.mod", "."}, {upward = true})[1])
+                    end,
+                    init_options = {usePlaceholders = true, completeUnimported = true, gofumpt = true}
+                },
+                sumneko_lua = {
+                    settings = { -- custom settings for lua
+                        Lua = {
+                            -- make the language server recognize "vim" global
+                            diagnostics = {globals = {"vim", "require"}},
+                            workspace = {
+                                -- make language server aware of runtime files
+                                library = {
+                                    [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+                                    [vim.fn.stdpath("config") .. "/lua"] = true
+                                }
+                            }
+                        }
+                    }
+                },
+                bashls = {filetypes = {"sh", "zsh"}},
+                yamlls = {},
+                pyright = {
+                    settings = {
+                        python = {
+                            analysis = {
+                                autoSearchPaths = true,
+                                diagnosticMode = "openFilesOnly",
+                                useLibraryCodeForTypes = true
+                            }
+                        }
+                    }
+                },
+                pylsp = {},
+                efm = {},
+                solargraph = {filetypes = {"ruby", "rb", "erb", "rakefile"}},
+                dockerls = {root_dir = vim.loop.cwd},
+                clangd = {cmd = {"clangd", "--background-index"}},
+                jsonls = {},
+                perlnavigator = {},
+                rust_analyzer = {}
+            },
+            setup = {},
+            capabilities = {
+                clangd = function()
+                    local utf16cap = require("cmp_nvim_lsp").default_capabilities()
+                    utf16cap.offsetEncoding = {"utf-16"}
+                    return utf16cap
+                end
             }
         },
         event = "BufReadPre",
-        config = function()
-            local lspconfig = require("lspconfig")
-
+        config = function(_, opts)
             local cmp_nvim_lsp = require("cmp_nvim_lsp")
-
-            local nok, navic = pcall(require, "nvim-navic")
-            if not nok then
-                vim.notify("Unable to require nvim-navic", vim.lsp.log_levels.ERROR, {title = "Plugin error"})
-                return
-            end
-
-            local saga_status, saga = pcall(require, "lspsaga")
-            if not saga_status then
-                vim.notify("Unable to require lspsaga", vim.lsp.log_levels.ERROR, {title = "Plugin error"})
-                return
-            end
-
-            saga.init_lsp_saga({
-                -- keybinds for navigation in lspsaga window
-                move_in_saga = {prev = "<C-k>", next = "<C-j>"},
-                -- use enter to open file with finder
-                finder_action_keys = {open = "<CR>"},
-                -- use enter to open file with definition preview
-                definition_action_keys = {edit = "<CR>"},
-                -- disable virtual text
-                code_action_lightbulb = {virtual_text = false}
-            })
 
             local on_attach = function(client, bufnr)
                 require("plugins.lsp.format").on_attach(client, bufnr)
 
-                if client.name == "tsserver" then
-                    client.server_capabilities.document_formatting = false
-                elseif client.name == "sumneko_lua" then
-                    client.server_capabilities.document_formatting = false
-                elseif client.name == "gopls" then
-                    client.server_capabilities.document_formatting = false
-                    client.server_capabilities.document_range_formatting = false
-                end
-
                 -- Avoid attaching multiple times
                 if client.name ~= "pylsp" and client.name ~= "null-ls" and client.name ~= "efm" then
-                    navic.attach(client, bufnr)
+                    require("nvim-navic").attach(client, bufnr)
                 end
 
                 require("plugins.lsp.keymaps").on_attach(client, bufnr)
             end
 
+            local servers = opts.servers
             local capabilities = cmp_nvim_lsp.default_capabilities()
+
+            require("mason-lspconfig").setup({ensure_installed = vim.tbl_keys(servers)})
+            require("mason-lspconfig").setup_handlers({
+                function(server)
+                    local server_opts = servers[server] or {}
+                    if opts.capabilities[server] then
+                        server_opts.capabilities = opts.capabilities[server]
+                    else
+                        server_opts.capabilities = capabilities
+                    end
+                    server_opts.on_attach = on_attach
+                    if opts.setup[server] then
+                        if opts.setup[server](server, server_opts) then return end
+                    elseif opts.setup["*"] then
+                        if opts.setup["*"](server, server_opts) then return end
+                    end
+                    require("lspconfig")[server].setup(server_opts)
+                end
+            })
 
             local signs = {Error = " ", Warn = " ", Hint = "ﴞ ", Info = " "}
             for type, icon in pairs(signs) do
@@ -65,7 +112,7 @@ return {
                 vim.fn.sign_define(hl, {text = icon, texthl = hl, numhl = ""})
             end
 
-            local config = {
+            vim.diagnostic.config({
                 -- disable virtual text
                 virtual_text = false,
                 -- show signs
@@ -81,90 +128,12 @@ return {
                     header = "",
                     prefix = ""
                 }
-            }
-
-            vim.diagnostic.config(config)
+            })
 
             vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {border = "rounded"})
 
             vim.lsp.handlers["textDocument/signatureHelp"] =
                 vim.lsp.with(vim.lsp.handlers.signature_help, {border = "rounded"})
-
-            -- Go
-            lspconfig["gopls"].setup({
-                capabilities = capabilities,
-                on_attach = on_attach,
-                settings = {gopls = {analyses = {unusedparams = true}, staticcheck = true, gofumpt = true}},
-                root_dir = lspconfig.util.root_pattern(".git", "go.mod", "."),
-                init_options = {usePlaceholders = true, completeUnimported = true, gofumpt = true}
-            })
-
-            -- Lua
-            lspconfig["sumneko_lua"].setup({
-                capabilities = capabilities,
-                on_attach = on_attach,
-                settings = { -- custom settings for lua
-                    Lua = {
-                        -- make the language server recognize "vim" global
-                        diagnostics = {globals = {"vim", "require"}},
-                        workspace = {
-                            -- make language server aware of runtime files
-                            library = {
-                                [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                                [vim.fn.stdpath("config") .. "/lua"] = true
-                            }
-                        }
-                    }
-                }
-            })
-
-            -- Python
-            lspconfig["pylsp"].setup({capabilities = capabilities, on_attach = on_attach})
-
-            lspconfig["pyright"].setup({
-                capabilities = capabilities,
-                on_attach = on_attach,
-                settings = {
-                    python = {
-                        analysis = {
-                            autoSearchPaths = true,
-                            diagnosticMode = "openFilesOnly",
-                            useLibraryCodeForTypes = true
-                        }
-                    }
-                }
-            })
-
-            -- Bash
-            lspconfig["bashls"].setup({capabilities = capabilities, on_attach = on_attach, filetypes = {"sh", "zsh"}})
-
-            -- Docker
-            lspconfig["bashls"].setup({capabilities = capabilities, on_attach = on_attach, root_dir = vim.loop.cwd})
-
-            -- C
-            local utf16cap = capabilities
-            utf16cap.offsetEncoding = {"utf-16"}
-            lspconfig["clangd"].setup({
-                cmd = {"clangd", "--background-index"},
-                capabilities = utf16cap,
-                on_attach = on_attach
-            })
-
-            lspconfig["efm"].setup({capabilities = capabilities, on_attach = on_attach})
-
-            lspconfig["jsonls"].setup({capabilities = capabilities, on_attach = on_attach})
-
-            lspconfig["perlnavigator"].setup({capabilities = capabilities, on_attach = on_attach})
-
-            lspconfig["yamlls"].setup({capabilities = capabilities, on_attach = on_attach})
-
-            lspconfig["solargraph"].setup({
-                capabilities = capabilities,
-                on_attach = on_attach,
-                filetypes = {"ruby", "rb", "erb", "rakefile"}
-            })
-
-            lspconfig["rust_analyzer"].setup({capabilities = capabilities, on_attach = on_attach})
         end
     }, {
         "jose-elias-alvarez/null-ls.nvim",
@@ -176,14 +145,7 @@ return {
         dependencies = {"jayp0521/mason-null-ls.nvim"},
         event = "BufReadPre",
         config = function()
-            -- import mason-null-ls plugin safely
-            local mason_null_ls_status, mason_null_ls = pcall(require, "mason-null-ls")
-            if not mason_null_ls_status then
-                vim.notify("Unable to require mason-null-ls", vim.lsp.log_levels.ERROR, {title = "Plugin error"})
-                return
-            end
-
-            mason_null_ls.setup({
+            require("mason-null-ls").setup({
                 -- list of formatters & linters for mason to install
                 ensure_installed = {"stylua", "black", "gofmt", "goimports", "golangci_lint"},
                 -- auto-install configured servers (with lspconfig)
@@ -224,15 +186,5 @@ return {
                 }
             })
         end
-    }, {"williamboman/mason.nvim", cmd = "Mason", opts = {}}, -- Mason LSP
-    {
-        "williamboman/mason-lspconfig.nvim",
-        opts = {
-            ensure_installed = {
-                "gopls", "sumneko_lua", "bashls", "yamlls", "pyright", "pylsp", "efm", "solargraph", "dockerls",
-                "clangd", "jsonls", "perlnavigator", "rust_analyzer"
-            },
-            automatic_installation = true
-        }
     }
 }

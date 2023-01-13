@@ -27,7 +27,11 @@ return {
                 navic = { enabled = true, custom_bg = mocha.mantle },
                 dap = { enabled = true, enable_ui = true },
                 notify = true,
-                leap = true
+                leap = true,
+                mini = true,
+                harpoon = true,
+                illuminate = true,
+                mason = true
             },
             highlight_overrides = {
                 macchiato = {

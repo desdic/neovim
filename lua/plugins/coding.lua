@@ -3,9 +3,7 @@ return {
         "L3MON4D3/LuaSnip", -- snippet completions
         dependencies = {
             "rafamadriz/friendly-snippets", -- collection of snippets
-            config = function()
-                require("luasnip.loaders.from_vscode").lazy_load()
-            end
+            config = function() require("luasnip.loaders.from_vscode").lazy_load() end
         },
         config = function()
             local ls = require("luasnip")
@@ -398,7 +396,7 @@ return {
                 -- disable_indentation = true
             })
         end
-    }, {"gpanders/editorconfig.nvim", event = "BufEnter"}, {"Vimjas/vim-python-pep8-indent", ft = "python"}, {
+    }, {"gpanders/editorconfig.nvim", event = "BufEnter"}, {
         "ray-x/go.nvim",
         ft = "go",
         dependencies = {"ray-x/guihua.lua"},

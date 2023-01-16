@@ -22,5 +22,6 @@ lazy.setup("plugins", {
             }
         }
     },
+    dev = {path = "~/src/private", patterns = {}},
     install = {colorscheme = {"catppuccin", "habamax"}}
 })

@@ -1,6 +1,7 @@
 return {
     {
         "ggandor/leap.nvim",
+        even = "BufReadPost",
         keys = {
             {
                 "s",
@@ -25,23 +26,33 @@ return {
             }
         },
         config = function() require("leap").add_default_mappings() end
-    }, -- bufremove
-    {
+    }, {
         "echasnovski/mini.bufremove",
         event = "VeryLazy",
         keys = {
             {"<leader>bd", function() require("mini.bufremove").delete(0, false) end, desc = "[B]uffer [d]elete"},
             {"<leader>bD", function() require("mini.bufremove").delete(0, true) end, desc = "[B]uffer [d]elete force"}
-        }
+        },
+        config = function() require("mini.bufremove").setup() end
     }, {
-        "booperlv/nvim-gomove",
-        opts = {map_defaults = false, reindent = true, undojoin = true, move_past_end_col = false},
-        keys = {
-            {"<S-j>", "<Plug>GoVSMDown", mode = {"x"}, desc = "Move visual line down"},
-            {"<S-k>", "<Plug>GoVSMUp", mode = {"x"}, desc = "Move visual line up"},
-            {"<S-h>", "<Plug>GoVSMLeft", mode = {"x"}, desc = "Move visual line left"},
-            {"<S-l>", "<Plug>GoVSMRight", mode = {"x"}, desc = "Move visual line right"}
-        }
+        "echasnovski/mini.move",
+        event = "BufEnter",
+        opts = {
+            mappings = {
+                -- Move visual selection in Visual mode. Defaults are Alt (Meta) + hjkl.
+                left = "<M-S-h>",
+                right = "<M-S-l>",
+                down = "<M-S-j>",
+                up = "<M-S-k>",
+
+                -- Move current line in Normal mode
+                line_left = "<M-S-h>",
+                line_right = "<M-S-l>",
+                line_down = "<M-S-j>",
+                line_up = "<M-S-k>"
+            }
+        },
+        config = function(_, opts) require("mini.move").setup(opts) end
     }, {
         "AckslD/nvim-neoclip.lua",
         opts = {},
@@ -109,6 +120,7 @@ return {
         end
     }, {
         "nvim-tree/nvim-tree.lua",
+        event = "VeryLazy",
         keys = {{"<Leader>n", ":NvimTreeToggle<CR>", desc = "Start file browser"}},
         dependencies = {{"kyazdani42/nvim-web-devicons"}},
 
@@ -123,7 +135,8 @@ return {
             -- configure nvim-tree
             require("nvim-tree").setup({
                 renderer = {icons = {glyphs = {folder = {arrow_closed = "", arrow_open = ""}}}},
-                actions = {open_file = {window_picker = {enable = false}}}
+                actions = {open_file = {window_picker = {enable = false}}},
+                git = {ignore = false}
             })
         end
     }, {
@@ -162,9 +175,7 @@ return {
         "RRethy/vim-illuminate",
         event = "BufReadPost",
         opts = {delay = 200, filetypes_denylist = {"NvimTree", "alpha"}},
-        config = function(_, opts)
-            require("illuminate").configure(opts)
-        end,
+        config = function(_, opts) require("illuminate").configure(opts) end,
         keys = {
             {"]]", function() require("illuminate").goto_next_reference(false) end, desc = "Next Reference"},
             {"[[", function() require("illuminate").goto_prev_reference(false) end, desc = "Prev Reference"}

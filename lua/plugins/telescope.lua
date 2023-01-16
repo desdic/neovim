@@ -3,9 +3,19 @@ local M = {
     cmd = "Telescope",
     keys = {
         {"<Leader>vrc", function() require("custom.telescope").search_nvim() end},
-        {"<Leader>notes", function() require("custom.telescope").grep_notes() end, desc = ""},
-        {"<Leader>ff", function() require("telescope.builtin").find_files({hidden = true}) end, desc = "[F]ind [f]iles"},
-        {"<Leader>fg", function() require("telescope.builtin").live_grep() end, desc = "[F]ile [g]rep"},
+        {"<Leader>notes", function() require("custom.telescope").grep_notes() end, desc = ""}, {
+            "<Leader>ff",
+            function()
+                require("telescope.builtin").find_files({
+                    hidden = true,
+
+                    find_command = {
+                        "fd", "--type", "f", "--hidden", "--no-ignore", "--color=never"
+                    }
+                })
+            end,
+            desc = "[F]ind [f]iles"
+        }, {"<Leader>fg", function() require("telescope.builtin").live_grep() end, desc = "[F]ile [g]rep"},
         {"<Leader>sm", function() require("telescope.builtin").marks() end, desc = "[S]how [m]arks"},
         {"<Leader>ts", function() require("telescope.builtin").treesitter() end, desc = "[T]reesitter [s]ymbols"},
         {"<Leader>sb", function() require("telescope.builtin").buffers() end, desc = "[S]how [b]uffers"},

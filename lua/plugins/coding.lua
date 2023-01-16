@@ -190,7 +190,8 @@ return {
         config = function()
             local nm = require("neo-minimap")
 
-            nm.setup_defaults({height_toggle = {12, 36}, hl_group = "DiagnosticWarn"})
+            local winwidth = math.floor(vim.o.columns * 0.75)
+            nm.setup_defaults({width=winwidth, height_toggle = {12, 36, 48}, hl_group = "DiagnosticWarn"})
 
             nm.source_on_save("~/.config/nvim/lua/plugins/neo-minimap.lua")
 

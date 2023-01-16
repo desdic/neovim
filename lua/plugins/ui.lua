@@ -26,10 +26,6 @@ return {
                 dashboard.button("q", "  Quit Neovim", ":qa<CR>")
             }
 
-            local lazystats = require("lazy").stats()
-            dashboard.section.footer.val = lazystats.loaded .. "/" .. lazystats.count .. " plugins  " ..
-                                               (math.floor(lazystats.startuptime * 100 + 0.5) / 100) .. "ms"
-
             dashboard.section.footer.opts.hl = "Type"
             dashboard.section.header.opts.hl = "Include"
             dashboard.section.buttons.opts.hl = "Keyword"
@@ -52,8 +48,8 @@ return {
                 pattern = "LazyVimStarted",
                 callback = function()
                     local stats = require("lazy").stats()
-                    local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-                    dashboard.section.footer.val = "⚡ Neovim loaded " .. stats.count .. " plugins"
+                    -- local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
+                    dashboard.section.footer.val = "⚡ Neovim loaded " .. stats.count .. " plugins "
                     pcall(vim.cmd.AlphaRedraw)
                 end
             })
@@ -197,7 +193,8 @@ return {
                 level = vim.log.levels.INFO,
                 fps = 20,
                 max_height = function() return math.floor(vim.o.lines * 0.75) end,
-                max_width = function() return math.floor(vim.o.columns * 0.75) end
+                max_width = function() return math.floor(vim.o.columns * 0.75) end,
+                stages = "static"
             })
 
             vim.notify = notify

@@ -62,11 +62,9 @@ return {
             },
             setup = {},
             capabilities = {
-                clangd = function()
-                    local utf16cap = require("cmp_nvim_lsp").default_capabilities()
-                    utf16cap.offsetEncoding = {"utf-16"}
-                    return utf16cap
-                end
+                clangd = {
+                    offsetEncoding = {"utf-16"}
+                }
             }
         },
         event = "BufReadPre",
@@ -91,11 +89,14 @@ return {
             require("mason-lspconfig").setup_handlers({
                 function(server)
                     local server_opts = servers[server] or {}
+                    server_opts.capabilities = capabilities
+
                     if opts.capabilities[server] then
-                        server_opts.capabilities = opts.capabilities[server]
-                    else
-                        server_opts.capabilities = capabilities
+                        for k, v in pairs(opts.capabilities[server]) do
+                            server_opts.capabilities[k] = v
+                        end
                     end
+
                     server_opts.on_attach = on_attach
                     if opts.setup[server] then
                         if opts.setup[server](server, server_opts) then return end

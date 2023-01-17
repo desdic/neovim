@@ -79,7 +79,10 @@ return {
                 end,
                 desc = "Peek (Markdown Preview)"
             }
-        }
+        },
+        config = function(_, opts)
+            require("peek").setup(opts)
+        end
     }, {
         "akinsho/toggleterm.nvim",
         cmd = "ToggleTerm",

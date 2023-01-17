@@ -183,7 +183,8 @@ return {
         end
     }, {
         "rcarriga/nvim-notify",
-        event = "VeryLazy",
+        lazy = false,
+        -- event = "VeryLazy",
         config = function()
             local notify = require("notify")
 

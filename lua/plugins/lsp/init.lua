@@ -3,7 +3,15 @@ return {
         "glepnir/lspsaga.nvim",
         branch = "main",
         event = "BufRead",
-        opts = {symbol_in_winbar = {enable = false}, lightbulb = {enable = true, virtual_text = false}},
+        opts = {
+            ui = {
+                colors = require("catppuccin.groups.integrations.lsp_saga").custom_colors(),
+                kind = require("catppuccin.groups.integrations.lsp_saga").custom_kind()
+            },
+
+            symbol_in_winbar = {enable = false},
+            lightbulb = {enable = true, virtual_text = false}
+        },
         config = function(_, opts) require("lspsaga").setup(opts) end
     }, {
         "neovim/nvim-lspconfig",
@@ -61,11 +69,7 @@ return {
                 rust_analyzer = {}
             },
             setup = {},
-            capabilities = {
-                clangd = {
-                    offsetEncoding = {"utf-16"}
-                }
-            }
+            capabilities = {clangd = {offsetEncoding = {"utf-16"}}}
         },
         event = "BufReadPre",
         config = function(_, opts)

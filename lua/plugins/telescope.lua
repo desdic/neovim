@@ -7,11 +7,11 @@ local M = {
             "<Leader>ff",
             function()
                 require("telescope.builtin").find_files({
-                    hidden = true,
+                    hidden = true
 
-                    find_command = {
-                        "fd", "--type", "f", "--hidden", "--no-ignore", "--color=never"
-                    }
+                    -- find_command = {
+                    --     "fd", "--type", "f", "--hidden", "--no-ignore", "--color=never"
+                    -- }
                 })
             end,
             desc = "[F]ind [f]iles"

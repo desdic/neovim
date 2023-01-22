@@ -2,6 +2,7 @@ return {
     {
         "ggandor/leap.nvim",
         even = "BufReadPost",
+        opts = {labeled_modes = "nv"},
         keys = {
             {
                 "s",
@@ -25,7 +26,12 @@ return {
                 end
             }
         },
-        config = function() require("leap").add_default_mappings() end
+        config = function(_, opts)
+            local leap = require("leap")
+            for k, v in pairs(opts) do leap.opts[k] = v end
+
+            leap.add_default_mappings()
+        end
     }, {
         "echasnovski/mini.bufremove",
         event = "VeryLazy",
@@ -80,9 +86,7 @@ return {
                 desc = "Peek (Markdown Preview)"
             }
         },
-        config = function(_, opts)
-            require("peek").setup(opts)
-        end
+        config = function(_, opts) require("peek").setup(opts) end
     }, {
         "akinsho/toggleterm.nvim",
         cmd = "ToggleTerm",
@@ -183,5 +187,5 @@ return {
             {"]]", function() require("illuminate").goto_next_reference(false) end, desc = "Next Reference"},
             {"[[", function() require("illuminate").goto_prev_reference(false) end, desc = "Prev Reference"}
         }
-    }
+    }, {"luukvbaal/stabilize.nvim", config = function() require("stabilize").setup() end} -- not needed in nvim 0.9
 }

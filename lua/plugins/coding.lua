@@ -63,7 +63,8 @@ return {
                     priority_weight = 1.0,
                     comparators = {
                         compare.scopes, compare.offset, compare.exact, compare.score, compare.recently_used,
-                        compare.locality, compare.kind, compare.sort_text, compare.length, compare.order
+                        compare.locality, compare.kind, -- compare.sort_text,
+                        compare.length, compare.order
                     }
                 },
                 min_length = 0, -- allow for `from package import _` in Python
@@ -73,7 +74,7 @@ return {
                     ["<C-Space>"] = cmp.mapping.complete(),
                     ["<C-e>"] = cmp.mapping.abort(),
                     ["<C-y>"] = cmp.config.disable,
-                    ["<CR>"] = cmp.mapping.confirm({select = false}),
+                    ["<CR>"] = cmp.mapping.confirm({select = false}), -- no not select first item
 
                     ["<Tab>"] = cmp.mapping(function(fallback)
                         if cmp.visible() then
@@ -191,7 +192,7 @@ return {
             local nm = require("neo-minimap")
 
             local winwidth = math.floor(vim.o.columns * 0.75)
-            nm.setup_defaults({width=winwidth, height_toggle = {12, 36, 48}, hl_group = "DiagnosticWarn"})
+            nm.setup_defaults({width = winwidth, height_toggle = {12, 36, 48}, hl_group = "DiagnosticWarn"})
 
             nm.source_on_save("~/.config/nvim/lua/plugins/neo-minimap.lua")
 

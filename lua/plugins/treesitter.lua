@@ -51,8 +51,8 @@ return {
                     keymaps = {
                         init_selection = "<CR>",
                         scope_incremental = "<CR>",
-                        node_incremental = "<TAB>",
-                        node_decremental = "<S-TAB>"
+                        node_incremental = "<S-CR>",
+                        node_decremental = "<BS>"
                     }
                 },
                 textobjects = {

@@ -59,7 +59,6 @@ return {
                 preselect = false,
                 snippet = {expand = function(args) luasnip.lsp_expand(args.body) end},
                 formatting = {
-                    fields = {cmp.ItemField.Kind, cmp.ItemField.Abbr, cmp.ItemField.Menu},
                     format = lspkind.cmp_format({maxwidth = 50, ellipsis_char = "..."})
                 },
                 sorting = {

@@ -58,9 +58,7 @@ return {
             cmp.setup({
                 preselect = false,
                 snippet = {expand = function(args) luasnip.lsp_expand(args.body) end},
-                formatting = {
-                    format = lspkind.cmp_format({maxwidth = 50, ellipsis_char = "..."})
-                },
+                formatting = {format = lspkind.cmp_format({maxwidth = 50, ellipsis_char = "..."})},
                 sorting = {
                     priority_weight = 1.0,
                     comparators = {
@@ -120,20 +118,12 @@ return {
             cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
         end
     }, {
-        "echasnovski/mini.comment",
+        "numToStr/Comment.nvim",
         event = "VeryLazy",
         dependencies = {"JoosepAlviste/nvim-ts-context-commentstring"},
-        config = function()
-            require("mini.comment").setup({
-                hooks = {pre = function()
-                    require("ts_context_commentstring.internal").update_commentstring({})
-                end}
-            })
-        end
-    }, -- pairs
-    -- {"echasnovski/mini.pairs", event = "VeryLazy", config = function() require("mini.pairs").setup({}) end},
-    -- surround
-    {
+        opts = {},
+        config = function(_, opts) require("Comment").setup(opts) end
+    }, {
         "echasnovski/mini.surround",
         event = "VeryLazy",
         config = function()

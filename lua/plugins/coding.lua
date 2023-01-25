@@ -92,9 +92,9 @@ return {
                     end, {"i", "s"})
                 }),
                 sources = {
-                    {name = "nvim_lsp", priority = 10, keyword_length = 2},
-                    {name = "buffer", priority = 8, keyword_length = 2},
-                    {name = "luasnip", priority = 6, keyword_length = 2},
+                    {name = "luasnip", priority = 10, keyword_length = 2},
+                    {name = "nvim_lsp", priority = 8, keyword_length = 2},
+                    {name = "buffer", priority = 6, keyword_length = 2},
                     {name = "nvim_lua", priority_weight = 4, keyword_length = 2},
                     {name = "path", priority = 2, keyword_length = 2}
                 },

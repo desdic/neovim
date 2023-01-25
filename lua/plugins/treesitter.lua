@@ -32,8 +32,8 @@ return {
         config = function()
             require("nvim-treesitter.configs").setup({
                 ensure_installed = {
-                    "bash", "c", "cpp", "dockerfile", "go", "json", "lua", "python", "ruby", "yaml", "toml", "markdown",
-                    "markdown_inline", "glsl", "rust"
+                    "bash", "c", "cpp", "dockerfile", "go", "gomod", "json", "lua", "python", "ruby", "yaml", "toml", "markdown",
+                    "markdown_inline", "glsl", "rust", "make", "sql"
                 },
                 indent = { enable = true, disable = {} },
                 highlight = {

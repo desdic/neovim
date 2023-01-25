@@ -18,7 +18,7 @@ vim.cmd('command! -nargs=0 LspVirtualTextToggle lua require("lsp/virtual_text").
 
 vim.keymap.set("n", "<Leader>cm", ":delmarks a-zA-Z0-9<CR>", {silent = true, noremap = true, desc = "Clear all marks"})
 
-vim.keymap.set("n", "<Leader>m", function() require("custom.utils").toggle_mouse() end,
+vim.keymap.set("n", "<Leader>mo", function() require("custom.utils").toggle_mouse() end,
                {silent = true, noremap = true, desc = "Toggle mouse"})
 
 -- Move to window using the arrow keys

@@ -74,7 +74,7 @@ return {
                     ["<C-Space>"] = cmp.mapping.complete(),
                     ["<C-e>"] = cmp.mapping.abort(),
                     ["<C-y>"] = cmp.config.disable,
-                    ["<CR>"] = cmp.mapping.confirm({select = false}), -- no not select first item
+                    ["<CR>"] = cmp.mapping.confirm({select = true}), -- no not select first item
 
                     ["<Tab>"] = cmp.mapping(function(fallback)
                         if cmp.visible() then
@@ -398,8 +398,14 @@ return {
         config = function(_, opts) require("go").setup(opts) end
     }, {
         "mfussenegger/nvim-dap",
-        ft = {"go", "python", "c", "cpp"},
-
+        keys = {
+            {"<F4>", function() require("dapui").toggle() end, desc = "Start DAP UI"},
+            {"<F5>", function() require("dap").toggle_breakpoint() end, desc = "DAP Set breakpoint"},
+            {"<F9>", function() require("dap").continue() end, desc="Start/Continue"},
+            {"<F1>", function() require("dap").step_over() end, desc = "DAP Step over"},
+            {"<F2>", function() require("dap").step_into() end, desc = "DAP Step into"},
+            {"<F3>", function() require("dap").step_out() end, desc = "DAP Step out"}
+        },
         dependencies = {
             {"theHamsta/nvim-dap-virtual-text"}, -- virtual text for debugger
             {
@@ -411,18 +417,6 @@ return {
                 config = function() require("dapui").setup() end
             }
         },
-        init = function()
-            vim.keymap.set("n", "<F4>", function() require("dapui").toggle() end,
-                           {noremap = true, desc = "Toggle debugging"})
-            vim.keymap.set("n", "<F5>", function() require("dap").toggle_breakpoint() end,
-                           {noremap = true, desc = "Set breakpoint"})
-            vim.keymap.set("n", "<F9>", function() require("dap").continue() end,
-                           {noremap = true, desc = "Continue or start"})
-            vim.keymap.set("n", "<F1>", function() require("dap").step_over() end, {noremap = true, desc = "Step over"})
-            vim.keymap.set("n", "<F2>", function() require("dap").step_into() end, {noremap = true, desc = "Step into"})
-            vim.keymap.set("n", "<F3>", function() require("dap").step_out() end, {noremap = true, desc = "Step out"})
-        end,
-
         config = function()
             local dap = require("dap")
             local sign = vim.fn.sign_define
@@ -474,8 +468,6 @@ return {
             }
 
             dap.configurations.c = dap.configurations.cpp -- Reuse for c
-
-            vim.fn.sign_define("DapBreakpoint", {text = "🛑", texthl = "", linehl = "", numhl = ""})
         end
     }, {
         "lewis6991/gitsigns.nvim",

@@ -122,7 +122,11 @@ return {
         event = "VeryLazy",
         dependencies = {"JoosepAlviste/nvim-ts-context-commentstring"},
         opts = {},
-        config = function(_, opts) require("Comment").setup(opts) end
+        config = function(_, opts)
+            require("Comment").setup(opts)
+            local ft = require("Comment.ft")
+            ft.set("vtc", "#%s")
+        end
     }, {
         "echasnovski/mini.surround",
         event = "VeryLazy",
@@ -401,7 +405,7 @@ return {
         keys = {
             {"<F4>", function() require("dapui").toggle() end, desc = "Start DAP UI"},
             {"<F5>", function() require("dap").toggle_breakpoint() end, desc = "DAP Set breakpoint"},
-            {"<F9>", function() require("dap").continue() end, desc="Start/Continue"},
+            {"<F9>", function() require("dap").continue() end, desc = "Start/Continue"},
             {"<F1>", function() require("dap").step_over() end, desc = "DAP Step over"},
             {"<F2>", function() require("dap").step_into() end, desc = "DAP Step into"},
             {"<F3>", function() require("dap").step_out() end, desc = "DAP Step out"}

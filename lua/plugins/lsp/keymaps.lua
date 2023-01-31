@@ -19,8 +19,7 @@ function M.on_attach(client, buffer)
     self:map("[e", M.diagnostic_goto(false, "ERROR"), {desc = "Prev Error"})
     self:map("]w", M.diagnostic_goto(true, "WARNING"), {desc = "Next Warning"})
     self:map("[w", M.diagnostic_goto(false, "WARNING"), {desc = "Prev Warning"})
-    self:map("<leader>ca", M.code_action, {desc = "Code Action", expr = true, mode = {"n", "v"}, has = "codeAction"})
-
+    self:map("<leader>ca", M.code_action, {desc = "Code Action", mode = {"n", "v"}, has = "codeAction"})
     local format = require("plugins.lsp.format").format
     self:map("<leader>f", format, {desc = "Format Document", has = "documentFormatting"})
     self:map("<leader>f", format, {desc = "Format Range", mode = "v", has = "documentRangeFormatting"})
@@ -47,8 +46,8 @@ function M.rename()
 end
 
 function M.code_action()
-    if vim.bo.filetype == "go" then if pcall(require, "go") then return ":GoCodeAction<CR>" end end
-    vim.lsp.buf.code_action()
+    if vim.bo.filetype == "go" then if pcall(require, "go") then return vim.cmd("GoCodeAction") end end
+    return vim.lsp.buf.code_action()
 end
 
 function M.diagnostic_goto(next, severity)

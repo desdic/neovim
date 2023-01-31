@@ -2,7 +2,7 @@ return {
     {
         "ggandor/leap.nvim",
         even = "BufReadPost",
-        opts = {labeled_modes = "nv"},
+        opts = {},
         keys = {
             {
                 "s",

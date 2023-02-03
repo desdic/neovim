@@ -225,14 +225,14 @@ return {
             number = false,
             excluded_filetypes = {"toggleterm"}
         },
-        config = function(_, opts)
-            require("focus").setup(opts)
-        end,
+        config = function(_, opts) require("focus").setup(opts) end,
         keys = {
             {"<Leader>sl", function() require("focus").split_command("h") end, desc = "[S]plit window [l]eft"},
             {"<Leader>sr", function() require("focus").split_command("l") end, desc = "[S]plit window [r]ight"}
         }
-    }, {"kshenoy/vim-signature", event = "BufEnter"}, {
+    },
+    {"chentoast/marks.nvim", event = "BufEnter", opts = {}, config = function(_, opts) require("marks").setup(opts) end},
+    {
         "akinsho/nvim-bufferline.lua",
         event = "VeryLazy",
         keys = {

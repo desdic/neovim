@@ -180,7 +180,7 @@ return {
         keys = {
             {"<Leader>n", ":NvimTreeToggle<CR>", desc = "Start file browser"}
         },
-        dependencies = {{"kyazdani42/nvim-web-devicons"}},
+        dependencies = {{"nvim-tree/nvim-web-devicons"}},
 
         config = function()
             -- recommended settings from nvim-tree documentation

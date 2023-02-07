@@ -109,18 +109,20 @@ return {
                 return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
             end
 
-            local filename = function()
-                local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
-                if buf_ft == "toggleterm" then return "terminal" end
+            local filename = {
+                function()
+                    local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
+                    if buf_ft == "toggleterm" then return "terminal" end
 
-                local filepath = vim.fn.expand("%:p")
+                    local filepath = vim.fn.expand("%:p")
 
-                if #filepath > 52 then
-                    filepath = ".." .. string.sub(filepath, -50)
-                end
+                    if #filepath > 52 then filepath = ".." .. string.sub(filepath, -50) end
 
-                return filepath
-            end
+                    return filepath
+                end,
+                padding = {right = 1},
+                cond = hide_in_width
+            }
 
             local navicok, navic = pcall(require, "nvim-navic")
             local navicinfo = {
@@ -154,8 +156,8 @@ return {
                 sections = {
                     lualine_a = {branch, diagnostics},
                     lualine_b = {mode},
-                    lualine_c = {filename},
-                    lualine_x = {lspclients, "%=", diff, spaces, "encoding", filetype},
+                    lualine_c = {filename, navicinfo},
+                    lualine_x = {"%=", lspclients, diff, spaces, "encoding", filetype},
                     lualine_y = {location},
                     lualine_z = {}
                     -- lualine_z = {progress}
@@ -168,14 +170,14 @@ return {
                     lualine_y = {},
                     lualine_z = {}
                 },
-                winbar = {
-                    lualine_a = {},
-                    lualine_b = {},
-                    lualine_c = {},
-                    lualine_x = {navicinfo},
-                    lualine_y = {},
-                    lualine_z = {}
-                },
+                -- winbar = {
+                --     lualine_a = {},
+                --     lualine_b = {},
+                --     lualine_c = {},
+                --     lualine_x = {navicinfo},
+                --     lualine_y = {},
+                --     lualine_z = {}
+                -- },
                 inactive_winbar = {
                     lualine_a = {},
                     lualine_b = {},
@@ -241,6 +243,7 @@ return {
     {"chentoast/marks.nvim", event = "BufEnter", opts = {}, config = function(_, opts) require("marks").setup(opts) end},
     {
         "akinsho/nvim-bufferline.lua",
+        dependencies = {"nvim-tree/nvim-web-devicons"},
         event = "VeryLazy",
         keys = {
             {"<S-l>", ":BufferLineCycleNext<CR>", desc = "Move to next buffer"},
@@ -251,9 +254,7 @@ return {
                 show_buffer_close_icons = false,
                 show_buffer_icons = false,
                 show_close_icon = false,
-                persist_buffer_sort = true,
-                name_formatter = function(opts) return string.format(" %s ", opts.name) end,
-                numbers = function(opts) return string.format(" %s ", opts.ordinal) end
+                persist_buffer_sort = true
             }
         }
     }

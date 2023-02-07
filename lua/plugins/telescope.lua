@@ -34,7 +34,7 @@ local M = {
     },
     dependencies = {
         {"nvim-telescope/telescope-fzy-native.nvim"}, {"nvim-telescope/telescope-ui-select.nvim"},
-        {"desdic/telescope-rooter.nvim"}, {"nvim-lua/plenary.nvim"}, {"kyazdani42/nvim-web-devicons"}
+        {"desdic/telescope-rooter.nvim"}, {"nvim-lua/plenary.nvim"}, {"nvim-tree/nvim-web-devicons"}
     }
 }
 

@@ -3,9 +3,13 @@ return {
         "neovim/nvim-lspconfig",
         dependencies = {
             {
-                {"ray-x/lsp_signature.nvim"}, {"hrsh7th/cmp-nvim-lsp"},
-                {"SmiteshP/nvim-navic", opts = {highlight = true}},
-                {"williamboman/mason.nvim", cmd = "Mason", opts = {}}, {"williamboman/mason-lspconfig.nvim"}
+                {"ray-x/lsp_signature.nvim"}, {"hrsh7th/cmp-nvim-lsp"}, {
+                    "SmiteshP/nvim-navic",
+                    opts = {highlight = true},
+                    config = function(_, opts)
+                        require("nvim-navic").setup(opts)
+                    end
+                }, {"williamboman/mason.nvim", cmd = "Mason", opts = {}}, {"williamboman/mason-lspconfig.nvim"}
             }
         },
         opts = {

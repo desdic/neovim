@@ -112,7 +112,14 @@ return {
             local filename = function()
                 local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
                 if buf_ft == "toggleterm" then return "terminal" end
-                return vim.fn.expand("%:.")
+
+                local filepath = vim.fn.expand("%:p")
+
+                if #filepath > 52 then
+                    filepath = ".." .. string.sub(filepath, -50)
+                end
+
+                return filepath
             end
 
             local navicok, navic = pcall(require, "nvim-navic")
@@ -147,7 +154,7 @@ return {
                 sections = {
                     lualine_a = {branch, diagnostics},
                     lualine_b = {mode},
-                    lualine_c = {navicinfo},
+                    lualine_c = {filename},
                     lualine_x = {lspclients, "%=", diff, spaces, "encoding", filetype},
                     lualine_y = {location},
                     lualine_z = {}
@@ -165,9 +172,9 @@ return {
                     lualine_a = {},
                     lualine_b = {},
                     lualine_c = {},
-                    lualine_x = {},
+                    lualine_x = {navicinfo},
                     lualine_y = {},
-                    lualine_z = {filename}
+                    lualine_z = {}
                 },
                 inactive_winbar = {
                     lualine_a = {},

@@ -1,5 +1,6 @@
 local M = {
     "nvim-telescope/telescope.nvim",
+    event = "VeryLazy",
     cmd = "Telescope",
     keys = {
         {"<Leader>vrc", function() require("custom.telescope").search_nvim() end},

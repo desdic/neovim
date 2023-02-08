@@ -1,7 +1,7 @@
 return {
     {
         "ggandor/leap.nvim",
-        even = "BufReadPost",
+        event = "BufReadPost",
         opts = {},
         keys = {
             {

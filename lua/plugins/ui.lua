@@ -47,9 +47,11 @@ return {
             vim.api.nvim_create_autocmd("User", {
                 pattern = "LazyVimStarted",
                 callback = function()
+
+                    local version = vim.version()
+
                     local stats = require("lazy").stats()
-                    -- local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-                    dashboard.section.footer.val = "⚡ Neovim loaded " .. stats.count .. " plugins "
+                    dashboard.section.footer.val = "⚡ Neovim(".. version.major .. "." .. version.minor .. "." .. version.patch .. ") loaded " .. stats.count .. " plugins "
                     pcall(vim.cmd.AlphaRedraw)
                 end
             })

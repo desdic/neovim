@@ -18,9 +18,11 @@ return {
                 dashboard.button("f", "  Find file", ":Telescope find_files <CR>"),
                 dashboard.button("g", "  Grep text", ":Telescope live_grep <CR>"),
                 dashboard.button("h", "  Harpoon", ":Telescope harpoon marks<CR>"),
-                dashboard.button("l", "  Lazy", ":Lazy<CR>"), dashboard.button("m", "  Mason", ":Mason<CR>"),
+                dashboard.button("l", "  Lazy", ":Lazy<CR>"),
+                dashboard.button("m", "  Mason", ":Mason<CR>"),
                 dashboard.button("n", "  Notes", ":lua require('custom.telescope').grep_notes()<CR>"),
                 dashboard.button("r", "  Recently used files", ":Telescope oldfiles <CR>"),
+                dashboard.button("s", "  Restore session", ":lua require('persistence').load()<CR>"),
                 dashboard.button("t", "  Update treesitter", ":TSUpdateSync<CR>"),
                 dashboard.button("u", "  Update plugins", ":Lazy sync<CR>"),
                 dashboard.button("q", "  Quit Neovim", ":qa<CR>")
@@ -47,11 +49,11 @@ return {
             vim.api.nvim_create_autocmd("User", {
                 pattern = "LazyVimStarted",
                 callback = function()
-
                     local version = vim.version()
 
                     local stats = require("lazy").stats()
-                    dashboard.section.footer.val = "⚡ Neovim(".. version.major .. "." .. version.minor .. "." .. version.patch .. ") loaded " .. stats.count .. " plugins "
+                    dashboard.section.footer.val = "⚡ Neovim(" .. version.major .. "." .. version.minor .. "." ..
+                                                       version.patch .. ") loaded " .. stats.count .. " plugins "
                     pcall(vim.cmd.AlphaRedraw)
                 end
             })
@@ -158,38 +160,38 @@ return {
                 sections = {
                     lualine_a = {branch, diagnostics},
                     lualine_b = {mode},
-                    lualine_c = {filename, navicinfo},
+                    lualine_c = {navicinfo},
                     lualine_x = {"%=", lspclients, diff, spaces, "encoding", filetype},
                     lualine_y = {location},
                     lualine_z = {}
                     -- lualine_z = {progress}
                 },
-                inactive_sections = {
-                    lualine_a = {},
-                    lualine_b = {},
-                    lualine_c = {"%=", filename},
-                    lualine_x = {},
-                    lualine_y = {},
-                    lualine_z = {}
-                },
-                -- winbar = {
+                -- inactive_sections = {
                 --     lualine_a = {},
                 --     lualine_b = {},
-                --     lualine_c = {},
-                --     lualine_x = {navicinfo},
+                --     lualine_c = {"%=", filename},
+                --     lualine_x = {},
                 --     lualine_y = {},
                 --     lualine_z = {}
                 -- },
+                winbar = {
+                    --     lualine_a = {},
+                    --     lualine_b = {},
+                    --     lualine_c = {},
+                    --     lualine_x = {navicinfo},
+                    --     lualine_y = {},
+                    lualine_z = {"%m", filename}
+                },
                 inactive_winbar = {
-                    lualine_a = {},
-                    lualine_b = {},
-                    lualine_c = {},
-                    lualine_x = {},
-                    lualine_y = {},
+                    -- lualine_a = {},
+                    -- lualine_b = {},
+                    -- lualine_c = {},
+                    -- lualine_x = {},
+                    -- lualine_y = {},
                     lualine_z = {filename}
                 },
                 tabline = {},
-                extensions = {}
+                extensions = {"nvim-tree", "nvim-dap-ui"}
             })
         end
     }, {
@@ -254,9 +256,9 @@ return {
         opts = {
             options = {
                 show_buffer_close_icons = false,
-                show_buffer_icons = false,
                 show_close_icon = false,
-                persist_buffer_sort = true
+                persist_buffer_sort = true,
+                offsets = {{filetype = "NvimTree", text = "NvimTree", highlight = "Directory", text_align = "left"}}
             }
         }
     }

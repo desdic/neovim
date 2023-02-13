@@ -21,7 +21,7 @@ return {
                     end,
                     init_options = {usePlaceholders = true, completeUnimported = true, gofumpt = true}
                 },
-                sumneko_lua = {
+                lua_ls = {
                     settings = { -- custom settings for lua
                         Lua = {
                             -- make the language server recognize "vim" global

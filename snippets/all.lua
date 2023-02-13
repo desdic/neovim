@@ -10,7 +10,7 @@ local sn = ls.snippet_node
 -- local rep = require("luasnip.extras").rep
 
 local file_begin = function()
-    local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+    local row, col = vim.api.nvim_win_get_cursor(0)
     return row == 1 and col == 1
 end
 

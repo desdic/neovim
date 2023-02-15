@@ -22,7 +22,7 @@ return {
                 nvimtree = {enabled = true, show_root = false},
                 bufferline = true,
                 markdown = false,
-                ts_rainbow = true,
+                ts_rainbow2 = true,
                 navic = {enabled = true, custom_bg = mocha.mantle},
                 dap = {enabled = true, enable_ui = true},
                 notify = true,

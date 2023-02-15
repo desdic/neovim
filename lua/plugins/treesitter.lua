@@ -1,7 +1,7 @@
 return {
 
     -- playground
-    { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" }, -- context
+    { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle", build = ":TSInstall query" }, -- context
     {
         "nvim-treesitter/nvim-treesitter-context",
         event = "BufReadPre",
@@ -27,7 +27,7 @@ return {
         build = function() require("nvim-treesitter.install").update({ with_sync = true }) end,
         dependencies = {
             { "nvim-treesitter/nvim-treesitter-refactor" }, { "nvim-treesitter/nvim-treesitter-textobjects" },
-            { "mrjones2014/nvim-ts-rainbow" }
+            { "HiPhish/nvim-ts-rainbow2", dev = true }
         },
         config = function()
             require("nvim-treesitter.configs").setup({
@@ -42,8 +42,14 @@ return {
                 },
                 rainbow = {
                     enable = true,
-                    extended = true,
-                    max_file_lines = 5000 -- Do not enable for files with more than 5000 lines, int
+                    -- list of languages you want to disable the plugin for
+                    -- disable = { "jsx" },
+                    -- Which query to use for finding delimiters
+                    query = 'rainbow-parens',
+                    -- Highlight the entire buffer all at once
+                    strategy = require 'ts-rainbow.strategy.global',
+                    -- Do not enable for files with more than n lines
+                    max_file_lines = 3000
                 },
                 refactor = { smart_rename = { enable = true, keymaps = { smart_rename = "grr" } } },
                 incremental_selection = {

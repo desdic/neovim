@@ -1,7 +1,7 @@
 return {
 
     -- playground
-    { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle", build = ":TSInstall query" }, -- context
+    {"nvim-treesitter/playground", cmd = "TSPlaygroundToggle", build = ":TSInstall query"}, -- context
     {
         "nvim-treesitter/nvim-treesitter-context",
         event = "BufReadPre",
@@ -12,10 +12,10 @@ return {
             trim_scope = "outer", -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
             min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
             patterns = { -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
-                default = { "class", "function", "method", "for", "while", "if", "switch", "case" },
-                markdown = { "section" },
-                json = { "pair" },
-                yaml = { "block_mapping_pair" }
+                default = {"class", "function", "method", "for", "while", "if", "switch", "case"},
+                markdown = {"section"},
+                json = {"pair"},
+                yaml = {"block_mapping_pair"}
             },
             zindex = 20, -- The Z-index of the context window
             mode = "cursor", -- Line used to calculate context. Choices: 'cursor', 'topline'
@@ -24,18 +24,18 @@ return {
     }, -- treesitter
     {
         "nvim-treesitter/nvim-treesitter",
-        build = function() require("nvim-treesitter.install").update({ with_sync = true }) end,
+        build = function() require("nvim-treesitter.install").update({with_sync = true}) end,
         dependencies = {
-            { "nvim-treesitter/nvim-treesitter-refactor" }, { "nvim-treesitter/nvim-treesitter-textobjects" },
-            { "HiPhish/nvim-ts-rainbow2", dev = true }
+            {"nvim-treesitter/nvim-treesitter-refactor"}, {"nvim-treesitter/nvim-treesitter-textobjects"},
+            {"HiPhish/nvim-ts-rainbow2"}
         },
         config = function()
             require("nvim-treesitter.configs").setup({
                 ensure_installed = {
-                    "bash", "c", "cpp", "dockerfile", "go", "gomod", "json", "lua", "python", "ruby", "yaml", "toml", "markdown",
-                    "markdown_inline", "glsl", "rust", "make", "sql"
+                    "bash", "c", "cpp", "dockerfile", "go", "gomod", "json", "lua", "python", "ruby", "yaml", "toml",
+                    "markdown", "markdown_inline", "glsl", "rust", "make", "sql"
                 },
-                indent = { enable = true, disable = {} },
+                indent = {enable = true, disable = {}},
                 highlight = {
                     enable = true -- false will disable the whole extension
                     -- disable = {"rust"} -- list of language that will be disabled
@@ -45,13 +45,13 @@ return {
                     -- list of languages you want to disable the plugin for
                     -- disable = { "jsx" },
                     -- Which query to use for finding delimiters
-                    query = 'rainbow-parens',
+                    query = "rainbow-parens",
                     -- Highlight the entire buffer all at once
-                    strategy = require 'ts-rainbow.strategy.global',
+                    strategy = require("ts-rainbow.strategy.global"),
                     -- Do not enable for files with more than n lines
                     max_file_lines = 3000
                 },
-                refactor = { smart_rename = { enable = true, keymaps = { smart_rename = "grr" } } },
+                refactor = {smart_rename = {enable = true, keymaps = {smart_rename = "grr"}}},
                 incremental_selection = {
                     enable = true,
                     keymaps = {
@@ -79,8 +79,8 @@ return {
                     },
                     swap = {
                         enable = true,
-                        swap_next = { ["fa"] = "@parameter.inner" },
-                        swap_previous = { ["fA"] = "@parameter.inner" }
+                        swap_next = {["fa"] = "@parameter.inner"},
+                        swap_previous = {["fA"] = "@parameter.inner"}
                     },
                     move = {
                         enable = true,
@@ -123,7 +123,7 @@ return {
                         show_help = "?"
                     }
                 },
-                context_commentstring = { enable = true, enable_autocmd = false }
+                context_commentstring = {enable = true, enable_autocmd = false}
             })
         end
     }

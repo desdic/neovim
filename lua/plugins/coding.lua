@@ -230,9 +230,7 @@ return {
             })
 
             -- Markdown
-            nm.set({"zi", "zo", "zu"}, {"*.md"}, {
-                events = {"BufEnter"},
-
+            nm.set({"zi", "zo", "zu"}, {"markdown"}, {
                 query = {
                     [[
         ;; query for functions/function declarations
@@ -251,9 +249,7 @@ return {
             })
 
             -- Python
-            nm.set({"zi", "zo", "zu"}, {"*.py"}, {
-                events = {"BufEnter"},
-
+            nm.set({"zi", "zo", "zu"}, {"python"}, {
                 query = {
                     [[
         ;; query for functions/function declarations
@@ -278,9 +274,7 @@ return {
             })
 
             -- C/CPP
-            nm.set({"zi", "zo", "zu"}, {"*.c", "*.h", "*.hpp", "*.cpp", "*.cc", "*.frag", "*.vert"}, {
-                events = {"BufEnter"},
-
+            nm.set({"zi", "zo", "zu"}, {"c", "cpp"}, {
                 query = {
                     [[
         ;; query for functions/function declarations
@@ -311,8 +305,7 @@ return {
             })
 
             -- Go
-            nm.set({"zi", "zo", "zu"}, "*.go", {
-                events = {"BufEnter"},
+            nm.set({"zi", "zo", "zu"}, "go", {
                 -- ((function_call (dot_index_expression) @field (#eq? @field "vim.keymap.set")) @cap)
                 query = {
                     [[
@@ -342,9 +335,7 @@ return {
             })
 
             -- Lua
-            nm.set({"zi", "zo", "zu"}, "*.lua", {
-                events = {"BufEnter"},
-
+            nm.set({"zi", "zo", "zu"}, "lua", {
                 query = {
                     [[
          ((function_declaration) @cap)
@@ -374,9 +365,7 @@ return {
             })
 
             -- Rust
-            nm.set({"zi", "zo"}, "*.rs", {
-                events = {"BufEnter"},
-
+            nm.set({"zi", "zo"}, "rust", {
                 query = {
                     [[
          ((function_item) @cap)

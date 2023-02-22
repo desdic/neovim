@@ -3,7 +3,9 @@ return {
         "L3MON4D3/LuaSnip", -- snippet completions
         dependencies = {
             "rafamadriz/friendly-snippets", -- collection of snippets
-            config = function() require("luasnip.loaders.from_vscode").lazy_load() end
+            config = function()
+                require("luasnip.loaders.from_vscode").lazy_load()
+            end
         },
         config = function()
             local ls = require("luasnip")
@@ -24,7 +26,9 @@ return {
 
                 ext_opts = {
                     -- [types.insertNode] = {active = {virt_text = {{"●", "DiffAdd"}}}},
-                    [types.choiceNode] = {active = {virt_text = {{"●", "Operator"}}}}
+                    [types.choiceNode] = {
+                        active = {virt_text = {{"●", "Operator"}}}
+                    }
                 }
             })
 
@@ -32,19 +36,27 @@ return {
             ls.filetype_extend("changelog", {"debchangelog"})
 
             vim.keymap.set({"i", "s"}, "<c-j>", function()
-                if ls.expand_or_jumpable() then ls.expand_or_jump() end
+                if ls.expand_or_jumpable() then
+                    ls.expand_or_jump()
+                end
             end, {silent = true})
 
-            vim.keymap.set({"i", "s"}, "<c-k>", function() if ls.jumpable(-1) then ls.jump(-1) end end, {silent = true})
+            vim.keymap.set({"i", "s"}, "<c-k>", function()
+                if ls.jumpable(-1) then ls.jump(-1) end
+            end, {silent = true})
 
-            vim.keymap.set("i", "<c-l>", function() if ls.choice_active() then ls.change_choice(1) end end)
+            vim.keymap.set("i", "<c-l>", function()
+                if ls.choice_active() then ls.change_choice(1) end
+            end)
         end
     }, {
         "hrsh7th/nvim-cmp",
         event = "InsertEnter",
         dependencies = {
-            "hrsh7th/cmp-buffer", "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-nvim-lua", "hrsh7th/cmp-path",
-            "hrsh7th/cmp-path", "onsails/lspkind-nvim", "saadparwaiz1/cmp_luasnip", "L3MON4D3/LuaSnip"
+            "hrsh7th/cmp-buffer", "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-nvim-lua", "hrsh7th/cmp-path", "hrsh7th/cmp-path",
+            "onsails/lspkind-nvim", "saadparwaiz1/cmp_luasnip",
+            "L3MON4D3/LuaSnip"
         },
         config = function()
             local cmp = require("cmp")
@@ -57,13 +69,23 @@ return {
 
             cmp.setup({
                 preselect = false,
-                snippet = {expand = function(args) luasnip.lsp_expand(args.body) end},
-                formatting = {format = lspkind.cmp_format({maxwidth = 50, ellipsis_char = "..."})},
+                snippet = {
+                    expand = function(args)
+                        luasnip.lsp_expand(args.body)
+                    end
+                },
+                formatting = {
+                    format = lspkind.cmp_format({
+                        maxwidth = 50,
+                        ellipsis_char = "..."
+                    })
+                },
                 sorting = {
                     priority_weight = 1.0,
                     comparators = {
-                        compare.scopes, compare.offset, compare.exact, compare.score, compare.recently_used,
-                        compare.locality, compare.kind, -- compare.sort_text,
+                        compare.scopes, compare.offset, compare.exact,
+                        compare.score, compare.recently_used, compare.locality,
+                        compare.kind, -- compare.sort_text,
                         compare.length, compare.order
                     }
                 },
@@ -98,7 +120,10 @@ return {
                     {name = "nvim_lua", priority_weight = 4, keyword_length = 2},
                     {name = "path", priority = 2, keyword_length = 2}
                 },
-                window = {documentation = cmp.config.window.bordered(), completion = cmp.config.window.bordered()}
+                window = {
+                    documentation = cmp.config.window.bordered(),
+                    completion = cmp.config.window.bordered()
+                }
             })
         end
     }, {
@@ -157,7 +182,10 @@ return {
                 extensions = {
                     generic = {
                         commands = {
-                            ["run {filename}"] = {command = {"python3", "{filename}"}, filetype = "python"},
+                            ["run {filename}"] = {
+                                command = {"python3", "{filename}"},
+                                filetype = "python"
+                            },
                             ["run main.go"] = {
                                 command = {"go", "run", "main.go"},
                                 filetype = "go",
@@ -170,7 +198,10 @@ return {
                             }
                         }
                     },
-                    kitchen = {targets = {"converge", "verify", "destroy", "test"}, include_all = false}
+                    kitchen = {
+                        targets = {"converge", "verify", "destroy", "test"},
+                        include_all = false
+                    }
                 },
                 run_groups = {fast = {"generic", "makefile", "cargo"}}
             })
@@ -183,14 +214,36 @@ return {
         end
     }, {
         "ziontee113/neo-minimap",
-        ft = {"go", "lua", "python", "cpp", "c", "markdown", "yaml", "rust"},
+        ft = {"go", "lua", "python", "cpp", "c", "markdown", "yaml", "rust", "make"},
         config = function()
             local nm = require("neo-minimap")
 
             local winwidth = math.floor(vim.o.columns * 0.75)
-            nm.setup_defaults({width = winwidth, height_toggle = {12, 36, 48}, hl_group = "DiagnosticWarn"})
+            nm.setup_defaults({
+                width = winwidth,
+                height_toggle = {12, 36, 48},
+                hl_group = "DiagnosticWarn"
+            })
 
             nm.source_on_save("~/.config/nvim/lua/plugins/neo-minimap.lua")
+
+            -- Make
+            nm.set({"zi", "zo"}, "make", {
+                query = {
+                    [[ (rule (targets (word) @cap)) ]],
+                    [[ (rule (targets (word) @cap) (#eq? @cap "{cursorword}")) ]]
+                },
+
+                search_patterns = {
+                    {"fn", "<C-j>", true}, {"fn", "<C-k>", false}
+                },
+
+                -- auto_jump = false,
+                -- open_win_opts = { border = "double" },
+                win_opts = {scrolloff = 1}
+
+                -- disable_indentation = true
+            })
 
             -- Yaml
             nm.set({"zi", "zo", "zu"}, {"docker-compose*.yml"}, {
@@ -325,7 +378,9 @@ return {
     ]]
                 },
 
-                search_patterns = {{"func", "<C-j>", true}, {"func", "<C-k>", false}},
+                search_patterns = {
+                    {"func", "<C-j>", true}, {"func", "<C-k>", false}
+                },
 
                 -- auto_jump = false,
                 -- open_win_opts = { border = "double" },
@@ -350,11 +405,14 @@ return {
         ]]
                 },
 
-                regex = {{}, {[[^\s*---*\s\+\w\+]], [[--\s*=]]}, {[[^\s*---*\s\+\w\+]], [[--\s*=]]}, {}},
+                regex = {
+                    {}, {[[^\s*---*\s\+\w\+]], [[--\s*=]]},
+                    {[[^\s*---*\s\+\w\+]], [[--\s*=]]}, {}
+                },
 
                 search_patterns = {
-                    {"function", "<C-j>", true}, {"function", "<C-k>", false}, {"keymap", "<A-j>", true},
-                    {"keymap", "<A-k>", false}
+                    {"function", "<C-j>", true}, {"function", "<C-k>", false},
+                    {"keymap", "<A-j>", true}, {"keymap", "<A-k>", false}
                 },
 
                 -- auto_jump = false,
@@ -374,7 +432,9 @@ return {
         ]]
                 },
 
-                search_patterns = {{"fn", "<C-j>", true}, {"fn", "<C-k>", false}},
+                search_patterns = {
+                    {"fn", "<C-j>", true}, {"fn", "<C-k>", false}
+                },
 
                 -- auto_jump = false,
                 -- open_win_opts = { border = "double" },
@@ -392,19 +452,49 @@ return {
     }, {
         "mfussenegger/nvim-dap",
         keys = {
-            {"<F4>", function() require("dapui").toggle() end, desc = "Start DAP UI"},
-            {"<F5>", function() require("dap").toggle_breakpoint() end, desc = "DAP Set breakpoint"},
-            {"<F9>", function() require("dap").continue() end, desc = "Start/Continue"},
-            {"<F1>", function() require("dap").step_over() end, desc = "DAP Step over"},
-            {"<F2>", function() require("dap").step_into() end, desc = "DAP Step into"},
-            {"<F3>", function() require("dap").step_out() end, desc = "DAP Step out"}
+            {
+                "<F4>",
+                function() require("dapui").toggle() end,
+                desc = "Start DAP UI"
+            }, {
+                "<F5>",
+                function() require("dap").toggle_breakpoint() end,
+                desc = "DAP Set breakpoint"
+            },
+            {
+                "<F9>",
+                function() require("dap").continue() end,
+                desc = "Start/Continue"
+            },
+            {
+                "<F1>",
+                function() require("dap").step_over() end,
+                desc = "DAP Step over"
+            },
+            {
+                "<F2>",
+                function() require("dap").step_into() end,
+                desc = "DAP Step into"
+            },
+            {
+                "<F3>",
+                function() require("dap").step_out() end,
+                desc = "DAP Step out"
+            }
         },
         dependencies = {
             {"theHamsta/nvim-dap-virtual-text"}, -- virtual text for debugger
             {
                 "mfussenegger/nvim-dap-python", -- python debugger
-                config = function() require("dap-python").setup("~/.virtualenvs/debugpy/bin/python") end
-            }, {"leoluz/nvim-dap-go", config = function() require("dap-go").setup() end}, -- go debugger
+                config = function()
+                    require("dap-python").setup(
+                        "~/.virtualenvs/debugpy/bin/python")
+                end
+            },
+            {
+                "leoluz/nvim-dap-go",
+                config = function() require("dap-go").setup() end
+            }, -- go debugger
             {
                 "rcarriga/nvim-dap-ui", -- debugger UI
                 config = function() require("dapui").setup() end
@@ -414,9 +504,24 @@ return {
             local dap = require("dap")
             local sign = vim.fn.sign_define
 
-            sign("DapBreakpoint", {text = "●", texthl = "DapBreakpoint", linehl = "", numhl = ""})
-            sign("DapBreakpointCondition", {text = "●", texthl = "DapBreakpointCondition", linehl = "", numhl = ""})
-            sign("DapLogPoint", {text = "◆", texthl = "DapLogPoint", linehl = "", numhl = ""})
+            sign("DapBreakpoint", {
+                text = "●",
+                texthl = "DapBreakpoint",
+                linehl = "",
+                numhl = ""
+            })
+            sign("DapBreakpointCondition", {
+                text = "●",
+                texthl = "DapBreakpointCondition",
+                linehl = "",
+                numhl = ""
+            })
+            sign("DapLogPoint", {
+                text = "◆",
+                texthl = "DapLogPoint",
+                linehl = "",
+                numhl = ""
+            })
 
             -- https://github.com/microsoft/vscode-cpptools/releases/latest
             -- download cpptools-linux.vsix
@@ -426,7 +531,8 @@ return {
             dap.adapters.cppdbg = {
                 type = "executable",
                 id = "cppdbg",
-                command = os.getenv("HOME") .. "/software/vscode-cpptools/extension/debugAdapters/bin/OpenDebugAD7"
+                command = os.getenv("HOME") ..
+                    "/software/vscode-cpptools/extension/debugAdapters/bin/OpenDebugAD7"
             }
 
             dap.configurations.cpp = {
@@ -435,7 +541,8 @@ return {
                     type = "cppdbg",
                     request = "launch",
                     program = function()
-                        return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+                        return vim.fn.input("Path to executable: ",
+                                            vim.fn.getcwd() .. "/", "file")
                     end,
                     cwd = "${workspaceFolder}",
                     stopOnEntry = true,
@@ -455,7 +562,8 @@ return {
                     miDebuggerPath = "/usr/bin/gdb",
                     cwd = "${workspaceFolder}",
                     program = function()
-                        return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+                        return vim.fn.input("Path to executable: ",
+                                            vim.fn.getcwd() .. "/", "file")
                     end
                 }
             }
@@ -467,9 +575,24 @@ return {
         event = "BufReadPre",
         opts = {
             signs = {
-                add = {hl = "GitSignsAdd", text = "│", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn"},
-                change = {hl = "GitSignsChange", text = "│", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn"},
-                delete = {hl = "GitSignsDelete", text = "_", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn"},
+                add = {
+                    hl = "GitSignsAdd",
+                    text = "│",
+                    numhl = "GitSignsAddNr",
+                    linehl = "GitSignsAddLn"
+                },
+                change = {
+                    hl = "GitSignsChange",
+                    text = "│",
+                    numhl = "GitSignsChangeNr",
+                    linehl = "GitSignsChangeLn"
+                },
+                delete = {
+                    hl = "GitSignsDelete",
+                    text = "_",
+                    numhl = "GitSignsDeleteNr",
+                    linehl = "GitSignsDeleteLn"
+                },
                 topdelete = {
                     hl = "GitSignsDelete",
                     text = "‾",
@@ -485,13 +608,17 @@ return {
             },
             on_attach = function(bufnr)
                 local function map(mode, lhs, rhs, opts)
-                    opts = vim.tbl_extend("force", {noremap = true, silent = true}, opts or {})
+                    opts = vim.tbl_extend("force",
+                                          {noremap = true, silent = true},
+                                          opts or {})
                     vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, opts)
                 end
 
                 -- Navigation
-                map("n", "]c", "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", {expr = true})
-                map("n", "[c", "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", {expr = true})
+                map("n", "]c", "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'",
+                    {expr = true})
+                map("n", "[c", "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'",
+                    {expr = true})
 
                 -- Actions
                 -- map("n", "<leader>hs", "<cmd>Gitsigns stage_hunk<CR>")
@@ -502,10 +629,13 @@ return {
                 -- map("n", "<leader>hu", "<cmd>Gitsigns undo_stage_hunk<CR>")
                 -- map("n", "<leader>hR", "<cmd>Gitsigns reset_buffer<CR>")
                 -- map("n", "<leader>hp", "<cmd>Gitsigns preview_hunk<CR>")
-                map("n", "<leader>hb", '<cmd>lua require"gitsigns".blame_line{full=true}<CR>')
-                map("n", "<leader>tb", "<cmd>Gitsigns toggle_current_line_blame<CR>")
+                map("n", "<leader>hb",
+                    '<cmd>lua require"gitsigns".blame_line{full=true}<CR>')
+                map("n", "<leader>tb",
+                    "<cmd>Gitsigns toggle_current_line_blame<CR>")
                 map("n", "<leader>hd", "<cmd>Gitsigns diffthis<CR>")
-                map("n", "<leader>hD", '<cmd>lua require"gitsigns".diffthis("~")<CR>')
+                map("n", "<leader>hD",
+                    '<cmd>lua require"gitsigns".diffthis("~")<CR>')
                 -- map("n", "<leader>td", "<cmd>Gitsigns toggle_deleted<CR>")
 
                 -- Text object

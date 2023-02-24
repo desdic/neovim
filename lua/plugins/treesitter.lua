@@ -1,8 +1,7 @@
 return {
 
     -- playground
-    {"nvim-treesitter/playground", cmd = "TSPlaygroundToggle", build = ":TSInstall query"}, -- context
-    {
+    {"nvim-treesitter/playground", cmd = "TSPlaygroundToggle"}, {
         "nvim-treesitter/nvim-treesitter-context",
         event = "BufReadPre",
 
@@ -12,7 +11,10 @@ return {
             trim_scope = "outer", -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
             min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
             patterns = { -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
-                default = {"class", "function", "method", "for", "while", "if", "switch", "case"},
+                default = {
+                    "class", "function", "method", "for", "while", "if",
+                    "switch", "case"
+                },
                 markdown = {"section"},
                 json = {"pair"},
                 yaml = {"block_mapping_pair"}
@@ -24,16 +26,20 @@ return {
     }, -- treesitter
     {
         "nvim-treesitter/nvim-treesitter",
-        build = function() require("nvim-treesitter.install").update({with_sync = true}) end,
+        build = function()
+            require("nvim-treesitter.install").update({with_sync = true})
+        end,
         dependencies = {
-            {"nvim-treesitter/nvim-treesitter-refactor"}, {"nvim-treesitter/nvim-treesitter-textobjects"},
+            {"nvim-treesitter/nvim-treesitter-refactor"},
+            {"nvim-treesitter/nvim-treesitter-textobjects"},
             {"HiPhish/nvim-ts-rainbow2"}
         },
         config = function()
             require("nvim-treesitter.configs").setup({
                 ensure_installed = {
-                    "bash", "c", "cpp", "dockerfile", "go", "gomod", "json", "lua", "python", "ruby", "yaml", "toml",
-                    "markdown", "markdown_inline", "glsl", "rust", "make", "sql"
+                    "bash", "c", "cpp", "dockerfile", "go", "gomod", "json",
+                    "lua", "python", "ruby", "yaml", "toml", "markdown",
+                    "markdown_inline", "glsl", "rust", "make", "sql", "query"
                 },
                 indent = {enable = true, disable = {}},
                 highlight = {
@@ -51,7 +57,12 @@ return {
                     -- Do not enable for files with more than n lines
                     max_file_lines = 3000
                 },
-                refactor = {smart_rename = {enable = true, keymaps = {smart_rename = "grr"}}},
+                refactor = {
+                    smart_rename = {
+                        enable = true,
+                        keymaps = {smart_rename = "grr"}
+                    }
+                },
                 incremental_selection = {
                     enable = true,
                     keymaps = {

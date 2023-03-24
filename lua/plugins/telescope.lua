@@ -31,11 +31,14 @@ local M = {
             function() require("telescope.builtin").current_buffer_fuzzy_find() end,
             desc = "[F]uzzy [s]earch"
         }, {"<Leader>gS", function() require("telescope.builtin").git_status() end, desc = "[G]it [s]tatus"},
-        {"<Leader>hm", ":Telescope harpoon marks<CR>", desc = "[H]arpoon [m]arks"}
+        {"<Leader>hm", ":Telescope harpoon marks<CR>", desc = "[H]arpoon [m]arks"},
+        {"zi", ":Telescope agrolens query=functions,labels buffers=all sametype=false<CR>"},
+        {"zo", ":Telescope agrolens query=callings buffers=all sametype=false match=name<CR>"}
     },
     dependencies = {
         {"nvim-telescope/telescope-fzy-native.nvim"}, {"nvim-telescope/telescope-ui-select.nvim"},
-        {"desdic/telescope-rooter.nvim"}, {"nvim-tree/nvim-web-devicons"}
+        {"desdic/telescope-rooter.nvim"}, {"nvim-tree/nvim-web-devicons"},
+        {"desdic/agrolens.nvim", dev = false, event = "VeryLazy"}
     }
 }
 
@@ -46,7 +49,7 @@ function M.config()
 
     ts.setup({
         defaults = {
-            file_ignore_patterns = {".git/", ".cache/", "vendor"},
+            file_ignore_patterns = {"^.git/", "^.cache/", "vendor"},
             prompt_prefix = " ",
             selection_caret = " ",
             path_display = {"smart"},
@@ -73,13 +76,15 @@ function M.config()
         },
         extensions = {
             fzy_native = {override_generic_sorter = false, override_file_sorter = true},
-            rooter = {patterns = {".git", "go.sum"}}
+            rooter = {patterns = {".git", "go.sum"}},
+            agrolens = {debug = false, sametype = true, includehiddenbuffers = false}
         }
     })
 
     ts.load_extension("fzy_native")
     ts.load_extension("harpoon")
     ts.load_extension("rooter")
+    ts.load_extension("agrolens")
 end
 
 return M

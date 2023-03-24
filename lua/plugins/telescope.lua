@@ -32,8 +32,9 @@ local M = {
             desc = "[F]uzzy [s]earch"
         }, {"<Leader>gS", function() require("telescope.builtin").git_status() end, desc = "[G]it [s]tatus"},
         {"<Leader>hm", ":Telescope harpoon marks<CR>", desc = "[H]arpoon [m]arks"},
+        {"zu", ":Telescope agrolens query=functions,labels<CR>"},
         {"zi", ":Telescope agrolens query=functions,labels buffers=all sametype=false<CR>"},
-        {"zo", ":Telescope agrolens query=callings buffers=all sametype=false match=name<CR>"}
+        {"zo", ":Telescope agrolens query=callings buffers=all sametype=false match=name,object<CR>"}
     },
     dependencies = {
         {"nvim-telescope/telescope-fzy-native.nvim"}, {"nvim-telescope/telescope-ui-select.nvim"},
@@ -77,7 +78,7 @@ function M.config()
         extensions = {
             fzy_native = {override_generic_sorter = false, override_file_sorter = true},
             rooter = {patterns = {".git", "go.sum"}},
-            agrolens = {debug = false, sametype = true, includehiddenbuffers = false}
+            agrolens = {debug = false, sametype = false, includehiddenbuffers = true}
         }
     })
 

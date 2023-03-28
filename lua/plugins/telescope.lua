@@ -34,7 +34,8 @@ local M = {
         {"<Leader>hm", ":Telescope harpoon marks<CR>", desc = "[H]arpoon [m]arks"},
         {"zu", ":Telescope agrolens query=functions,labels<CR>"},
         {"zi", ":Telescope agrolens query=functions,labels buffers=all sametype=false<CR>"},
-        {"zo", ":Telescope agrolens query=callings buffers=all sametype=false match=name,object<CR>"}
+        {"zo", ":Telescope agrolens query=callings buffers=all sametype=false match=name,object<CR>"},
+        {"zc", ":Telescope agrolens query=comments buffers=all sametype=false<CR>"}
     },
     dependencies = {
         {"nvim-telescope/telescope-fzy-native.nvim"}, {"nvim-telescope/telescope-ui-select.nvim"},

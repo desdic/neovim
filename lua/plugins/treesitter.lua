@@ -39,7 +39,7 @@ return {
                 ensure_installed = {
                     "bash", "c", "cpp", "dockerfile", "go", "gomod", "json",
                     "lua", "python", "ruby", "yaml", "toml", "markdown",
-                    "markdown_inline", "glsl", "rust", "make", "sql", "query"
+                    "markdown_inline", "glsl", "rust", "make", "sql", "query", "perl", "php"
                 },
                 indent = {enable = true, disable = {}},
                 highlight = {

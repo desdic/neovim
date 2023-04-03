@@ -11,14 +11,4 @@
 
 # My Neovim config
 
-Used for Go, Python and some Ruby.
-
-# Requirements
-
-- Neovim 0.8+
-- fd
-- fzf
-- carbo
-- golang
-- python 3+
-```
+Requires Neovim 0.8+

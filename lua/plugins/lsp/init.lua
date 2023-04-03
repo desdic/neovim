@@ -142,7 +142,7 @@ return {
         config = function()
             require("mason-null-ls").setup({
                 -- list of formatters & linters for mason to install
-                ensure_installed = {"stylua", "black", "gofmt", "goimports", "golangci_lint"},
+                ensure_installed = {"stylua", "black", "goimports", "golangci_lint"},
                 -- auto-install configured servers (with lspconfig)
                 automatic_installation = true
             })

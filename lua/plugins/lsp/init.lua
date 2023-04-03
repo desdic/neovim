@@ -3,40 +3,44 @@ return {
         "neovim/nvim-lspconfig",
         dependencies = {
             {
-                {"ray-x/lsp_signature.nvim"}, {"hrsh7th/cmp-nvim-lsp"}, {
+                { "ray-x/lsp_signature.nvim" },
+                { "hrsh7th/cmp-nvim-lsp" },
+                {
                     "SmiteshP/nvim-navic",
-                    opts = {highlight = true},
+                    opts = { highlight = true },
                     config = function(_, opts)
                         require("nvim-navic").setup(opts)
-                    end
-                }, {"williamboman/mason.nvim", cmd = "Mason", opts = {}}, {"williamboman/mason-lspconfig.nvim"}
-            }
+                    end,
+                },
+                { "williamboman/mason.nvim", cmd = "Mason", opts = {} },
+                { "williamboman/mason-lspconfig.nvim" },
+            },
         },
         opts = {
             servers = {
                 gopls = {
-                    settings = {gopls = {analyses = {unusedparams = true}, staticcheck = true, gofumpt = true}},
+                    settings = { gopls = { analyses = { unusedparams = true }, staticcheck = true, gofumpt = true } },
                     root_dir = function()
-                        return vim.fs.dirname(vim.fs.find({".git", "go.mod", "."}, {upward = true})[1])
+                        return vim.fs.dirname(vim.fs.find({ ".git", "go.mod", "." }, { upward = true })[1])
                     end,
-                    init_options = {usePlaceholders = true, completeUnimported = true, gofumpt = true}
+                    init_options = { usePlaceholders = true, completeUnimported = true, gofumpt = true },
                 },
                 lua_ls = {
                     settings = { -- custom settings for lua
                         Lua = {
                             -- make the language server recognize "vim" global
-                            diagnostics = {globals = {"vim", "require"}},
+                            diagnostics = { globals = { "vim", "require" } },
                             workspace = {
                                 -- make language server aware of runtime files
                                 library = {
                                     [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                                    [vim.fn.stdpath("config") .. "/lua"] = true
-                                }
-                            }
-                        }
-                    }
+                                    [vim.fn.stdpath("config") .. "/lua"] = true,
+                                },
+                            },
+                        },
+                    },
                 },
-                bashls = {filetypes = {"sh", "zsh"}},
+                bashls = { filetypes = { "sh", "zsh" } },
                 yamlls = {},
                 pyright = {
                     settings = {
@@ -44,22 +48,22 @@ return {
                             analysis = {
                                 autoSearchPaths = true,
                                 diagnosticMode = "openFilesOnly",
-                                useLibraryCodeForTypes = true
-                            }
-                        }
-                    }
+                                useLibraryCodeForTypes = true,
+                            },
+                        },
+                    },
                 },
                 pylsp = {},
                 efm = {},
-                solargraph = {filetypes = {"ruby", "rb", "erb", "rakefile"}},
-                dockerls = {root_dir = vim.loop.cwd},
-                clangd = {cmd = {"clangd", "--background-index"}},
+                solargraph = { filetypes = { "ruby", "rb", "erb", "rakefile" } },
+                dockerls = { root_dir = vim.loop.cwd },
+                clangd = { cmd = { "clangd", "--background-index" } },
                 jsonls = {},
                 perlnavigator = {},
-                rust_analyzer = {}
+                rust_analyzer = {},
             },
             setup = {},
-            capabilities = {clangd = {offsetEncoding = {"utf-16"}}}
+            capabilities = { clangd = { offsetEncoding = { "utf-16" } } },
         },
         event = "BufReadPre",
         config = function(_, opts)
@@ -79,7 +83,7 @@ return {
             local servers = opts.servers
             local capabilities = cmp_nvim_lsp.default_capabilities()
 
-            require("mason-lspconfig").setup({ensure_installed = vim.tbl_keys(servers)})
+            require("mason-lspconfig").setup({ ensure_installed = vim.tbl_keys(servers) })
             require("mason-lspconfig").setup_handlers({
                 function(server)
                     local server_opts = servers[server] or {}
@@ -93,25 +97,29 @@ return {
 
                     server_opts.on_attach = on_attach
                     if opts.setup[server] then
-                        if opts.setup[server](server, server_opts) then return end
+                        if opts.setup[server](server, server_opts) then
+                            return
+                        end
                     elseif opts.setup["*"] then
-                        if opts.setup["*"](server, server_opts) then return end
+                        if opts.setup["*"](server, server_opts) then
+                            return
+                        end
                     end
                     require("lspconfig")[server].setup(server_opts)
-                end
+                end,
             })
 
-            local signs = {Error = " ", Warn = " ", Hint = "ﴞ ", Info = " "}
+            local signs = { Error = " ", Warn = " ", Hint = "ﴞ ", Info = " " }
             for type, icon in pairs(signs) do
                 local hl = "DiagnosticSign" .. type
-                vim.fn.sign_define(hl, {text = icon, texthl = hl, numhl = ""})
+                vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
             end
 
             vim.diagnostic.config({
                 -- disable virtual text
                 virtual_text = false,
                 -- show signs
-                signs = {active = signs},
+                signs = { active = signs },
                 update_in_insert = true,
                 underline = true,
                 severity_sort = true,
@@ -121,30 +129,31 @@ return {
                     border = "rounded",
                     source = "always",
                     header = "",
-                    prefix = ""
-                }
+                    prefix = "",
+                },
             })
 
-            vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {border = "rounded"})
+            vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
 
             vim.lsp.handlers["textDocument/signatureHelp"] =
-                vim.lsp.with(vim.lsp.handlers.signature_help, {border = "rounded"})
-        end
-    }, {
+                vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+        end,
+    },
+    {
         "jose-elias-alvarez/null-ls.nvim",
         build = {
             "go install github.com/daixiang0/gci@latest",
             "go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest",
-            "go install golang.org/x/tools/cmd/goimports@latest"
+            "go install golang.org/x/tools/cmd/goimports@latest",
         },
-        dependencies = {"jayp0521/mason-null-ls.nvim"},
+        dependencies = { "jayp0521/mason-null-ls.nvim" },
         event = "BufReadPre",
         config = function()
             require("mason-null-ls").setup({
                 -- list of formatters & linters for mason to install
-                ensure_installed = {"stylua", "black", "goimports", "golangci_lint"},
+                ensure_installed = { "stylua", "black", "goimports", "golangci_lint" },
                 -- auto-install configured servers (with lspconfig)
-                automatic_installation = true
+                automatic_installation = true,
             })
 
             local null_ls = require("null-ls")
@@ -156,30 +165,53 @@ return {
 
             local gci_format = {
                 method = null_ls.methods.FORMATTING,
-                filetypes = {"go"},
-                generator = h.formatter_factory({command = "gci", args = {"-w", "$FILENAME"}, to_temp_file = true})
+                filetypes = { "go" },
+                generator = h.formatter_factory({ command = "gci", args = { "-w", "$FILENAME" }, to_temp_file = true }),
             }
 
             -- configure null_ls
             null_ls.setup({
                 -- setup formatters & linters
                 sources = {
-                    formatting.stylua, formatting.black, formatting.rustfmt, formatting.gofmt,
-                    formatting.gofumpt, formatting.clang_format, formatting.goimports, diagnostics.golangci_lint.with({
+                    formatting.stylua,
+                    formatting.black,
+                    formatting.rustfmt,
+                    formatting.gofmt,
+                    formatting.gofumpt,
+                    formatting.clang_format,
+                    formatting.goimports,
+                    diagnostics.golangci_lint.with({
                         args = {
-                            "run", "--enable-all", "--disable", "lll", "--disable", "godot", "--out-format=json",
-                            "$DIRNAME", "--path-prefix", "$ROOT"
-                        }
-                    }), gci_format, null_ls.builtins.formatting.rubocop.with({
+                            "run",
+                            "--enable-all",
+                            "--disable",
+                            "lll",
+                            "--disable",
+                            "godot",
+                            "--out-format=json",
+                            "$DIRNAME",
+                            "--path-prefix",
+                            "$ROOT",
+                        },
+                    }),
+                    gci_format,
+                    null_ls.builtins.formatting.rubocop.with({
                         args = {
-                            "--auto-correct", "-f", "-c", HOME_PATH .. "/.work-rubocop.yml", "quiet", "--stderr",
-                            "--stdin", "$FILENAME"
-                        }
-                    }), null_ls.builtins.diagnostics.rubocop.with({
-                        args = {"-c", HOME_PATH .. "/.work-rubocop.yml", "-f", "json", "--stdin", "$FILENAME"}
-                    })
-                }
+                            "--auto-correct",
+                            "-f",
+                            "-c",
+                            HOME_PATH .. "/.work-rubocop.yml",
+                            "quiet",
+                            "--stderr",
+                            "--stdin",
+                            "$FILENAME",
+                        },
+                    }),
+                    null_ls.builtins.diagnostics.rubocop.with({
+                        args = { "-c", HOME_PATH .. "/.work-rubocop.yml", "-f", "json", "--stdin", "$FILENAME" },
+                    }),
+                },
             })
-        end
-    }
+        end,
+    },
 }

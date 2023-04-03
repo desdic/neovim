@@ -1,7 +1,8 @@
 return {
 
     -- playground
-    {"nvim-treesitter/playground", cmd = "TSPlaygroundToggle"}, {
+    { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" },
+    {
         "nvim-treesitter/nvim-treesitter-context",
         event = "BufReadPre",
 
@@ -12,38 +13,63 @@ return {
             min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
             patterns = { -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
                 default = {
-                    "class", "function", "method", "for", "while", "if",
-                    "switch", "case"
+                    "class",
+                    "function",
+                    "method",
+                    "for",
+                    "while",
+                    "if",
+                    "switch",
+                    "case",
                 },
-                markdown = {"section"},
-                json = {"pair"},
-                yaml = {"block_mapping_pair"}
+                markdown = { "section" },
+                json = { "pair" },
+                yaml = { "block_mapping_pair" },
             },
             zindex = 20, -- The Z-index of the context window
             mode = "cursor", -- Line used to calculate context. Choices: 'cursor', 'topline'
-            separator = nil
-        }
+            separator = nil,
+        },
     }, -- treesitter
     {
         "nvim-treesitter/nvim-treesitter",
         build = function()
-            require("nvim-treesitter.install").update({with_sync = true})
+            require("nvim-treesitter.install").update({ with_sync = true })
         end,
         dependencies = {
-            {"nvim-treesitter/nvim-treesitter-refactor"},
-            {"nvim-treesitter/nvim-treesitter-textobjects"},
-            {"HiPhish/nvim-ts-rainbow2"}
+            { "nvim-treesitter/nvim-treesitter-refactor" },
+            { "nvim-treesitter/nvim-treesitter-textobjects" },
+            { "HiPhish/nvim-ts-rainbow2" },
         },
         config = function()
             require("nvim-treesitter.configs").setup({
                 ensure_installed = {
-                    "bash", "c", "cpp", "dockerfile", "go", "gomod", "json",
-                    "lua", "python", "ruby", "yaml", "toml", "markdown",
-                    "markdown_inline", "glsl", "rust", "make", "sql", "query", "perl", "php", "vimdoc"
+                    "bash",
+                    "c",
+                    "cpp",
+                    "dockerfile",
+                    "go",
+                    "gomod",
+                    "json",
+                    "lua",
+                    "python",
+                    "ruby",
+                    "yaml",
+                    "toml",
+                    "markdown",
+                    "markdown_inline",
+                    "glsl",
+                    "rust",
+                    "make",
+                    "sql",
+                    "query",
+                    "perl",
+                    "php",
+                    "vimdoc",
                 },
-                indent = {enable = true, disable = {}},
+                indent = { enable = true, disable = {} },
                 highlight = {
-                    enable = true -- false will disable the whole extension
+                    enable = true, -- false will disable the whole extension
                     -- disable = {"rust"} -- list of language that will be disabled
                 },
                 rainbow = {
@@ -58,8 +84,8 @@ return {
                 refactor = {
                     smart_rename = {
                         enable = true,
-                        keymaps = {smart_rename = "grr"}
-                    }
+                        keymaps = { smart_rename = "grr" },
+                    },
                 },
                 incremental_selection = {
                     enable = true,
@@ -67,8 +93,8 @@ return {
                         init_selection = "<CR>",
                         scope_incremental = "<CR>",
                         node_incremental = "<S-CR>",
-                        node_decremental = "<BS>"
-                    }
+                        node_decremental = "<BS>",
+                    },
                 },
                 textobjects = {
                     select = {
@@ -83,13 +109,13 @@ return {
                             ["af"] = "@function.outer",
                             ["if"] = "@function.inner",
                             ["ac"] = "@class.outer",
-                            ["ic"] = "@class.inner"
-                        }
+                            ["ic"] = "@class.inner",
+                        },
                     },
                     swap = {
                         enable = true,
-                        swap_next = {["fa"] = "@parameter.inner"},
-                        swap_previous = {["fA"] = "@parameter.inner"}
+                        swap_next = { ["fa"] = "@parameter.inner" },
+                        swap_previous = { ["fA"] = "@parameter.inner" },
                     },
                     move = {
                         enable = true,
@@ -101,7 +127,7 @@ return {
                             ["]l"] = "@loop.outer",
                             ["]i"] = "@conditional.outer",
                             ["]p"] = "@parameter.inner",
-                            ["]o"] = "@call.outer"
+                            ["]o"] = "@call.outer",
                         },
                         goto_previous_start = {
                             ["[f"] = "@function.outer",
@@ -110,9 +136,9 @@ return {
                             ["[l"] = "@loop.outer",
                             ["[i"] = "@conditional.outer",
                             ["[p"] = "@parameter.inner",
-                            ["[o"] = "@call.outer"
-                        }
-                    }
+                            ["[o"] = "@call.outer",
+                        },
+                    },
                 },
                 playground = {
                     enable = true,
@@ -129,11 +155,11 @@ return {
                         unfocus_language = "F",
                         update = "R",
                         goto_node = "<cr>",
-                        show_help = "?"
-                    }
+                        show_help = "?",
+                    },
                 },
-                context_commentstring = {enable = true, enable_autocmd = false}
+                context_commentstring = { enable = true, enable_autocmd = false },
             })
-        end
-    }
+        end,
+    },
 }

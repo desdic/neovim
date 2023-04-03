@@ -6,7 +6,7 @@ vim.filetype.add({
         mount = "systemd",
         target = "systemd",
         path = "systemd",
-        rules = "make"
+        rules = "make",
     },
     pattern = {
         [".*/etc/systemd/.*.%.socket"] = "systemd",
@@ -15,8 +15,8 @@ vim.filetype.add({
         [".*/etc/systemd/.*.d/*.%.conf"] = "systemd",
         [".*/etc/systemd/.*.d/.#.*"] = "systemd",
         ["~/.config/systemd/user/.*.%.socket"] = "systemd",
-        ["~/.config/systemd/user/.*.%.swap"] = "systemd"
-    }
+        ["~/.config/systemd/user/.*.%.swap"] = "systemd",
+    },
 })
 
-vim.filetype.add({extension = {frag = "glsl", vert = "glsl", vtc = "vtc"}})
+vim.filetype.add({ extension = { frag = "glsl", vert = "glsl", vtc = "vtc" } })

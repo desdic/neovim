@@ -13,7 +13,9 @@ function M.get_line_starts(winid)
         if fold_end ~= -1 then
             lnum = fold_end + 1
         else
-            if lnum ~= cur_line then table.insert(targets, {pos = {lnum, 1}}) end
+            if lnum ~= cur_line then
+                table.insert(targets, { pos = { lnum, 1 } })
+            end
             lnum = lnum + 1
         end
     end
@@ -24,9 +26,13 @@ function M.get_line_starts(winid)
         return math.abs(cur_screen_row - t_screen_row)
     end
 
-    table.sort(targets, function(t1, t2) return screen_rows_from_cur(t1) < screen_rows_from_cur(t2) end)
+    table.sort(targets, function(t1, t2)
+        return screen_rows_from_cur(t1) < screen_rows_from_cur(t2)
+    end)
 
-    if #targets >= 1 then return targets end
+    if #targets >= 1 then
+        return targets
+    end
 end
 
 return M

@@ -11,8 +11,10 @@ local rep = require("luasnip.extras").rep
 
 local snippets, autosnippets = {}, {}
 
-local pcallf = s({trig = "pcallguard", name = "protective guard"},
-                 fmt([[local {}, {} = pcall(require, "{}")
+local pcallf = s(
+    { trig = "pcallguard", name = "protective guard" },
+    fmt(
+        [[local {}, {} = pcall(require, "{}")
 if not {} then
     vim.notify("Unable to require {}", vim.lsp.log_levels.ERROR,
                {{title = "Plugin error"}})
@@ -20,7 +22,10 @@ if not {} then
 end
 
 {}
-        ]], {i(1, "ok"), i(2, "fn"), i(3, "library"), rep(1), rep(3), i(0)}))
+        ]],
+        { i(1, "ok"), i(2, "fn"), i(3, "library"), rep(1), rep(3), i(0) }
+    )
+)
 table.insert(snippets, pcallf)
 
 return snippets, autosnippets

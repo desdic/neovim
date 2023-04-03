@@ -25,7 +25,7 @@ return {
                 dashboard.button("s", "  Restore session", ":lua require('persistence').load()<CR>"),
                 dashboard.button("t", "  Update treesitter", ":TSUpdateSync<CR>"),
                 dashboard.button("u", "  Update plugins", ":Lazy sync<CR>"),
-                dashboard.button("q", "  Quit Neovim", ":qa<CR>")
+                dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
             }
 
             dashboard.section.footer.opts.hl = "Type"
@@ -38,10 +38,12 @@ return {
         config = function(_, dashboard)
             if vim.o.filetype == "lazy" then
                 vim.cmd.close()
-                vim.api.nvim_create_autocmd("User",
-                                            {pattern = "AlphaReady", callback = function()
-                    require("lazy").show()
-                end})
+                vim.api.nvim_create_autocmd("User", {
+                    pattern = "AlphaReady",
+                    callback = function()
+                        require("lazy").show()
+                    end,
+                })
             end
 
             require("alpha").setup(dashboard.opts)
@@ -52,90 +54,117 @@ return {
                     local version = vim.version()
 
                     local stats = require("lazy").stats()
-                    dashboard.section.footer.val = "⚡ Neovim(" .. version.major .. "." .. version.minor .. "." ..
-                                                       version.patch .. ") loaded " .. stats.count .. " plugins "
+                    dashboard.section.footer.val = "⚡ Neovim("
+                        .. version.major
+                        .. "."
+                        .. version.minor
+                        .. "."
+                        .. version.patch
+                        .. ") loaded "
+                        .. stats.count
+                        .. " plugins "
                     pcall(vim.cmd.AlphaRedraw)
-                end
+                end,
             })
-        end
-    }, {
+        end,
+    },
+    {
         "nvim-lualine/lualine.nvim",
         lazy = false,
         config = function()
-            local hide_in_width = function() return vim.fn.winwidth(0) > 80 end
+            local hide_in_width = function()
+                return vim.fn.winwidth(0) > 80
+            end
 
             local diagnostics = {
                 "diagnostics",
-                sources = {"nvim_diagnostic"},
-                sections = {"error", "warn"},
-                symbols = {error = " ", warn = " "},
+                sources = { "nvim_diagnostic" },
+                sections = { "error", "warn" },
+                symbols = { error = " ", warn = " " },
                 colored = false,
                 update_in_insert = false,
-                always_visible = true
+                always_visible = true,
             }
 
             local diff = {
                 "diff",
                 colored = false,
-                symbols = {added = " ", modified = " ", removed = " "}, -- changes diff symbols
-                cond = hide_in_width
+                symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
+                cond = hide_in_width,
             }
 
-            local mode = {"mode", fmt = function(str) return "-- " .. str .. " --" end}
+            local mode = {
+                "mode",
+                fmt = function(str)
+                    return "-- " .. str .. " --"
+                end,
+            }
 
             local filetype = {
                 function()
                     local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
-                    if buf_ft == "toggleterm" then return "" end
+                    if buf_ft == "toggleterm" then
+                        return ""
+                    end
                     return buf_ft
                 end,
                 icons_enabled = false,
-                icon = nil
+                icon = nil,
             }
 
-            local branch = {"branch", icons_enabled = true, icon = ""}
+            local branch = { "branch", icons_enabled = true, icon = "" }
 
-            local location = {"location", padding = 0}
+            local location = { "location", padding = 0 }
 
             local lspclients = {
                 function()
                     local clients = vim.lsp.get_active_clients()
-                    if next(clients) == nil then return "" end
+                    if next(clients) == nil then
+                        return ""
+                    end
                     return ""
                 end,
-                padding = {right = 1},
-                cond = hide_in_width
+                padding = { right = 1 },
+                cond = hide_in_width,
             }
 
             local spaces = function()
                 local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
-                if buf_ft == "toggleterm" then return "" end
+                if buf_ft == "toggleterm" then
+                    return ""
+                end
                 return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
             end
 
             local filename = {
                 function()
                     local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
-                    if buf_ft == "toggleterm" then return "terminal" end
+                    if buf_ft == "toggleterm" then
+                        return "terminal"
+                    end
 
                     local filepath = vim.fn.expand("%:p")
 
-                    if #filepath > 52 then filepath = ".." .. string.sub(filepath, -50) end
+                    if #filepath > 52 then
+                        filepath = ".." .. string.sub(filepath, -50)
+                    end
 
                     return filepath
                 end,
-                padding = {right = 1},
-                cond = hide_in_width
+                padding = { right = 1 },
+                cond = hide_in_width,
             }
 
             local navicok, navic = pcall(require, "nvim-navic")
             local navicinfo = {
                 function()
-                    if navicok and navic.is_available() then return " " .. navic.get_location() end
+                    if navicok and navic.is_available() then
+                        return " " .. navic.get_location()
+                    end
                     return ""
                 end,
-                padding = {right = 1},
-                cond = hide_in_width
+                padding = { right = 1 },
+                cond = hide_in_width,
             }
 
             require("lualine").setup({
@@ -145,25 +174,35 @@ return {
                     -- theme = custom_catppuccin,
                     theme = "catppuccin",
                     -- theme = "nightfox",
-                    component_separators = {left = "", right = ""},
-                    section_separators = {left = "", right = ""},
+                    component_separators = { left = "", right = "" },
+                    section_separators = { left = "", right = "" },
                     disabled_filetypes = {
-                        statusline = {"alpha", "NvimTree", "Outline", "lazy"},
+                        statusline = { "alpha", "NvimTree", "Outline", "lazy" },
                         winbar = {
-                            "help", "startify", "packer", "neogitstatus", "NvimTree", "Trouble", "alpha", "lir",
-                            "Outline", "spectre_panel", "toggleterm", "qf"
-                        }
+                            "help",
+                            "startify",
+                            "packer",
+                            "neogitstatus",
+                            "NvimTree",
+                            "Trouble",
+                            "alpha",
+                            "lir",
+                            "Outline",
+                            "spectre_panel",
+                            "toggleterm",
+                            "qf",
+                        },
                     },
                     always_divide_middle = true,
-                    globalstatus = true
+                    globalstatus = true,
                 },
                 sections = {
-                    lualine_a = {branch, diagnostics},
-                    lualine_b = {mode},
-                    lualine_c = {navicinfo},
-                    lualine_x = {"%=", lspclients, diff, spaces, "encoding", filetype},
-                    lualine_y = {location},
-                    lualine_z = {}
+                    lualine_a = { branch, diagnostics },
+                    lualine_b = { mode },
+                    lualine_c = { navicinfo },
+                    lualine_x = { "%=", lspclients, diff, spaces, "encoding", filetype },
+                    lualine_y = { location },
+                    lualine_z = {},
                     -- lualine_z = {progress}
                 },
                 -- inactive_sections = {
@@ -180,7 +219,7 @@ return {
                     --     lualine_c = {},
                     --     lualine_x = {navicinfo},
                     --     lualine_y = {},
-                    lualine_z = {"%m", filename}
+                    lualine_z = { "%m", filename },
                 },
                 inactive_winbar = {
                     -- lualine_a = {},
@@ -188,13 +227,14 @@ return {
                     -- lualine_c = {},
                     -- lualine_x = {},
                     -- lualine_y = {},
-                    lualine_z = {filename}
+                    lualine_z = { filename },
                 },
                 tabline = {},
-                extensions = {"nvim-tree", "nvim-dap-ui"}
+                extensions = { "nvim-tree", "nvim-dap-ui" },
             })
-        end
-    }, {
+        end,
+    },
+    {
         "rcarriga/nvim-notify",
         lazy = false,
         -- event = "VeryLazy",
@@ -206,60 +246,87 @@ return {
                 timeout = 1000,
                 level = vim.log.levels.INFO,
                 fps = 20,
-                max_height = function() return math.floor(vim.o.lines * 0.75) end,
-                max_width = function() return math.floor(vim.o.columns * 0.75) end,
-                stages = "static"
+                max_height = function()
+                    return math.floor(vim.o.lines * 0.75)
+                end,
+                max_width = function()
+                    return math.floor(vim.o.columns * 0.75)
+                end,
+                stages = "static",
             })
 
             vim.notify = notify
-        end
-    }, {
+        end,
+    },
+    {
         "stevearc/dressing.nvim",
         event = "VeryLazy",
 
         init = function()
             ---@diagnostic disable-next-line: duplicate-set-field
             vim.ui.select = function(...)
-                require("lazy").load({plugins = {"dressing.nvim"}})
+                require("lazy").load({ plugins = { "dressing.nvim" } })
                 return vim.ui.select(...)
             end
             ---@diagnostic disable-next-line: duplicate-set-field
             vim.ui.input = function(...)
-                require("lazy").load({plugins = {"dressing.nvim"}})
+                require("lazy").load({ plugins = { "dressing.nvim" } })
                 return vim.ui.input(...)
             end
-        end
-    }, {
+        end,
+    },
+    {
         "beauwilliams/focus.nvim",
         opts = {
             enable = true,
             cursorline = false,
             signcolumn = true,
             number = false,
-            excluded_filetypes = {"toggleterm"}
+            excluded_filetypes = { "toggleterm" },
         },
-        config = function(_, opts) require("focus").setup(opts) end,
+        config = function(_, opts)
+            require("focus").setup(opts)
+        end,
         keys = {
-            {"<Leader>sl", function() require("focus").split_command("h") end, desc = "[S]plit window [l]eft"},
-            {"<Leader>sr", function() require("focus").split_command("l") end, desc = "[S]plit window [r]ight"}
-        }
+            {
+                "<Leader>sl",
+                function()
+                    require("focus").split_command("h")
+                end,
+                desc = "[S]plit window [l]eft",
+            },
+            {
+                "<Leader>sr",
+                function()
+                    require("focus").split_command("l")
+                end,
+                desc = "[S]plit window [r]ight",
+            },
+        },
     },
-    {"chentoast/marks.nvim", event = "BufEnter", opts = {}, config = function(_, opts) require("marks").setup(opts) end},
+    {
+        "chentoast/marks.nvim",
+        event = "BufEnter",
+        opts = {},
+        config = function(_, opts)
+            require("marks").setup(opts)
+        end,
+    },
     {
         "akinsho/nvim-bufferline.lua",
-        dependencies = {"nvim-tree/nvim-web-devicons"},
+        dependencies = { "nvim-tree/nvim-web-devicons" },
         event = "VeryLazy",
         keys = {
-            {"<S-l>", ":BufferLineCycleNext<CR>", desc = "Move to next buffer"},
-            {"<S-h>", ":BufferLineCyclePrev<CR>", desc = "Move to previous buffer"}
+            { "<S-l>", ":BufferLineCycleNext<CR>", desc = "Move to next buffer" },
+            { "<S-h>", ":BufferLineCyclePrev<CR>", desc = "Move to previous buffer" },
         },
         opts = {
             options = {
                 show_buffer_close_icons = false,
                 show_close_icon = false,
                 persist_buffer_sort = true,
-                offsets = {{filetype = "NvimTree", text = "NvimTree", highlight = "Directory", text_align = "left"}}
-            }
-        }
-    }
+                offsets = { { filetype = "NvimTree", text = "NvimTree", highlight = "Directory", text_align = "left" } },
+            },
+        },
+    },
 }

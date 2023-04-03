@@ -15,9 +15,11 @@ function M.format()
     vim.lsp.buf.format({
         bufnr = buf,
         filter = function(client)
-            if have_nls then return client.name == "null-ls" end
+            if have_nls then
+                return client.name == "null-ls"
+            end
             return client.name ~= "null-ls"
-        end
+        end,
     })
 end
 
@@ -26,7 +28,11 @@ function M.on_attach(client, buf)
         vim.api.nvim_create_autocmd("BufWritePre", {
             group = vim.api.nvim_create_augroup("LspFormat." .. buf, {}),
             buffer = buf,
-            callback = function() if M.autoformat then M.format() end end
+            callback = function()
+                if M.autoformat then
+                    M.format()
+                end
+            end,
         })
     end
 end

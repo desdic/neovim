@@ -12,7 +12,7 @@ local rep = require("luasnip.extras").rep
 
 local snippets, autosnippets = {}, {}
 
-local test = s({trig = "test", name = "test"}, t("test"))
+local test = s({ trig = "test", name = "test" }, t("test"))
 
 table.insert(snippets, test)
 

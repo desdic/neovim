@@ -49,8 +49,47 @@ function M.config()
     local ts = require("telescope")
 
     local actions = require("telescope.actions")
+    local action_state = require("telescope.actions.state")
 
     ts.setup({
+        pickers = {
+            -- Make telescope able to jump to a specific line
+            find_files = {
+                on_input_filter_cb = function(prompt)
+                    local find_colon = string.find(prompt, ":")
+                    if find_colon then
+                        local ret = string.sub(prompt, 1, find_colon - 1)
+                        vim.schedule(function()
+                            local prompt_bufnr = vim.api.nvim_get_current_buf()
+                            local state = action_state.get_current_picker(prompt_bufnr).previewer.state
+                            local lnum = tonumber(prompt:sub(find_colon + 1))
+                            if type(lnum) == "number" then
+                                if state then 
+                                    local win = tonumber(state.winid)
+                                    local bufnr = tonumber(state.bufnr)
+                                    local line_count = vim.api.nvim_buf_line_count(bufnr)
+                                    vim.api.nvim_win_set_cursor(win, {math.max(1, math.min(lnum, line_count)), 0})
+                                end
+                            end
+                        end)
+                        return { prompt = ret}
+                    end
+                end,
+                attach_mappings = function()
+                    actions.select_default:enhance {
+                        post = function()
+                            local prompt = action_state.get_current_line()
+                            local find_colon = string.find(prompt, ":")
+                            if find_colon then
+                                local lnum = tonumber(prompt:sub(find_colon + 1))
+                                vim.api.nvim_win_set_cursor(0, {lnum, 0})
+                            end
+                        end,
+                    }
+                    return true
+                end
+            }
+        },
         defaults = {
             file_ignore_patterns = {"^.git/", "^.cache/", "vendor"},
             prompt_prefix = " ",

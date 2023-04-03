@@ -119,6 +119,7 @@ function M.config()
                             local prompt_bufnr = vim.api.nvim_get_current_buf()
                             local state = action_state.get_current_picker(prompt_bufnr).previewer.state
                             local lnum = tonumber(prompt:sub(find_colon + 1))
+
                             if type(lnum) == "number" then
                                 if state then
                                     local win = tonumber(state.winid)
@@ -128,6 +129,10 @@ function M.config()
                                 end
                             end
                         end)
+                        local selection = action_state.get_selected_entry()
+                        if selection then
+                            ret = selection[1]
+                        end
                         return { prompt = ret }
                     end
                 end,

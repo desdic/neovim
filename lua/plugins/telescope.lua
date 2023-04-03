@@ -33,14 +33,15 @@ local M = {
         }, {"<Leader>gS", function() require("telescope.builtin").git_status() end, desc = "[G]it [s]tatus"},
         {"<Leader>hm", ":Telescope harpoon marks<CR>", desc = "[H]arpoon [m]arks"},
         {"zu", ":Telescope agrolens query=functions,labels<CR>"},
-        {"zi", ":Telescope agrolens query=functions,labels buffers=all sametype=false<CR>"},
-        {"zo", ":Telescope agrolens query=callings buffers=all sametype=false match=name,object<CR>"},
-        {"zc", ":Telescope agrolens query=comments buffers=all sametype=false<CR>"}
+        {"zi", ":Telescope agrolens query=functions,labels buffers=all same_type=false<CR>"},
+        {"zo", ":Telescope agrolens query=callings buffers=all same_type=false match=name,object<CR>"},
+        {"zl", ":Telescope agrolens query=cheflxchost,github-workflow-steps<CR>"},
+        {"zc", ":Telescope agrolens query=comments buffers=all same_type=false<CR>"}
     },
     dependencies = {
         {"nvim-telescope/telescope-fzy-native.nvim"}, {"nvim-telescope/telescope-ui-select.nvim"},
         {"desdic/telescope-rooter.nvim"}, {"nvim-tree/nvim-web-devicons"},
-        {"desdic/agrolens.nvim", dev = false, event = "VeryLazy"}
+        {"desdic/agrolens.nvim", event = "VeryLazy"}
     }
 }
 
@@ -79,7 +80,13 @@ function M.config()
         extensions = {
             fzy_native = {override_generic_sorter = false, override_file_sorter = true},
             rooter = {patterns = {".git", "go.sum"}},
-            agrolens = {debug = false, sametype = false, includehiddenbuffers = true}
+            agrolens = {
+                debug = false,
+                same_type = false,
+                include_hidden_buffers = false,
+                disable_indentation = true,
+                aliases = {yamllist = "docker-compose,github-workflow-steps"}
+            }
         }
     })
 

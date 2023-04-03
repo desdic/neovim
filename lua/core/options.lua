@@ -80,3 +80,5 @@ vim.wo.cursorline = true
 opt.isfname:append("@-@")
 
 option.pumheight = 10 -- Maximum number of entries in a popup
+
+global.markdown_fenched_languages = {"lua", "c", "cpp", "go", "rust", "ruby"}

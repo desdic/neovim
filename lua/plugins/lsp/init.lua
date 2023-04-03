@@ -164,7 +164,7 @@ return {
             null_ls.setup({
                 -- setup formatters & linters
                 sources = {
-                    formatting.stylua, formatting.lua_format, formatting.black, formatting.rustfmt, formatting.gofmt,
+                    formatting.stylua, formatting.black, formatting.rustfmt, formatting.gofmt,
                     formatting.gofumpt, formatting.clang_format, formatting.goimports, diagnostics.golangci_lint.with({
                         args = {
                             "run", "--enable-all", "--disable", "lll", "--disable", "godot", "--out-format=json",

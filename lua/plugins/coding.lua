@@ -61,6 +61,7 @@ return {
             "hrsh7th/cmp-nvim-lua",
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-path",
+            "hrsh7th/cmp-nvim-lsp-signature-help",
             "onsails/lspkind-nvim",
             "saadparwaiz1/cmp_luasnip",
             "L3MON4D3/LuaSnip",
@@ -126,6 +127,7 @@ return {
                     { name = "buffer", priority = 6, keyword_length = 2 },
                     { name = "nvim_lua", priority_weight = 4, keyword_length = 2 },
                     { name = "path", priority = 2, keyword_length = 2 },
+                    { name = "nvim_lsp_signature_help" },
                 },
                 window = { documentation = cmp.config.window.bordered(), completion = cmp.config.window.bordered() },
             })

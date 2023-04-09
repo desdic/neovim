@@ -5,6 +5,9 @@ return {
     {
         "nvim-treesitter/nvim-treesitter-context",
         event = "BufReadPre",
+        keys = {
+            {"<Leader>tp", ":TSPlaygroundToggle<CR>"}
+        },
 
         opts = {
             enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
@@ -139,6 +142,11 @@ return {
                             ["[o"] = "@call.outer",
                         },
                     },
+                },
+                query_linter = {
+                    enable = true,
+                    use_virtual_text = true,
+                    lint_events = { "BufWrite", "CursorHold" },
                 },
                 playground = {
                     enable = true,

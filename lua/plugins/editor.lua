@@ -279,10 +279,4 @@ return {
             },
         },
     },
-    {
-        "luukvbaal/stabilize.nvim",
-        config = function()
-            require("stabilize").setup()
-        end,
-    }, -- not needed in nvim 0.9
 }

@@ -50,8 +50,15 @@ vim.keymap.set("x", "<Leader>p", '"_dP', { silent = true, noremap = true, desc =
 vim.keymap.set({ "n", "v" }, "<Leader>y", '"+y', { silent = true, noremap = true, desc = "yank to clipboard" })
 vim.keymap.set("n", "<Leader>Y", '"+Y', { silent = true, noremap = true, desc = "yank line to clipboard" })
 
--- The mapping xnoremap p "_dP changes the behavior of p when pasting over selected text which is at the end of a line. That occurs because when text at the end of a line is deleted, the cursor moves back to the last character on the line, and P then pastes before that last character.
-vim.keymap.set({ "n", "v" }, "<Leader>d", '"_d', { silent = true, noremap = true, desc = "delete?" })
+-- The mapping xnoremap p "_dP changes the behavior of p when pasting over selected text
+-- which is at the end of a line. That occurs because when text at the end of a line is deleted, the cursor
+-- moves back to the last character on the line, and P then pastes before that last character.
+vim.keymap.set(
+    { "n", "v" },
+    "<Leader>d",
+    '"_d',
+    { silent = true, noremap = true, desc = "delete, don't save in register" }
+)
 
 vim.keymap.set("n", "n", "nzzzv", { silent = true, noremap = true, desc = "search next and center" })
 vim.keymap.set("n", "N", "Nzzzv", { silent = true, noremap = true, desc = "search next and center" })
@@ -60,4 +67,4 @@ vim.keymap.set("n", "<C-d>", "<C-d>zz", { silent = true, noremap = true, desc = 
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { silent = true, noremap = true, desc = "jump center" })
 
 vim.keymap.set("n", "<Leader>tf", require("plugins.lsp.format").toggle, { desc = "Toggle format on Save" })
-vim.keymap.set("n", "<Leader>t", ":PlenaryBustedDirectory. <CR>", { desc = "PlenaryTest" })
+vim.keymap.set("n", "<Leader>tt", ":PlenaryBustedDirectory. <CR>", { desc = "PlenaryTest" })

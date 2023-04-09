@@ -97,7 +97,19 @@ local M = {
         { "nvim-telescope/telescope-ui-select.nvim" },
         { "desdic/telescope-rooter.nvim" },
         { "nvim-tree/nvim-web-devicons" },
-        { "desdic/agrolens.nvim", event = "VeryLazy" },
+        {
+            "desdic/agrolens.nvim",
+            dev = false,
+            event = "VeryLazy",
+            keys = {
+                {
+                    "ag",
+                    function()
+                        require("agrolens").generate({all_captures=true})
+                    end,
+                },
+            },
+        },
     },
 }
 

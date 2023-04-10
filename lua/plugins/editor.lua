@@ -85,11 +85,6 @@ return {
         end,
     },
     {
-        "AckslD/nvim-neoclip.lua",
-        opts = {},
-        keys = { { "<Leader>bp", ":Telescope neoclip unnamed<CR>", desc = "Show clipboard buffers" } },
-    },
-    {
         "smjonas/inc-rename.nvim",
         cmd = "IncRename",
         keys = { { "<Leader>rn", ":IncRename " .. vim.fn.expand("<cword>"), desc = "[R]e[n]ame" } },

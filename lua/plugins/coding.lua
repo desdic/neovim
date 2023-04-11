@@ -86,15 +86,20 @@ return {
                 sorting = {
                     priority_weight = 1.0,
                     comparators = {
-                        compare.scopes,
-                        compare.offset,
                         compare.exact,
+                        compare.length,
+                        compare.scopes,
                         compare.score,
                         compare.recently_used,
-                        compare.locality,
-                        compare.kind, -- compare.sort_text,
-                        compare.length,
-                        compare.order,
+                        -- compare.scopes,
+                        -- compare.offset,
+                        -- compare.exact,
+                        -- compare.score,
+                        -- compare.recently_used,
+                        -- compare.locality,
+                        -- compare.kind, -- compare.sort_text,
+                        -- compare.length,
+                        -- compare.order,
                     },
                 },
                 min_length = 0, -- allow for `from package import _` in Python
@@ -217,7 +222,6 @@ return {
             greyjoy.load_extension("cargo")
         end,
     },
-    { "gpanders/editorconfig.nvim", event = "BufEnter" },
     {
         "ray-x/go.nvim",
         ft = "go",

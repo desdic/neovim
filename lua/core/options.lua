@@ -84,7 +84,7 @@ option.pumheight = 10 -- Maximum number of entries in a popup
 global.markdown_fenched_languages = { "lua", "c", "cpp", "go", "rust", "ruby" }
 
 -- Set line numbers in telescope preview window
-vim.cmd "autocmd User TelescopePreviewerLoaded setlocal number"
+vim.cmd("autocmd User TelescopePreviewerLoaded setlocal number")
 
 -- stabilize buffer content
-global.splitkeep="screen"
+global.splitkeep = "screen"

@@ -136,6 +136,15 @@ return {
                 },
                 window = { documentation = cmp.config.window.bordered(), completion = cmp.config.window.bordered() },
             })
+
+            cmp.setup.cmdline(":", {
+                mapping = cmp.mapping.preset.cmdline(),
+                sources = cmp.config.sources({
+                    { name = "path" },
+                }, {
+                    { name = "cmdline" },
+                }),
+            })
         end,
     },
     {

@@ -147,14 +147,6 @@ local function go_result_type(info)
     -- This only returns a source_file and no longer decends into tree
     -- local scope = ts_locals.get_scope_tree(cursor_node, 0)
     --
-    -- local function_node
-    -- for _, v in ipairs(scope) do
-    --     if function_node_types[v:type()] then
-    --         function_node = v
-    --         break
-    --     end
-    -- end
-
     if not function_node then
         print("Not inside of a function")
         return t("")

@@ -18,8 +18,6 @@ vim.keymap.set(
     { noremap = true, silent = false, expr = false, desc = "Remove search" }
 )
 
-vim.cmd('command! -nargs=0 LspVirtualTextToggle lua require("lsp/virtual_text").toggle()')
-
 vim.keymap.set(
     "n",
     "<Leader>cm",

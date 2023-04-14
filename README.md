@@ -11,4 +11,4 @@
 
 # My Neovim config
 
-Requires Neovim 0.8+
+Requires Neovim 0.9+

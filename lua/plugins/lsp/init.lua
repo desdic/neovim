@@ -41,7 +41,13 @@ return {
                     },
                 },
                 bashls = { filetypes = { "sh", "zsh" } },
-                yamlls = {},
+                yamlls = {
+                    settings = {
+                        yaml = {
+                            keyOrdering = false,
+                        },
+                    },
+                },
                 pyright = {
                     settings = {
                         python = {

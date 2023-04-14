@@ -31,6 +31,7 @@ return {
                 harpoon = true,
                 illuminate = true,
                 mason = true,
+                semantic_tokens = true,
             },
             highlight_overrides = {
                 mocha = {

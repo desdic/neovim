@@ -6,7 +6,7 @@ return {
         "nvim-treesitter/nvim-treesitter-context",
         event = "BufReadPre",
         keys = {
-            {"<Leader>tp", ":TSPlaygroundToggle<CR>"}
+            { "<Leader>tp", ":TSPlaygroundToggle<CR>" },
         },
 
         opts = {

@@ -136,15 +136,6 @@ return {
                 },
                 window = { documentation = cmp.config.window.bordered(), completion = cmp.config.window.bordered() },
             })
-
-            cmp.setup.cmdline(":", {
-                mapping = cmp.mapping.preset.cmdline(),
-                sources = cmp.config.sources({
-                    { name = "path" },
-                }, {
-                    { name = "cmdline" },
-                }),
-            })
         end,
     },
     {
@@ -325,6 +316,15 @@ return {
                 command = os.getenv("HOME") .. "/software/vscode-cpptools/extension/debugAdapters/bin/OpenDebugAD7",
             }
 
+            dap.adapters.codelldb = {
+                type = "server",
+                port = "${port}",
+                executable = {
+                    command = "/usr/bin/codelldb",
+                    args = { "--port", "${port}", "--settings",  "{\"showDisassembly\" : \"never\"}" },
+                },
+            }
+
             dap.configurations.cpp = {
                 {
                     name = "Launch file",
@@ -358,6 +358,19 @@ return {
             }
 
             dap.configurations.c = dap.configurations.cpp -- Reuse for c
+
+            dap.configurations.rust = {
+                {
+                    name = "Rust debug",
+                    type = "codelldb",
+                    request = "launch",
+                    program = function()
+                        return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/target/debug/", "file")
+                    end,
+                    cwd = "${workspaceFolder}",
+                    stopOnEntry = true,
+                },
+            }
         end,
     },
     {

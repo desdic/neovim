@@ -14,6 +14,15 @@ return {
                 },
                 { "williamboman/mason.nvim", cmd = "Mason", opts = {} },
                 { "williamboman/mason-lspconfig.nvim" },
+                {
+                    "rust-lang/rust.vim",
+                    ft = "rust",
+                    init = function()
+                        vim.g.rustfmt_autosave = 1
+                    end,
+                },
+                { "RRethy/vim-illuminate" },
+                { "simrat39/rust-tools.nvim" },
             },
         },
         opts = {
@@ -66,7 +75,6 @@ return {
                 clangd = { cmd = { "clangd", "--background-index" } },
                 jsonls = {},
                 perlnavigator = {},
-                rust_analyzer = {},
             },
             setup = {},
             capabilities = { clangd = { offsetEncoding = { "utf-16" } } },
@@ -114,6 +122,29 @@ return {
                     require("lspconfig")[server].setup(server_opts)
                 end,
             })
+
+            local rt = require("rust-tools")
+            local rust_opts = {
+                server = {
+                    on_attach = function(client, bufnr)
+                        -- Code action groups
+                        vim.keymap.set("n", "<Leader>ca", rt.code_action_group.code_action_group, { buffer = bufnr })
+                        require("illuminate").on_attach(client)
+                    end,
+                    settings = {
+                        ["rust-analyzer"] = {
+                            cargo = {
+                                allFeatures = true,
+                            },
+                            checkOnSave = {
+                                command = "clippy",
+                            },
+                        },
+                    },
+                },
+            }
+
+            rt.setup(rust_opts)
 
             local signs = { Error = " ", Warn = " ", Hint = "ﴞ ", Info = " " }
             for type, icon in pairs(signs) do

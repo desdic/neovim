@@ -51,5 +51,6 @@ return {
         vim.cmd([[colorscheme catppuccin]])
 
         vim.api.nvim_set_hl(0, "LeapBackdrop", { link = "Comment" })
+        vim.api.nvim_set_hl(0, "LspInlayHint", { link = "Comment" })
     end,
 }

@@ -22,13 +22,41 @@ return {
                     end,
                 },
                 { "RRethy/vim-illuminate" },
-                { "simrat39/rust-tools.nvim" },
+                {
+                    "simrat39/rust-tools.nvim",
+                    opts = {
+                        tools = {
+                            inlay_hints = {
+                                auto = false,
+                            },
+                        },
+                    },
+                    config = function(_, opts)
+                        require("rust-tools").setup(opts)
+                    end,
+                }
             },
         },
         opts = {
             servers = {
                 gopls = {
-                    settings = { gopls = { analyses = { unusedparams = true }, staticcheck = true, gofumpt = true } },
+                    settings = {
+                        gopls = {
+                            analyses = { unusedparams = true },
+                            staticcheck = true,
+                            gofumpt = true,
+
+                            hints = {
+                                assignVariableTypes = true,
+                                compositeLiteralFields = true,
+                                compositeLiteralTypes = true,
+                                constantValues = true,
+                                functionTypeParameters = true,
+                                parameterNames = true,
+                                rangeVariableTypes = true,
+                            },
+                        },
+                    },
                     root_dir = function()
                         return vim.fs.dirname(vim.fs.find({ ".git", "go.mod", "." }, { upward = true })[1])
                     end,
@@ -45,6 +73,9 @@ return {
                                     [vim.fn.expand("$VIMRUNTIME/lua")] = true,
                                     [vim.fn.stdpath("config") .. "/lua"] = true,
                                 },
+                            },
+                            hint = {
+                                enable = true,
                             },
                         },
                     },
@@ -91,6 +122,7 @@ return {
                     require("nvim-navic").attach(client, bufnr)
                 end
 
+                -- require("lsp-inlayhints").on_attach(client, bufnr)
                 require("plugins.lsp.keymaps").on_attach(client, bufnr)
             end
 
@@ -146,7 +178,7 @@ return {
 
             rt.setup(rust_opts)
 
-            local signs = { Error = " ", Warn = " ", Hint = "ﴞ ", Info = " " }
+            local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
             for type, icon in pairs(signs) do
                 local hl = "DiagnosticSign" .. type
                 vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })

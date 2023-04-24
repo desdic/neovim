@@ -225,7 +225,7 @@ return {
         "ray-x/go.nvim",
         ft = "go",
         dependencies = { "ray-x/guihua.lua" },
-        opts = { dap_debug = true, dap_debug_gui = true },
+        opts = { dap_debug = true, dap_debug_gui = true, lsp_inlay_hints = { enable = false } },
         config = function(_, opts)
             require("go").setup(opts)
         end,

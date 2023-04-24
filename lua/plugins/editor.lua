@@ -23,12 +23,6 @@ return {
                         target_windows = { winid },
                         targets = require("utils/lines").get_line_starts(winid),
                     })
-                    vim.schedule(function()
-                        vim.cmd([[norm o]])
-                    end)
-                    vim.schedule(function()
-                        vim.cmd([[startinsert]])
-                    end)
                 end,
             },
         },

@@ -34,7 +34,7 @@ return {
                     config = function(_, opts)
                         require("rust-tools").setup(opts)
                     end,
-                }
+                },
             },
         },
         opts = {

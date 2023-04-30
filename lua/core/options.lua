@@ -65,7 +65,7 @@ global.loaded_python_provider = 0
 
 option.termguicolors = true
 
-option.swapfile = false
+option.swapfile = true
 option.conceallevel = 0 -- so that `` is visible in markdown files
 
 option.splitbelow = true

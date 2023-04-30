@@ -21,6 +21,8 @@ return {
 
                 -- Enable dynamic snippets
                 updateevents = "TextChanged,TextChangedI",
+                -- For cleaning up snippets whose text was deleted
+                delete_check_events = "TextChanged",
 
                 enable_autosnippets = true,
 
@@ -135,24 +137,39 @@ return {
                     { name = "nvim_lsp_signature_help" },
                 },
                 window = { documentation = cmp.config.window.bordered(), completion = cmp.config.window.bordered() },
+                experimental = {
+                    ghost_text = {
+                        hl_group = "LspCodeLens",
+                    },
+                },
             })
         end,
     },
     {
-        "windwp/nvim-autopairs",
+        "echasnovski/mini.pairs",
         event = "VeryLazy",
+        opts = {},
+        config = function(_, opts)
+            require("mini.pairs").setup(opts)
+        end,
+    },
+    {
+        "echasnovski/mini.surround",
+        event = "VeryLazy",
+        version = "*",
         opts = {
-            disable_filetype = { "TelescopePrompt", "vim" },
-            check_ts = true,
-            ts_config = {
-                lua = { "string" }, -- it will not add a pair on that treesitter node
+            mappings = {
+                add = "gza", -- Add surrounding in Normal and on motion (gzaiw")
+                delete = "gzd", -- Delete surrounding
+                find = "gzf", -- Find surrounding (to the right)
+                find_left = "gzF", -- Find surrounding (to the left)
+                highlight = "gzh", -- Highlight surrounding
+                replace = "gzr", -- Replace surrounding
+                update_n_lines = "gzn", -- Update `n_lines`
             },
         },
         config = function(_, opts)
-            require("nvim-autopairs").setup(opts)
-            local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-            local cmp = require("cmp")
-            cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+            require("mini.surround").setup(opts)
         end,
     },
     {
@@ -164,22 +181,6 @@ return {
             require("Comment").setup(opts)
             local ft = require("Comment.ft")
             ft.set("vtc", "#%s")
-        end,
-    },
-    {
-        "kylechui/nvim-surround",
-        version = "*",
-        event = "VeryLazy",
-        config = function()
-            -- default mappings
-            -- surr*ound_words             ysiw)           (surround_words)
-            -- *make strings               ys$"            "make strings"
-            -- [delete ar*ound me!]        ds]             delete around me!
-            -- remove <b>HTML t*ags</b>    dst             remove HTML tags
-            -- 'change quot*es'            cs'"            "change quotes"
-            -- <b>or tag* types</b>        csth1<CR>       <h1>or tag types</h1>
-            -- delete(functi*on calls)     dsf             function calls
-            require("nvim-surround").setup({})
         end,
     },
     {
@@ -321,7 +322,7 @@ return {
                 port = "${port}",
                 executable = {
                     command = "/usr/bin/codelldb",
-                    args = { "--port", "${port}", "--settings",  "{\"showDisassembly\" : \"never\"}" },
+                    args = { "--port", "${port}", "--settings", '{"showDisassembly" : "never"}' },
                 },
             }
 

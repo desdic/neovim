@@ -185,6 +185,30 @@ return {
         end,
     },
     {
+        "echasnovski/mini.ai",
+        event = "VeryLazy",
+        opts = function()
+            local ai = require("mini.ai")
+            return {
+                n_lines = 500,
+                custom_textobjects = {
+                    -- cao change outer block/conditional/loop
+                    o = ai.gen_spec.treesitter({
+                        a = { "@block.outer", "@conditional.outer", "@loop.outer" },
+                        i = { "@block.inner", "@conditional.inner", "@loop.inner" },
+                    }, {}),
+                    f = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }, {}),
+                    -- caa = change function argument
+                    c = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }, {}),
+                },
+            }
+        end,
+        config = function(_, opts)
+            require("mini.ai").setup(opts)
+            -- cif = change inner function
+        end,
+    },
+    {
         "desdic/greyjoy.nvim",
         keys = {
             { "<Leader>gr", ":Greyjoy<CR>", desc = "[G]reyjoy [r]un" },

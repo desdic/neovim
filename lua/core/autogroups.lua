@@ -112,3 +112,13 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
     end,
 })
+
+-- set comment string for varnish/vtc files
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = {
+        "vtc",
+    },
+    callback = function(_)
+        vim.api.nvim_buf_set_option(0, "commentstring", "# %s")
+    end,
+})

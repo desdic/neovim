@@ -43,6 +43,7 @@ return {
             { "nvim-treesitter/nvim-treesitter-refactor" },
             { "nvim-treesitter/nvim-treesitter-textobjects" },
             { "HiPhish/nvim-ts-rainbow2" },
+            { "JoosepAlviste/nvim-ts-context-commentstring" },
         },
         config = function()
             require("nvim-treesitter.configs").setup({
@@ -166,7 +167,10 @@ return {
                         show_help = "?",
                     },
                 },
-                context_commentstring = { enable = true, enable_autocmd = false },
+                context_commentstring = {
+                    enable = true,
+                    enable_autocmd = false,
+                },
             })
         end,
     },

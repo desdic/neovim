@@ -137,11 +137,6 @@ return {
                     { name = "nvim_lsp_signature_help" },
                 },
                 window = { documentation = cmp.config.window.bordered(), completion = cmp.config.window.bordered() },
-                experimental = {
-                    ghost_text = {
-                        hl_group = "LspCodeLens",
-                    },
-                },
             })
         end,
     },
@@ -173,14 +168,20 @@ return {
         end,
     },
     {
-        "numToStr/Comment.nvim",
+        "echasnovski/mini.comment",
         event = "VeryLazy",
-        dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
-        opts = {},
+        dependencies = {
+            "JoosepAlviste/nvim-ts-context-commentstring",
+        },
+        opts = {
+            hooks = {
+                pre = function()
+                    require("ts_context_commentstring.internal").update_commentstring({})
+                end,
+            },
+        },
         config = function(_, opts)
-            require("Comment").setup(opts)
-            local ft = require("Comment.ft")
-            ft.set("vtc", "#%s")
+            require("mini.comment").setup(opts)
         end,
     },
     {

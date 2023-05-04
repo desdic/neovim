@@ -42,7 +42,12 @@ return {
                 gopls = {
                     settings = {
                         gopls = {
-                            analyses = { unusedparams = true },
+                            analyses = {
+                                nilness = true,
+                                unusedparams = true,
+                                unusedwrite = true,
+                                useany = true,
+                            },
                             staticcheck = true,
                             gofumpt = true,
 
@@ -257,6 +262,7 @@ return {
                             "lll",
                             "--disable",
                             "godot",
+                            "--disable","goimports",
                             "--out-format=json",
                             "$DIRNAME",
                             "--path-prefix",

@@ -109,10 +109,7 @@ return {
                     ["<C-b>"] = cmp.mapping.scroll_docs(-4),
                     ["<C-f>"] = cmp.mapping.scroll_docs(4),
                     ["<C-Space>"] = cmp.mapping.complete(),
-                    ["<C-e>"] = cmp.mapping.abort(),
-                    ["<C-y>"] = cmp.config.disable,
                     ["<CR>"] = cmp.mapping.confirm({ select = true }), -- no not select first item
-
                     ["<Tab>"] = cmp.mapping(function(fallback)
                         if cmp.visible() then
                             cmp.select_next_item()
@@ -249,7 +246,7 @@ return {
     },
     {
         "ray-x/go.nvim",
-        ft = {"go", "gomod"},
+        ft = { "go", "gomod" },
         dependencies = { "ray-x/guihua.lua", "neovim/nvim-lspconfig", "nvim-treesitter/nvim-treesitter" },
         build = ':lua require("go.install").update_all_sync()',
         opts = { dap_debug = true, dap_debug_gui = true, lsp_inlay_hints = { enable = false } },

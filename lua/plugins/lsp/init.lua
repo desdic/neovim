@@ -7,7 +7,37 @@ return {
                 { "hrsh7th/cmp-nvim-lsp" },
                 {
                     "SmiteshP/nvim-navic",
-                    opts = { highlight = true },
+                    opts = {
+                        icons = {
+                            File = "󰈙 ",
+                            Module = " ",
+                            Namespace = "󰌗 ",
+                            Package = " ",
+                            Class = "󰌗 ",
+                            Method = "󰆧 ",
+                            Property = " ",
+                            Field = " ",
+                            Constructor = " ",
+                            Enum = "󰕘",
+                            Interface = "󰕘",
+                            Function = "󰊕 ",
+                            Variable = "󰆧 ",
+                            Constant = "󰏿 ",
+                            String = "󰀬 ",
+                            Number = "󰎠 ",
+                            Boolean = "◩ ",
+                            Array = "󰅪 ",
+                            Object = "󰅩 ",
+                            Key = "󰌋 ",
+                            Null = "󰟢 ",
+                            EnumMember = " ",
+                            Struct = "󰌗 ",
+                            Event = " ",
+                            Operator = "󰆕 ",
+                            TypeParameter = "󰊄 ",
+                        },
+                        highlight = true,
+                    },
                     config = function(_, opts)
                         require("nvim-navic").setup(opts)
                     end,
@@ -42,6 +72,8 @@ return {
                 gopls = {
                     settings = {
                         gopls = {
+                            usePlaceholders = true,
+                            completeUnimported = true,
                             analyses = {
                                 nilness = true,
                                 unusedparams = true,
@@ -62,10 +94,10 @@ return {
                             },
                         },
                     },
+                    filetypes = { "go", "gomod", "gowork", "gotmpl" },
                     root_dir = function()
-                        return vim.fs.dirname(vim.fs.find({ ".git", "go.mod", "." }, { upward = true })[1])
+                        return vim.fs.dirname(vim.fs.find({ ".git", "go.mod", "go.work", "." }, { upward = true })[1])
                     end,
-                    init_options = { usePlaceholders = true, completeUnimported = true, gofumpt = true },
                 },
                 lua_ls = {
                     settings = { -- custom settings for lua
@@ -183,7 +215,7 @@ return {
 
             rt.setup(rust_opts)
 
-            local signs = { Error = " ", Warn = " ", Hint = "ﴞ ", Info = " " }
+            local signs = { Error = " ", Warn = " ", Hint = "󰵚 ", Info = " " }
             for type, icon in pairs(signs) do
                 local hl = "DiagnosticSign" .. type
                 vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
@@ -225,7 +257,7 @@ return {
         config = function()
             require("mason-null-ls").setup({
                 -- list of formatters & linters for mason to install
-                ensure_installed = { "stylua", "black", "goimports", "golangci_lint" },
+                ensure_installed = { "stylua", "black", "goimports", "golines", "golangci_lint" },
                 -- auto-install configured servers (with lspconfig)
                 automatic_installation = true,
             })
@@ -254,6 +286,7 @@ return {
                     formatting.gofumpt,
                     formatting.clang_format,
                     formatting.goimports,
+                    -- formatting.golines,
                     diagnostics.golangci_lint.with({
                         args = {
                             "run",
@@ -262,7 +295,8 @@ return {
                             "lll",
                             "--disable",
                             "godot",
-                            "--disable","goimports",
+                            "--disable",
+                            "goimports",
                             "--out-format=json",
                             "$DIRNAME",
                             "--path-prefix",

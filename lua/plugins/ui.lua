@@ -15,17 +15,17 @@ return {
             dashboard.section.header.val = vim.split(logo, "\n")
             dashboard.section.buttons.val = {
                 dashboard.button("c", "  Configuration", ":lua require('custom.telescope').search_nvim()<CR>"),
-                dashboard.button("f", "  Find file", ":Telescope find_files <CR>"),
-                dashboard.button("g", "  Grep text", ":Telescope live_grep <CR>"),
+                dashboard.button("f", "󰈞  Find file", ":Telescope find_files <CR>"),
+                dashboard.button("g", "󰊄  Grep text", ":Telescope live_grep <CR>"),
                 dashboard.button("h", "  Harpoon", ":Telescope harpoon marks<CR>"),
                 dashboard.button("l", "  Lazy", ":Lazy<CR>"),
                 dashboard.button("m", "  Mason", ":Mason<CR>"),
                 dashboard.button("n", "  Notes", ":lua require('custom.telescope').grep_notes()<CR>"),
-                dashboard.button("r", "  Recently used files", ":Telescope oldfiles <CR>"),
+                dashboard.button("r", "󰄉  Recently used files", ":Telescope oldfiles <CR>"),
                 dashboard.button("s", "  Restore session", ":lua require('persistence').load()<CR>"),
                 dashboard.button("t", "  Update treesitter", ":TSUpdateSync<CR>"),
-                dashboard.button("u", "  Update plugins", ":Lazy sync<CR>"),
-                dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
+                dashboard.button("u", "󰃨  Update plugins", ":Lazy sync<CR>"),
+                dashboard.button("q", "󰅚  Quit Neovim", ":qa<CR>"),
             }
 
             dashboard.section.footer.opts.hl = "Type"
@@ -89,7 +89,7 @@ return {
             local diff = {
                 "diff",
                 colored = false,
-                symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
+                symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
                 cond = hide_in_width,
             }
 
@@ -214,11 +214,11 @@ return {
                 --     lualine_z = {}
                 -- },
                 winbar = {
-                    --     lualine_a = {},
-                    --     lualine_b = {},
-                    --     lualine_c = {},
-                    --     lualine_x = {navicinfo},
-                    --     lualine_y = {},
+                --     lualine_a = {},
+                --     lualine_b = {},
+                --     lualine_c = {},
+                --     lualine_x = {navicinfo},
+                --     lualine_y = {},
                     lualine_z = { "%m", filename },
                 },
                 inactive_winbar = {

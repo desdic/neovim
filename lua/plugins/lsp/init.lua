@@ -143,6 +143,7 @@ return {
                 clangd = { cmd = { "clangd", "--background-index" } },
                 jsonls = {},
                 perlnavigator = {},
+                rust_analyzer = {},
             },
             setup = {},
             capabilities = { clangd = { offsetEncoding = { "utf-16" } } },

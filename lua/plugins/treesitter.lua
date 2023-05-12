@@ -1,6 +1,4 @@
 return {
-
-    -- playground
     {
         "nvim-treesitter/playground",
         cmd = "TSPlaygroundToggle",
@@ -11,7 +9,6 @@ return {
     {
         "nvim-treesitter/nvim-treesitter-context",
         event = "BufReadPre",
-
         opts = {
             enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
             max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
@@ -36,7 +33,7 @@ return {
             mode = "cursor", -- Line used to calculate context. Choices: 'cursor', 'topline'
             separator = nil,
         },
-    }, -- treesitter
+    },
     {
         "nvim-treesitter/nvim-treesitter",
         build = function()

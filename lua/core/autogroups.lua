@@ -20,28 +20,7 @@ local autogroups = {
     },
     ["_mail"] = { [{ "FileType" }] = { [{ "mail" }] = { "set tw=72 fo+=taw spell" } } },
     ["_gitcommit"] = { [{ "FileType" }] = { [{ "gitcommit" }] = { "set spell" } } },
-    ["_markdown"] = { [{ "FileType" }] = { [{ "markdown" }] = { "set spell" } } },
     ["_help"] = { [{ "FileType" }] = { [{ "help" }] = { "setlocal nolist" } } },
-    ["_json"] = {
-        [{ "FileType" }] = {
-            [{ "json" }] = {
-                "set conceallevel=0",
-                "set ft=json",
-                "set expandtab",
-                "set tabstop=2",
-                "set shiftwidth=2",
-            },
-        },
-    },
-    ["_sxhkdrc"] = {
-        [{ "FileType" }] = {
-            [{ "sxhkdrc" }] = {
-                "sxhkdrc set noexpandtab",
-                "sxhkdrc set tabstop=2",
-                "sxhkdrc set shiftwidth=2",
-            },
-        },
-    },
     ["_ruby"] = {
         [{ "FileType" }] = {
             [{ "ruby", "eruby", "ruby.eruby.chef" }] = {

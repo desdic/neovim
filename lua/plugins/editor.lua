@@ -181,7 +181,7 @@ return {
 
             -- configure nvim-tree
             require("nvim-tree").setup({
-                renderer = { icons = { glyphs = { folder = { arrow_closed = "", arrow_open = "" } } } },
+                renderer = { icons = { glyphs = { folder = { arrow_closed = "󰁕", arrow_open = "󰁆" } } } },
                 actions = { open_file = { window_picker = { enable = false } } },
                 git = { ignore = false },
             })
@@ -242,7 +242,9 @@ return {
                 desc = "file 4",
             },
         },
-        config = function(_, opts) end,
+        config = function(_, opts)
+            require("harpoon").setup(opts)
+        end,
     },
     {
         "RRethy/vim-illuminate",

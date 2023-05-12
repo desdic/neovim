@@ -28,4 +28,14 @@ end
 )
 table.insert(snippets, pcallf)
 
+
+local viminspec = s(
+    { trig = "print.vim.inspect", name = "print(vim.inspect(var))" },
+    fmt(
+        [[print(vim.inspect({}))]],
+        { i(1, "var") }
+    )
+)
+table.insert(snippets, viminspec)
+
 return snippets, autosnippets

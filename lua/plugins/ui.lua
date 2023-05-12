@@ -170,10 +170,7 @@ return {
             require("lualine").setup({
                 options = {
                     icons_enabled = true,
-                    -- theme = "tokyonight",
-                    -- theme = custom_catppuccin,
                     theme = "catppuccin",
-                    -- theme = "nightfox",
                     component_separators = { left = "", right = "" },
                     section_separators = { left = "", right = "" },
                     disabled_filetypes = {
@@ -203,30 +200,11 @@ return {
                     lualine_x = { "%=", lspclients, diff, spaces, "encoding", filetype },
                     lualine_y = { location },
                     lualine_z = {},
-                    -- lualine_z = {progress}
                 },
-                -- inactive_sections = {
-                --     lualine_a = {},
-                --     lualine_b = {},
-                --     lualine_c = {"%=", filename},
-                --     lualine_x = {},
-                --     lualine_y = {},
-                --     lualine_z = {}
-                -- },
                 winbar = {
-                --     lualine_a = {},
-                --     lualine_b = {},
-                --     lualine_c = {},
-                --     lualine_x = {navicinfo},
-                --     lualine_y = {},
                     lualine_z = { "%m", filename },
                 },
                 inactive_winbar = {
-                    -- lualine_a = {},
-                    -- lualine_b = {},
-                    -- lualine_c = {},
-                    -- lualine_x = {},
-                    -- lualine_y = {},
                     lualine_z = { filename },
                 },
                 tabline = {},
@@ -237,7 +215,6 @@ return {
     {
         "rcarriga/nvim-notify",
         lazy = false,
-        -- event = "VeryLazy",
         config = function()
             local notify = require("notify")
 
@@ -320,7 +297,7 @@ return {
             { "<S-l>", ":BufferLineCycleNext<CR>", desc = "Move to next buffer" },
             { "<S-h>", ":BufferLineCyclePrev<CR>", desc = "Move to previous buffer" },
         },
-        config = function(_, opts)
+        config = function(_, _)
             local mocha = require("catppuccin.palettes").get_palette("mocha")
             require("bufferline").setup({
                 options = {

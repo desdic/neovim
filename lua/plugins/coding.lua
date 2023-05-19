@@ -85,6 +85,8 @@ return {
 
             cmplsp.setup()
 
+            local min_length = 3
+
             cmp.setup({
                 preselect = false,
                 snippet = {
@@ -121,10 +123,6 @@ return {
                     ["<Tab>"] = cmp.mapping(function(fallback)
                         if cmp.visible() then
                             cmp.select_next_item()
-                        elseif luasnip.expand_or_jumpable() then
-                            luasnip.expand_or_jump()
-                        elseif has_words_before() then
-                            cmp.complete()
                         else
                             fallback()
                         end
@@ -132,20 +130,18 @@ return {
                     ["<S-Tab>"] = cmp.mapping(function(fallback)
                         if cmp.visible() then
                             cmp.select_prev_item()
-                        elseif luasnip.jumpable(-1) then
-                            luasnip.jump(-1)
                         else
                             fallback()
                         end
                     end, { "i", "s" }),
                 }),
                 sources = {
-                    { name = "luasnip", priority = 10, keyword_length = 2 },
-                    { name = "nvim_lsp", priority = 8, keyword_length = 2 },
-                    { name = "buffer", priority = 6, keyword_length = 2 },
-                    { name = "nvim_lua", priority_weight = 4, keyword_length = 2 },
-                    { name = "path", priority = 2, keyword_length = 2 },
-                    { name = "nvim_lsp_signature_help" },
+                    { name = "luasnip", priority = 10, keyword_length = 3 },
+                    { name = "nvim_lsp", priority = 8, keyword_length = 3 },
+                    { name = "buffer", priority = 6, keyword_length = 3 },
+                    { name = "nvim_lua", priority_weight = 4, keyword_length = 3 },
+                    { name = "path", priority = 2, keyword_length = 3 },
+                    { name = "nvim_lsp_signature_help", keyword_length = 3 },
                 },
                 window = { documentation = cmp.config.window.bordered(), completion = cmp.config.window.bordered() },
             })

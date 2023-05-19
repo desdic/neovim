@@ -85,8 +85,6 @@ return {
 
             cmplsp.setup()
 
-            local min_length = 3
-
             cmp.setup({
                 preselect = false,
                 snippet = {
@@ -464,4 +462,17 @@ return {
             end,
         },
     },
+    {
+        "folke/trouble.nvim",
+        even = "VeryLazy",
+        dependencies = { { "nvim-tree/nvim-web-devicons" } },
+        keys = {
+            { "<Leader>xx", ":TroubleToggle<CR>", desc = "Toggle trouble" },
+            { "<Leader>xq", ":TroubleToggle quickfix<CR>", desc = "Trouble quickfix" },
+        },
+        opts = {},
+        config = function(_, opts)
+            require("trouble").setup(opts)
+        end
+    }
 }

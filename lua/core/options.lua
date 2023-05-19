@@ -7,7 +7,7 @@ local buffer_option = vim.bo
 local window_option = vim.wo
 local indent = 2
 
--- vim.lsp.set_log_level("debug")
+vim.lsp.set_log_level("OFF") -- turn complely off when not duing 'debug'
 
 global.mapleader = "," -- Set leader
 global.maplocalleader = "," -- Set local leader

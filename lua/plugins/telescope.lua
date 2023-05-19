@@ -119,6 +119,8 @@ function M.config()
     local actions = require("telescope.actions")
     local action_state = require("telescope.actions.state")
 
+    local trouble = require("trouble.providers.telescope")
+
     ts.setup({
         pickers = {
             -- Make telescope able to jump to a specific line
@@ -175,6 +177,7 @@ function M.config()
                     ["<C-k>"] = actions.move_selection_previous,
                     ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
                     ["<esc>"] = actions.close,
+                    ["<c-t>"] = trouble.open_with_trouble,
                     -- ["<CR>"] = actions.select_default + actions.center,
 
                     -- You can perform as many actions in a row as you like
@@ -184,6 +187,7 @@ function M.config()
                 n = {
                     ["<C-j>"] = actions.move_selection_next,
                     ["<C-k>"] = actions.move_selection_previous,
+                    ["<c-t>"] = trouble.open_with_trouble,
                     -- ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
                     -- ["<C-h>"] = actions.which_key
                 },

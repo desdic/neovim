@@ -37,6 +37,7 @@ return {
                             TypeParameter = "󰊄 ",
                         },
                         highlight = true,
+                        depth_limit = 5,
                     },
                     config = function(_, opts)
                         require("nvim-navic").setup(opts)
@@ -240,10 +241,11 @@ return {
                 },
             })
 
-            vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
-
-            vim.lsp.handlers["textDocument/signatureHelp"] =
-                vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+            -- Currently disabled since its handled by noice
+            -- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+            --
+            -- vim.lsp.handlers["textDocument/signatureHelp"] =
+            --     vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
         end,
     },
     {

@@ -133,13 +133,24 @@ return {
                         end
                     end, { "i", "s" }),
                 }),
+                -- sources = {
+                --     { name = "luasnip", priority = 10, keyword_length = 3 },
+                --     { name = "nvim_lsp", priority = 8, keyword_length = 3 },
+                --     { name = "buffer", priority = 6, keyword_length = 3 },
+                --     { name = "nvim_lua", priority_weight = 4, keyword_length = 3 },
+                --     { name = "path", priority = 2, keyword_length = 3 },
+                --     { name = "nvim_lsp_signature_help", keyword_length = 3 },
+                -- },
                 sources = {
-                    { name = "luasnip", priority = 10, keyword_length = 3 },
-                    { name = "nvim_lsp", priority = 8, keyword_length = 3 },
-                    { name = "buffer", priority = 6, keyword_length = 3 },
-                    { name = "nvim_lua", priority_weight = 4, keyword_length = 3 },
-                    { name = "path", priority = 2, keyword_length = 3 },
-                    { name = "nvim_lsp_signature_help", keyword_length = 3 },
+                    { name = "luasnip" },
+                    { name = "nvim_lsp" },
+                    { name = "buffer" },
+                    { name = "nvim_lua" },
+                    { name = "path" },
+                    { name = "nvim_lsp_signature_help" },
+                },
+                performance = {
+                    max_view_entries = 50,
                 },
                 window = { documentation = cmp.config.window.bordered(), completion = cmp.config.window.bordered() },
             })
@@ -216,8 +227,8 @@ return {
     {
         "desdic/greyjoy.nvim",
         keys = {
-            { "<Leader>gr", ":Greyjoy<CR>", desc = "[G]reyjoy [r]un" },
-            { "<Leader>gf", ":Greyjoy fast<CR>", desc = "[G]reyjoy run [f]ast" },
+            { "<Leader>gr", "<cmd>Greyjoy<CR>", desc = "[G]reyjoy [r]un" },
+            { "<Leader>gf", "<cmd>Greyjoy fast<CR>", desc = "[G]reyjoy run [f]ast" },
         },
         config = function()
             local greyjoy = require("greyjoy")
@@ -467,12 +478,12 @@ return {
         even = "VeryLazy",
         dependencies = { { "nvim-tree/nvim-web-devicons" } },
         keys = {
-            { "<Leader>xx", ":TroubleToggle<CR>", desc = "Toggle trouble" },
-            { "<Leader>xq", ":TroubleToggle quickfix<CR>", desc = "Trouble quickfix" },
+            { "<Leader>xx", "<cmd>TroubleToggle<CR>", desc = "Toggle trouble" },
+            { "<Leader>xq", "<cmd>TroubleToggle quickfix<CR>", desc = "Trouble quickfix" },
         },
         opts = {},
         config = function(_, opts)
             require("trouble").setup(opts)
-        end
-    }
+        end,
+    },
 }

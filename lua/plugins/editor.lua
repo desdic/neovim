@@ -82,7 +82,7 @@ return {
         "smjonas/inc-rename.nvim",
         cmd = "IncRename",
         keys = { { "<Leader>rn", ":IncRename " .. vim.fn.expand("<cword>"), desc = "[R]e[n]ame" } },
-        opts = { input_buffer_type = "dressing" },
+        opts = { input_buffer_type = "noice" },
     },
     {
         "toppair/peek.nvim",
@@ -109,7 +109,7 @@ return {
     {
         "akinsho/toggleterm.nvim",
         cmd = "ToggleTerm",
-        keys = { { "<c-t>", ":ToggleTerm", desc = "Toggle term" } },
+        keys = { { "<c-t>", "<cmd>ToggleTerm", desc = "Toggle term" } },
 
         config = function()
             require("toggleterm").setup({
@@ -168,7 +168,7 @@ return {
     {
         "nvim-tree/nvim-tree.lua",
         event = "VeryLazy",
-        keys = { { "<Leader>n", ":NvimTreeToggle<CR>", desc = "Start file browser" } },
+        keys = { { "<Leader>n", "<cmd>NvimTreeToggle<CR>", desc = "Start file browser" } },
         dependencies = { { "nvim-tree/nvim-web-devicons" } },
 
         config = function()

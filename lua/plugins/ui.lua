@@ -116,17 +116,17 @@ return {
 
             local location = { "location", padding = 0 }
 
-            local lspclients = {
-                function()
-                    local clients = vim.lsp.get_active_clients()
-                    if next(clients) == nil then
-                        return ""
-                    end
-                    return ""
-                end,
-                padding = { right = 1 },
-                cond = hide_in_width,
-            }
+            -- local lspclients = {
+            --     function()
+            --         local clients = vim.lsp.get_active_clients()
+            --         if next(clients) == nil then
+            --             return ""
+            --         end
+            --         return ""
+            --     end,
+            --     padding = { right = 1 },
+            --     cond = hide_in_width,
+            -- }
 
             local spaces = function()
                 local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
@@ -197,15 +197,16 @@ return {
                     lualine_a = { branch, diagnostics },
                     lualine_b = { mode },
                     lualine_c = { navicinfo },
-                    lualine_x = { "%=", lspclients, diff, spaces, "encoding", filetype },
+                    lualine_x = { "%=", diff, spaces, "encoding", filetype },
                     lualine_y = { location },
                     lualine_z = {},
                 },
                 winbar = {
-                    lualine_z = { "%m", filename },
+                    lualine_c = { "%=", "%m", filename },
+                    -- lualine_c = { "%=", navicinfo },
                 },
                 inactive_winbar = {
-                    lualine_z = { filename },
+                    lualine_c = { "%=", "%m", filename },
                 },
                 tabline = {},
                 extensions = { "nvim-tree", "nvim-dap-ui" },
@@ -220,7 +221,7 @@ return {
 
             notify.setup({
                 background_colour = "#000000",
-                timeout = 1000,
+                timeout = 3000,
                 level = vim.log.levels.INFO,
                 fps = 20,
                 max_height = function()
@@ -294,8 +295,8 @@ return {
         dependencies = { "nvim-tree/nvim-web-devicons" },
         event = "VeryLazy",
         keys = {
-            { "<S-l>", ":BufferLineCycleNext<CR>", desc = "Move to next buffer" },
-            { "<S-h>", ":BufferLineCyclePrev<CR>", desc = "Move to previous buffer" },
+            { "<S-l>", "<cmd>BufferLineCycleNext<CR>", desc = "Move to next buffer" },
+            { "<S-h>", "<cmd>BufferLineCyclePrev<CR>", desc = "Move to previous buffer" },
         },
         config = function(_, _)
             local mocha = require("catppuccin.palettes").get_palette("mocha")
@@ -323,5 +324,44 @@ return {
                 }),
             })
         end,
+    },
+    {
+        "folke/noice.nvim",
+        event = "VeryLazy",
+        opts = {
+            lsp = {
+                -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+                override = {
+                    ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+                    ["vim.lsp.util.stylize_markdown"] = true,
+                    ["cmp.entry.get_documentation"] = true,
+                },
+            },
+            -- you can enable a preset for easier configuration
+            presets = {
+                bottom_search = true,
+                command_palette = true,
+                long_message_to_split = true,
+                inc_rename = true,
+                lsp_doc_border = true,
+            },
+        },
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+            "rcarriga/nvim-notify",
+        },
+        config = function(_, opts)
+            require("noice").setup(opts)
+        end,
+    },
+    {
+        "lukas-reineke/indent-blankline.nvim",
+        event = { "BufReadPost", "BufNewFile" },
+        opts = {
+            char = "│",
+            filetype_exclude = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy", "mason" },
+            show_trailing_blankline_indent = false,
+            show_current_context = false,
+        },
     },
 }

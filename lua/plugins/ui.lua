@@ -345,6 +345,10 @@ return {
                 inc_rename = true,
                 lsp_doc_border = true,
             },
+            messages = {
+                -- don't show virtual text of search results
+                view_search = false,
+            }
         },
         dependencies = {
             "MunifTanjim/nui.nvim",

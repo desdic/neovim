@@ -76,13 +76,6 @@ return {
             local lspkind = require("lspkind")
             local luasnip = require("luasnip")
 
-            local has_words_before = function()
-                local cursor = vim.api.nvim_win_get_cursor(0)
-                return (vim.api.nvim_buf_get_lines(0, cursor[1] - 1, cursor[1], true)[1] or "")
-                    :sub(cursor[2], cursor[2])
-                    :match("%s")
-            end
-
             cmplsp.setup()
 
             cmp.setup({
@@ -101,15 +94,6 @@ return {
                         compare.scopes,
                         compare.score,
                         compare.recently_used,
-                        -- compare.scopes,
-                        -- compare.offset,
-                        -- compare.exact,
-                        -- compare.score,
-                        -- compare.recently_used,
-                        -- compare.locality,
-                        -- compare.kind, -- compare.sort_text,
-                        -- compare.length,
-                        -- compare.order,
                     },
                 },
                 min_length = 0, -- allow for `from package import _` in Python
@@ -133,14 +117,6 @@ return {
                         end
                     end, { "i", "s" }),
                 }),
-                -- sources = {
-                --     { name = "luasnip", priority = 10, keyword_length = 3 },
-                --     { name = "nvim_lsp", priority = 8, keyword_length = 3 },
-                --     { name = "buffer", priority = 6, keyword_length = 3 },
-                --     { name = "nvim_lua", priority_weight = 4, keyword_length = 3 },
-                --     { name = "path", priority = 2, keyword_length = 3 },
-                --     { name = "nvim_lsp_signature_help", keyword_length = 3 },
-                -- },
                 sources = {
                     { name = "luasnip" },
                     { name = "nvim_lsp" },
@@ -190,9 +166,10 @@ return {
             "JoosepAlviste/nvim-ts-context-commentstring",
         },
         opts = {
-            hooks = {
-                pre = function()
-                    require("ts_context_commentstring.internal").update_commentstring({})
+            options = {
+                custom_commentstring = function()
+                    return require("ts_context_commentstring.internal").calculate_commentstring()
+                        or vim.bo.commentstring
                 end,
             },
         },
@@ -258,7 +235,6 @@ return {
 
             greyjoy.load_extension("kitchen")
             greyjoy.load_extension("generic")
-            -- greyjoy.load_extension("vscode_tasks")
             greyjoy.load_extension("makefile")
             greyjoy.load_extension("cargo")
         end,

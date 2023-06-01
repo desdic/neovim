@@ -56,6 +56,8 @@ return {
                     "go",
                     "gomod",
                     "json",
+                    "json5",
+                    "jsonc",
                     "lua",
                     "make",
                     "markdown",

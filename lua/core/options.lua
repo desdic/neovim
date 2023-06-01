@@ -1,4 +1,5 @@
 DATA_PATH = vim.fn.stdpath("data")
+HOME_PATH = "/home/" .. vim.fn.expand("$USER")
 
 local global = vim.g
 local option = vim.o
@@ -19,7 +20,6 @@ option.shortmess = option.shortmess .. "c" -- Avoid showing message extra messag
 option.cmdheight = 2 -- Set height to prevent 'press enter to continue'
 option.hidden = true -- Allow to switch buffer without saving
 
--- option.completeopt = "menuone,noinsert,noselect"
 option.completeopt = "menu,menuone,noselect"
 option.updatetime = 300 -- Faster completion
 
@@ -38,7 +38,6 @@ option.scrolloff = 10 -- Always keep 10 lines visible
 option.errorbells = false -- Disable error bells
 option.showcmd = false -- Don't show commands
 
-HOME_PATH = "/home/" .. vim.fn.expand("$USER")
 option.undodir = HOME_PATH .. "/.config/nvim/undo" -- Save and set undo/redo levels
 option.undofile = true
 option.undolevels = 100

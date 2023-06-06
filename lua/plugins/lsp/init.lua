@@ -131,6 +131,7 @@ return {
                     },
                 },
                 pyright = {
+                    filetypes = {"python"},
                     settings = {
                         python = {
                             analysis = {
@@ -269,7 +270,7 @@ return {
         config = function()
             require("mason-null-ls").setup({
                 -- list of formatters & linters for mason to install
-                ensure_installed = { "stylua", "black", "goimports", "golines", "golangci_lint" },
+                ensure_installed = { "stylua", "black", "goimports", "golines", "golangci_lint", "ruff", "mypy" },
                 -- auto-install configured servers (with lspconfig)
                 automatic_installation = true,
             })
@@ -298,7 +299,9 @@ return {
                     formatting.gofumpt,
                     formatting.clang_format,
                     formatting.goimports,
-                    -- formatting.golines,
+                    diagnostics.mypy,
+                    diagnostics.ruff,
+                    formatting.golines,
                     diagnostics.golangci_lint.with({
                         args = {
                             "run",

@@ -70,7 +70,8 @@ return {
     },
     {
         "nvim-lualine/lualine.nvim",
-        lazy = false,
+        -- lazy = false,
+        event = "VeryLazy",
         config = function()
             local hide_in_width = function()
                 return vim.fn.winwidth(0) > 80
@@ -284,7 +285,7 @@ return {
     },
     {
         "chentoast/marks.nvim",
-        event = "BufEnter",
+        event = "VeryLazy",
         opts = {},
         config = function(_, opts)
             require("marks").setup(opts)

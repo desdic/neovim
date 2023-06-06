@@ -1,6 +1,7 @@
 return {
     {
         "neovim/nvim-lspconfig",
+        event = "VeryLazy",
         dependencies = {
             {
                 { "ray-x/lsp_signature.nvim" },
@@ -8,34 +9,6 @@ return {
                 {
                     "SmiteshP/nvim-navic",
                     opts = {
-                        icons = {
-                            File = "󰈙 ",
-                            Module = " ",
-                            Namespace = "󰌗 ",
-                            Package = " ",
-                            Class = "󰌗 ",
-                            Method = "󰆧 ",
-                            Property = " ",
-                            Field = " ",
-                            Constructor = " ",
-                            Enum = "󰕘",
-                            Interface = "󰕘",
-                            Function = "󰊕 ",
-                            Variable = "󰆧 ",
-                            Constant = "󰏿 ",
-                            String = "󰀬 ",
-                            Number = "󰎠 ",
-                            Boolean = "◩ ",
-                            Array = "󰅪 ",
-                            Object = "󰅩 ",
-                            Key = "󰌋 ",
-                            Null = "󰟢 ",
-                            EnumMember = " ",
-                            Struct = "󰌗 ",
-                            Event = " ",
-                            Operator = "󰆕 ",
-                            TypeParameter = "󰊄 ",
-                        },
                         highlight = true,
                         depth_limit = 5,
                     },
@@ -52,9 +25,9 @@ return {
                         vim.g.rustfmt_autosave = 1
                     end,
                 },
-                { "RRethy/vim-illuminate" },
                 {
                     "simrat39/rust-tools.nvim",
+                    ft = "rust",
                     opts = {
                         tools = {
                             inlay_hints = {
@@ -105,6 +78,7 @@ return {
                     end,
                 },
                 lua_ls = {
+                    filetypes = { "lua" },
                     settings = { -- custom settings for lua
                         Lua = {
                             -- make the language server recognize "vim" global
@@ -124,6 +98,7 @@ return {
                 },
                 bashls = { filetypes = { "sh", "zsh" } },
                 yamlls = {
+                    filetypes = { "yaml" },
                     settings = {
                         yaml = {
                             keyOrdering = false,
@@ -131,7 +106,7 @@ return {
                     },
                 },
                 pyright = {
-                    filetypes = {"python"},
+                    filetypes = { "python" },
                     settings = {
                         python = {
                             analysis = {
@@ -142,7 +117,9 @@ return {
                         },
                     },
                 },
-                pylsp = {},
+                pylsp = {
+                    filetypes = { "python" },
+                },
                 efm = {},
                 solargraph = { filetypes = { "ruby", "rb", "erb", "rakefile" } },
                 dockerls = { root_dir = vim.loop.cwd },
@@ -154,12 +131,13 @@ return {
                     end,
                 },
                 perlnavigator = {},
-                rust_analyzer = {},
+                rust_analyzer = {
+                    filetypes = { "rust" },
+                },
             },
             setup = {},
             capabilities = { clangd = { offsetEncoding = { "utf-16" } } },
         },
-        event = "BufReadPre",
         config = function(_, opts)
             local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
@@ -266,7 +244,7 @@ return {
             "go install golang.org/x/tools/cmd/goimports@latest",
         },
         dependencies = { "jayp0521/mason-null-ls.nvim" },
-        event = "BufReadPre",
+        event = "VeryLazy",
         config = function()
             require("mason-null-ls").setup({
                 -- list of formatters & linters for mason to install

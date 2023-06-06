@@ -1,6 +1,6 @@
 local M = {
     "nvim-telescope/telescope.nvim",
-    event = "VeryLazy",
+    -- event = "VeryLazy",
     cmd = "Telescope",
     keys = {
         {
@@ -99,8 +99,6 @@ local M = {
         { "nvim-tree/nvim-web-devicons" },
         {
             "desdic/agrolens.nvim",
-            dev = false,
-            event = "VeryLazy",
             keys = {
                 {
                     "ag",

@@ -63,7 +63,6 @@ return {
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-nvim-lua",
             "hrsh7th/cmp-path",
-            "hrsh7th/cmp-path",
             "hrsh7th/cmp-nvim-lsp-signature-help",
             "onsails/lspkind-nvim",
             "saadparwaiz1/cmp_luasnip",
@@ -394,7 +393,7 @@ return {
     },
     {
         "lewis6991/gitsigns.nvim",
-        event = "BufReadPre",
+        event = "VeryLazy",
         opts = {
             signs = {
                 add = { hl = "GitSignsAdd", text = "│", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },

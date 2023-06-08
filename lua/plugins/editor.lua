@@ -245,13 +245,4 @@ return {
             require("harpoon").setup(opts)
         end,
     },
-    {
-        "echasnovski/mini.cursorword",
-        version = "*",
-        event = { "BufReadPost" },
-        opts = { delay = 200 },
-        config = function(_, opts)
-            require("mini.cursorword").setup(opts)
-        end,
-    },
 }

@@ -117,18 +117,6 @@ return {
 
             local location = { "location", padding = 0 }
 
-            -- local lspclients = {
-            --     function()
-            --         local clients = vim.lsp.get_active_clients()
-            --         if next(clients) == nil then
-            --             return ""
-            --         end
-            --         return ""
-            --     end,
-            --     padding = { right = 1 },
-            --     cond = hide_in_width,
-            -- }
-
             local spaces = function()
                 local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
                 if buf_ft == "toggleterm" then
@@ -204,7 +192,6 @@ return {
                 },
                 winbar = {
                     lualine_c = { "%=", "%m", filename },
-                    -- lualine_c = { "%=", navicinfo },
                 },
                 inactive_winbar = {
                     lualine_c = { "%=", "%m", filename },

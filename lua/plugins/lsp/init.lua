@@ -29,6 +29,27 @@ return {
                     "simrat39/rust-tools.nvim",
                     ft = "rust",
                     opts = {
+                        server = {
+                            on_attach = function(_, bufnr)
+                                -- Code action groups
+                                vim.keymap.set(
+                                    "n",
+                                    "<Leader>ca",
+                                    require("rust-tools").code_action_group.code_action_group,
+                                    { buffer = bufnr }
+                                )
+                            end,
+                            settings = {
+                                ["rust-analyzer"] = {
+                                    cargo = {
+                                        allFeatures = true,
+                                    },
+                                    checkOnSave = {
+                                        command = "clippy",
+                                    },
+                                },
+                            },
+                        },
                         tools = {
                             inlay_hints = {
                                 auto = false,
@@ -131,9 +152,7 @@ return {
                     end,
                 },
                 perlnavigator = {},
-                rust_analyzer = {
-                    filetypes = { "rust" },
-                },
+                rust_analyzer = {},
             },
             setup = {},
             capabilities = { clangd = { offsetEncoding = { "utf-16" } } },
@@ -181,29 +200,6 @@ return {
                     require("lspconfig")[server].setup(server_opts)
                 end,
             })
-
-            local rt = require("rust-tools")
-            local rust_opts = {
-                server = {
-                    on_attach = function(client, bufnr)
-                        -- Code action groups
-                        vim.keymap.set("n", "<Leader>ca", rt.code_action_group.code_action_group, { buffer = bufnr })
-                        require("illuminate").on_attach(client)
-                    end,
-                    settings = {
-                        ["rust-analyzer"] = {
-                            cargo = {
-                                allFeatures = true,
-                            },
-                            checkOnSave = {
-                                command = "clippy",
-                            },
-                        },
-                    },
-                },
-            }
-
-            rt.setup(rust_opts)
 
             local signs = { Error = " ", Warn = " ", Hint = "󰵚 ", Info = " " }
             for type, icon in pairs(signs) do

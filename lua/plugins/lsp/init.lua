@@ -28,37 +28,6 @@ return {
                 {
                     "simrat39/rust-tools.nvim",
                     ft = "rust",
-                    opts = {
-                        server = {
-                            on_attach = function(_, bufnr)
-                                -- Code action groups
-                                vim.keymap.set(
-                                    "n",
-                                    "<Leader>ca",
-                                    require("rust-tools").code_action_group.code_action_group,
-                                    { buffer = bufnr }
-                                )
-                            end,
-                            settings = {
-                                ["rust-analyzer"] = {
-                                    cargo = {
-                                        allFeatures = true,
-                                    },
-                                    checkOnSave = {
-                                        command = "clippy",
-                                    },
-                                },
-                            },
-                        },
-                        tools = {
-                            inlay_hints = {
-                                auto = false,
-                            },
-                        },
-                    },
-                    config = function(_, opts)
-                        require("rust-tools").setup(opts)
-                    end,
                 },
                 {
                     "b0o/schemastore.nvim",
@@ -200,6 +169,28 @@ return {
                     require("lspconfig")[server].setup(server_opts)
                 end,
             })
+
+            local rustopts = {
+                server = {
+                    on_attach = on_attach,
+                    settings = {
+                        ["rust-analyzer"] = {
+                            cargo = {
+                                allFeatures = true,
+                            },
+                            checkOnSave = {
+                                command = "clippy",
+                            },
+                        },
+                    },
+                },
+                tools = {
+                    inlay_hints = {
+                        auto = false,
+                    },
+                },
+            }
+            require("rust-tools").setup(rustopts)
 
             local signs = { Error = " ", Warn = " ", Hint = "󰵚 ", Info = " " }
             for type, icon in pairs(signs) do

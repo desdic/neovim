@@ -79,9 +79,9 @@ return {
                 highlight = {
                     enable = true, -- false will disable the whole extension
                     -- disable = {"rust"} -- list of language that will be disabled
-                    disable = function(lang, bufnr) 
+                    disable = function(lang, bufnr)
                         return lang == "yaml" and vim.api.nvim_buf_line_count(bufnr) > 5000
-                    end
+                    end,
                 },
                 rainbow = {
                     enable = true,

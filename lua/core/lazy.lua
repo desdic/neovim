@@ -18,7 +18,7 @@ if not lazyok then
 end
 
 lazy.setup("plugins", {
-    defaults = { lazy = true }, -- be lazy
+    defaults = { lazy = false },
     ui = { border = "rounded" }, -- show borders
     performance = {
         rtp = {

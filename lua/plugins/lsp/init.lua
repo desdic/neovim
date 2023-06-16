@@ -1,7 +1,7 @@
 return {
     {
         "neovim/nvim-lspconfig",
-        event = "VeryLazy",
+        event = "BufReadPre,BufNewFile",
         dependencies = {
             {
                 { "ray-x/lsp_signature.nvim" },
@@ -108,6 +108,11 @@ return {
                     },
                 },
                 pylsp = {
+                    plugins = {
+                        rope_import = {
+                            enabled = true,
+                        },
+                    },
                     filetypes = { "python" },
                 },
                 efm = {},
@@ -121,10 +126,37 @@ return {
                     end,
                 },
                 perlnavigator = {},
-                rust_analyzer = {},
+                rust_analyzer = {
+                    disabled = true, -- just make sure its installed
+                },
+                rust_tools = {
+                    server = {
+                        settings = {
+                            ["rust-analyzer"] = {
+                                cargo = {
+                                    allFeatures = true,
+                                },
+                                checkOnSave = {
+                                    command = "clippy",
+                                },
+                            },
+                        },
+                    },
+                    tools = {
+                        inlay_hints = {
+                            auto = false,
+                        },
+                    },
+                },
             },
-            setup = {},
-            capabilities = { clangd = { offsetEncoding = { "utf-16" } } },
+            setup = {
+                clangd = function(_, server_opts)
+                    server_opts["capabilities"]["offsetEncoding"] = { "utf-16" }
+                end,
+                rust_tools = function(_, server_opts)
+                    require("rust-tools").setup(server_opts)
+                end,
+            },
         },
         config = function(_, opts)
             local cmp_nvim_lsp = require("cmp_nvim_lsp")
@@ -137,60 +169,63 @@ return {
                     require("nvim-navic").attach(client, bufnr)
                 end
 
-                -- require("lsp-inlayhints").on_attach(client, bufnr)
                 require("plugins.lsp.keymaps").on_attach(client, bufnr)
             end
 
             local servers = opts.servers
             local capabilities = cmp_nvim_lsp.default_capabilities()
 
-            require("mason-lspconfig").setup({ ensure_installed = vim.tbl_keys(servers) })
-            require("mason-lspconfig").setup_handlers({
-                function(server)
-                    local server_opts = servers[server] or {}
-                    server_opts.capabilities = capabilities
+            -- get all the servers that are available thourgh mason-lspconfig
+            local have_mason, mlsp = pcall(require, "mason-lspconfig")
+            local all_mslp_servers = {}
+            if have_mason then
+                all_mslp_servers = vim.tbl_keys(require("mason-lspconfig.mappings.server").lspconfig_to_package)
+            end
 
-                    if opts.capabilities[server] then
-                        for k, v in pairs(opts.capabilities[server]) do
-                            server_opts.capabilities[k] = v
-                        end
+            local ensure_installed = {}
+            local not_supported = {}
+            for server, _ in pairs(servers) do
+                if vim.tbl_contains(all_mslp_servers, server) then
+                    table.insert(ensure_installed, server)
+                else
+                    table.insert(not_supported, server)
+                end
+            end
+
+            local function setup_handler(server)
+                local server_opts = servers[server] or {}
+                server_opts.capabilities = capabilities
+
+                -- if disabled we install it but don't configure it
+                local disabled = server_opts["disabled"] or false
+                if disabled then
+                    return
+                end
+
+                server_opts.on_attach = on_attach
+                if opts.setup[server] then
+                    if opts.setup[server](server, server_opts) then
+                        return
                     end
-
-                    server_opts.on_attach = on_attach
-                    if opts.setup[server] then
-                        if opts.setup[server](server, server_opts) then
-                            return
-                        end
-                    elseif opts.setup["*"] then
-                        if opts.setup["*"](server, server_opts) then
-                            return
-                        end
+                elseif opts.setup["*"] then
+                    if opts.setup["*"](server, server_opts) then
+                        return
                     end
-                    require("lspconfig")[server].setup(server_opts)
-                end,
-            })
+                end
+                require("lspconfig")[server].setup(server_opts)
+            end
 
-            local rustopts = {
-                server = {
-                    on_attach = on_attach,
-                    settings = {
-                        ["rust-analyzer"] = {
-                            cargo = {
-                                allFeatures = true,
-                            },
-                            checkOnSave = {
-                                command = "clippy",
-                            },
-                        },
-                    },
-                },
-                tools = {
-                    inlay_hints = {
-                        auto = false,
-                    },
-                },
-            }
-            require("rust-tools").setup(rustopts)
+            mlsp.setup({ ensure_installed = ensure_installed, handlers = { setup_handler } })
+
+            -- Setup unsupported language servers
+            for _, server in ipairs(not_supported) do
+                local server_opts = servers[server] or {}
+                server_opts.capabilities = capabilities
+                server_opts.on_attach = on_attach
+                if opts.setup[server] then
+                    opts.setup[server](server, server_opts)
+                end
+            end
 
             local signs = { Error = " ", Warn = " ", Hint = "󰵚 ", Info = " " }
             for type, icon in pairs(signs) do
@@ -231,7 +266,7 @@ return {
             "go install golang.org/x/tools/cmd/goimports@latest",
         },
         dependencies = { "jayp0521/mason-null-ls.nvim" },
-        event = "VeryLazy",
+        event = "BufReadPre,BufNewFile",
         config = function()
             require("mason-null-ls").setup({
                 -- list of formatters & linters for mason to install

@@ -1,7 +1,7 @@
 return {
     {
         "neovim/nvim-lspconfig",
-        event = "BufReadPre,BufNewFile",
+        event = { "BufReadPre", "BufNewFile" },
         dependencies = {
             {
                 { "ray-x/lsp_signature.nvim" },
@@ -266,7 +266,7 @@ return {
             "go install golang.org/x/tools/cmd/goimports@latest",
         },
         dependencies = { "jayp0521/mason-null-ls.nvim" },
-        event = "BufReadPre,BufNewFile",
+        event = { "BufReadPre", "BufNewFile" },
         config = function()
             require("mason-null-ls").setup({
                 -- list of formatters & linters for mason to install

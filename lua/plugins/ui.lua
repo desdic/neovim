@@ -336,7 +336,21 @@ return {
             messages = {
                 -- don't show virtual text of search results
                 view_search = false,
-            }
+            },
+            routes = {
+                {
+                    view = "notify",
+                    filter = { event = "msg_showmode" },
+                },
+                {
+                    filter = {
+                        event = "msg_show",
+                        kind = "",
+                        find = "written",
+                    },
+                    opts = { skip = true },
+                },
+            },
         },
         dependencies = {
             "MunifTanjim/nui.nvim",

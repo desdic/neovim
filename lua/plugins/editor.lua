@@ -1,36 +1,61 @@
 return {
+    -- {
+    --     "ggandor/leap.nvim",
+    --     opts = {},
+    --     keys = {
+    --         {
+    --             "s",
+    --             function()
+    --                 require("leap").leap({
+    --                     target_windows = vim.tbl_filter(function(win)
+    --                         return vim.api.nvim_win_get_config(win).focusable
+    --                     end, vim.api.nvim_tabpage_list_wins(0)),
+    --                 })
+    --             end,
+    --             desc = "[S]earch",
+    --         },
+    --         {
+    --             "vo",
+    --             function()
+    --                 local winid = vim.api.nvim_get_current_win()
+    --                 require("leap").leap({
+    --                     target_windows = { winid },
+    --                     targets = require("utils/lines").get_line_starts(winid),
+    --                 })
+    --             end,
+    --         },
+    --     },
+    --     config = function(_, opts)
+    --         local leap = require("leap")
+    --         for k, v in pairs(opts) do
+    --             leap.opts[k] = v
+    --         end
+    --     end,
+    -- },
     {
-        "ggandor/leap.nvim",
-        opts = {},
+        "folke/flash.nvim",
+        event = "VeryLazy",
+        opts = {
+            search = {
+                filetype_exclude = { "notify", "noice" },
+            },
+        },
         keys = {
             {
                 "s",
+                mode = { "n", "x", "o" },
                 function()
-                    require("leap").leap({
-                        target_windows = vim.tbl_filter(function(win)
-                            return vim.api.nvim_win_get_config(win).focusable
-                        end, vim.api.nvim_tabpage_list_wins(0)),
-                    })
+                    require("flash").jump()
                 end,
-                desc = "[S]earch",
             },
             {
-                "vo",
+                "S",
+                mode = { "o", "x" },
                 function()
-                    local winid = vim.api.nvim_get_current_win()
-                    require("leap").leap({
-                        target_windows = { winid },
-                        targets = require("utils/lines").get_line_starts(winid),
-                    })
+                    require("flash").treesitter()
                 end,
-            },
+            }
         },
-        config = function(_, opts)
-            local leap = require("leap")
-            for k, v in pairs(opts) do
-                leap.opts[k] = v
-            end
-        end,
     },
     {
         "echasnovski/mini.bufremove",
@@ -101,36 +126,33 @@ return {
                 desc = "Peek (Markdown Preview)",
             },
         },
-        config = function(_, opts)
-            require("peek").setup(opts)
-        end,
     },
     {
         "akinsho/toggleterm.nvim",
         cmd = "ToggleTerm",
         keys = { { "<c-t>", "<cmd>ToggleTerm", desc = "Toggle term" } },
-
-        config = function()
-            require("toggleterm").setup({
-                size = 20,
-                open_mapping = [[<c-t>]],
-                hide_numbers = true,
-                shade_filetypes = {},
-                shade_terminals = true,
-                shading_factor = 2,
-                start_in_insert = true,
-                insert_mappings = true,
-                persist_size = true,
-                direction = "float",
-                -- direction = "horizontal",
-                close_on_exit = true,
-                shell = vim.o.shell,
-                float_opts = {
-                    border = "curved",
-                    winblend = 0,
-                    highlights = { border = "Normal", background = "Normal" },
-                },
-            })
+        opts = {
+            size = 20,
+            open_mapping = [[<c-t>]],
+            hide_numbers = true,
+            shade_filetypes = {},
+            shade_terminals = true,
+            shading_factor = 2,
+            start_in_insert = true,
+            insert_mappings = true,
+            persist_size = true,
+            direction = "float",
+            -- direction = "horizontal",
+            close_on_exit = true,
+            shell = vim.o.shell,
+            float_opts = {
+                border = "curved",
+                winblend = 0,
+                highlights = { border = "Normal", background = "Normal" },
+            },
+        },
+        config = function(_, opts)
+            require("toggleterm").setup(opts)
 
             function _G.set_terminal_keymaps()
                 vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], { noremap = true, buffer = 0, desc = "Esc in terminal" })

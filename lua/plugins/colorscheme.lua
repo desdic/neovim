@@ -20,7 +20,7 @@ return {
                 gitsigns = true,
                 harpoon = true,
                 illuminate = true,
-                leap = true,
+                leap = false,
                 lsp_trouble = true,
                 markdown = false,
                 mason = true,

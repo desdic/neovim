@@ -85,7 +85,6 @@ local M = {
             end,
             desc = "[G]it [s]tatus",
         },
-        { "<Leader>hm", "<cmd>Telescope harpoon marks<CR>", desc = "[H]arpoon [m]arks" },
         { "zu", "<cmd>Telescope agrolens query=functions,labels<CR>" },
         { "zi", "<cmd>Telescope agrolens query=functions,labels buffers=all same_type=false<CR>" },
         { "zo", "<cmd>Telescope agrolens query=callings buffers=all same_type=false match=name,object<CR>" },
@@ -205,7 +204,6 @@ function M.config()
     })
 
     ts.load_extension("fzy_native")
-    ts.load_extension("harpoon")
     ts.load_extension("rooter")
     ts.load_extension("agrolens")
 end

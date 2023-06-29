@@ -17,7 +17,6 @@ return {
                 dashboard.button("c", "  Configuration", ":lua require('custom.telescope').search_nvim()<CR>"),
                 dashboard.button("f", "󰈞  Find file", ":Telescope find_files <CR>"),
                 dashboard.button("g", "󰊄  Grep text", ":Telescope live_grep <CR>"),
-                dashboard.button("h", "  Harpoon", ":Telescope harpoon marks<CR>"),
                 dashboard.button("l", "  Lazy", ":Lazy<CR>"),
                 dashboard.button("m", "  Mason", ":Mason<CR>"),
                 dashboard.button("n", "  Notes", ":lua require('custom.telescope').grep_notes()<CR>"),
@@ -240,35 +239,6 @@ return {
                 return vim.ui.input(...)
             end
         end,
-    },
-    {
-        "beauwilliams/focus.nvim",
-        opts = {
-            enable = true,
-            cursorline = false,
-            signcolumn = true,
-            number = false,
-            excluded_filetypes = { "toggleterm" },
-        },
-        config = function(_, opts)
-            require("focus").setup(opts)
-        end,
-        keys = {
-            {
-                "<Leader>sl",
-                function()
-                    require("focus").split_command("h")
-                end,
-                desc = "[S]plit window [l]eft",
-            },
-            {
-                "<Leader>sr",
-                function()
-                    require("focus").split_command("l")
-                end,
-                desc = "[S]plit window [r]ight",
-            },
-        },
     },
     {
         "chentoast/marks.nvim",

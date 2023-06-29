@@ -18,7 +18,6 @@ return {
                 cmp = true,
                 dap = { enabled = true, enable_ui = true },
                 gitsigns = true,
-                harpoon = true,
                 illuminate = true,
                 leap = false,
                 lsp_trouble = true,

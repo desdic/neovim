@@ -54,7 +54,7 @@ return {
                 function()
                     require("flash").treesitter()
                 end,
-            }
+            },
         },
     },
     {
@@ -206,65 +206,6 @@ return {
                 actions = { open_file = { window_picker = { enable = false } } },
                 git = { ignore = false },
             })
-        end,
-    },
-    {
-        "ThePrimeagen/harpoon",
-        event = "VeryLazy",
-        opts = {},
-        keys = {
-            {
-                "<Leader>a",
-                function()
-                    require("harpoon.mark").add_file()
-                end,
-                desc = "Add file to harpoon",
-            },
-            {
-                "<Leader>z",
-                function()
-                    require("harpoon.ui").nav_next()
-                end,
-                desc = "Next file in harpoon",
-            },
-            {
-                "<Leader>x",
-                function()
-                    require("harpoon.ui").nav_prev()
-                end,
-                desc = "Previous file in harpoon",
-            },
-            {
-                "<Leader>1",
-                function()
-                    require("harpoon.ui").nav_file(1)
-                end,
-                desc = "file 1",
-            },
-            {
-                "<Leader>2",
-                function()
-                    require("harpoon.ui").nav_file(2)
-                end,
-                desc = "file 2",
-            },
-            {
-                "<Leader>3",
-                function()
-                    require("harpoon.ui").nav_file(3)
-                end,
-                desc = "file 3",
-            },
-            {
-                "<Leader>4",
-                function()
-                    require("harpoon.ui").nav_file(4)
-                end,
-                desc = "file 4",
-            },
-        },
-        config = function(_, opts)
-            require("harpoon").setup(opts)
         end,
     },
 }

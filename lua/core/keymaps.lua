@@ -66,3 +66,5 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz", { silent = true, noremap = true, desc = 
 
 vim.keymap.set("n", "<Leader>tf", require("plugins.lsp.format").toggle, { desc = "Toggle format on Save" })
 vim.keymap.set("n", "<Leader>tt", ":PlenaryBustedDirectory. <CR>", { desc = "PlenaryTest" })
+
+vim.keymap.set("n", "<Leader>sl", ':vsplit<CR>', { silent = true, noremap = true, desc = "Split vertical" })

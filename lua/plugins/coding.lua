@@ -67,6 +67,7 @@ return {
             "onsails/lspkind-nvim",
             "saadparwaiz1/cmp_luasnip",
             "L3MON4D3/LuaSnip",
+            "lukas-reineke/cmp-under-comparator"
         },
         config = function()
             local cmp = require("cmp")
@@ -88,11 +89,12 @@ return {
                 sorting = {
                     priority_weight = 1.0,
                     comparators = {
+                        compare.offset,
                         compare.exact,
-                        compare.length,
-                        compare.scopes,
                         compare.score,
                         compare.recently_used,
+                        require("cmp-under-comparator").under,
+                        compare.kind,
                     },
                 },
                 min_length = 0, -- allow for `from package import _` in Python

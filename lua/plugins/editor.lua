@@ -1,37 +1,4 @@
 return {
-    -- {
-    --     "ggandor/leap.nvim",
-    --     opts = {},
-    --     keys = {
-    --         {
-    --             "s",
-    --             function()
-    --                 require("leap").leap({
-    --                     target_windows = vim.tbl_filter(function(win)
-    --                         return vim.api.nvim_win_get_config(win).focusable
-    --                     end, vim.api.nvim_tabpage_list_wins(0)),
-    --                 })
-    --             end,
-    --             desc = "[S]earch",
-    --         },
-    --         {
-    --             "vo",
-    --             function()
-    --                 local winid = vim.api.nvim_get_current_win()
-    --                 require("leap").leap({
-    --                     target_windows = { winid },
-    --                     targets = require("utils/lines").get_line_starts(winid),
-    --                 })
-    --             end,
-    --         },
-    --     },
-    --     config = function(_, opts)
-    --         local leap = require("leap")
-    --         for k, v in pairs(opts) do
-    --             leap.opts[k] = v
-    --         end
-    --     end,
-    -- },
     {
         "folke/flash.nvim",
         event = "VeryLazy",

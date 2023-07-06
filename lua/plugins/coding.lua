@@ -67,7 +67,7 @@ return {
             "onsails/lspkind-nvim",
             "saadparwaiz1/cmp_luasnip",
             "L3MON4D3/LuaSnip",
-            "lukas-reineke/cmp-under-comparator"
+            "lukas-reineke/cmp-under-comparator",
         },
         config = function()
             local cmp = require("cmp")
@@ -135,7 +135,7 @@ return {
     },
     {
         "echasnovski/mini.pairs",
-        event = "VeryLazy",
+        event = "InsertEnter",
         opts = {},
         config = function(_, opts)
             require("mini.pairs").setup(opts)

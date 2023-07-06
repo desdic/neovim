@@ -42,7 +42,6 @@ return {
         dependencies = {
             { "nvim-treesitter/nvim-treesitter-refactor" },
             { "nvim-treesitter/nvim-treesitter-textobjects" },
-            { "HiPhish/nvim-ts-rainbow2" },
             { "JoosepAlviste/nvim-ts-context-commentstring" },
         },
         config = function()
@@ -82,15 +81,6 @@ return {
                     disable = function(lang, bufnr)
                         return lang == "yaml" and vim.api.nvim_buf_line_count(bufnr) > 5000
                     end,
-                },
-                rainbow = {
-                    enable = true,
-                    -- list of languages you want to disable the plugin for
-                    -- disable = { "jsx" },
-                    -- Which query to use for finding delimiters
-                    query = "rainbow-parens",
-                    -- Highlight the entire buffer all at once
-                    strategy = require("ts-rainbow.strategy.global"),
                 },
                 refactor = {
                     smart_rename = {

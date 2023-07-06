@@ -18,8 +18,6 @@ return {
                 cmp = true,
                 dap = { enabled = true, enable_ui = true },
                 gitsigns = true,
-                illuminate = true,
-                leap = false,
                 lsp_trouble = true,
                 markdown = false,
                 mason = true,
@@ -31,7 +29,7 @@ return {
                 semantic_tokens = true,
                 telescope = true,
                 treesitter = true,
-                ts_rainbow2 = true,
+                rainbow_delimiters = true,
             },
             highlight_overrides = {
                 mocha = {

@@ -14,8 +14,9 @@ global.mapleader = "," -- Set leader
 global.maplocalleader = "," -- Set local leader
 global.shada = "NONE"
 
-option.shortmess = option.shortmess .. "I" -- Turn off splash
-option.shortmess = option.shortmess .. "c" -- Avoid showing message extra message when using completion
+vim.opt.shortmess:append("I") -- Turn off splash
+vim.opt.shortmess:append("c") -- Avoid showing message extra message when using completion
+vim.opt.shortmess:append("s") -- Don't give "search hit BOTTOM, continuing at TOP" or "search
 
 option.cmdheight = 2 -- Set height to prevent 'press enter to continue'
 option.hidden = true -- Allow to switch buffer without saving
@@ -27,7 +28,7 @@ option.showmode = false -- We don't need to see things like -- INSERT -- anymore
 option.ruler = true -- Make search act like search in modern browsers
 option.incsearch = true
 option.hlsearch = false -- No search highlight
-option.backup = false -- Don't use swap or backup
+option.backup = false -- Don't use backup
 option.writebackup = false
 
 option.showmatch = true -- Show matching braces

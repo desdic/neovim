@@ -6,6 +6,14 @@ return {
             search = {
                 filetype_exclude = { "notify", "noice" },
             },
+            modes = {
+                search = {
+                    enabled = false -- disable for search
+                },
+                char = {
+                    enabled = false -- disable for fFtT
+                }
+            }
         },
         keys = {
             {

@@ -320,6 +320,17 @@ return {
                     },
                     opts = { skip = true },
                 },
+                {
+                    filter = {
+                        event = "msg_show",
+                        kind = "search_count",
+                    },
+                    opts = { skip = true },
+                },
+                {
+                    filter = { event = "msg_show", find = "E486: Pattern not found:" },
+                    opts = { skip = true },
+                },
             },
         },
         dependencies = {

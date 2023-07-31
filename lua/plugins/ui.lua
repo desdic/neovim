@@ -284,64 +284,6 @@ return {
         end,
     },
     {
-        "folke/noice.nvim",
-        event = "VeryLazy",
-        opts = {
-            lsp = {
-                -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-                override = {
-                    ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-                    ["vim.lsp.util.stylize_markdown"] = true,
-                    ["cmp.entry.get_documentation"] = true,
-                },
-            },
-            -- you can enable a preset for easier configuration
-            presets = {
-                bottom_search = true,
-                command_palette = true,
-                long_message_to_split = true,
-                inc_rename = true,
-                lsp_doc_border = true,
-            },
-            messages = {
-                -- don't show virtual text of search results
-                view_search = false,
-            },
-            routes = {
-                {
-                    view = "notify",
-                    filter = { event = "msg_showmode" },
-                },
-                {
-                    filter = {
-                        event = "msg_show",
-                        kind = "",
-                        find = "written",
-                    },
-                    opts = { skip = true },
-                },
-                {
-                    filter = {
-                        event = "msg_show",
-                        kind = "search_count",
-                    },
-                    opts = { skip = true },
-                },
-                {
-                    filter = { event = "msg_show", find = "E486: Pattern not found:" },
-                    opts = { skip = true },
-                },
-            },
-        },
-        dependencies = {
-            "MunifTanjim/nui.nvim",
-            "rcarriga/nvim-notify",
-        },
-        config = function(_, opts)
-            require("noice").setup(opts)
-        end,
-    },
-    {
         "lukas-reineke/indent-blankline.nvim",
         event = { "BufReadPost", "BufNewFile" },
         opts = {

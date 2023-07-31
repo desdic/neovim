@@ -4,7 +4,7 @@ return {
         event = "VeryLazy",
         opts = {
             search = {
-                filetype_exclude = { "notify", "noice" },
+                filetype_exclude = { "notify" },
             },
             modes = {
                 search = {
@@ -81,7 +81,7 @@ return {
         "smjonas/inc-rename.nvim",
         cmd = "IncRename",
         keys = { { "<Leader>rn", ":IncRename " .. vim.fn.expand("<cword>"), desc = "[R]e[n]ame" } },
-        opts = { input_buffer_type = "noice" },
+        opts = { input_buffer_type = "dressing" },
     },
     {
         "toppair/peek.nvim",

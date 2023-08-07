@@ -84,23 +84,14 @@ return {
         opts = { input_buffer_type = "dressing" },
     },
     {
-        "toppair/peek.nvim",
-        build = "deno task --quiet build:fast",
-        opts = {},
-        keys = {
-            {
-                "<Leader>op",
-                function()
-                    local peek = require("peek")
-                    if peek.is_open() then
-                        peek.close()
-                    else
-                        peek.open()
-                    end
-                end,
-                desc = "Peek (Markdown Preview)",
-            },
+        "ellisonleao/glow.nvim",
+        cmd = "Glow",
+        opts = {
+            style = "dark"
         },
+        keys = {
+            {"<Leader>op", "<cmd>Glow<CR>", desc="Preview markdown"}
+        }
     },
     {
         "akinsho/toggleterm.nvim",

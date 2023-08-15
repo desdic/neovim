@@ -1,6 +1,6 @@
 return {
     {
-        "L3MON4D3/LuaSnip", -- snippet completions
+        "L3MON4D3/LuaSnip",                 -- snippet completions
         dependencies = {
             "rafamadriz/friendly-snippets", -- collection of snippets
         },
@@ -147,12 +147,12 @@ return {
         version = "*",
         opts = {
             mappings = {
-                add = "gza", -- Add surrounding in Normal and on motion (gzaiw")
-                delete = "gzd", -- Delete surrounding
-                find = "gzf", -- Find surrounding (to the right)
-                find_left = "gzF", -- Find surrounding (to the left)
-                highlight = "gzh", -- Highlight surrounding
-                replace = "gzr", -- Replace surrounding
+                add = "gza",            -- Add surrounding in Normal and on motion (gzaiw")
+                delete = "gzd",         -- Delete surrounding
+                find = "gzf",           -- Find surrounding (to the right)
+                find_left = "gzF",      -- Find surrounding (to the left)
+                highlight = "gzh",      -- Highlight surrounding
+                replace = "gzr",        -- Replace surrounding
                 update_n_lines = "gzn", -- Update `n_lines`
             },
         },
@@ -205,7 +205,7 @@ return {
     {
         "desdic/greyjoy.nvim",
         keys = {
-            { "<Leader>gr", "<cmd>Greyjoy<CR>", desc = "[G]reyjoy [r]un" },
+            { "<Leader>gr", "<cmd>Greyjoy<CR>",      desc = "[G]reyjoy [r]un" },
             { "<Leader>gf", "<cmd>Greyjoy fast<CR>", desc = "[G]reyjoy run [f]ast" },
         },
         config = function()
@@ -299,7 +299,7 @@ return {
         dependencies = {
             { "theHamsta/nvim-dap-virtual-text" }, -- virtual text for debugger
             {
-                "mfussenegger/nvim-dap-python", -- python debugger
+                "mfussenegger/nvim-dap-python",    -- python debugger
                 config = function()
                     require("dap-python").setup("~/.virtualenvs/debugpy/bin/python")
                 end,
@@ -309,7 +309,7 @@ return {
                 config = function()
                     require("dap-go").setup()
                 end,
-            }, -- go debugger
+            },                          -- go debugger
             {
                 "rcarriga/nvim-dap-ui", -- debugger UI
                 config = function()
@@ -455,7 +455,7 @@ return {
         even = "VeryLazy",
         dependencies = { { "nvim-tree/nvim-web-devicons" } },
         keys = {
-            { "<Leader>xx", "<cmd>TroubleToggle<CR>", desc = "Toggle trouble" },
+            { "<Leader>xx", "<cmd>TroubleToggle<CR>",          desc = "Toggle trouble" },
             { "<Leader>xq", "<cmd>TroubleToggle quickfix<CR>", desc = "Trouble quickfix" },
         },
         opts = {},
@@ -463,4 +463,20 @@ return {
             require("trouble").setup(opts)
         end,
     },
+    {
+        "NeogitOrg/neogit",
+        dependencies = "nvim-lua/plenary.nvim",
+        config = true,
+        cmd = "Neogit",
+        keys = {
+            {
+                "<Leader>g",
+                function()
+                    local neogit = require("neogit")
+                    neogit.open({ kind = "vsplit" })
+                end,
+                desc = "Neogit"
+            }
+        }
+    }
 }

@@ -10,7 +10,11 @@ end
 function M.format()
     local buf = vim.api.nvim_get_current_buf()
     local ft = vim.bo[buf].filetype
-    local have_nls = #require("null-ls.sources").get_available(ft, "NULL_LS_FORMATTING") > 0
+
+    local have_nls = false
+    if pcall(require, "null-ls.sources") then
+        have_nls = #require("null-ls.sources").get_available(ft, "NULL_LS_FORMATTING") > 0
+    end
 
     vim.lsp.buf.format({
         bufnr = buf,

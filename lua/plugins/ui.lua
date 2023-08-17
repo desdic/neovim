@@ -5,12 +5,12 @@ return {
         opts = function()
             local dashboard = require("alpha.themes.dashboard")
             local logo = [[
-                                     .__                  
-              ____   ____  _______  _|__| _____           
-             /    \_/ __ \/  _ \  \/ /  |/     \          
-            |   |  \  ___(  <_> )   /|  |  Y Y  \         
-            |___|  /\___  >____/ \_/ |__|__|_|  /         
-                 \/     \/                    \/          
+                                     .__
+              ____   ____  _______  _|__| _____
+             /    \_/ __ \/  _ \  \/ /  |/     \
+            |   |  \  ___(  <_> )   /|  |  Y Y  \
+            |___|  /\___  >____/ \_/ |__|__|_|  /
+                 \/     \/                    \/
         ]]
             dashboard.section.header.val = vim.split(logo, "\n")
             dashboard.section.buttons.val = {
@@ -285,7 +285,7 @@ return {
     },
     {
         "lukas-reineke/indent-blankline.nvim",
-        event = { "BufReadPost", "BufNewFile" },
+        event = { "VeryLazy" },
         opts = {
             char = "│",
             filetype_exclude = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy", "mason" },

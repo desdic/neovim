@@ -1,3 +1,19 @@
+-- vim.cmd([[
+-- function!   QuickFixOpenAll()
+--     if empty(getqflist())
+--         return
+--     endif
+--     let s:prev_val = ""
+--     for d in getqflist()
+--         let s:curr_val = bufname(d.bufnr)
+--         if (s:curr_val != s:prev_val)
+--             exec "edit " . s:curr_val
+--         endif
+--         let s:prev_val = s:curr_val
+--     endfor
+-- endfunction
+-- ]])
+
 local M = {
     "nvim-telescope/telescope.nvim",
     -- event = "VeryLazy",
@@ -84,6 +100,20 @@ local M = {
                 require("telescope.builtin").git_status()
             end,
             desc = "[G]it [s]tatus",
+        },
+        {
+            "<Leader>ka",
+            function()
+                local qflist = vim.fn.getqflist()
+                if qflist then
+                    vim.cmd('cclose')
+                    for _, element in ipairs(qflist) do
+                        local filename = vim.api.nvim_buf_get_name(element.bufnr)
+                        vim.cmd('e ' .. filename)
+                    end
+                end
+            end,
+            desc = "Open files in listed in quickfix list"
         },
         { "zu", "<cmd>Telescope agrolens query=functions,labels<CR>" },
         { "zi", "<cmd>Telescope agrolens query=functions,labels buffers=all same_type=false<CR>" },

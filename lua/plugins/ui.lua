@@ -15,8 +15,6 @@ return {
             dashboard.section.header.val = vim.split(logo, "\n")
             dashboard.section.buttons.val = {
                 dashboard.button("c", "  Configuration", ":lua require('custom.telescope').search_nvim()<CR>"),
-                dashboard.button("f", "󰈞  Find file", ":Telescope find_files <CR>"),
-                dashboard.button("g", "󰊄  Grep text", ":Telescope live_grep <CR>"),
                 dashboard.button("l", "  Lazy", ":Lazy<CR>"),
                 dashboard.button("m", "  Mason", ":Mason<CR>"),
                 dashboard.button("n", "  Notes", ":lua require('custom.telescope').grep_notes()<CR>"),

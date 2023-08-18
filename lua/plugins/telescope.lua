@@ -21,10 +21,7 @@ local M = {
             function()
                 require("telescope.builtin").find_files({
                     hidden = true,
-
-                    -- find_command = {
-                    --     "fd", "--type", "f", "--hidden", "--no-ignore", "--color=never"
-                    -- }
+                    find_command = { "rg", "--files", "--sort", "path" },
                 })
             end,
             desc = "[F]ind [f]iles",
@@ -181,6 +178,8 @@ function M.config()
             prompt_prefix = " ",
             selection_caret = " ",
             path_display = { "smart" },
+            file_sorter = require 'telescope.sorters'.get_fuzzy_file,
+            sorting_strategy = "descending",
 
             mappings = {
                 i = {

@@ -178,7 +178,6 @@ function M.config()
             prompt_prefix = " ",
             selection_caret = " ",
             path_display = { "smart" },
-            file_sorter = require 'telescope.sorters'.get_fuzzy_file,
             sorting_strategy = "descending",
 
             mappings = {

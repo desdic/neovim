@@ -136,7 +136,20 @@ return {
     {
         "echasnovski/mini.pairs",
         event = "InsertEnter",
-        opts = {},
+        opts = {
+            -- I prefer not to enable the closing if its the EOL
+            mappings = {
+                ['('] = { action = 'open', pair = '()', neigh_pattern =  '\n' },
+                ['['] = { action = 'open', pair = '[]', neigh_pattern =  '\n' },
+                ['{'] = { action = 'open', pair = '{}', neigh_pattern =  '\n' },
+                [')'] = { action = 'close', pair = '()', neigh_pattern = '\n' },
+                [']'] = { action = 'close', pair = '[]', neigh_pattern = '\n' },
+                ['}'] = { action = 'close', pair = '{}', neigh_pattern = '\n' },
+                ['"'] = { action = 'closeopen', pair = '""', neigh_pattern = '\n', register = { cr = false } },
+                ["'"] = { action = 'closeopen', pair = "''", neigh_pattern = '\n', register = { cr = false } },
+                ['`'] = { action = 'closeopen', pair = '``', neigh_pattern = '\n', register = { cr = false } },
+            },
+        },
         config = function(_, opts)
             require("mini.pairs").setup(opts)
         end,

@@ -68,6 +68,14 @@ return {
             "saadparwaiz1/cmp_luasnip",
             "L3MON4D3/LuaSnip",
             "lukas-reineke/cmp-under-comparator",
+            {
+                'windwp/nvim-autopairs',
+                opts = {
+                    check_ts = true,
+                    disable_filetype = { "TelescopePrompt", "vim" },
+                    fast_wrap = {},
+                }
+            },
         },
         config = function()
             local cmp = require("cmp")
@@ -131,47 +139,14 @@ return {
                 },
                 window = { documentation = cmp.config.window.bordered(), completion = cmp.config.window.bordered() },
             })
+
+            local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+            cmp.event:on(
+                'confirm_done',
+                cmp_autopairs.on_confirm_done()
+            )
         end,
-    },
-    {
-        "echasnovski/mini.pairs",
-        event = "InsertEnter",
-        opts = {
-            -- I prefer not to enable the closing if its the EOL
-            mappings = {
-                ['('] = { action = 'open', pair = '()', neigh_pattern =  '\n' },
-                ['['] = { action = 'open', pair = '[]', neigh_pattern =  '\n' },
-                ['{'] = { action = 'open', pair = '{}', neigh_pattern =  '\n' },
-                [')'] = { action = 'close', pair = '()', neigh_pattern = '\n' },
-                [']'] = { action = 'close', pair = '[]', neigh_pattern = '\n' },
-                ['}'] = { action = 'close', pair = '{}', neigh_pattern = '\n' },
-                ['"'] = { action = 'closeopen', pair = '""', neigh_pattern = '\n', register = { cr = false } },
-                ["'"] = { action = 'closeopen', pair = "''", neigh_pattern = '\n', register = { cr = false } },
-                ['`'] = { action = 'closeopen', pair = '``', neigh_pattern = '\n', register = { cr = false } },
-            },
-        },
-        config = function(_, opts)
-            require("mini.pairs").setup(opts)
-        end,
-    },
-    {
-        "echasnovski/mini.surround",
-        event = "VeryLazy",
-        version = "*",
-        opts = {
-            mappings = {
-                add = "gza",            -- Add surrounding in Normal and on motion (gzaiw")
-                delete = "gzd",         -- Delete surrounding
-                find = "gzf",           -- Find surrounding (to the right)
-                find_left = "gzF",      -- Find surrounding (to the left)
-                highlight = "gzh",      -- Highlight surrounding
-                replace = "gzr",        -- Replace surrounding
-                update_n_lines = "gzn", -- Update `n_lines`
-            },
-        },
-        config = function(_, opts)
-            require("mini.surround").setup(opts)
-        end,
+
     },
     {
         "echasnovski/mini.comment",

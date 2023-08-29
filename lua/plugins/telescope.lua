@@ -108,6 +108,13 @@ local M = {
         { "desdic/telescope-rooter.nvim" },
         { "nvim-tree/nvim-web-devicons" },
         {
+            "desdic/macrothis.nvim",
+            opts = {},
+            keys = {
+                { "<Leader>kkl", "<cmd>Telescope macrothis<CR>" },
+            }
+        },
+        {
             "desdic/agrolens.nvim",
             keys = {
                 {
@@ -117,10 +124,6 @@ local M = {
                     end,
                 },
             },
-        },
-        {
-            "desdic/macrothis.nvim",
-            opts = {},
         }
     },
 }
@@ -216,6 +219,13 @@ function M.config()
                 disable_indentation = true,
                 aliases = { yamllist = "docker-compose,github-workflow-steps" },
             },
+            macrothis = {
+                -- mappings = {
+                --     load = "<CR>",
+                --     save = "<C-l>",
+                --     delete = "<C-d>"
+                -- }
+            }
         },
     })
 

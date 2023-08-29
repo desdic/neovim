@@ -118,6 +118,10 @@ local M = {
                 },
             },
         },
+        {
+            "desdic/macrothis.nvim",
+            opts = {},
+        }
     },
 }
 
@@ -218,6 +222,7 @@ function M.config()
     ts.load_extension("fzy_native")
     ts.load_extension("rooter")
     ts.load_extension("agrolens")
+    ts.load_extension("macrothis")
 end
 
 return M

@@ -184,10 +184,10 @@ return {
                                     formatCommand = "gofumpt",
                                     formatStdin = true,
                                 },
-                                {
-                                    formatCommand = "gci ${INPUT}",
-                                    formatStdin = true,
-                                },
+                                -- {
+                                --     formatCommand = "gci print ${FILENAME}",
+                                --     formatStdin = true,
+                                -- },
                                 {
                                     lintCommand =
                                     "golangci-lint run --enable-all --disable lll --out-format=line-number ${INPUT}",

@@ -43,13 +43,9 @@ return {
             { "nvim-treesitter/nvim-treesitter-refactor" },
             { "nvim-treesitter/nvim-treesitter-textobjects" },
             { "JoosepAlviste/nvim-ts-context-commentstring" },
-            { "RRethy/nvim-treesitter-endwise" }
         },
         config = function()
             require("nvim-treesitter.configs").setup({
-                endwise = {
-                    enable = true
-                },
                 ensure_installed = {
                     "bash",
                     "c",

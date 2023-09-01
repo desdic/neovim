@@ -59,7 +59,7 @@ vim.keymap.set(
 )
 
 vim.keymap.set("n", "n", "nzzzv", { silent = true, noremap = true, desc = "search next and center" })
-vim.keymap.set("n", "N", "Nzzzv", { silent = true, noremap = true, desc = "search next and center" })
+vim.keymap.set("n", "N", "Nzzzv", { silent = true, noremap = true, desc = "search prev and center" })
 vim.keymap.set("n", "J", "mzJ`z", { silent = true, noremap = true, desc = "join next line and center" })
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { silent = true, noremap = true, desc = "jump center" })
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { silent = true, noremap = true, desc = "jump center" })

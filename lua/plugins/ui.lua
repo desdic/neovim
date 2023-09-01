@@ -18,7 +18,6 @@ return {
                 dashboard.button("l", "  Lazy", ":Lazy<CR>"),
                 dashboard.button("m", "  Mason", ":Mason<CR>"),
                 dashboard.button("n", "  Notes", ":lua require('custom.telescope').grep_notes()<CR>"),
-                dashboard.button("r", "󰄉  Recently used files", ":Telescope oldfiles <CR>"),
                 dashboard.button("s", "  Restore session", ":lua require('persistence').load()<CR>"),
                 dashboard.button("t", "  Update treesitter", ":TSUpdateSync<CR>"),
                 dashboard.button("u", "󰃨  Update plugins", ":Lazy sync<CR>"),
@@ -67,7 +66,6 @@ return {
     },
     {
         "nvim-lualine/lualine.nvim",
-        -- lazy = false,
         event = "VeryLazy",
         config = function()
             local hide_in_width = function()

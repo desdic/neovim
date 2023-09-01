@@ -68,3 +68,6 @@ vim.keymap.set("n", "<Leader>tf", require("plugins.lsp.format").toggle, { desc =
 vim.keymap.set("n", "<Leader>tt", ":PlenaryBustedDirectory. <CR>", { desc = "PlenaryTest" })
 
 vim.keymap.set("n", "<Leader>sl", ':vsplit<CR>', { silent = true, noremap = true, desc = "Split vertical" })
+
+vim.keymap.set("n", "<Leader>n", vim.cmd.Ex, { silent = true, noremap = true, desc = "netrw"})
+vim.keymap.set("n", "Q", "<nop>") -- don't like it

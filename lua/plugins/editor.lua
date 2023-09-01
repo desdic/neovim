@@ -161,26 +161,4 @@ return {
             vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
         end,
     },
-    {
-        "nvim-tree/nvim-tree.lua",
-        event = "VeryLazy",
-        keys = { { "<Leader>n", "<cmd>NvimTreeToggle<CR>", desc = "Start file browser" } },
-        dependencies = { { "nvim-tree/nvim-web-devicons" } },
-
-        config = function()
-            -- recommended settings from nvim-tree documentation
-            vim.g.loaded = 1
-            vim.g.loaded_netrwPlugin = 1
-
-            -- change color for arrows in tree to light blue
-            -- vim.cmd([[ highlight NvimTreeIndentMarker guifg=#3FC5FF ]])
-
-            -- configure nvim-tree
-            require("nvim-tree").setup({
-                renderer = { icons = { glyphs = { folder = { arrow_closed = "󰁕", arrow_open = "󰁆" } } } },
-                actions = { open_file = { window_picker = { enable = false } } },
-                git = { ignore = false },
-            })
-        end,
-    },
 }

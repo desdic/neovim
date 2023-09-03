@@ -440,7 +440,7 @@ return {
     },
     {
         "folke/trouble.nvim",
-        even = "VeryLazy",
+        event = "VeryLazy",
         dependencies = { { "nvim-tree/nvim-web-devicons" } },
         keys = {
             { "<Leader>xx", "<cmd>TroubleToggle<CR>",          desc = "Toggle trouble" },

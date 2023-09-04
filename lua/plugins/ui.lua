@@ -192,7 +192,7 @@ return {
                     lualine_c = { "%=", "%m", filename },
                 },
                 tabline = {},
-                extensions = { "nvim-tree", "nvim-dap-ui" },
+                extensions = { "nvim-dap-ui" },
             })
         end,
     },

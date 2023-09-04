@@ -190,7 +190,7 @@ return {
                                 -- },
                                 {
                                     lintCommand =
-                                    "golangci-lint run --enable-all --disable lll --out-format=line-number ${INPUT}",
+                                    "golangci-lint run --enable-all --disable lll --disable depguard --out-format=line-number ${INPUT}",
                                     lintFormats = {
                                         "%f:%l:%c: %m",
                                     },

@@ -117,7 +117,6 @@ return {
             insert_mappings = true,
             persist_size = true,
             direction = "float",
-            -- direction = "horizontal",
             close_on_exit = true,
             shell = vim.o.shell,
             float_opts = {
@@ -129,6 +128,7 @@ return {
         config = function(_, opts)
             require("toggleterm").setup(opts)
 
+            ---@diagnostic disable-next-line: duplicate-set-field
             function _G.set_terminal_keymaps()
                 vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], { noremap = true, buffer = 0, desc = "Esc in terminal" })
                 vim.keymap.set("t", "jk", [[<C-\><C-n>]], { noremap = true, buffer = 0, desc = "Esc in terminal" })

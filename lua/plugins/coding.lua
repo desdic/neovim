@@ -149,46 +149,13 @@ return {
 
     },
     {
-        "echasnovski/mini.comment",
-        event = "VeryLazy",
-        dependencies = {
-            "JoosepAlviste/nvim-ts-context-commentstring",
-        },
-        opts = {
-            options = {
-                custom_commentstring = function()
-                    return require("ts_context_commentstring.internal").calculate_commentstring()
-                        or vim.bo.commentstring
-                end,
-            },
-        },
-        config = function(_, opts)
-            require("mini.comment").setup(opts)
-        end,
-    },
-    {
-        "echasnovski/mini.ai",
-        event = "VeryLazy",
-        opts = function()
-            local ai = require("mini.ai")
-            return {
-                n_lines = 500,
-                custom_textobjects = {
-                    -- cao change outer block/conditional/loop
-                    o = ai.gen_spec.treesitter({
-                        a = { "@block.outer", "@conditional.outer", "@loop.outer" },
-                        i = { "@block.inner", "@conditional.inner", "@loop.inner" },
-                    }, {}),
-                    f = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }, {}),
-                    -- caa = change function argument
-                    c = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }, {}),
-                },
-            }
-        end,
-        config = function(_, opts)
-            require("mini.ai").setup(opts)
-            -- cif = change inner function
-        end,
+        "numToStr/Comment.nvim",
+        config = function()
+            require('Comment').setup()
+            local ft = require("Comment.ft")
+            ft.set("vtc", "#%s")
+            ft.set("vcl", "#%s")
+        end
     },
     {
         "desdic/greyjoy.nvim",

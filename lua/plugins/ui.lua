@@ -281,12 +281,30 @@ return {
     {
         "lukas-reineke/indent-blankline.nvim",
         event = { "VeryLazy" },
-        opts = {
-            char = "│",
-            filetype_exclude = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy", "mason" },
-            show_trailing_blankline_indent = false,
-            show_current_context = false,
-        },
+        branch = "v3",
+        config = function()
+            local highlight = {
+                'RainbowDelimiterRed',
+                'RainbowDelimiterYellow',
+                'RainbowDelimiterOrange',
+                'RainbowDelimiterGreen',
+                'RainbowDelimiterBlue',
+                'RainbowDelimiterCyan',
+                'RainbowDelimiterViolet',
+            }
+            require('ibl').setup({
+                indent = { char = "│", tab_char="▸" },
+                exclude = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy", "mason" },
+                scope = {
+                    enabled = true,
+                    highlight = highlight,
+                    show_start = false,
+                    show_end = false,
+                }
+            })
+            local hooks = require "ibl.hooks"
+            hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
+        end,
     },
     {
         "hiphish/rainbow-delimiters.nvim",

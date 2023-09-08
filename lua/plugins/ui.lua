@@ -300,7 +300,8 @@ return {
                     highlight = highlight,
                     show_start = false,
                     show_end = false,
-                }
+                },
+                debounce = 300
             })
             local hooks = require "ibl.hooks"
             hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)

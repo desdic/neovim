@@ -283,25 +283,13 @@ return {
         event = { "VeryLazy" },
         branch = "v3",
         config = function()
-            local highlight = {
-                'RainbowDelimiterRed',
-                'RainbowDelimiterYellow',
-                'RainbowDelimiterOrange',
-                'RainbowDelimiterGreen',
-                'RainbowDelimiterBlue',
-                'RainbowDelimiterCyan',
-                'RainbowDelimiterViolet',
-            }
             require('ibl').setup({
                 indent = { char = "│", tab_char="▸" },
                 exclude = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy", "mason" },
                 scope = {
-                    enabled = true,
-                    highlight = highlight,
-                    show_start = false,
-                    show_end = false,
+                    enabled = false,
                 },
-                debounce = 300
+                debounce = 1000
             })
             local hooks = require "ibl.hooks"
             hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)

@@ -3,11 +3,6 @@ return {
         "goolord/alpha-nvim",
         event = "VimEnter",
         opts = function()
-            vim.api.nvim_create_user_command("UpdateAll", function()
-                vim.cmd([[Lazy sync]])
-                vim.cmd([[TSUpdateSync]])
-                vim.cmd([[MasonUpdate]])
-            end, {})
 
             local dashboard = require("alpha.themes.dashboard")
             local logo = [[

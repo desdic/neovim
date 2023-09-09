@@ -3,6 +3,12 @@ return {
         "goolord/alpha-nvim",
         event = "VimEnter",
         opts = function()
+            vim.api.nvim_create_user_command("UpdateAll", function()
+                vim.cmd([[Lazy sync]])
+                vim.cmd([[TSUpdateSync]])
+                vim.cmd([[MasonUpdate]])
+            end, {})
+
             local dashboard = require("alpha.themes.dashboard")
             local logo = [[
                                      .__
@@ -15,12 +21,9 @@ return {
             dashboard.section.header.val = vim.split(logo, "\n")
             dashboard.section.buttons.val = {
                 dashboard.button("c", "  Configuration", ":lua require('custom.telescope').search_nvim()<CR>"),
-                dashboard.button("l", "  Lazy", ":Lazy<CR>"),
-                dashboard.button("m", "  Mason", ":Mason<CR>"),
                 dashboard.button("n", "  Notes", ":lua require('custom.telescope').grep_notes()<CR>"),
                 dashboard.button("s", "  Restore session", ":lua require('persistence').load()<CR>"),
-                dashboard.button("t", "  Update treesitter", ":TSUpdateSync<CR>"),
-                dashboard.button("u", "󰃨  Update plugins", ":Lazy sync<CR>"),
+                dashboard.button("u", "󰃨  Update all", ":UpdateAll<CR>"),
                 dashboard.button("q", "󰅚  Quit Neovim", ":qa<CR>"),
             }
 

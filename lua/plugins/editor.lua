@@ -85,7 +85,10 @@ return {
     },
     {
         "ellisonleao/glow.nvim",
-        config = true,
+        opts = {
+            style = "dark",
+            width = 180,
+        },
         cmd = "Glow",
         keys = {
             { "<Leader>op", "<cmd>Glow<CR>" }

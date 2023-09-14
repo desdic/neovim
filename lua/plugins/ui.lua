@@ -3,7 +3,6 @@ return {
         "goolord/alpha-nvim",
         event = "VimEnter",
         opts = function()
-
             local dashboard = require("alpha.themes.dashboard")
             local logo = [[
                                      .__
@@ -282,12 +281,11 @@ return {
         branch = "v3",
         config = function()
             require('ibl').setup({
-                indent = { char = "│", tab_char="▸" },
+                indent = { char = "│", tab_char = "▸" },
                 exclude = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy", "mason" },
                 scope = {
                     enabled = false,
                 },
-                debounce = 1000
             })
             local hooks = require "ibl.hooks"
             hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)

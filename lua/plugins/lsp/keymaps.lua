@@ -23,7 +23,12 @@ function M.on_attach(client, buffer)
     local format = require("plugins.lsp.format").format
     self:map("<leader>f", format, { desc = "Format Document", has = "documentFormatting" })
     self:map("<leader>f", format, { desc = "Format Range", mode = "v", has = "documentRangeFormatting" })
-    self:map("<leader>rn", M.rename, { expr = true, desc = "Rename", has = "rename" })
+
+    if pcall(require, "inc_rename") then
+        self:map("<leader>rn", function() return ":IncRename "..vim.fn.expand("<cword>") end, { expr = true, desc = "Rename", has = "rename" })
+    else
+        self:map("<leader>rn", function() vim.lsp.buf.rename() end, { expr = false, desc = "Rename", has = "rename" })
+    end
 end
 
 function M.new(client, buffer)
@@ -45,14 +50,6 @@ function M:map(lhs, rhs, opts)
         type(rhs) == "string" and ("<cmd>%s<cr>"):format(rhs) or rhs,
         { silent = true, buffer = self.buffer, expr = opts.expr, desc = opts.desc }
     )
-end
-
-function M.rename()
-    if pcall(require, "inc_rename") then
-        return ":IncRename " .. vim.fn.expand("<cword>")
-    else
-        vim.lsp.buf.rename()
-    end
 end
 
 function M.code_action()

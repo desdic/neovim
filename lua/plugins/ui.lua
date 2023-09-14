@@ -219,6 +219,15 @@ return {
     {
         "stevearc/dressing.nvim",
         event = "VeryLazy",
+        opts = {
+            input = {
+                override = function(conf)
+                    conf.col = -1
+                    conf.row = 0
+                    return conf
+                end,
+            },
+        },
         init = function()
             ---@diagnostic disable-next-line: duplicate-set-field
             vim.ui.select = function(...)

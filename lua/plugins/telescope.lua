@@ -109,7 +109,7 @@ local M = {
         { "nvim-tree/nvim-web-devicons" },
         {
             "desdic/macrothis.nvim",
-            opts = {},
+            opts = { default_register = "a" },
             keys = {
                 { "<Leader>kkl", "<cmd>Telescope macrothis<CR>" },
             }

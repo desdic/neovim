@@ -26,7 +26,7 @@ return {
                     cmd = "Mason",
                     build = ":MasonUpdate", -- :MasonUpdate updates registry contents
                     opts = {
-                        ensure_installed = { "stylua", "black", "goimports", "golines", "golangci_lint", "ruff",
+                        ensure_installed = { "stylua", "black", "golangci-lint", "goimports", "golines", "golangci_lint", "ruff",
                             "mypy",
                             "clang-format" },
                     },

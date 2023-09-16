@@ -25,7 +25,27 @@ return {
                     "williamboman/mason.nvim",
                     cmd = "Mason",
                     build = ":MasonUpdate", -- :MasonUpdate updates registry contents
-                    opts = {}
+                    opts = {
+                        ensure_installed = { "stylua", "black", "goimports", "golines", "golangci_lint", "ruff",
+                            "mypy",
+                            "clang-format" },
+                    },
+                    config = function(_, opts)
+                        require("mason").setup(opts)
+
+                        -- Install tools that is not part of the LSP but used by efm
+                        local masonreg = require("mason-registry")
+                        masonreg.refresh(function()
+                            for _, package in ipairs(opts.ensure_installed) do
+                                if masonreg.has_package(package) then
+                                    if not masonreg.is_installed(package) then
+                                        vim.notify("Installing " .. package)
+                                        masonreg.get_package(package):install()
+                                    end
+                                end
+                            end
+                        end)
+                    end
                 },
                 { "williamboman/mason-lspconfig.nvim" },
                 {
@@ -291,7 +311,7 @@ return {
                 require("plugins.lsp.format").on_attach(client, bufnr)
 
                 -- Avoid attaching multiple times
-                if client.name ~= "pylsp" and client.name ~= "null-ls" and client.name ~= "efm" then
+                if client.name ~= "pylsp" and client.name ~= "efm" then
                     require("nvim-navic").attach(client, bufnr)
                 end
 
@@ -383,94 +403,4 @@ return {
                 vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
         end,
     },
-    {
-        "jayp0521/mason-null-ls.nvim", -- use mason-null-ls to install stuff needed for efm
-        dependencies = { "jose-elias-alvarez/null-ls.nvim" },
-        config = function()
-            require("mason-null-ls").setup({
-                -- list of formatters & linters for mason to install
-                ensure_installed = { "stylua", "black", "goimports", "golines", "golangci_lint", "ruff", "mypy",
-                    "clang-format" },
-                -- auto-install configured servers (with lspconfig)
-                automatic_installation = true,
-            })
-            local null_ls = require("null-ls")
-            null_ls.setup({})
-        end
-    }
-    -- {
-    --     "jose-elias-alvarez/null-ls.nvim",
-    --     dependencies = { "jayp0521/mason-null-ls.nvim" },
-    --     event = { "BufReadPre", "BufNewFile" },
-    --     config = function()
-    --         require("mason-null-ls").setup({
-    --             -- list of formatters & linters for mason to install
-    --             ensure_installed = { "stylua", "black", "goimports", "golines", "golangci_lint", "ruff", "mypy" },
-    --             -- auto-install configured servers (with lspconfig)
-    --             automatic_installation = true,
-    --         })
-    --
-    --         local null_ls = require("null-ls")
-    --         -- local h = require("null-ls.helpers")
-    --
-    --         -- for conciseness
-    --         -- local formatting = null_ls.builtins.formatting -- to setup formatters
-    --         local diagnostics = null_ls.builtins.diagnostics -- to setup linters
-    --
-    --         -- local gci_format = {
-    --         --     method = null_ls.methods.FORMATTING,
-    --         --     filetypes = { "go" },
-    --         --     generator = h.formatter_factory({ command = "gci", args = { "-w", "$FILENAME" }, to_temp_file = true }),
-    --         -- }
-    --
-    --         -- configure null_ls
-    --         null_ls.setup({
-    --             -- setup formatters & linters
-    --             sources = {
-    --                 -- formatting.stylua,
-    --                 -- formatting.black,
-    --                 -- formatting.rustfmt,
-    --                 -- formatting.gofmt,
-    --                 -- formatting.gofumpt,
-    --                 -- formatting.clang_format,
-    --                 -- formatting.goimports,
-    --                 -- diagnostics.mypy,
-    --                 -- diagnostics.ruff,
-    --                 -- formatting.golines,
-    --                 diagnostics.golangci_lint.with({
-    --                     args = {
-    --                         "run",
-    --                         "--enable-all",
-    --                         "--disable",
-    --                         "lll",
-    --                         "--disable",
-    --                         "godot",
-    --                         "--disable",
-    --                         "goimports",
-    --                         "--out-format=json",
-    --                         "$DIRNAME",
-    --                         "--path-prefix",
-    --                         "$ROOT",
-    --                     },
-    --                 }),
-    --                 -- gci_format,
-    --                 -- null_ls.builtins.formatting.rubocop.with({
-    --                 --     args = {
-    --                 --         "--auto-correct",
-    --                 --         "-f",
-    --                 --         "-c",
-    --                 --         HOME_PATH .. "/.work-rubocop.yml",
-    --                 --         "quiet",
-    --                 --         "--stderr",
-    --                 --         "--stdin",
-    --                 --         "$FILENAME",
-    --                 --     },
-    --                 -- }),
-    --                 -- null_ls.builtins.diagnostics.rubocop.with({
-    --                 --     args = { "-c", HOME_PATH .. "/.work-rubocop.yml", "-f", "json", "--stdin", "$FILENAME" },
-    --                 -- }),
-    --             },
-    --         })
-    --     end,
-    -- },
 }

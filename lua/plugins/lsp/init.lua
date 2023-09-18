@@ -23,7 +23,7 @@ return {
                 },
                 {
                     "williamboman/mason.nvim",
-                    cmd = "Mason",
+                    cmd = {"Mason", "MasonUpdate"},
                     build = ":MasonUpdate", -- :MasonUpdate updates registry contents
                     opts = {
                         ensure_installed = { "stylua", "black", "golangci-lint", "goimports", "golines", "golangci_lint", "ruff",

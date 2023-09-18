@@ -271,9 +271,6 @@ return {
             { "<Leader>xq", "<cmd>TroubleToggle quickfix<CR>", desc = "Trouble quickfix" },
         },
         opts = {},
-        config = function(_, opts)
-            require("trouble").setup(opts)
-        end,
     },
     {
         "NeogitOrg/neogit",

@@ -152,17 +152,5 @@ return {
 
             vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
         end,
-    },
-    {
-        "ThePrimeagen/harpoon",
-        event = "VeryLazy",
-        dependencies = "nvim-lua/plenary.nvim",
-        opts = {},
-        keys = {
-            { "<Leader>a", function() require("harpoon.mark").add_file() end,        desc = "Add file to harpoon" },
-            { "<Leader>j", function() require("harpoon.ui").nav_next() end,          desc = "Next file in harpoon" },
-            { "<Leader>f", function() require("harpoon.ui").nav_prev() end,          desc = "Prev file in harpoon" },
-            { "<Leader>m", function() require("harpoon.ui").toggle_quick_menu() end, desc = "Harpoon menu" },
-        }
     }
 }

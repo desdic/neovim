@@ -155,18 +155,12 @@ return {
                     component_separators = { left = "", right = "" },
                     section_separators = { left = "", right = "" },
                     disabled_filetypes = {
-                        statusline = { "alpha", "NvimTree", "Outline", "lazy" },
+                        statusline = { "alpha", "lazy" },
                         winbar = {
                             "help",
                             "startify",
-                            "packer",
                             "neogitstatus",
-                            "NvimTree",
-                            "Trouble",
                             "alpha",
-                            "lir",
-                            "Outline",
-                            "spectre_panel",
                             "toggleterm",
                             "qf",
                         },
@@ -264,9 +258,6 @@ return {
                     show_buffer_close_icons = false,
                     show_close_icon = false,
                     persist_buffer_sort = true,
-                    offsets = {
-                        { filetype = "NvimTree", text = "NvimTree", highlight = "Directory", text_align = "left" },
-                    },
                 },
                 highlights = require("catppuccin.groups.integrations.bufferline").get({
                     custom = {
@@ -291,7 +282,7 @@ return {
         config = function()
             require('ibl').setup({
                 indent = { char = "│", tab_char = "▸" },
-                exclude = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy", "mason" },
+                exclude = { "help", "alpha", "lazy", "mason" },
                 scope = {
                     enabled = false,
                 },

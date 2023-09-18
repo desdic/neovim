@@ -18,7 +18,6 @@ return {
                 cmp = true,
                 dap = { enabled = true, enable_ui = true },
                 gitsigns = true,
-                lsp_trouble = true,
                 markdown = false,
                 mason = true,
                 mini = true,

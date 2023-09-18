@@ -263,16 +263,6 @@ return {
         },
     },
     {
-        "folke/trouble.nvim",
-        event = "VeryLazy",
-        dependencies = { { "nvim-tree/nvim-web-devicons" } },
-        keys = {
-            { "<Leader>xx", "<cmd>TroubleToggle<CR>",          desc = "Toggle trouble" },
-            { "<Leader>xq", "<cmd>TroubleToggle quickfix<CR>", desc = "Trouble quickfix" },
-        },
-        opts = {},
-    },
-    {
         "NeogitOrg/neogit",
         dependencies = "nvim-lua/plenary.nvim",
         config = true,

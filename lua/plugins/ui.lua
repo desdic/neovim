@@ -278,7 +278,6 @@ return {
     {
         "lukas-reineke/indent-blankline.nvim",
         event = { "VeryLazy" },
-        branch = "v3",
         config = function()
             require('ibl').setup({
                 indent = { char = "│", tab_char = "▸" },

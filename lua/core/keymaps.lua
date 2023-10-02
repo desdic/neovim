@@ -26,7 +26,7 @@ vim.keymap.set(
 )
 
 vim.keymap.set("n", "<Leader>mo", function()
-    require("custom.utils").toggle_mouse()
+    require("core.mouse").toggle()
 end, { silent = true, noremap = true, desc = "Toggle mouse" })
 
 -- Move to window using the arrow keys
@@ -64,10 +64,10 @@ vim.keymap.set("n", "J", "mzJ`z", { silent = true, noremap = true, desc = "join 
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { silent = true, noremap = true, desc = "jump center" })
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { silent = true, noremap = true, desc = "jump center" })
 
-vim.keymap.set("n", "<Leader>tf", require("plugins.lsp.format").toggle, { desc = "Toggle format on Save" })
+vim.keymap.set("n", "<Leader>tf", require("core.format").toggle, { desc = "Toggle format on Save" })
 vim.keymap.set("n", "<Leader>tt", ":PlenaryBustedDirectory. <CR>", { desc = "PlenaryTest" })
 
-vim.keymap.set("n", "<Leader>sl", ':vsplit<CR>', { silent = true, noremap = true, desc = "Split vertical" })
+vim.keymap.set("n", "<Leader>sl", ":vsplit<CR>", { silent = true, noremap = true, desc = "Split vertical" })
 
-vim.keymap.set("n", "<Leader>n", vim.cmd.Ex, { silent = true, noremap = true, desc = "netrw"})
+vim.keymap.set("n", "<Leader>n", vim.cmd.Ex, { silent = true, noremap = true, desc = "netrw" })
 vim.keymap.set("n", "Q", "<nop>") -- don't like it

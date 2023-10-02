@@ -10,9 +10,18 @@ end
 function M.format()
     local buf = vim.api.nvim_get_current_buf()
 
-    vim.lsp.buf.format({
-        bufnr = buf,
-    })
+    local have_conform, conform = pcall(require, "conform")
+    if have_conform then
+        conform.format({
+            lsp_fallback = true,
+            async = false,
+            timeout_ms = 1000,
+        })
+    else
+        vim.lsp.buf.format({
+            bufnr = buf,
+        })
+    end
 end
 
 function M.on_attach(client, buf)

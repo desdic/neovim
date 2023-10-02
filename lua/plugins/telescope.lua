@@ -6,13 +6,13 @@ local M = {
         {
             "<Leader>vrc",
             function()
-                require("custom.telescope").search_nvim()
+                require("core.telescope").search_nvim()
             end,
         },
         {
             "<Leader>notes",
             function()
-                require("custom.telescope").grep_notes()
+                require("core.telescope").grep_notes()
             end,
             desc = "",
         },

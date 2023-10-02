@@ -5,6 +5,8 @@ function M.on_attach(client, buffer)
 
     self:map("<leader>gl", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
     self:map("<leader>cl", "LspInfo", { desc = "Lsp Info" })
+    self:map("<leader>cr", "LspRestart", { desc = "Restart LSP server" })
+
     self:map("<leader>xd", "Telescope diagnostics", { desc = "Telescope Diagnostics" })
     self:map("gd", "Telescope lsp_definitions", { desc = "Goto Definition" })
     self:map("gr", "Telescope lsp_references", { desc = "References" })
@@ -24,9 +26,8 @@ function M.on_attach(client, buffer)
     self:map("<leader>f", format, { desc = "Format Document", has = "documentFormatting" })
     self:map("<leader>f", format, { desc = "Format Range", mode = "v", has = "documentRangeFormatting" })
 
-    if pcall(require, "inc_rename") then
-        self:map("<leader>rn", function() return ":IncRename "..vim.fn.expand("<cword>") end, { expr = true, desc = "Rename", has = "rename" })
-    else
+    -- If we don't have inc_rename use the build-in
+    if not pcall(require, "inc_rename") then
         self:map("<leader>rn", function() vim.lsp.buf.rename() end, { expr = false, desc = "Rename", has = "rename" })
     end
 end

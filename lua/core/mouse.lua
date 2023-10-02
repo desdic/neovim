@@ -1,6 +1,6 @@
 local M = {}
 
-function M.toggle_mouse()
+function M.toggle()
     if vim.o.mouse == "" then
         vim.o.mouse = "nvi"
     else

@@ -87,14 +87,14 @@ local M = {
             function()
                 local qflist = vim.fn.getqflist()
                 if qflist then
-                    vim.cmd('cclose')
+                    vim.cmd("cclose")
                     for _, element in ipairs(qflist) do
                         local filename = vim.api.nvim_buf_get_name(element.bufnr)
-                        vim.cmd('e ' .. filename)
+                        vim.cmd("e " .. filename)
                     end
                 end
             end,
-            desc = "Open files in listed in quickfix list"
+            desc = "Open files in listed in quickfix list",
         },
         { "zu", "<cmd>Telescope agrolens query=functions,labels<CR>" },
         { "zi", "<cmd>Telescope agrolens query=functions,labels buffers=all same_type=false<CR>" },
@@ -107,24 +107,8 @@ local M = {
         { "nvim-telescope/telescope-ui-select.nvim" },
         { "desdic/telescope-rooter.nvim" },
         { "nvim-tree/nvim-web-devicons" },
-        {
-            "desdic/macrothis.nvim",
-            opts = { default_register = "a" },
-            keys = {
-                { "<Leader>kkl", "<cmd>Telescope macrothis<CR>" },
-            }
-        },
-        {
-            "desdic/agrolens.nvim",
-            keys = {
-                {
-                    "ag",
-                    function()
-                        require("agrolens").generate({ all_captures = true })
-                    end,
-                },
-            },
-        }
+        { "desdic/macrothis.nvim" },
+        { "desdic/agrolens.nvim" },
     },
 }
 
@@ -221,7 +205,7 @@ function M.config()
                 --     save = "<C-l>",
                 --     delete = "<C-d>"
                 -- }
-            }
+            },
         },
     })
 

@@ -40,7 +40,7 @@ option.scrolloff = 10 -- Always keep 10 lines visible
 option.errorbells = false -- Disable error bells
 option.showcmd = false -- Don't show commands
 
-option.undodir = HOME_PATH .. "/.config/nvim/undo" -- Save and set undo/redo levels
+option.undodir = DATA_PATH .. "/undo" -- Save and set undo/redo levels
 option.undofile = true
 option.undolevels = 100
 option.undoreload = 100

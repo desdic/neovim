@@ -10,11 +10,13 @@ return {
         local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
         local on_attach = function(client, bufnr)
-
             require("core.format").on_attach(client, bufnr)
 
             if client.server_capabilities.documentSymbolProvider then
-                require("nvim-navic").attach(client, bufnr)
+                -- Avoid attching to pyright and pylsp
+                if client.name ~= "pylsp" then
+                    require("nvim-navic").attach(client, bufnr)
+                end
             end
 
             require("core.keymaps_lsp").on_attach(client, bufnr)
@@ -168,7 +170,7 @@ return {
         local rt = require("rust-tools")
         rt.setup({
             server = {
-            on_attach = on_attach,
+                on_attach = on_attach,
                 settings = {
                     ["rust-analyzer"] = {
                         cargo = {

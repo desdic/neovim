@@ -9,7 +9,7 @@ return {
                 json = { "jq" },
                 lua = { "stylua" },
                 python = { "isort", "black" },
-                go = { "golines", "goimports", "gofmt", "gofumpt" },
+                go = { "golines", "goimports", "gofmt", "gofumpt", "gci" },
                 c = { "indent" },
                 rust = { "rustfmt" },
                 sh = { "shfmt" },

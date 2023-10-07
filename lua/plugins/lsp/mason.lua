@@ -50,7 +50,9 @@ return {
                 "golines",
                 "goimports",
                 "golangci-lint",
-                -- "clangtidy" -- nice ?
+                "gofumpt",
+                "gci",
+                "shellcheck",
             }
         })
     end

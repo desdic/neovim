@@ -1,15 +1,16 @@
 return {
     "lukas-reineke/indent-blankline.nvim",
     event = { "VeryLazy" },
-    config = function()
-        require('ibl').setup({
-            indent = { char = "│", tab_char = "▸" },
-            -- config = {exclude = { "help", "alpha", "lazy", "mason" }},
-            scope = {
-                enabled = false,
-            },
-        })
-        local hooks = require "ibl.hooks"
-        hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
+    opts = {
+        indent = { char = "│", tab_char = "▸" },
+        scope = {
+            enabled = false,
+        },
+        exclude = {
+            filetypes = { "help", "alpha", "lazy", "mason", "toggleterm", "lazyterm", "notify", "lazy" },
+        },
+    },
+    config = function(_, opts)
+        require("ibl").setup(opts)
     end,
 }

@@ -9,7 +9,7 @@ return {
 
         lint.linters_by_ft = {
             python = { "ruff", "pylint", "mypy" },
-            c = { "flawfinder", "clangtidy" },
+            c = { "flawfinder" },
             go = { "golangcilint" },
             -- lua    = { "luacheck" }, -- TODO luacheck can't find vim and other globals
             -- make   = { "checkmake" },
@@ -20,8 +20,10 @@ return {
         lint.linters.golangcilint.args = {
             "run",
             "--enable-all",
-            "--disable", "lll",
-            "--disable", "depguard",
+            "--disable",
+            "lll",
+            "--disable",
+            "depguard",
             "--out-format",
             "json",
             function()

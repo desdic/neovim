@@ -73,18 +73,6 @@ return {
             cond = hide_in_width,
         }
 
-        local navicok, navic = pcall(require, "nvim-navic")
-        local navicinfo = {
-            function()
-                if navicok and navic.is_available() then
-                    return " " .. navic.get_location()
-                end
-                return ""
-            end,
-            padding = { right = 1 },
-            cond = hide_in_width,
-        }
-
         require("lualine").setup({
             options = {
                 icons_enabled = true,
@@ -108,7 +96,7 @@ return {
             sections = {
                 lualine_a = { branch, diagnostics },
                 lualine_b = { mode },
-                lualine_c = { navicinfo },
+                lualine_c = { "aerial" },
                 lualine_x = { "%=", diff, spaces, "encoding", filetype },
                 lualine_y = { location },
                 lualine_z = {},

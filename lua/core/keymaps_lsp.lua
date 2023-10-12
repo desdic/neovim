@@ -3,6 +3,7 @@ local M = {}
 function M.on_attach(client, buffer)
     local self = M.new(client, buffer)
 
+
     self:map("<leader>gl", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
     self:map("<leader>cl", "LspInfo", { desc = "Lsp Info" })
     self:map("<leader>cr", "LspRestart", { desc = "Restart LSP server" })
@@ -26,10 +27,15 @@ function M.on_attach(client, buffer)
     self:map("<leader>f", format, { desc = "Format Document", has = "documentFormatting" })
     self:map("<leader>f", format, { desc = "Format Range", mode = "v", has = "documentRangeFormatting" })
 
-    -- If we don't have inc_rename use the build-in
+    if pcall(require, "aerial") then
+        self:map("{", "AerialNext", { desc = "AerialNext" })
+        self:map("}", "AerialPrev", { desc = "AerialPrev" })
+    end
+
     if not pcall(require, "inc_rename") then
         self:map("<leader>rn", function() vim.lsp.buf.rename() end, { expr = false, desc = "Rename", has = "rename" })
     end
+
 end
 
 function M.new(client, buffer)

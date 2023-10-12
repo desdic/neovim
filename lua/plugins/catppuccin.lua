@@ -22,7 +22,7 @@ return {
                 mason = true,
                 mini = true,
                 native_lsp = { enabled = true },
-                navic = { enabled = true, custom_bg = mocha.mantle },
+                aerial = true,
                 notify = true,
                 nvimtree = { enabled = true, show_root = false },
                 semantic_tokens = true,

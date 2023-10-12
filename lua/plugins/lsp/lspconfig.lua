@@ -3,7 +3,6 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
         "hrsh7th/cmp-nvim-lsp",
-        "SmiteshP/nvim-navic",
     },
     config = function()
         local lspconfig = require("lspconfig")
@@ -11,14 +10,6 @@ return {
 
         local on_attach = function(client, bufnr)
             require("core.format").on_attach(client, bufnr)
-
-            if client.server_capabilities.documentSymbolProvider then
-                -- Avoid attching to pyright and pylsp
-                if client.name ~= "pylsp" then
-                    require("nvim-navic").attach(client, bufnr)
-                end
-            end
-
             require("core.keymaps_lsp").on_attach(client, bufnr)
         end
 

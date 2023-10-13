@@ -20,102 +20,65 @@ return {
                 return pcall(require, plugin)
             end
 
+            local silent_bufnr = function(desc)
+                return { silent = true, buffer = bufnr, desc = desc }
+            end
+
             require("core.format").on_attach(client, bufnr)
 
-            local keymap = vim.keymap
             local format = require("core.format").format
+            local keymap = vim.keymap.set
 
-            keymap.set(
-                "n",
-                "gl",
-                vim.diagnostic.open_float,
-                { silent = true, buffer = bufnr, desc = "Line diagnostics" }
-            )
-            keymap.set("n", "<leader>cl", "<cmd>LspInfo<cr>", { silent = true, desc = "LSP info" })
-            keymap.set("n", "<leader>cr", "<cmd>LspRestart<cr>", { silent = true, desc = "Restart LSP server" })
-            keymap.set(
+            keymap("n", "gl", vim.diagnostic.open_float, silent_bufnr("Line diagnostics"))
+            keymap("n", "<leader>cl", "<cmd>LspInfo<cr>", { silent = true, desc = "LSP info" })
+            keymap("n", "<leader>cr", "<cmd>LspRestart<cr>", { silent = true, desc = "Restart LSP server" })
+            keymap(
                 "n",
                 "<leader>xd",
                 "<cmd>Telescope diagnostics<cr>",
                 { silent = true, desc = "Telescope Diagnostics" }
             )
-            keymap.set(
-                "n",
-                "gd",
-                "<cmd>Telescope lsp_definitions<cr>",
-                { silent = true, buffer = bufnr, desc = "Goto Definition" }
-            )
-            keymap.set(
-                "n",
-                "gr",
-                "<cmd>Telescope lsp_references<cr>",
-                { silent = true, buffer = bufnr, desc = "References" }
-            )
-            keymap.set(
-                "n",
-                "gi",
-                "<cmd>Telescope lsp_implementations<cr>",
-                { silent = true, buffer = bufnr, desc = "Goto Implementation" }
-            )
-            keymap.set(
-                "n",
-                "gt",
-                "<cmd>Telescope lsp_type_definitions<cr>",
-                { silent = true, buffer = bufnr, desc = "Goto Type Definition" }
-            )
-            keymap.set("n", "K", vim.lsp.buf.hover, { silent = true, buffer = bufnr, desc = "Hover" })
+            keymap("n", "gd", "<cmd>Telescope lsp_definitions<cr>", silent_bufnr("Goto Definition"))
+            keymap("n", "gr", "<cmd>Telescope lsp_references<cr>", silent_bufnr("References"))
+            keymap("n", "gi", "<cmd>Telescope lsp_implementations<cr>", silent_bufnr("Goto Implementation"))
+            keymap("n", "gt", "<cmd>Telescope lsp_type_definitions<cr>", silent_bufnr("Goto Type Definition"))
+            keymap("n", "K", vim.lsp.buf.hover, silent_bufnr("Hover"))
 
-            keymap.set(
-                "n",
-                "<C-j>",
-                vim.diagnostic.goto_next,
-                { silent = true, buffer = bufnr, desc = "Next Diagnostic" }
-            )
-            keymap.set(
-                "n",
-                "<C-k>",
-                vim.diagnostic.goto_prev,
-                { silent = true, buffer = bufnr, desc = "Prev Diagnostic" }
-            )
-
+            keymap("n", "<C-j>", vim.diagnostic.goto_next, silent_bufnr("Next Diagnostic"))
+            keymap("n", "<C-k>", vim.diagnostic.goto_prev, silent_bufnr("Prev Diagnostic"))
 
             if has_cap("signatureHelp") then
-                keymap.set(
-                    "n",
-                    "gs",
-                    vim.lsp.buf.signature_help,
-                    { silent = true, buffer = bufnr, desc = "Signature Help" }
-                )
+                keymap("n", "gs", vim.lsp.buf.signature_help, silent_bufnr("Signature Help"))
             end
 
             if has_plugin("aerial") then
-                keymap.set("n", "{", "<cmd>AerialNext<cr>", { silent = true, buffer = bufnr, desc = "Aerial next" })
-                keymap.set("n", "}", "<cmd>AerialPrev<cr>", { silent = true, buffer = bufnr, desc = "Aerial prev" })
+                keymap("n", "{", "<cmd>AerialNext<cr>", silent_bufnr("Aerial next"))
+                keymap("n", "}", "<cmd>AerialPrev<cr>", silent_bufnr("Aerial prev"))
             end
 
             if not has_plugin("inc_rename") then
                 if has_cap("rename") then
-                    keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename" })
+                    keymap("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename" })
                 end
             end
 
             if has_cap("codeAction") then
-                keymap.set({ "n", "v" }, "<leader>ca", function()
+                keymap({ "n", "v" }, "<leader>ca", function()
                     if vim.bo.filetype == "go" then
                         if has_plugin("go") then
                             return vim.cmd("GoCodeAction")
                         end
                     end
                     return vim.lsp.buf.code_action()
-                end, { silent = true, buffer = bufnr, desc = "Code Action" })
+                end, silent_bufnr("Code Action"))
             end
 
             if has_cap("documentFormatting") then
-                keymap.set("n", "<leader>f", format, { silent = true, buffer = bufnr, desc = "Format Document" })
+                keymap("n", "<leader>f", format, silent_bufnr("Format Document"))
             end
 
             if has_cap("documentRangeFormatting") then
-                keymap.set("v", "<leader>f", format, { silent = true, buffer = bufnr, desc = "Format Range" })
+                keymap("v", "<leader>f", format, silent_bufnr("Format Range"))
             end
         end
 

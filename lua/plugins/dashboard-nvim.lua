@@ -10,7 +10,7 @@ return {
 |   |  \  ___(  <_> )   /|  |  Y Y  \
 |___|  /\___  >____/ \_/ |__|__|_|  /
      \/     \/                    \/
-        ]]
+]]
 
         logo = logo .. version.major .. "." .. version.minor .. "." .. version.patch
         logo = string.rep("\n", 8) .. logo .. "\n\n"
@@ -28,38 +28,38 @@ return {
                 center = {
                     {
                         action = "lua require('core.telescope').search_nvim()",
-                        desc = " Configuration",
-                        icon = "",
+                        desc = "Configuration",
+                        icon = " ",
                         key = "c",
                     },
                     {
                         action = "Lazy",
-                        desc = " Lazy",
-                        icon = "󰒲",
+                        desc = "Lazy",
+                        icon = "󰒲 ",
                         key = "l",
                     },
                     {
                         action = "lua require('core.telescope').grep_notes()",
-                        desc = " Notes",
-                        icon = "",
+                        desc = "Notes",
+                        icon = " ",
                         key = "n",
                     },
                     {
                         action = "lua require('persistence').load()",
-                        desc = " Restore session",
-                        icon = "",
+                        desc = "Restore session",
+                        icon = " ",
                         key = "s",
                     },
                     {
                         action = "UpdateAll",
-                        desc = " Update all",
-                        icon = "󰃨",
+                        desc = "Update all",
+                        icon = "󰃨 ",
                         key = "u",
                     },
                     {
                         action = "qa",
-                        desc = " Quit",
-                        icon = "",
+                        desc = "Quit",
+                        icon = " ",
                         key = "q",
                     },
                 },

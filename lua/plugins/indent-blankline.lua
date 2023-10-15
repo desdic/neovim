@@ -7,7 +7,7 @@ return {
             enabled = false,
         },
         exclude = {
-            filetypes = { "help", "alpha", "lazy", "mason", "toggleterm", "lazyterm", "notify", "lazy", "aerial" },
+            filetypes = { "help", "alpha", "dashboard", "lazy", "mason", "toggleterm", "lazyterm", "notify", "lazy", "aerial" },
         },
     },
     config = function(_, opts)

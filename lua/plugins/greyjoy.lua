@@ -1,7 +1,8 @@
 return {
     "desdic/greyjoy.nvim",
+    event = { "VeryLazy" },
     keys = {
-        { "<Leader>gr", "<cmd>Greyjoy<CR>",      desc = "[G]reyjoy [r]un" },
+        { "<Leader>gr", "<cmd>Greyjoy<CR>", desc = "[G]reyjoy [r]un" },
         { "<Leader>gf", "<cmd>Greyjoy fast<CR>", desc = "[G]reyjoy run [f]ast" },
     },
     config = function()

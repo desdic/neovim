@@ -1,13 +1,14 @@
 return {
-    "L3MON4D3/LuaSnip",                     -- snippet completions
+    "L3MON4D3/LuaSnip", -- snippet completions
     dependencies = {
-        "rafamadriz/friendly-snippets",     -- collection of snippets
+        "rafamadriz/friendly-snippets", -- collection of snippets
+        config = function()
+            require("luasnip.loaders.from_vscode").lazy_load()
+        end,
     },
     build = "make install_jsregexp",
     config = function()
         local ls = require("luasnip")
-
-        require("luasnip.loaders.from_vscode").lazy_load()
 
         local lsloader = require("luasnip.loaders.from_lua")
 

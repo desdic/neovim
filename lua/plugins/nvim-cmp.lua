@@ -11,14 +11,7 @@ return {
         "saadparwaiz1/cmp_luasnip",
         "L3MON4D3/LuaSnip",
         "lukas-reineke/cmp-under-comparator",
-        {
-            'windwp/nvim-autopairs',
-            opts = {
-                check_ts = true,
-                disable_filetype = { "TelescopePrompt", "vim" },
-                fast_wrap = {},
-            }
-        },
+        "windwp/nvim-autopairs",
     },
     config = function()
         local cmp = require("cmp")
@@ -48,12 +41,12 @@ return {
                     compare.kind,
                 },
             },
-            min_length = 0,     -- allow for `from package import _` in Python
+            min_length = 0, -- allow for `from package import _` in Python
             mapping = cmp.mapping.preset.insert({
                 ["<C-b>"] = cmp.mapping.scroll_docs(-4),
                 ["<C-f>"] = cmp.mapping.scroll_docs(4),
                 ["<C-Space>"] = cmp.mapping.complete(),
-                ["<CR>"] = cmp.mapping.confirm({ select = false }),     -- no not select first item
+                ["<CR>"] = cmp.mapping.confirm({ select = false }), -- no not select first item
                 ["<Tab>"] = cmp.mapping(function(fallback)
                     if cmp.visible() then
                         cmp.select_next_item()
@@ -75,7 +68,7 @@ return {
                 { name = "buffer" },
                 { name = "nvim_lua" },
                 { name = "path" },
-                { name = "nvim_lsp_signature_help" }
+                { name = "nvim_lsp_signature_help" },
             },
             performance = {
                 max_view_entries = 50,
@@ -83,10 +76,7 @@ return {
             window = { documentation = cmp.config.window.bordered(), completion = cmp.config.window.bordered() },
         })
 
-        local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-        cmp.event:on(
-            'confirm_done',
-            cmp_autopairs.on_confirm_done()
-        )
+        local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+        cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
     end,
 }

@@ -81,12 +81,12 @@ return {
                 component_separators = { left = "", right = "" },
                 section_separators = { left = "", right = "" },
                 disabled_filetypes = {
-                    statusline = { "alpha", "lazy" },
+                    statusline = { "dashboard", "lazy" },
                     winbar = {
                         "help",
                         "startify",
                         "neogitstatus",
-                        "alpha",
+                        "dashboard",
                         "toggleterm",
                         "qf",
                     },

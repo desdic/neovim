@@ -36,6 +36,7 @@ return {
     },
     {
         "nvim-treesitter/nvim-treesitter",
+        event = "VeryLazy",
         build = function()
             require("nvim-treesitter.install").update({ with_sync = true })
         end,
@@ -61,6 +62,7 @@ return {
                     "make",
                     "markdown",
                     "markdown_inline",
+                    "meson",
                     "perl",
                     "php",
                     "python",

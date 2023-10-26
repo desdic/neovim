@@ -73,6 +73,15 @@ vim.api.nvim_create_autocmd("BufReadPost", {
     end,
 })
 
+vim.api.nvim_create_autocmd("BufEnter", {
+    callback = function()
+        -- :h fo-table (default tcqj)
+        vim.opt.formatoptions:remove({ "c", "r", "o" })
+        vim.opt.formatoptions:append({ "n" })
+    end,
+    desc = "Disable New Line Comment",
+})
+
 -- close some filetypes with <q>
 vim.api.nvim_create_autocmd("FileType", {
     pattern = {
@@ -85,7 +94,7 @@ vim.api.nvim_create_autocmd("FileType", {
         "startuptime",
         "tsplayground",
         "PlenaryTestPopup",
-        "macrothishelp"
+        "macrothishelp",
     },
     callback = function(event)
         vim.bo[event.buf].buflisted = false

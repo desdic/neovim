@@ -95,6 +95,7 @@ vim.api.nvim_create_autocmd("FileType", {
         "tsplayground",
         "PlenaryTestPopup",
         "macrothishelp",
+        "greyjoy"
     },
     callback = function(event)
         vim.bo[event.buf].buflisted = false

@@ -10,6 +10,11 @@ return {
                 enabled = false, -- disable for search
             },
         },
+        label = {
+            rainbow = {
+                enabled = true
+            }
+        }
     },
     keys = {
         {

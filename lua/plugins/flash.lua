@@ -9,12 +9,15 @@ return {
             search = {
                 enabled = false, -- disable for search
             },
+            char = {
+                enabled = false, -- disable for fFtT
+            },
         },
         label = {
             rainbow = {
-                enabled = true
-            }
-        }
+                enabled = true,
+            },
+        },
     },
     keys = {
         {

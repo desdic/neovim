@@ -9,7 +9,7 @@ vim.keymap.set("n", "<Leader>qa", ":qa!<CR>", { silent = true, noremap = true, d
 vim.keymap.set("i", "<C-H>", "<C-W>", { silent = true, noremap = true, desc = "Delete word backwards" })
 
 -- jk as escape
-vim.keymap.set("i", "jk", "<ESC>", { silent = true, noremap = true, desc = "Escape in insert mode" })
+-- vim.keymap.set("i", "jk", "<ESC>", { silent = true, noremap = true, desc = "Escape in insert mode" })
 
 vim.keymap.set(
     "n",

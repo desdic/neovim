@@ -83,6 +83,13 @@ local M = {
             desc = "[G]it [s]tatus",
         },
         {
+            "<Leader>fb",
+            function()
+                require("telescope.builtin").buffers()
+            end,
+            desc = "[F]ile [b]buffers",
+        },
+        {
             "<Leader>ka",
             function()
                 local qflist = vim.fn.getqflist()

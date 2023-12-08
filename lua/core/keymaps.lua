@@ -29,12 +29,6 @@ vim.keymap.set("n", "<Leader>mo", function()
     require("core.mouse").toggle()
 end, { silent = true, noremap = true, desc = "Toggle mouse" })
 
--- Move to window using the arrow keys
-vim.keymap.set("n", "<left>", "<C-w>h", { desc = "Move to window on left" })
-vim.keymap.set("n", "<down>", "<C-w>j", { desc = "Move to window on right" })
-vim.keymap.set("n", "<up>", "<C-w>k", { desc = "Move to window below" })
-vim.keymap.set("n", "<right>", "<C-w>l", { desc = "Move to window above" })
-
 -- Resizing
 vim.keymap.set("n", "<S-left>", "<C-w><", { desc = "Resize horizontal right" })
 vim.keymap.set("n", "<S-down>", "<C-w>-", { desc = "Resize horizontal left" })
@@ -71,3 +65,8 @@ vim.keymap.set("n", "<Leader>sl", ":vsplit<CR>", { silent = true, noremap = true
 
 vim.keymap.set("n", "<Leader>n", vim.cmd.Ex, { silent = true, noremap = true, desc = "netrw" })
 vim.keymap.set("n", "Q", "<nop>") -- don't like it
+
+vim.keymap.set("n", "-", "<c-x>", { silent = true, noremap = true, desc = "decrease number" })
+vim.keymap.set("n", "+", "<c-a>", { silent = true, noremap = true, desc = "increase number" })
+
+vim.keymap.set("n", "<C-a>", "gg<S-v>G", { silent = true, noremap = true, desc = "select all" })

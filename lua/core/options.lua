@@ -45,7 +45,7 @@ option.undofile = true
 option.undolevels = 100
 option.undoreload = 100
 option.listchars = "tab:▸ ,trail:·,nbsp:␣,extends:❯,precedes:❮" -- Hidden chars
-option.clipboard = 'unnamedplus'
+-- option.clipboard = 'unnamedplus'
 
 window_option.signcolumn = "yes" -- Always show signcolumn // number
 window_option.number = true -- Show numbers

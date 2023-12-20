@@ -108,6 +108,7 @@ local M = {
         { "zo", "<cmd>Telescope agrolens query=callings buffers=all same_type=false match=name,object<CR>" },
         { "zl", "<cmd>Telescope agrolens query=cheflxchost,github-workflow-steps<CR>" },
         { "zc", "<cmd>Telescope agrolens query=comments buffers=all same_type=false<CR>" },
+        { "<Leader>cz", "<cmd>Telescope chezmoi find_files<CR>" },
     },
     dependencies = {
         { "nvim-telescope/telescope-fzy-native.nvim" },
@@ -220,6 +221,7 @@ function M.config()
     ts.load_extension("rooter")
     ts.load_extension("agrolens")
     ts.load_extension("macrothis")
+    ts.load_extension('chezmoi')
 end
 
 return M

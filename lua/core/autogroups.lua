@@ -96,7 +96,8 @@ vim.api.nvim_create_autocmd("FileType", {
         "PlenaryTestPopup",
         "macrothishelp",
         "greyjoy",
-        "fugitive"
+        "fugitive",
+        "git"
     },
     callback = function(event)
         vim.bo[event.buf].buflisted = false

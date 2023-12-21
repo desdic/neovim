@@ -29,6 +29,12 @@ vim.keymap.set("n", "<Leader>mo", function()
     require("core.mouse").toggle()
 end, { silent = true, noremap = true, desc = "Toggle mouse" })
 
+-- Move to window using the arrow keys
+vim.keymap.set("n", "<left>", "<C-w>h", { desc = "Move to window on left" })
+vim.keymap.set("n", "<down>", "<C-w>j", { desc = "Move to window on right" })
+vim.keymap.set("n", "<up>", "<C-w>k", { desc = "Move to window below" })
+vim.keymap.set("n", "<right>", "<C-w>l", { desc = "Move to window above" })
+
 -- Resizing
 vim.keymap.set("n", "<S-left>", "<C-w><", { desc = "Resize horizontal right" })
 vim.keymap.set("n", "<S-down>", "<C-w>-", { desc = "Resize horizontal left" })

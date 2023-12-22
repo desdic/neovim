@@ -76,3 +76,15 @@ vim.keymap.set("n", "-", "<c-x>", { silent = true, noremap = true, desc = "decre
 vim.keymap.set("n", "+", "<c-a>", { silent = true, noremap = true, desc = "increase number" })
 
 vim.keymap.set("n", "<C-a>", "gg<S-v>G", { silent = true, noremap = true, desc = "select all" })
+
+-- use blackhole register if we delete empty line by dd
+vim.keymap.set("n", "dd", function()
+    if vim.api.nvim_get_current_line():match("^%s*$") then
+        return '"_dd'
+    else
+        return "dd"
+    end
+end, { expr = true })
+
+-- Substitute all the occurrance of the current word
+vim.keymap.set('n', '<Leader>S', ':%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>')

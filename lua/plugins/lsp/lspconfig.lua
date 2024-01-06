@@ -224,29 +224,20 @@ return {
         })
         -- }}}
 
-        -- {{{ Rust
-        local rt = require("rust-tools")
-        rt.setup({
+        vim.g.rustaceanvim = {
+            -- Plugin configuration
+            tools = {},
+            -- LSP configuration
             server = {
                 on_attach = on_attach,
                 settings = {
-                    ["rust-analyzer"] = {
-                        cargo = {
-                            allFeatures = true,
-                        },
-                        checkOnSave = {
-                            command = "clippy",
-                        },
-                    },
+                    -- rust-analyzer language server configuration
+                    ["rust-analyzer"] = {},
                 },
             },
-            tools = {
-                inlay_hints = {
-                    auto = false,
-                },
-            },
-        })
-        -- }}}
+            -- DAP configuration
+            dap = {},
+        }
 
         local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
         for type, icon in pairs(signs) do

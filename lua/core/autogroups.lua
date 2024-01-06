@@ -97,7 +97,8 @@ vim.api.nvim_create_autocmd("FileType", {
         "macrothishelp",
         "greyjoy",
         "fugitive",
-        "git"
+        "git",
+        "checkhealth"
     },
     callback = function(event)
         vim.bo[event.buf].buflisted = false

@@ -8,13 +8,14 @@ local M = {
             function()
                 require("core.telescope").search_nvim()
             end,
+            desc = "Search nvim config"
         },
         {
             "<Leader>notes",
             function()
                 require("core.telescope").grep_notes()
             end,
-            desc = "",
+            desc = "Search notes",
         },
         {
             "<Leader>ff",

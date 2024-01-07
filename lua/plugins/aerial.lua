@@ -3,7 +3,7 @@ return {
     event = { "VeryLazy" },
     opts = {},
     keys = {
-        { "<Leader>a", "<cmd>AerialToggle!<CR>" },
+        { "<Leader>xa", "<cmd>AerialToggle!<CR>", desc ="Toggle aerial" },
     },
     dependencies = {
         "nvim-treesitter/nvim-treesitter",

@@ -3,14 +3,14 @@ return {
         "nvim-treesitter/playground",
         cmd = "TSPlaygroundToggle",
         keys = {
-            { "<Leader>tp", "<cmd>TSPlaygroundToggle<CR>" },
+            { "<Leader>tp", "<cmd>TSPlaygroundToggle<CR>", desc="Treesitter playground" },
         },
     },
     {
         "nvim-treesitter/nvim-treesitter-context",
         event = "BufReadPre",
         keys = {
-            { "<Leader>tc", "<cmd>TSContextToggle<CR>" },
+            { "<Leader>tc", "<cmd>TSContextToggle<CR>", desc="Treesitter context" },
         },
         opts = {
             enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)

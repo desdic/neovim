@@ -6,6 +6,7 @@ return {
             function()
                 require("agrolens").generate({ all_captures = true })
             end,
+            desc = "Agrolens"
         },
     },
 }

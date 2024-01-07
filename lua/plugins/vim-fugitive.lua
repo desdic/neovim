@@ -2,8 +2,8 @@ return {
     "tpope/vim-fugitive",
     event = "BufWinEnter",
     keys = {
-        { "<leader>gs", vim.cmd.Git },
-        { "<leader>gp", "<cmd>Git pull --rebase<cr>" }, -- rebase always
+        { "<leader>gs", vim.cmd.Git, desc="Git" },
+        { "<leader>gp", "<cmd>Git pull --rebase<cr>", desc = "Git pull rebase" }, -- rebase always
     },
     config = function()
         local fugitive_augroup = vim.api.nvim_create_augroup("fugitive_augroup", {})
@@ -23,10 +23,9 @@ return {
 
                 -- NOTE: It allows me to easily set the branch i am pushing and any tracking
                 -- needed if i did not set the branch up correctly
-                vim.keymap.set("n", "<leader>t", ":Git push -u origin ", opts)
-
-                vim.keymap.set("n", "gh", "<cmd>diffget //2<cr>", opts)
-                vim.keymap.set("n", "gl", "<cmd>diffget //3<cr>", opts)
+                vim.keymap.set("n", "<leader>t", ":Git push -u origin ", { buffer = bufnr, remap = false, desc="Git push" })
+                vim.keymap.set("n", "gh", "<cmd>diffget //2<cr>", { buffer = bufnr, remap = false, desc="Git choose left" })
+                vim.keymap.set("n", "gl", "<cmd>diffget //3<cr>", { buffer = bufnr, remap = false, desc="Git choose right" })
             end,
         })
     end,

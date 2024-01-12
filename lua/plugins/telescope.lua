@@ -8,7 +8,7 @@ local M = {
             function()
                 require("core.telescope").search_nvim()
             end,
-            desc = "Search nvim config"
+            desc = "Search nvim config",
         },
         {
             "<Leader>no",
@@ -107,7 +107,7 @@ local M = {
         { "zu", "<cmd>Telescope agrolens query=functions,labels<CR>" },
         { "zi", "<cmd>Telescope agrolens query=functions,labels buffers=all same_type=false<CR>" },
         { "zo", "<cmd>Telescope agrolens query=callings buffers=all same_type=false match=name,object<CR>" },
-        { "zl", "<cmd>Telescope agrolens query=cheflxchost,github-workflow-steps<CR>" },
+        { "zl", "<cmd>Telescope agrolens query=work<CR>" },
         { "zc", "<cmd>Telescope agrolens query=comments buffers=all same_type=false<CR>" },
         { "<Leader>cz", "<cmd>Telescope chezmoi find_files<CR>" },
     },
@@ -206,7 +206,10 @@ function M.config()
                 same_type = false,
                 include_hidden_buffers = false,
                 disable_indentation = true,
-                aliases = { yamllist = "docker-compose,github-workflow-steps" },
+                aliases = {
+                    yamllist = "docker-compose,github-workflow-steps",
+                    work = "cheflxchost,github-workflow-steps,pytest",
+                },
             },
             macrothis = {
                 -- mappings = {
@@ -222,7 +225,7 @@ function M.config()
     ts.load_extension("rooter")
     ts.load_extension("agrolens")
     ts.load_extension("macrothis")
-    ts.load_extension('chezmoi')
+    ts.load_extension("chezmoi")
 end
 
 return M

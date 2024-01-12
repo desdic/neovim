@@ -11,7 +11,7 @@ local M = {
             desc = "Search nvim config"
         },
         {
-            "<Leader>notes",
+            "<Leader>no",
             function()
                 require("core.telescope").grep_notes()
             end,

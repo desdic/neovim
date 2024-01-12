@@ -1,4 +1,3 @@
-vim.keymap.set("", "<Leader>c", ":close<CR>", { silent = true, noremap = true, desc = "Close window" })
 vim.keymap.set("", "<Leader>w", ":w!<CR>", { silent = true, noremap = true, desc = "Write buffer" })
 
 vim.keymap.set("v", "<", "<gv", { silent = true, noremap = true, desc = "Align to left" })
@@ -7,9 +6,6 @@ vim.keymap.set("v", ">", ">gv", { silent = true, noremap = true, desc = "Align t
 vim.keymap.set("n", "<Leader>qa", ":qa!<CR>", { silent = true, noremap = true, desc = "Quit" })
 
 vim.keymap.set("i", "<C-H>", "<C-W>", { silent = true, noremap = true, desc = "Delete word backwards" })
-
--- jk as escape
--- vim.keymap.set("i", "jk", "<ESC>", { silent = true, noremap = true, desc = "Escape in insert mode" })
 
 vim.keymap.set(
     "n",
@@ -69,13 +65,11 @@ vim.keymap.set("n", "<Leader>tt", ":PlenaryBustedDirectory. <CR>", { desc = "Ple
 
 vim.keymap.set("n", "<Leader>sl", ":vsplit<CR>", { silent = true, noremap = true, desc = "Split vertical" })
 
-vim.keymap.set("n", "<Leader>n", vim.cmd.Ex, { silent = true, noremap = true, desc = "netrw" })
+vim.keymap.set("n", "<Leader>ne", vim.cmd.Ex, { silent = true, noremap = true, desc = "netrw" })
 vim.keymap.set("n", "Q", "<nop>") -- don't like it
 
 vim.keymap.set("n", "-", "<c-x>", { silent = true, noremap = true, desc = "decrease number" })
 vim.keymap.set("n", "+", "<c-a>", { silent = true, noremap = true, desc = "increase number" })
-
-vim.keymap.set("n", "<C-a>", "gg<S-v>G", { silent = true, noremap = true, desc = "select all" })
 
 -- use blackhole register if we delete empty line by dd
 vim.keymap.set("n", "dd", function()

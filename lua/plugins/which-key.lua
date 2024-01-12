@@ -5,5 +5,10 @@ return {
         vim.o.timeout = true
         vim.o.timeoutlen = 500
     end,
-    opts = {},
+    opts = {
+        plugins = {
+            marks = false,
+            registers = false
+        }
+    },
 }

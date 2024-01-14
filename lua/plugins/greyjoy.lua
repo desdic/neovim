@@ -28,12 +28,13 @@ return {
                 },
                 kitchen = { targets = { "converge", "verify", "destroy", "test" }, include_all = false },
             },
-            run_groups = { fast = { "generic", "makefile", "cargo" } },
+            run_groups = { fast = { "generic", "makefile", "cargo", "docker_compose" } },
         })
 
         greyjoy.load_extension("kitchen")
         greyjoy.load_extension("generic")
         greyjoy.load_extension("makefile")
         greyjoy.load_extension("cargo")
+        greyjoy.load_extension("docker_compose")
     end,
 }

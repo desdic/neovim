@@ -26,7 +26,9 @@ return {
                         },
                     },
                 },
-                kitchen = { targets = { "converge", "verify", "destroy", "test" }, include_all = false },
+                kitchen = { group_id = 2, targets = { "converge", "verify", "destroy", "test" }, include_all = false },
+                docker_compose = { group_id = 3 },
+                cargo = { group_id = 4 },
             },
             run_groups = { fast = { "generic", "makefile", "cargo", "docker_compose" } },
         })

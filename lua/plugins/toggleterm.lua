@@ -1,7 +1,10 @@
 return {
     "akinsho/toggleterm.nvim",
     cmd = "ToggleTerm",
-    keys = { { "<c-t>", "<cmd>ToggleTerm<cr>", desc = "Toggle term" } },
+    keys = {
+        { "<c-t>", "<cmd>ToggleTerm<cr>", desc = "Toggle term" },
+        { "<leader>tt", "<cmd>TermSelect<cr>", desc = "Toggle term select" },
+    },
     opts = {
         size = 20,
         open_mapping = [[<c-t>]],

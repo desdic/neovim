@@ -31,6 +31,10 @@ local autogroups = {
             },
         },
     },
+    ["_varnish"] = {
+        [{ "BufNewFile", "BufRead" }] = { [{ "*.vtc" }] = { "set filetype=vtc" } },
+        [{ "BufNewFile", "BufRead" }] = { [{ "*.vcl" }] = { "set filetype=vcl" } },
+    },
 }
 
 for autogrp, autovalues in pairs(autogroups) do
@@ -98,7 +102,7 @@ vim.api.nvim_create_autocmd("FileType", {
         "greyjoy",
         "fugitive",
         "git",
-        "checkhealth"
+        "checkhealth",
     },
     callback = function(event)
         vim.bo[event.buf].buflisted = false

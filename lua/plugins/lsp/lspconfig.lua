@@ -48,7 +48,7 @@ return {
             keymap("n", "<C-k>", vim.diagnostic.goto_prev, silent_bufnr("Prev Diagnostic"))
 
             if has_cap("signatureHelp") then
-                keymap("n", "gs", vim.lsp.buf.signature_help, silent_bufnr("Signature Help"))
+                keymap("n", "gss", vim.lsp.buf.signature_help, silent_bufnr("Signature Help"))
             end
 
             if has_plugin("aerial") then

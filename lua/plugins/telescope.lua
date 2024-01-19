@@ -109,6 +109,8 @@ local M = {
         { "zo", "<cmd>Telescope agrolens query=callings buffers=all same_type=false match=name,object<CR>" },
         { "zl", "<cmd>Telescope agrolens query=work<CR>" },
         { "zc", "<cmd>Telescope agrolens query=comments buffers=all same_type=false<CR>" },
+        { "z[", "<cmd>Telescope agrolens query=all jump=next<CR>" },
+        { "z]", "<cmd>Telescope agrolens query=all jump=prev<CR>" },
         { "<Leader>cz", "<cmd>Telescope chezmoi find_files<CR>" },
     },
     dependencies = {
@@ -172,7 +174,7 @@ function M.config()
             },
         },
         defaults = {
-            file_ignore_patterns = { "^.git/", "^.cache/", "vendor" },
+            file_ignore_patterns = { "^.git/", "^.cache/", "vendor", "^deps/mini.nvim/" },
             prompt_prefix = " ",
             selection_caret = " ",
             path_display = { "smart" },
@@ -208,7 +210,8 @@ function M.config()
                 disable_indentation = true,
                 aliases = {
                     yamllist = "docker-compose,github-workflow-steps",
-                    work = "cheflxchost,github-workflow-steps,pytest",
+                    work = "cheflxchost,github-workflow-steps,pytest,ipam",
+                    all = "cheflxchost,pytest,ipam,functions,labels",
                 },
             },
             macrothis = {

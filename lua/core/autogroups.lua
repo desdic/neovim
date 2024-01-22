@@ -32,8 +32,7 @@ local autogroups = {
         },
     },
     ["_varnish"] = {
-        [{ "BufNewFile", "BufRead" }] = { [{ "*.vtc" }] = { "set filetype=vtc" } },
-        [{ "BufNewFile", "BufRead" }] = { [{ "*.vcl" }] = { "set filetype=vcl" } },
+        [{ "BufNewFile", "BufRead" }] = { [{ "*.vtc", "*.vcl" }] = { "set filetype=varnish" } },
     },
 }
 

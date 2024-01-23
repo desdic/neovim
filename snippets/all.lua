@@ -20,10 +20,12 @@ local get_file_type = function(position)
         local nodes = {}
         if ftype == "python" then
             table.insert(nodes, t("python3"))
+        elseif ftype == "sh" then
+            table.insert(nodes, t("bash"))
         end
         table.insert(nodes, t(ftype))
         return sn(nil, {
-            c(1, { t("#!/usr/bin/env "), t("#!/sbin/env ") }),
+            t("#!/usr/bin/env "),
             c(2, nodes),
             t({ "", "", "" }),
             i(3, ""),

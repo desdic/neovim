@@ -40,8 +40,8 @@ local empty_python = function(position)
     return d(position, function()
         local nodes = { t("python3"), t("python") }
         return sn(nil, {
-            c(1, { t("#!/usr/bin/env "), t("#!/sbin/env ") }),
-            c(2, nodes),
+            t("#!/usr/bin/env "),
+            c(1, nodes),
             t({ "", "", "" }),
             t({ [[import argparse]], [[import logging]] }),
             t({ "", "", "" }),
@@ -58,7 +58,7 @@ local empty_python = function(position)
             }),
             t({ "", "", "" }),
             t({ "    " }),
-            i(3),
+            i(2),
             t({ "", "", "" }),
             t([[if __name__ == "__main__":]]),
             t({ "", "" }),

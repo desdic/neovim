@@ -49,13 +49,6 @@ local M = {
             desc = "[T]reesitter [s]ymbols",
         },
         {
-            "<Leader>sb",
-            function()
-                require("telescope.builtin").buffers()
-            end,
-            desc = "[S]how [b]uffers",
-        },
-        {
             "<Leader>ht",
             function()
                 require("telescope.builtin").help_tags()
@@ -64,9 +57,7 @@ local M = {
         },
         {
             "<Leader>ln",
-            function()
-                require("telescope").extensions.notify.notify({})
-            end,
+            "<cmd>Telescope notify<CR>",
             desc = "[L]ist [n]otifications",
         },
         {
@@ -75,13 +66,6 @@ local M = {
                 require("telescope.builtin").current_buffer_fuzzy_find()
             end,
             desc = "[F]uzzy [s]earch",
-        },
-        {
-            "<Leader>gS",
-            function()
-                require("telescope.builtin").git_status()
-            end,
-            desc = "[G]it [s]tatus",
         },
         {
             "<Leader>fb",
@@ -124,53 +108,17 @@ local M = {
 }
 
 function M.config()
+    ---@diagnostic disable-next-line: different-requires
     local ts = require("telescope")
 
     local actions = require("telescope.actions")
-    local action_state = require("telescope.actions.state")
 
     ts.setup({
         pickers = {
             -- Make telescope able to jump to a specific line
             find_files = {
-                on_input_filter_cb = function(prompt)
-                    local find_colon = string.find(prompt, ":")
-                    if find_colon then
-                        local ret = string.sub(prompt, 1, find_colon - 1)
-                        vim.schedule(function()
-                            local prompt_bufnr = vim.api.nvim_get_current_buf()
-                            local state = action_state.get_current_picker(prompt_bufnr).previewer.state
-                            local lnum = tonumber(prompt:sub(find_colon + 1))
-
-                            if type(lnum) == "number" then
-                                if state then
-                                    local win = tonumber(state.winid)
-                                    local bufnr = tonumber(state.bufnr)
-                                    local line_count = vim.api.nvim_buf_line_count(bufnr)
-                                    vim.api.nvim_win_set_cursor(win, { math.max(1, math.min(lnum, line_count)), 0 })
-                                end
-                            end
-                        end)
-                        local selection = action_state.get_selected_entry()
-                        if selection then
-                            ret = selection[1]
-                        end
-                        return { prompt = ret }
-                    end
-                end,
-                attach_mappings = function()
-                    actions.select_default:enhance({
-                        post = function()
-                            local prompt = action_state.get_current_line()
-                            local find_colon = string.find(prompt, ":")
-                            if find_colon then
-                                local lnum = tonumber(prompt:sub(find_colon + 1))
-                                vim.api.nvim_win_set_cursor(0, { lnum, 0 })
-                            end
-                        end,
-                    })
-                    return true
-                end,
+                on_input_filter_cb = require("core.telescope").jump_to_line_filter,
+                attach_mappings = require("core.telescope").jump_to_line_mapping,
             },
         },
         defaults = {
@@ -202,7 +150,7 @@ function M.config()
         },
         extensions = {
             fzy_native = { override_generic_sorter = false, override_file_sorter = true },
-            rooter = { patterns = { ".git", "go.sum" } },
+            rooter = { patterns = { ".git", "go.sum", "Makefile" } },
             agrolens = {
                 debug = false,
                 same_type = false,

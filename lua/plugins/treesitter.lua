@@ -44,7 +44,6 @@ return {
             require("nvim-treesitter.install").update({ with_sync = true })
         end,
         dependencies = {
-            { "nvim-treesitter/nvim-treesitter-refactor" },
             { "nvim-treesitter/nvim-treesitter-textobjects" },
             { "JoosepAlviste/nvim-ts-context-commentstring" },
         },
@@ -86,12 +85,6 @@ return {
                     disable = function(lang, bufnr)
                         return lang == "yaml" and vim.api.nvim_buf_line_count(bufnr) > 5000
                     end,
-                },
-                refactor = {
-                    smart_rename = {
-                        enable = true,
-                        keymaps = { smart_rename = "grr" },
-                    },
                 },
                 incremental_selection = {
                     enable = true,

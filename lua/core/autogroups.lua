@@ -93,7 +93,6 @@ vim.api.nvim_create_autocmd("FileType", {
         "man",
         "notify",
         "lspinfo",
-        "spectre_panel",
         "startuptime",
         "tsplayground",
         "PlenaryTestPopup",

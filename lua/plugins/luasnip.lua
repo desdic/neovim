@@ -1,12 +1,6 @@
 return {
     "L3MON4D3/LuaSnip", -- snippet completions
     event = "VeryLazy",
-    dependencies = {
-        "rafamadriz/friendly-snippets", -- collection of snippets
-        config = function()
-            require("luasnip.loaders.from_vscode").lazy_load()
-        end,
-    },
     build = "make install_jsregexp",
     config = function()
         local ls = require("luasnip")
@@ -29,7 +23,6 @@ return {
             enable_autosnippets = true,
 
             ext_opts = {
-                -- [types.insertNode] = {active = {virt_text = {{"●", "DiffAdd"}}}},
                 [types.choiceNode] = { active = { virt_text = { { "●", "Operator" } } } },
             },
         })

@@ -10,7 +10,6 @@ return {
         "onsails/lspkind-nvim",
         "saadparwaiz1/cmp_luasnip",
         "lukas-reineke/cmp-under-comparator",
-        "windwp/nvim-autopairs",
     },
     config = function()
         local cmp = require("cmp")
@@ -74,8 +73,5 @@ return {
             },
             window = { documentation = cmp.config.window.bordered(), completion = cmp.config.window.bordered() },
         })
-
-        local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-        cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
     end,
 }

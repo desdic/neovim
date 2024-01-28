@@ -11,36 +11,34 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup(
-    {
-        { import = "plugins" },
-    },
-    {
-        ui = { border = "rounded" }, -- show borders
-        performance = {
-            rtp = {
-                disabled_plugins = {
-                    "gzip",
-                    "matchit",
-                    -- "matchparen",
-                    -- "netrwPlugin",
-                    "tarPlugin",
-                    "tohtml",
-                    "tutor",
-                    "zipPlugin",
-                },
+require("lazy").setup({
+    { import = "plugins" },
+}, {
+    ui = { border = "rounded" }, -- show borders
+    performance = {
+        rtp = {
+            disabled_plugins = {
+                "gzip",
+                "matchit",
+                -- "matchparen",
+                -- "netrwPlugin",
+                "tarPlugin",
+                "tohtml",
+                "tutor",
+                "zipPlugin",
             },
         },
-        dev = { path = "~/src/private", patterns = {} },
+    },
+    dev = { path = "~/src/private", patterns = {} },
 
-        install = {
-            colorscheme = { "catppuccin" },
-        },
-        checker = {
-            enabled = true,
-            notify = false,
-        },
-        change_detection = {
-            notify = false,
-        },
-    })
+    install = {
+        colorscheme = { "catppuccin" },
+    },
+    checker = {
+        enabled = true,
+        notify = false,
+    },
+    change_detection = {
+        notify = false,
+    },
+})

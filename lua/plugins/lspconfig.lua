@@ -29,18 +29,18 @@ return {
 
         mason_lspconfig.setup({
             ensure_installed = {
-                "gopls",
-                "lua_ls",
                 "bashls",
-                "yamlls",
-                "pyright",
-                "pylsp",
-                "solargraph",
-                "dockerls",
                 "clangd",
+                "dockerls",
+                "gopls",
                 "jsonls",
+                "lua_ls",
                 "perlnavigator",
+                "pylsp",
+                "pyright",
                 "rust_analyzer",
+                "solargraph",
+                "yamlls",
             },
             -- auto-install configured servers (with lspconfig)
             automatic_installation = true, -- not the same as ensure_installed

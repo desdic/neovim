@@ -11,12 +11,11 @@ return {
             python = { "ruff", "pylint", "mypy" },
             c = { "flawfinder" },
             go = { "golangcilint" },
-            -- lua    = { "luacheck" }, -- TODO luacheck can't find vim and other globals
-            -- make   = { "checkmake" },
             sh = { "shellcheck" },
             ruby = { "rubocop" },
             json = { "jq" },
         }
+
         lint.linters.golangcilint.args = {
             "run",
             "--enable-all",
@@ -38,14 +37,6 @@ return {
             "--config",
             "~/.rubocop.yml",
         }
-
-        -- TODO
-        -- lint.linters.checkmake = {
-        --     cmd = "checkmake",
-        --     stdin = false,
-        --     append_fname = true,
-        --     args = {},
-        -- }
 
         local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
 

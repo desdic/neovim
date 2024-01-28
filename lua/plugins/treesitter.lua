@@ -3,14 +3,14 @@ return {
         "nvim-treesitter/playground",
         cmd = "TSPlaygroundToggle",
         keys = {
-            { "<Leader>tp", "<cmd>TSPlaygroundToggle<CR>", desc="Treesitter playground" },
+            { "<Leader>tp", "<cmd>TSPlaygroundToggle<CR>", desc = "Treesitter playground" },
         },
     },
     {
         "nvim-treesitter/nvim-treesitter-context",
         event = "BufReadPre",
         keys = {
-            { "<Leader>tc", "<cmd>TSContextToggle<CR>", desc="Treesitter context" },
+            { "<Leader>tc", "<cmd>TSContextToggle<CR>", desc = "Treesitter context" },
         },
         opts = {
             enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
@@ -41,6 +41,7 @@ return {
         "nvim-treesitter/nvim-treesitter",
         event = "VeryLazy",
         build = ":TSUpdate",
+        cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
         dependencies = {
             { "nvim-treesitter/nvim-treesitter-textobjects" },
             { "JoosepAlviste/nvim-ts-context-commentstring" },

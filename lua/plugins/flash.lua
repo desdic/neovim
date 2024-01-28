@@ -2,9 +2,6 @@ return {
     "folke/flash.nvim",
     event = "VeryLazy",
     opts = {
-        search = {
-            filetype_exclude = { "notify" },
-        },
         modes = {
             search = {
                 enabled = false, -- disable for search

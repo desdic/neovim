@@ -25,18 +25,18 @@ function M.format()
 end
 
 function M.on_attach(_, buf)
-        if vim.o.filetype == "go" then
-            M.autoformat = true
-        end
-        vim.api.nvim_create_autocmd("BufWritePre", {
-            group = vim.api.nvim_create_augroup("LspFormat." .. buf, {}),
-            buffer = buf,
-            callback = function()
-                if M.autoformat then
-                    M.format()
-                end
-            end,
-        })
+    if vim.o.filetype == "go" then
+        M.autoformat = true
+    end
+    vim.api.nvim_create_autocmd("BufWritePre", {
+        group = vim.api.nvim_create_augroup("LspFormat." .. buf, {}),
+        buffer = buf,
+        callback = function()
+            if M.autoformat then
+                M.format()
+            end
+        end,
+    })
 end
 
 return M

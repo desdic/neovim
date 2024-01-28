@@ -40,9 +40,7 @@ return {
     {
         "nvim-treesitter/nvim-treesitter",
         event = "VeryLazy",
-        build = function()
-            require("nvim-treesitter.install").update({ with_sync = true })
-        end,
+        build = ":TSUpdate",
         dependencies = {
             { "nvim-treesitter/nvim-treesitter-textobjects" },
             { "JoosepAlviste/nvim-ts-context-commentstring" },

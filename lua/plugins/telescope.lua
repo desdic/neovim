@@ -28,6 +28,20 @@ local M = {
             desc = "[F]ind [f]iles",
         },
         {
+            "<Leader>gf",
+            function()
+                require("telescope.builtin").git_files()
+            end,
+            desc = "[G]it [f]iles",
+        },
+        {
+            "<Leader>gk",
+            function()
+                require("telescope.builtin").grep_string()
+            end,
+            desc = "[G]rep [k]key",
+        },
+        {
             "<Leader>fg",
             function()
                 require("telescope.builtin").live_grep()

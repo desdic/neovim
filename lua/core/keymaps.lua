@@ -28,12 +28,7 @@ setkey("n", "<Leader>Y", '"+Y', { silent = true, noremap = true, desc = "yank li
 -- The mapping xnoremap p "_dP changes the behavior of p when pasting over selected text
 -- which is at the end of a line. That occurs because when text at the end of a line is deleted, the cursor
 -- moves back to the last character on the line, and P then pastes before that last character.
-setkey(
-    { "n", "v" },
-    "<Leader>d",
-    '"_d',
-    { silent = true, noremap = true, desc = "delete, don't save in register" }
-)
+setkey({ "n", "v" }, "<Leader>d", '"_d', { silent = true, noremap = true, desc = "delete, don't save in register" })
 
 setkey("n", "n", "nzzzv", { silent = true, noremap = true, desc = "search next and center" })
 setkey("n", "N", "Nzzzv", { silent = true, noremap = true, desc = "search prev and center" })
@@ -56,9 +51,8 @@ setkey("n", "+", "<c-a>", { silent = true, noremap = true, desc = "increase numb
 setkey("n", "dd", function()
     if vim.api.nvim_get_current_line():match("^%s*$") then
         return '"_dd'
-    else
-        return "dd"
     end
+    return "dd"
 end, { expr = true })
 
 -- Substitute all the occurrance of the current word

@@ -2,6 +2,9 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
+        "williamboman/mason.nvim",
+        "williamboman/mason-lspconfig.nvim",
+        "WhoIsSethDaniel/mason-tool-installer.nvim",
         "hrsh7th/cmp-nvim-lsp",
         "stevearc/aerial.nvim",
     },
@@ -10,238 +13,187 @@ return {
         local cmp_nvim_lsp = require("cmp_nvim_lsp")
         local capabilities = cmp_nvim_lsp.default_capabilities()
 
-        local on_attach = function(client, bufnr)
-            -- Check for capabilities
-            local has_cap = function(cap)
-                return client.server_capabilities[cap .. "Provider"]
-            end
+        local mason = require("mason")
+        local mason_lspconfig = require("mason-lspconfig")
+        local mason_tool_installer = require("mason-tool-installer")
 
-            local has_plugin = function(plugin)
-                return pcall(require, plugin)
-            end
+        mason.setup({
+            ui = {
+                icons = {
+                    package_installed = "✓",
+                    package_pending = "➜",
+                    package_uninstalled = "✗",
+                },
+            },
+        })
 
-            local silent_bufnr = function(desc)
-                return { silent = true, buffer = bufnr, desc = desc }
-            end
+        mason_lspconfig.setup({
+            ensure_installed = {
+                "gopls",
+                "lua_ls",
+                "bashls",
+                "yamlls",
+                "pyright",
+                "pylsp",
+                "solargraph",
+                "dockerls",
+                "clangd",
+                "jsonls",
+                "perlnavigator",
+                "rust_analyzer",
+            },
+            -- auto-install configured servers (with lspconfig)
+            automatic_installation = true, -- not the same as ensure_installed
+            handlers = {
+                function(server_name)
+                    require("lspconfig")[server_name].setup({
+                        capabilities = capabilities,
+                    })
+                end,
 
-            require("core.format").on_attach(client, bufnr)
+                -- Extra settings for LSP
 
-            local format = require("core.format").format
-            local keymap = vim.keymap.set
-
-            keymap("n", "gl", vim.diagnostic.open_float, silent_bufnr("Line diagnostics"))
-            keymap("n", "<leader>cl", "<cmd>LspInfo<cr>", { silent = true, desc = "LSP info" })
-            keymap("n", "<leader>cr", "<cmd>LspRestart<cr>", { silent = true, desc = "Restart LSP server" })
-            keymap(
-                "n",
-                "<leader>xd",
-                "<cmd>Telescope diagnostics<cr>",
-                { silent = true, desc = "Telescope Diagnostics" }
-            )
-            keymap("n", "gd", "<cmd>Telescope lsp_definitions<cr>", silent_bufnr("Goto Definition"))
-            keymap("n", "gr", "<cmd>Telescope lsp_references<cr>", silent_bufnr("References"))
-            keymap("n", "gi", "<cmd>Telescope lsp_implementations<cr>", silent_bufnr("Goto Implementation"))
-            keymap("n", "gt", "<cmd>Telescope lsp_type_definitions<cr>", silent_bufnr("Goto Type Definition"))
-            keymap("n", "K", vim.lsp.buf.hover, silent_bufnr("Hover"))
-
-            keymap("n", "<C-j>", vim.diagnostic.goto_next, silent_bufnr("Next Diagnostic"))
-            keymap("n", "<C-k>", vim.diagnostic.goto_prev, silent_bufnr("Prev Diagnostic"))
-
-            if has_cap("signatureHelp") then
-                keymap("n", "gss", vim.lsp.buf.signature_help, silent_bufnr("Signature Help"))
-            end
-
-            if has_plugin("aerial") then
-                keymap("n", "{", "<cmd>AerialNext<cr>", silent_bufnr("Aerial next"))
-                keymap("n", "}", "<cmd>AerialPrev<cr>", silent_bufnr("Aerial prev"))
-            end
-
-            if not has_plugin("inc_rename") then
-                if has_cap("rename") then
-                    keymap("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename" })
-                end
-            end
-
-            if has_cap("codeAction") then
-                keymap({ "n", "v" }, "<leader>ca", function()
-                    if vim.bo.filetype == "go" then
-                        if has_plugin("go") then
-                            return vim.cmd("GoCodeAction")
-                        end
-                    end
-                    return vim.lsp.buf.code_action()
-                end, silent_bufnr("Code Action"))
-            end
-
-            if has_cap("documentFormatting") then
-                keymap("n", "<leader>f", format, silent_bufnr("Format Document"))
-            end
-
-            if has_cap("documentRangeFormatting") then
-                keymap("v", "<leader>f", format, silent_bufnr("Format Range"))
-            end
-        end
-
-        -- {{{ Lua
-        lspconfig["lua_ls"].setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-            filetypes = { "lua" },
-            settings = { -- custom settings for lua
-                Lua = {
-                    -- make the language server recognize "vim" global
-                    diagnostics = { globals = { "vim", "require" } },
-                    workspace = {
-                        -- make language server aware of runtime files
-                        library = {
-                            [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                            [vim.fn.stdpath("config") .. "/lua"] = true,
+                -- {{ LUA
+                ["lua_ls"] = function()
+                    lspconfig.lua_ls.setup({
+                        filetypes = { "lua" },
+                        settings = { -- custom settings for lua
+                            Lua = {
+                                -- make the language server recognize "vim" global
+                                diagnostics = { globals = { "vim", "require" } },
+                                workspace = {
+                                    -- make language server aware of runtime files
+                                    library = {
+                                        [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+                                        [vim.fn.stdpath("config") .. "/lua"] = true,
+                                    },
+                                },
+                                hint = {
+                                    enable = true,
+                                },
+                            },
                         },
-                    },
-                    hint = {
-                        enable = true,
-                    },
-                },
+                    })
+                end,
+
+                -- {{ Go
+                ["gopls"] = function()
+                    lspconfig["gopls"].setup({
+                        settings = {
+                            gopls = {
+                                usePlaceholders = true,
+                                completeUnimported = true,
+                                analyses = {
+                                    nilness = true,
+                                    unusedparams = true,
+                                    unusedwrite = true,
+                                    useany = true,
+                                },
+                                staticcheck = true,
+                                gofumpt = true,
+
+                                hints = {
+                                    assignVariableTypes = true,
+                                    compositeLiteralFields = true,
+                                    compositeLiteralTypes = true,
+                                    constantValues = true,
+                                    functionTypeParameters = true,
+                                    parameterNames = true,
+                                    rangeVariableTypes = true,
+                                },
+                            },
+                        },
+                        filetypes = { "go", "gomod", "gowork", "gotmpl" },
+                        root_dir = function()
+                            return vim.fs.dirname(
+                                vim.fs.find({ ".git", "go.mod", "go.work", "." }, { upward = true })[1]
+                            )
+                        end,
+                    })
+                end,
+
+                -- {{ Python
+                ["pylsp"] = function()
+                    lspconfig["pylsp"].setup({
+                        plugins = {
+                            rope_import = {
+                                enabled = true,
+                            },
+                        },
+                    })
+                end,
+
+                -- {{ JSON
+                ["jsonls"] = function()
+                    lspconfig["jsonls"].setup({
+                        settings = {
+                            settings = {
+                                json = {
+                                    schemas = require("schemastore").json.schemas(),
+                                    validate = { enable = true },
+                                },
+                            },
+                        },
+                    })
+                end,
+
+                -- {{ YAML
+                ["yamlls"] = function()
+                    lspconfig["yamlls"].setup({
+                        settings = {
+                            yaml = {
+                                keyOrdering = false,
+                                schemaStore = {
+                                    -- You must disable built-in schemaStore support if you want to use
+                                    -- this plugin and its advanced options like `ignore`.
+                                    enable = false,
+                                    -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
+                                    url = "",
+                                },
+                                schemas = require("schemastore").yaml.schemas(),
+                            },
+                        },
+                    })
+                end,
+
+                -- {{ Ruby
+                ["solargraph"] = function()
+                    lspconfig["solargraph"].setup({
+                        filetypes = { "ruby", "eruby", "rakefile" },
+                    })
+                end,
+
+                -- {{ C/C++
+                ["clangd"] = function()
+                    lspconfig["clangd"].setup({
+                        cmd = { "clangd", "--background-index" },
+                    })
+                end,
             },
         })
-        -- }}}
 
-        -- {{{ Go
-        lspconfig["gopls"].setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-            settings = {
-                gopls = {
-                    usePlaceholders = true,
-                    completeUnimported = true,
-                    analyses = {
-                        nilness = true,
-                        unusedparams = true,
-                        unusedwrite = true,
-                        useany = true,
-                    },
-                    staticcheck = true,
-                    gofumpt = true,
-
-                    hints = {
-                        assignVariableTypes = true,
-                        compositeLiteralFields = true,
-                        compositeLiteralTypes = true,
-                        constantValues = true,
-                        functionTypeParameters = true,
-                        parameterNames = true,
-                        rangeVariableTypes = true,
-                    },
-                },
-            },
-            filetypes = { "go", "gomod", "gowork", "gotmpl" },
-            root_dir = function()
-                return vim.fs.dirname(vim.fs.find({ ".git", "go.mod", "go.work", "." }, { upward = true })[1])
-            end,
-        })
-        -- }}}
-
-        -- {{{ Python
-        lspconfig["pyright"].setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-        })
-
-        lspconfig["pylsp"].setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-            plugins = {
-                rope_import = {
-                    enabled = true,
-                },
+        mason_tool_installer.setup({
+            ensure_installed = {
+                "stylua",
+                "isort",
+                "black",
+                "mypy",
+                "pylint",
+                "ruff",
+                "golines",
+                "goimports",
+                "golangci-lint",
+                "gofumpt",
+                "gci",
+                "shellcheck",
             },
         })
-        -- }}}
-
-        -- {{{ Json
-        lspconfig["jsonls"].setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-            settings = {
-                settings = {
-                    json = {
-                        schemas = require("schemastore").json.schemas(),
-                        validate = { enable = true },
-                    },
-                },
-            },
-        })
-        -- }}}
-
-        -- {{{ Yaml
-        lspconfig["yamlls"].setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-            settings = {
-                yaml = {
-                    keyOrdering = false,
-                    schemaStore = {
-                        -- You must disable built-in schemaStore support if you want to use
-                        -- this plugin and its advanced options like `ignore`.
-                        enable = false,
-                        -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
-                        url = "",
-                    },
-                    schemas = require("schemastore").yaml.schemas(),
-                },
-            },
-        })
-        -- }}}
-
-        -- {{{ Shell
-        lspconfig["bashls"].setup({
-            filetypes = { "sh", "zsh" },
-            capabilities = capabilities,
-            on_attach = on_attach,
-        })
-        -- }}}
-
-        -- {{{ Ruby
-        lspconfig["solargraph"].setup({
-            filetypes = { "ruby", "rb", "erb", "rakefile" },
-            capabilities = capabilities,
-            on_attach = on_attach,
-        })
-        -- }}}
-
-        -- {{{ Docker
-        lspconfig["dockerls"].setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-            root_dir = vim.loop.cwd,
-        })
-        -- }}}
-
-        -- {{{ Perl
-        lspconfig["perlnavigator"].setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-        })
-        -- }}}
-
-        -- {{{ C
-        local clangcapabilities = capabilities
-        clangcapabilities["offsetEncoding"] = { "utf-16" }
-        clangcapabilities["signatureHelpProvider"] = false
-
-        lspconfig["clangd"].setup({
-            capabilities = clangcapabilities,
-            on_attach = on_attach,
-            cmd = { "clangd", "--background-index" },
-        })
-        -- }}}
 
         vim.g.rustaceanvim = {
             -- Plugin configuration
             tools = {},
             -- LSP configuration
             server = {
-                on_attach = on_attach,
                 settings = {
                     -- rust-analyzer language server configuration
                     ["rust-analyzer"] = {},

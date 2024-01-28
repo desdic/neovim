@@ -24,8 +24,7 @@ function M.format()
     end
 end
 
-function M.on_attach(client, buf)
-    if client.supports_method("textDocument/formatting") then
+function M.on_attach(_, buf)
         if vim.o.filetype == "go" then
             M.autoformat = true
         end
@@ -38,7 +37,6 @@ function M.on_attach(client, buf)
                 end
             end,
         })
-    end
 end
 
 return M

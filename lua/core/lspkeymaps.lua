@@ -19,9 +19,6 @@ M.setkeys = function(ev)
 
     local keymap = vim.keymap.set
     keymap("n", "gl", vim.diagnostic.open_float, silent_bufnr("Line diagnostics"))
-    keymap("n", "<leader>cl", "<cmd>LspInfo<cr>", { silent = true, desc = "LSP info" })
-    keymap("n", "<leader>cr", "<cmd>LspRestart<cr>", { silent = true, desc = "Restart LSP server" })
-    keymap("n", "<leader>xd", "<cmd>Telescope diagnostics<cr>", { silent = true, desc = "Telescope Diagnostics" })
     keymap("n", "gd", "<cmd>Telescope lsp_definitions<cr>", silent_bufnr("Goto Definition"))
     keymap("n", "gr", "<cmd>Telescope lsp_references<cr>", silent_bufnr("References"))
     keymap("n", "gi", "<cmd>Telescope lsp_implementations<cr>", silent_bufnr("Goto Implementation"))
@@ -45,11 +42,6 @@ M.setkeys = function(ev)
     end
 
     keymap({ "n", "v" }, "<leader>ca", function()
-        if vim.bo.filetype == "go" then
-            if has_plugin("go") then
-                return vim.cmd("GoCodeAction")
-            end
-        end
         return vim.lsp.buf.code_action()
     end, silent_bufnr("Code Action"))
 

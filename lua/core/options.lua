@@ -76,10 +76,12 @@ option.splitright = true
 option.mouse = ""
 vim.wo.cursorline = true
 
+-- Include @ in filename
 opt.isfname:append("@-@")
 
 option.pumheight = 10 -- Maximum number of entries in a popup
 
+-- Fix highligts within markdown files
 global.markdown_fenched_languages = { "lua", "c", "cpp", "go", "rust", "ruby" }
 
 -- Set line numbers in telescope preview window

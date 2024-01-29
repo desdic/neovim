@@ -53,12 +53,12 @@ setkey("n", "dd", function()
         return '"_dd'
     end
     return "dd"
-end, { expr = true })
+end, { expr = true, desc = "Delete line but if empty don't put it in any regiester" })
 
 -- Substitute all the occurrance of the current word
 setkey("n", "<Leader>S", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
 
-setkey("v", "J", ":m '>+1<CR>gv=gv")
-setkey("v", "K", ":m '<-2<CR>gv=gv")
+setkey("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move visual line down" })
+setkey("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move visual line up" })
 
 setkey("n", "<Leader>bd", ":bd<CR>", { silent = true, noremap = true, desc = "[B]uffer [D]elete" })

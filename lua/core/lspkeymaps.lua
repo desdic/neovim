@@ -5,11 +5,13 @@ M.setkeys = function(ev)
         return { silent = true, buffer = ev.buf, desc = desc }
     end
 
+    -- Check if we have capability
     local has_cap = function(cap)
         local client = vim.lsp.get_client_by_id(ev.data.client_id)
         return client.server_capabilities[cap .. "Provider"]
     end
 
+    -- Check if plugin is loaded
     local has_plugin = function(plugin)
         return pcall(require, plugin)
     end
@@ -41,7 +43,13 @@ M.setkeys = function(ev)
         keymap("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename" })
     end
 
+    -- Preferences for code actions
     keymap({ "n", "v" }, "<leader>ca", function()
+        if vim.bo.ft == "go" then
+            return vim.cmd("GoCodeAction")
+        elseif vim.bo.ft ~= "rust" then
+            return vim.cmd.RustLsp("codeAction")
+        end
         return vim.lsp.buf.code_action()
     end, silent_bufnr("Code Action"))
 

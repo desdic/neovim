@@ -31,9 +31,6 @@ local autogroups = {
             },
         },
     },
-    ["_varnish"] = {
-        [{ "BufNewFile", "BufRead" }] = { [{ "*.vtc", "*.vcl" }] = { "set filetype=varnish" } },
-    },
 }
 
 for autogrp, autovalues in pairs(autogroups) do
@@ -52,6 +49,7 @@ for autogrp, autovalues in pairs(autogroups) do
     end
 end
 
+-- Show yanking for 200ms
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
     callback = function()
         vim.highlight.on_yank({
@@ -104,7 +102,7 @@ vim.api.nvim_create_autocmd("FileType", {
     },
     callback = function(event)
         vim.bo[event.buf].buflisted = false
-        vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
+        vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true, desc = "Close buffer" })
     end,
 })
 
@@ -114,7 +112,15 @@ vim.api.nvim_create_autocmd("FileType", {
     },
     callback = function(event)
         vim.bo[event.buf].buflisted = false
-        vim.keymap.set("n", "o", "<cmd>silent! cfdo edit %<cr>", { buffer = event.buf, silent = true })
+        vim.keymap.set(
+            "n",
+            "o",
+            "<cmd>silent! cfdo edit %<cr>",
+            { buffer = event.buf, silent = true, desc = "Edit all in quickfix list" }
+        )
+        vim.keymap.set("n", "r", function()
+            return ":cdo s///gc<Left><Left><Left><Left>"
+        end, { silent = false, expr = true, noremap = true, desc = "Search and replace all in quickfix list" })
     end,
 })
 

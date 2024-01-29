@@ -1,4 +1,6 @@
 local M = {}
+
+-- Search in my notes
 function M.grep_notes()
     local tsbuildin = require("telescope.builtin")
     local optsgrep = {}
@@ -8,12 +10,13 @@ function M.grep_notes()
     tsbuildin.live_grep(optsgrep)
 end
 
+-- Search in my neovim config
 function M.search_nvim()
     local tsbuildin = require("telescope.builtin")
     tsbuildin.find_files({ prompt_title = "< VimRC >", cwd = "$HOME/.config/nvim/" })
 end
 
--- Filter for jumping to a line using find_files
+-- Filter for jumping to a line using find_files/git_files
 function M.jump_to_line_filter(prompt)
     local action_state = require("telescope.actions.state")
     local find_colon = string.find(prompt, ":")
@@ -41,7 +44,7 @@ function M.jump_to_line_filter(prompt)
     end
 end
 
--- Mapping to jump to line specified with : in find_files
+-- Mapping to jump to line specified with : in find_files/git_files
 function M.jump_to_line_mapping()
     local actions = require("telescope.actions")
     local action_state = require("telescope.actions.state")

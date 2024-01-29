@@ -8,6 +8,7 @@ return {
         "hrsh7th/cmp-nvim-lsp",
         "stevearc/aerial.nvim",
     },
+    cmd = "MasonUpdate",
     config = function()
         local lspconfig = require("lspconfig")
         local cmp_nvim_lsp = require("cmp_nvim_lsp")

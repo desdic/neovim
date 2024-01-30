@@ -8,7 +8,7 @@ return {
         "hrsh7th/cmp-nvim-lsp",
         "stevearc/aerial.nvim",
     },
-    cmd = "MasonUpdate",
+    cmd = {"MasonUpdate", "Mason"},
     config = function()
         local lspconfig = require("lspconfig")
         local cmp_nvim_lsp = require("cmp_nvim_lsp")
@@ -20,6 +20,7 @@ return {
 
         mason.setup({
             ui = {
+                border = "rounded",
                 icons = {
                     package_installed = "✓",
                     package_pending = "➜",

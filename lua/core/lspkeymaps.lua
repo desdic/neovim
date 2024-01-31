@@ -47,7 +47,7 @@ M.setkeys = function(ev)
     keymap({ "n", "v" }, "<leader>ca", function()
         if vim.bo.ft == "go" then
             return vim.cmd("GoCodeAction")
-        elseif vim.bo.ft ~= "rust" then
+        elseif vim.bo.ft == "rust" then
             return vim.cmd.RustLsp("codeAction")
         end
         return vim.lsp.buf.code_action()

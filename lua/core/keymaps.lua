@@ -32,9 +32,13 @@ setkey({ "n", "v" }, "<Leader>d", '"_d', { silent = true, noremap = true, desc =
 
 setkey("n", "n", "nzzzv", { silent = true, noremap = true, desc = "search next and center" })
 setkey("n", "N", "Nzzzv", { silent = true, noremap = true, desc = "search prev and center" })
+setkey("n", "G", "Gzzzv", { silent = true, noremap = true, desc = "botton + center" })
+setkey("n", "<C-o>", "<C-o>zzzv", { silent = true, noremap = true, desc = "last + center" })
 setkey("n", "J", "mzJ`z", { silent = true, noremap = true, desc = "join next line and center" })
 setkey("n", "<C-d>", "<C-d>zz", { silent = true, noremap = true, desc = "jump center" })
 setkey("n", "<C-u>", "<C-u>zz", { silent = true, noremap = true, desc = "jump center" })
+setkey("n", "{", "{zzzv", { silent = true, noremap = true, desc = "jump and center" })
+setkey("n", "}", "}zzzv", { silent = true, noremap = true, desc = "jump and center" })
 
 setkey("n", "<Leader>tf", require("core.format").toggle, { desc = "Toggle format on Save" })
 setkey("n", "<Leader>pbd", ":PlenaryBustedDirectory. <CR>", { desc = "PlenaryTest" })

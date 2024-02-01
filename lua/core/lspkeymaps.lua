@@ -20,6 +20,7 @@ M.setkeys = function(ev)
     local format = require("core.format").format
 
     local keymap = vim.keymap.set
+    keymap("n", "<Leader>tf", require("core.format").toggle, { desc = "Toggle format on Save" })
     keymap("n", "gl", vim.diagnostic.open_float, silent_bufnr("Line diagnostics"))
     keymap("n", "gd", "<cmd>Telescope lsp_definitions<cr>", silent_bufnr("Goto Definition"))
     keymap("n", "gr", "<cmd>Telescope lsp_references<cr>", silent_bufnr("References"))

@@ -16,6 +16,7 @@ return {
         for i = 1, 5 do
             vim.keymap.set("n", "<Leader>" .. i, function()
                 harpoon:list():select(i)
+                vim.api.nvim_feedkeys("zzzv", "n", false)
             end)
         end
     end,

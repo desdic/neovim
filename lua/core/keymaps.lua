@@ -1,58 +1,58 @@
-local setkey = vim.keymap.set
+local keymap = vim.keymap.set
 
-setkey("", "<Leader>w", ":w!<CR>", { silent = true, noremap = true, desc = "Write buffer" })
+keymap("", "<Leader>w", ":w!<CR>", { silent = true, noremap = true, desc = "Write buffer" })
 
-setkey("v", "<", "<gv", { silent = true, noremap = true, desc = "Align to left" })
-setkey("v", ">", ">gv", { silent = true, noremap = true, desc = "Align to right" })
+keymap("v", "<", "<gv", { silent = true, noremap = true, desc = "Align to left" })
+keymap("v", ">", ">gv", { silent = true, noremap = true, desc = "Align to right" })
 
-setkey("n", "<Leader>qa", ":qa!<CR>", { silent = true, noremap = true, desc = "Quit" })
+keymap("n", "<Leader>qa", ":qa!<CR>", { silent = true, noremap = true, desc = "Quit" })
 
-setkey("i", "<C-H>", "<C-W>", { silent = true, noremap = true, desc = "Delete word backwards" })
+keymap("i", "<C-H>", "<C-W>", { silent = true, noremap = true, desc = "Delete word backwards" })
 
-setkey(
+keymap(
     "n",
     "<Leader><space>",
     ":nohlsearch<CR>",
     { noremap = true, silent = false, expr = false, desc = "Remove search" }
 )
 
-setkey("n", "<Leader>mo", function()
+keymap("n", "<Leader>mo", function()
     require("core.mouse").toggle()
 end, { silent = true, noremap = true, desc = "Toggle mouse" })
 
-setkey("n", "Y", "yg$", { silent = true, noremap = true, desc = "yank line" })
-setkey("x", "<Leader>p", '"_dP', { silent = true, noremap = true, desc = "paste?" })
-setkey({ "n", "v" }, "<Leader>y", '"+y', { silent = true, noremap = true, desc = "yank to clipboard" })
-setkey("n", "<Leader>Y", '"+Y', { silent = true, noremap = true, desc = "yank line to clipboard" })
+keymap("n", "Y", "yg$", { silent = true, noremap = true, desc = "yank line" })
+keymap("x", "<Leader>p", '"_dP', { silent = true, noremap = true, desc = "paste?" })
+keymap({ "n", "v" }, "<Leader>y", '"+y', { silent = true, noremap = true, desc = "yank to clipboard" })
+keymap("n", "<Leader>Y", '"+Y', { silent = true, noremap = true, desc = "yank line to clipboard" })
 
 -- The mapping xnoremap p "_dP changes the behavior of p when pasting over selected text
 -- which is at the end of a line. That occurs because when text at the end of a line is deleted, the cursor
 -- moves back to the last character on the line, and P then pastes before that last character.
-setkey({ "n", "v" }, "<Leader>d", '"_d', { silent = true, noremap = true, desc = "delete, don't save in register" })
+keymap({ "n", "v" }, "<Leader>d", '"_d', { silent = true, noremap = true, desc = "delete, don't save in register" })
 
-setkey("n", "n", "nzzzv", { silent = true, noremap = true, desc = "search next and center" })
-setkey("n", "N", "Nzzzv", { silent = true, noremap = true, desc = "search prev and center" })
-setkey("n", "G", "Gzzzv", { silent = true, noremap = true, desc = "botton + center" })
-setkey("n", "<C-o>", "<C-o>zzzv", { silent = true, noremap = true, desc = "last + center" })
-setkey("n", "J", "mzJ`z", { silent = true, noremap = true, desc = "join next line and center" })
-setkey("n", "<C-d>", "<C-d>zz", { silent = true, noremap = true, desc = "jump center" })
-setkey("n", "<C-u>", "<C-u>zz", { silent = true, noremap = true, desc = "jump center" })
-setkey("n", "{", "{zzzv", { silent = true, noremap = true, desc = "jump and center" })
-setkey("n", "}", "}zzzv", { silent = true, noremap = true, desc = "jump and center" })
+-- Try to keep current line in center
+keymap("n", "n", "nzzzv", { silent = true, noremap = true, desc = "search next and center" })
+keymap("n", "N", "Nzzzv", { silent = true, noremap = true, desc = "search prev and center" })
+keymap("n", "G", "Gzzzv", { silent = true, noremap = true, desc = "botton + center" })
+keymap("n", "<C-o>", "<C-o>zzzv", { silent = true, noremap = true, desc = "last + center" })
+keymap("n", "J", "mzJ`z", { silent = true, noremap = true, desc = "join next line and center" })
+keymap("n", "<C-d>", "<C-d>zz", { silent = true, noremap = true, desc = "jump center" })
+keymap("n", "<C-u>", "<C-u>zz", { silent = true, noremap = true, desc = "jump center" })
+keymap("n", "{", "{zzzv", { silent = true, noremap = true, desc = "jump and center" })
+keymap("n", "}", "}zzzv", { silent = true, noremap = true, desc = "jump and center" })
 
-setkey("n", "<Leader>tf", require("core.format").toggle, { desc = "Toggle format on Save" })
-setkey("n", "<Leader>pbd", ":PlenaryBustedDirectory. <CR>", { desc = "PlenaryTest" })
+keymap("n", "<Leader>pbd", ":PlenaryBustedDirectory. <CR>", { desc = "PlenaryTest" })
 
-setkey("n", "<Leader>sl", ":vsplit<CR>", { silent = true, noremap = true, desc = "Split vertical" })
+keymap("n", "<Leader>sl", ":vsplit<CR>", { silent = true, noremap = true, desc = "Split vertical" })
 
-setkey("n", "<Leader>ne", vim.cmd.Ex, { silent = true, noremap = true, desc = "netrw" })
-setkey("n", "Q", "<nop>") -- don't like it
+keymap("n", "<Leader>ne", vim.cmd.Ex, { silent = true, noremap = true, desc = "netrw" })
+keymap("n", "Q", "<nop>") -- don't like it
 
-setkey("n", "-", "<c-x>", { silent = true, noremap = true, desc = "decrease number" })
-setkey("n", "+", "<c-a>", { silent = true, noremap = true, desc = "increase number" })
+keymap("n", "-", "<c-x>", { silent = true, noremap = true, desc = "decrease number" })
+keymap("n", "+", "<c-a>", { silent = true, noremap = true, desc = "increase number" })
 
 -- use blackhole register if we delete empty line by dd
-setkey("n", "dd", function()
+keymap("n", "dd", function()
     if vim.api.nvim_get_current_line():match("^%s*$") then
         return '"_dd'
     end
@@ -60,9 +60,14 @@ setkey("n", "dd", function()
 end, { expr = true, desc = "Delete line but if empty don't put it in any regiester" })
 
 -- Substitute all the occurrance of the current word
-setkey("n", "<Leader>S", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
+keymap("n", "<Leader>S", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
 
-setkey("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move visual line down" })
-setkey("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move visual line up" })
+keymap("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move visual line down" })
+keymap("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move visual line up" })
 
-setkey("n", "<Leader>bd", ":bd<CR>", { silent = true, noremap = true, desc = "[B]uffer [D]elete" })
+keymap("n", "<Leader>bd", ":bd<CR>", { silent = true, noremap = true, desc = "[B]uffer [D]elete" })
+
+keymap("n", "<left>", "<C-w>h", { desc = "Move to window on left" })
+keymap("n", "<right>", "<C-w>l", { desc = "Move to window above" })
+keymap("n", "<down>", "<Nop>", { desc = "Do nothing" })
+keymap("n", "<up>", "<Nop>", { desc = "Do nothing" })

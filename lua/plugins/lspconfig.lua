@@ -13,6 +13,11 @@ return {
         local cmp_nvim_lsp = require("cmp_nvim_lsp")
         local capabilities = cmp_nvim_lsp.default_capabilities()
 
+        -- To avoid getting warning on using multiple encodings
+        local clangcapabilities = capabilities
+        clangcapabilities["offsetEncoding"] = { "utf-16" }
+        clangcapabilities["signatureHelpProvider"] = false
+
         local mason = require("mason")
         local mason_lspconfig = require("mason-lspconfig")
         local mason_tool_installer = require("mason-tool-installer")
@@ -168,6 +173,7 @@ return {
                 ["clangd"] = function()
                     lspconfig["clangd"].setup({
                         cmd = { "clangd", "--background-index" },
+                        capabilities = clangcapabilities
                     })
                 end,
             },

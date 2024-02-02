@@ -74,7 +74,7 @@ return {
                 { name = "nvim_lsp_signature_help" },
             },
             performance = {
-                max_view_entries = 50,
+                max_view_entries = 20,
             },
             window = { documentation = cmp.config.window.bordered(), completion = cmp.config.window.bordered() },
         })

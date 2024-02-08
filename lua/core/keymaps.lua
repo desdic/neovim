@@ -71,3 +71,9 @@ keymap("n", "<left>", "<C-w>h", { desc = "Move to window on left" })
 keymap("n", "<right>", "<C-w>l", { desc = "Move to window above" })
 keymap("n", "<down>", "<Nop>", { desc = "Do nothing" })
 keymap("n", "<up>", "<Nop>", { desc = "Do nothing" })
+
+-- Better (v|c|)a objects with quotes
+keymap("v", 'a"', '2i"', { desc = "Better object quotes handling" })
+keymap("v", "a'", "2i'", { desc = "Better object quotes handling" })
+keymap("x", 'a"', '2i"', { desc = "Better object quotes handling" })
+keymap("x", "a'", "2i'", { desc = "Better object quotes handling" })

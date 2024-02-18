@@ -54,7 +54,7 @@ return {
             end
             local cur_index = marlin.cur_index()
 
-            return " " .. cur_index .. "/" .. indexes
+            return "  " .. cur_index .. "/" .. indexes
         end
 
         local location = { "location", padding = 0 }

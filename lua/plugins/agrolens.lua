@@ -1,5 +1,6 @@
 return {
     "desdic/agrolens.nvim",
+    dev = true,
     keys = {
         {
             "ag",

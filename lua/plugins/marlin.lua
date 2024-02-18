@@ -1,6 +1,5 @@
 return {
     "desdic/marlin.nvim",
-    dev = true,
     opts = {
         open_callback = require("marlin.callbacks").use_split,
     },

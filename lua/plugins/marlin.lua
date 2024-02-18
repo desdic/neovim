@@ -24,6 +24,9 @@ return {
         keymap("n", "<Leader>fs", function()
             marlin.sort()
         end, { desc = "sort" })
+        keymap("n", "<Leader>0", function()
+            marlin.open_all()
+        end, { desc = "open all" })
 
         for index = 1, 4 do
             keymap("n", "<Leader>" .. index, function()

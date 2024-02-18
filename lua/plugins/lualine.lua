@@ -3,7 +3,7 @@ return {
     dependencies = { "stevearc/aerial.nvim" },
     event = "VeryLazy",
     config = function()
-        local harpoon = require("harpoon")
+        local marlin = require("marlin")
 
         local hide_in_width = function()
             return vim.fn.winwidth(0) > 80
@@ -47,27 +47,14 @@ return {
 
         local branch = { "branch", icons_enabled = true, icon = "" }
 
-        -- Simple marker for harpoon
-        local harpoon_component = function()
-            local items = harpoon:list().items
-
-            if #items == 0 then
+        local marlin_component = function()
+            local indexes = marlin.num_indexes()
+            if indexes == 0 then
                 return ""
             end
+            local cur_index = marlin.cur_index()
 
-            local curfilename = vim.fn.expand("%:p")
-            local curid = ""
-            for idx, value in ipairs(items) do
-                local len = #value.value
-                local tmp = string.sub(curfilename, len * -1)
-
-                if tmp == value.value then
-                    curid = tostring(idx)
-                    break
-                end
-            end
-
-            return " " .. curid .. "/" .. #items
+            return " " .. cur_index .. "/" .. indexes
         end
 
         local location = { "location", padding = 0 }
@@ -122,7 +109,7 @@ return {
             sections = {
                 lualine_a = { branch, diagnostics },
                 lualine_b = { mode },
-                lualine_c = { harpoon_component, "aerial" },
+                lualine_c = { marlin_component, "aerial" },
                 lualine_x = { "%=", diff, spaces, "encoding", filetype },
                 lualine_y = { location },
                 lualine_z = {},

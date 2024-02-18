@@ -75,7 +75,7 @@ local M = {
             desc = "[L]ist [n]otifications",
         },
         {
-            "<Leader>fs",
+            "<Leader>fz",
             function()
                 require("telescope.builtin").current_buffer_fuzzy_find()
             end,

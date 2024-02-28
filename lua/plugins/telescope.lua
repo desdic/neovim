@@ -117,7 +117,7 @@ local M = {
         { "desdic/telescope-rooter.nvim" },
         { "nvim-tree/nvim-web-devicons" },
         { "desdic/macrothis.nvim" },
-        { "desdic/agrolens.nvim", dev=true },
+        { "desdic/agrolens.nvim" },
     },
 }
 

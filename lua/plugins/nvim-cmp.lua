@@ -6,6 +6,7 @@ return {
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-nvim-lua",
         "hrsh7th/cmp-path",
+        "f3fora/cmp-spell",
         "hrsh7th/cmp-nvim-lsp-signature-help",
         "onsails/lspkind-nvim",
         "saadparwaiz1/cmp_luasnip",
@@ -75,6 +76,15 @@ return {
                 { name = "nvim_lua" },
                 { name = "path" },
                 { name = "nvim_lsp_signature_help" },
+                {
+                    name = "spell",
+                    option = {
+                        keep_all_entries = false,
+                        enable_in_context = function()
+                            return true
+                        end,
+                    },
+                },
             },
             performance = {
                 max_view_entries = 20,

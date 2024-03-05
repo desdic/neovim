@@ -46,7 +46,9 @@ keymap("n", "<Leader>pbd", ":PlenaryBustedDirectory. <CR>", { desc = "PlenaryTes
 keymap("n", "<Leader>sl", ":vsplit<CR>", { silent = true, noremap = true, desc = "Split vertical" })
 
 keymap("n", "<Leader>ne", vim.cmd.Ex, { silent = true, noremap = true, desc = "netrw" })
-keymap("n", "Q", "<nop>") -- don't like it
+
+keymap("n", "Q", ":q", { silent = true, noremap = true, desc = "quit" })
+keymap("n", "W", ":w", { silent = true, noremap = true, desc = "write" })
 
 keymap("n", "-", "<c-x>", { silent = true, noremap = true, desc = "decrease number" })
 keymap("n", "+", "<c-a>", { silent = true, noremap = true, desc = "increase number" })

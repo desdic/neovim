@@ -89,3 +89,5 @@ vim.cmd("autocmd User TelescopePreviewerLoaded setlocal number")
 
 -- stabilize buffer content
 global.splitkeep = "screen"
+
+opt.spelllang = { 'en', 'da' }

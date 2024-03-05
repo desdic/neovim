@@ -91,3 +91,5 @@ vim.cmd("autocmd User TelescopePreviewerLoaded setlocal number")
 global.splitkeep = "screen"
 
 opt.spelllang = { 'en', 'da' }
+
+opt.shell = '/bin/zsh'

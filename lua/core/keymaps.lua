@@ -47,8 +47,8 @@ keymap("n", "<Leader>sl", ":vsplit<CR>", { silent = true, noremap = true, desc =
 
 keymap("n", "<Leader>ne", vim.cmd.Ex, { silent = true, noremap = true, desc = "netrw" })
 
-keymap("n", "Q", ":q", { silent = true, noremap = true, desc = "quit" })
-keymap("n", "W", ":w", { silent = true, noremap = true, desc = "write" })
+keymap("n", "Q", ":q", { silent = false, noremap = true, desc = "quit" })
+keymap("n", "W", ":w", { silent = false, noremap = true, desc = "write" })
 
 keymap("n", "-", "<c-x>", { silent = true, noremap = true, desc = "decrease number" })
 keymap("n", "+", "<c-a>", { silent = true, noremap = true, desc = "increase number" })

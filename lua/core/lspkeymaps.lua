@@ -60,6 +60,21 @@ M.setkeys = function(ev)
     if has_cap("documentRangeFormatting") then
         keymap("v", "<leader>f", format, silent_bufnr("Format Range"))
     end
+
+    -- Disable virtual text and add a toggle
+    vim.diagnostic.config({
+        virtual_text = false,
+        underline = false,
+    })
+
+    local isLspDiagnosticsVisible = false
+    keymap("n", "<leader>lx", function()
+        isLspDiagnosticsVisible = not isLspDiagnosticsVisible
+        vim.diagnostic.config({
+            virtual_text = isLspDiagnosticsVisible,
+            underline = isLspDiagnosticsVisible,
+        })
+    end, silent_bufnr("Toggle virtual text"))
 end
 
 return M

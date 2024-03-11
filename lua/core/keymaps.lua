@@ -21,7 +21,6 @@ keymap("n", "<Leader>mo", function()
 end, { silent = true, noremap = true, desc = "Toggle mouse" })
 
 keymap("n", "Y", "yg$", { silent = true, noremap = true, desc = "yank line" })
-keymap("x", "<Leader>p", '"_dP', { silent = true, noremap = true, desc = "paste?" })
 keymap({ "n", "v" }, "<Leader>y", '"+y', { silent = true, noremap = true, desc = "yank to clipboard" })
 keymap("n", "<Leader>Y", '"+Y', { silent = true, noremap = true, desc = "yank line to clipboard" })
 

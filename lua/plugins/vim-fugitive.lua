@@ -3,7 +3,7 @@ return {
     event = "BufWinEnter",
     keys = {
         { "<leader>gs", vim.cmd.Git, desc = "Git" },
-        { "<leader>gv", ,"<cmd>Gvdiffsplit<cr>", desc = "Git diff split" },
+        { "<leader>gv", "<cmd>Gvdiffsplit!<cr>", desc = "Git diff split" },
     },
     config = function()
         local fugitive_augroup = vim.api.nvim_create_augroup("fugitive_augroup", {})

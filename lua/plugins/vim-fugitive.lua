@@ -3,7 +3,7 @@ return {
     event = "BufWinEnter",
     keys = {
         { "<leader>gs", vim.cmd.Git, desc="Git" },
-        { "<leader>gp", "<cmd>Git pull --rebase<cr>", desc = "Git pull rebase" }, -- rebase always
+        { "<leader>gp", "<cmd>Git spull<cr>", desc = "Git stash/pull rebase" },
     },
     config = function()
         local fugitive_augroup = vim.api.nvim_create_augroup("fugitive_augroup", {})

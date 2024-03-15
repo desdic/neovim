@@ -89,6 +89,13 @@ local M = {
             desc = "[F]ile [b]buffers",
         },
         {
+            "<Leader>gb",
+            function()
+                require("telescope.builtin").git_branches()
+            end,
+            desc = "[G]it [b]ranches",
+        },
+        {
             "<Leader>ka",
             function()
                 local qflist = vim.fn.getqflist()

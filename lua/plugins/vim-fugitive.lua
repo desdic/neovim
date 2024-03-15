@@ -4,6 +4,8 @@ return {
     keys = {
         { "<leader>gs", vim.cmd.Git, desc = "Git" },
         { "<leader>gv", "<cmd>Gvdiffsplit!<cr>", desc = "Git diff split" },
+        { "gh", "<cmd>diffget //2<cr>", desc = "Git conflict choose left" },
+        { "gl", "<cmd>diffget //3<cr>", desc = "Git conflict choose right" },
     },
     config = function()
         local fugitive_augroup = vim.api.nvim_create_augroup("fugitive_augroup", {})
@@ -35,18 +37,6 @@ return {
                     "<leader>t",
                     ":Git push -u origin ",
                     { buffer = bufnr, remap = false, desc = "Git push origin" }
-                )
-                vim.keymap.set(
-                    "n",
-                    "gh",
-                    "<cmd>diffget //2<cr>",
-                    { buffer = bufnr, remap = false, desc = "Git choose left" }
-                )
-                vim.keymap.set(
-                    "n",
-                    "gl",
-                    "<cmd>diffget //3<cr>",
-                    { buffer = bufnr, remap = false, desc = "Git choose right" }
                 )
             end,
         })

@@ -2,7 +2,7 @@ return {
     "desdic/greyjoy.nvim",
     keys = {
         { "<Leader>gr", "<cmd>Greyjoy<CR>", desc = "[G]reyjoy [r]un" },
-        { "<Leader>gf", "<cmd>Greyjoy fast<CR>", desc = "[G]reyjoy run [f]ast" },
+        { "<Leader>gg", "<cmd>Greyjoy fast<CR>", desc = "[G]reyjoy fast [g]roup" },
     },
     dependencies = {
         { "akinsho/toggleterm.nvim" },

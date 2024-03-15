@@ -55,10 +55,10 @@ M.setkeys = function(ev)
     end, silent_bufnr("Code Action"))
 
     if has_cap("documentFormatting") then
-        keymap("n", "<leader>f", format, silent_bufnr("Format Document"))
+        keymap("n", "<leader>fm", format, silent_bufnr("[F]or[m]at Document"))
     end
     if has_cap("documentRangeFormatting") then
-        keymap("v", "<leader>f", format, silent_bufnr("Format Range"))
+        keymap("v", "<leader>fm", format, silent_bufnr("[F]or[m]at Range"))
     end
 end
 

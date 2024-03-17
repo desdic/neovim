@@ -25,7 +25,6 @@ return {
                 mini = true,
                 native_lsp = { enabled = true },
                 notify = true,
-                nvimtree = { enabled = true, show_root = false },
                 rainbow_delimiters = true,
                 semantic_tokens = true,
                 telescope = true,

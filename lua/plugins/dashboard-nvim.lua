@@ -45,10 +45,10 @@ return {
                         key = "n",
                     },
                     {
-                        action = "lua require('persistence').load()",
-                        desc = "Restore session",
+                        action = "lua require('marlin').open_all()",
+                        desc = "Marlin",
                         icon = " ",
-                        key = "s",
+                        key = "m",
                     },
                     {
                         action = "UpdateAll",

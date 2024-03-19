@@ -1,6 +1,5 @@
 return {
     "ellisonleao/glow.nvim",
-    event = { "VeryLazy" },
     opts = {
         style = "dark",
         width = 180,

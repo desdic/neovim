@@ -1,6 +1,7 @@
 return {
     {
         "mfussenegger/nvim-dap",
+        enabled = false,
         keys = {
             {
                 "<F4>",

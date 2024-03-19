@@ -12,6 +12,8 @@ return {
                 go = { "golines", "goimports", "gofmt", "gofumpt", "gci" },
                 rust = { "rustfmt" },
                 sh = { "shfmt" },
+                c = { "clang-format" },
+                cpp = { "clang-format" },
             },
         })
     end,

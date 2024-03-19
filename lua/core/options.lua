@@ -54,6 +54,7 @@ window_option.signcolumn = "yes" -- Make room for gitsigns + numbers
 window_option.list = true -- Show hidden chars
 
 buffer_option.tabstop = indent -- Default set to spaces
+buffer_option.softtabstop = indent
 buffer_option.shiftwidth = indent
 buffer_option.expandtab = true
 buffer_option.autoindent = true

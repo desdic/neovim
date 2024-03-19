@@ -64,7 +64,13 @@ return {
             if buf_ft == "toggleterm" then
                 return ""
             end
-            return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
+
+            local indent = "tabs"
+            if vim.api.nvim_buf_get_option(0, "expandtab") then
+                indent = "spaces"
+            end
+
+            return indent .. ":" .. vim.api.nvim_buf_get_option(0, "shiftwidth")
         end
 
         local filename = {

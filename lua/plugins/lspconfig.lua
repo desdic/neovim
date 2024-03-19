@@ -7,16 +7,11 @@ return {
         "WhoIsSethDaniel/mason-tool-installer.nvim",
         "hrsh7th/cmp-nvim-lsp",
     },
-    cmd = {"MasonUpdate", "Mason"},
+    cmd = { "MasonUpdate", "Mason" },
     config = function()
         local lspconfig = require("lspconfig")
         local cmp_nvim_lsp = require("cmp_nvim_lsp")
         local capabilities = cmp_nvim_lsp.default_capabilities()
-
-        -- To avoid getting warning on using multiple encodings
-        local clangcapabilities = capabilities
-        clangcapabilities["offsetEncoding"] = { "utf-16" }
-        clangcapabilities["signatureHelpProvider"] = false
 
         local mason = require("mason")
         local mason_lspconfig = require("mason-lspconfig")
@@ -172,8 +167,37 @@ return {
                 -- {{ C/C++
                 ["clangd"] = function()
                     lspconfig["clangd"].setup({
-                        cmd = { "clangd", "--background-index" },
-                        capabilities = clangcapabilities
+                        root_dir = function(fname)
+                            return require("lspconfig.util").root_pattern(
+                                "Makefile",
+                                "configure.ac",
+                                "configure.in",
+                                "config.h.in",
+                                "meson.build",
+                                "meson_options.txt",
+                                "build.ninja"
+                            )(fname) or require("lspconfig.util").root_pattern(
+                                "compile_commands.json",
+                                "compile_flags.txt"
+                            )(fname) or require("lspconfig.util").find_git_ancestor(fname)
+                        end,
+                        cmd = {
+                            "clangd",
+                            "--background-index",
+                            "--clang-tidy",
+                            "--header-insertion=iwyu",
+                            "--completion-style=detailed",
+                            "--function-arg-placeholders",
+                            "--fallback-style=llvm",
+                        },
+                        capabilities = {
+                            offsetEncoding = { "utf-16" },
+                        },
+                        init_options = {
+                            usePlaceholders = true,
+                            completeUnimported = true,
+                            clangdFileStatus = true,
+                        },
                     })
                 end,
             },

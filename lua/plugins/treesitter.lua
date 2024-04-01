@@ -8,6 +8,7 @@ return {
     },
     {
         "nvim-treesitter/nvim-treesitter-context",
+        enabled = false,
         event = "BufReadPre",
         keys = {
             { "<Leader>tc", "<cmd>TSContextToggle<CR>", desc = "Treesitter context" },

@@ -28,6 +28,9 @@ return {
         keymap("n", "<Leader>0", function()
             marlin.open_all()
         end, { desc = "open all" })
+        keymap("n", "<Leader>z", function()
+            marlin.toggle()
+        end, { desc = "toggle" })
 
         local mindex = 0
         local generate_finder = function()

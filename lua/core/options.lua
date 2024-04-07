@@ -22,7 +22,8 @@ vim.opt.shortmess:append("s") -- Don't give "search hit BOTTOM, continuing at TO
 option.cmdheight = 2 -- Set height to prevent 'press enter to continue'
 option.hidden = true -- Allow to switch buffer without saving
 
-option.completeopt = "menu,menuone,noselect"
+option.backspace = "indent,eol,start" -- allow backspace on indent, end of line or insert mode start position
+
 option.updatetime = 300 -- Faster completion
 
 option.showmode = false -- We don't need to see things like -- INSERT -- anymore
@@ -94,3 +95,5 @@ global.splitkeep = "screen"
 opt.spelllang = { 'en', 'da' }
 
 opt.shell = '/bin/zsh'
+
+vim.cmd("let g:netrw_liststyle = 3")

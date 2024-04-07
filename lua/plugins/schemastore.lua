@@ -1,5 +1,5 @@
 return {
     "b0o/schemastore.nvim",
-    event = { "VeryLazy" },
+    event = { "BufReadPost", "BufNewFile" },
     version = false, -- last release is way too old
 }

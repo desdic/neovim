@@ -1,6 +1,6 @@
 return {
     "chentoast/marks.nvim",
-    event = "VeryLazy",
+    event = { "BufReadPre", "BufNewFile" },
     keys = {
         { "m", "<Plug>(Marks-set)", desc = "Set mark" },
         { "dm", "<Plug>(Marks-delete)", desc = "Delete mark" },

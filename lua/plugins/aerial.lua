@@ -1,6 +1,6 @@
 return {
     "stevearc/aerial.nvim",
-    event = { "VeryLazy" },
+    event = { "BufReadPre", "BufNewFile" },
     opts = {},
     keys = {
         { "<Leader>xa", "<cmd>AerialToggle!<CR>", desc ="Toggle aerial" },

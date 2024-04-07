@@ -1,6 +1,5 @@
 local M = {
     "nvim-telescope/telescope.nvim",
-    -- event = "VeryLazy",
     cmd = "Telescope",
     keys = {
         {

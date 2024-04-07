@@ -27,6 +27,7 @@ M.setkeys = function(ev)
     keymap("n", "gi", "<cmd>Telescope lsp_implementations<cr>", silent_bufnr("Goto Implementation"))
     keymap("n", "gt", "<cmd>Telescope lsp_type_definitions<cr>", silent_bufnr("Goto Type Definition"))
     keymap("n", "K", vim.lsp.buf.hover, silent_bufnr("Hover"))
+    keymap("n", "<leader>rn", vim.lsp.buf.rename, silent_bufnr("Rename"))
 
     keymap("n", "<C-j>", vim.diagnostic.goto_next, silent_bufnr("Next Diagnostic"))
     keymap("n", "<C-k>", vim.diagnostic.goto_prev, silent_bufnr("Prev Diagnostic"))
@@ -38,10 +39,6 @@ M.setkeys = function(ev)
     if has_plugin("aerial") then
         keymap("n", "{", "<cmd>AerialNext<cr>", silent_bufnr("Aerial next"))
         keymap("n", "}", "<cmd>AerialPrev<cr>", silent_bufnr("Aerial prev"))
-    end
-
-    if not has_plugin("inc_rename") then
-        keymap("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename" })
     end
 
     -- Preferences for code actions

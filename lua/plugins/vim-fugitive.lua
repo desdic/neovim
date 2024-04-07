@@ -1,6 +1,6 @@
 return {
     "tpope/vim-fugitive",
-    event = "BufWinEnter",
+    event = { "BufReadPre", "BufNewFile" },
     keys = {
         { "<leader>gs", vim.cmd.Git, desc = "Git" },
         { "<leader>gv", "<cmd>Gvdiffsplit!<cr>", desc = "Git diff split" },

@@ -1,7 +1,7 @@
 return {
     "nvim-lualine/lualine.nvim",
     dependencies = { { "stevearc/aerial.nvim" }, { "desdic/marlin.nvim" } },
-    event = "VeryLazy",
+    event = { "BufReadPre", "BufNewFile" },
     config = function()
         local marlin = require("marlin")
 

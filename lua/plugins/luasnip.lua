@@ -1,6 +1,6 @@
 return {
     "L3MON4D3/LuaSnip", -- snippet completions
-    event = "VeryLazy",
+    event = { "BufReadPre", "BufNewFile" },
     build = "make install_jsregexp",
     config = function()
         local ls = require("luasnip")

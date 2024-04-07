@@ -4,6 +4,7 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     config = function()
         local marlin = require("marlin")
+        local lazy_status = require("lazy.status") -- to configure lazy pending updates count
 
         local hide_in_width = function()
             return vim.fn.winwidth(0) > 80
@@ -116,7 +117,18 @@ return {
                 lualine_a = { branch, diagnostics },
                 lualine_b = { mode },
                 lualine_c = { marlin_component, "aerial" },
-                lualine_x = { "%=", diff, spaces, "encoding", filetype },
+                lualine_x = {
+                    "%=",
+                    {
+                        lazy_status.updates,
+                        cond = lazy_status.has_updates,
+                        color = { fg = "#ff9e64" },
+                    },
+                    diff,
+                    spaces,
+                    "encoding",
+                    filetype,
+                },
                 lualine_y = { location },
                 lualine_z = {},
             },

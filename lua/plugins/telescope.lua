@@ -153,17 +153,15 @@ function M.config()
                     ["<C-k>"] = actions.move_selection_previous,
                     ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
                     ["<esc>"] = actions.close,
-                    -- ["<CR>"] = actions.select_default + actions.center,
+                    ["<CR>"] = actions.select_default + actions.center,
 
                     -- You can perform as many actions in a row as you like
                     -- ["<CR>"] = actions.select_default + actions.center + my_cool_custom_action,
-                    -- ["<C-h>"] = actions.which_key -- keys from pressing <C-/>
                 },
                 n = {
                     ["<C-j>"] = actions.move_selection_next,
                     ["<C-k>"] = actions.move_selection_previous,
-                    -- ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
-                    -- ["<C-h>"] = actions.which_key
+                    ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
                 },
             },
         },

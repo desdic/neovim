@@ -5,6 +5,7 @@ return {
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-nvim-lua",
+        "hrsh7th/cmp-cmdline",
         "hrsh7th/cmp-path",
         "f3fora/cmp-spell",
         "hrsh7th/cmp-nvim-lsp-signature-help",
@@ -26,6 +27,9 @@ return {
 
         cmp.setup({
             preselect = false,
+            completion = {
+                completeopt = "menu,menuone,preview,noselect",
+            },
             snippet = {
                 expand = function(args)
                     luasnip.lsp_expand(args.body)
@@ -104,6 +108,5 @@ return {
             }),
             matching = { disallow_symbol_nonprefix_matching = false },
         })
-
     end,
 }

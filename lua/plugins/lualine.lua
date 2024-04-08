@@ -139,7 +139,7 @@ return {
                 lualine_c = { "%=", "%m", filename },
             },
             tabline = {},
-            extensions = { "nvim-dap-ui" },
+            extensions = { "lazy", "aerial", "nvim-dap-ui" },
         })
     end,
 }

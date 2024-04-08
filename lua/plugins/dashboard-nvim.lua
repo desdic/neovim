@@ -51,6 +51,12 @@ return {
                         key = "m",
                     },
                     {
+                        action = "lua require('persistence').load()",
+                        desc = "Persistence",
+                        icon = " ",
+                        key = "s",
+                    },
+                    {
                         action = "UpdateAll",
                         desc = "Update all",
                         icon = "󰃨 ",

@@ -43,6 +43,7 @@ keymap("n", "}", "}zzzv", { silent = true, noremap = true, desc = "jump and cent
 keymap("n", "<Leader>pbd", ":PlenaryBustedDirectory. <CR>", { desc = "PlenaryTest" })
 
 keymap("n", "<Leader>sl", ":vsplit<CR>", { silent = true, noremap = true, desc = "Split vertical" })
+keymap("n", "<Leader>sx", ":close<CR>", { silent = true, noremap = true, desc = "Close split" })
 
 keymap("n", "<Leader>ne", vim.cmd.Ex, { silent = true, noremap = true, desc = "netrw" })
 

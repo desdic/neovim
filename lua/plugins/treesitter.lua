@@ -77,6 +77,7 @@ return {
                     "vim",
                     "vimdoc",
                     "yaml",
+                    "zig",
                 },
                 indent = { enable = true, disable = {} },
                 highlight = {

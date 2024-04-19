@@ -27,6 +27,10 @@ return {
                             filetype = "go",
                             filename = "main.go",
                         },
+                        ["zig build"] = {
+                            command = { "zig", "build" },
+                            filetype = "zig",
+                        },
                     },
                 },
                 kitchen = { group_id = 2, targets = { "converge", "verify", "destroy", "test" }, include_all = false },

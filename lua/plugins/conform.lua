@@ -14,6 +14,7 @@ return {
                 sh = { "shfmt" },
                 c = { "clang-format" },
                 cpp = { "clang-format" },
+                zig = { "zigfmt" },
             },
         })
     end,

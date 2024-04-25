@@ -132,6 +132,21 @@ function M.config()
 
     local actions = require("telescope.actions")
 
+    local select_one_or_multi = function(prompt_bufnr)
+        local picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
+        local multi = picker:get_multi_selection()
+        if not vim.tbl_isempty(multi) then
+            require("telescope.actions").close(prompt_bufnr)
+            for _, j in pairs(multi) do
+                if j.path ~= nil then
+                    vim.cmd(string.format("%s %s", "edit", j.path))
+                end
+            end
+        else
+            require("telescope.actions").select_default(prompt_bufnr)
+        end
+    end
+
     ts.setup({
         pickers = {
             -- Make telescope able to jump to a specific line
@@ -154,6 +169,7 @@ function M.config()
                     ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
                     ["<esc>"] = actions.close,
                     ["<CR>"] = actions.select_default + actions.center,
+                    ["<C-o>"] = select_one_or_multi,
 
                     -- You can perform as many actions in a row as you like
                     -- ["<CR>"] = actions.select_default + actions.center + my_cool_custom_action,
@@ -162,6 +178,7 @@ function M.config()
                     ["<C-j>"] = actions.move_selection_next,
                     ["<C-k>"] = actions.move_selection_previous,
                     ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+                    ["<C-o>"] = select_one_or_multi,
                 },
             },
         },

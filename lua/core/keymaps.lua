@@ -69,8 +69,6 @@ keymap("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move visual line up" })
 
 keymap("n", "<Leader>bd", ":bd<CR>", { silent = true, noremap = true, desc = "[B]uffer [D]elete" })
 
-keymap("n", "<left>", "<C-w>h", { desc = "Move to window on left" })
-keymap("n", "<right>", "<C-w>l", { desc = "Move to window above" })
 keymap("n", "<down>", "<Nop>", { desc = "Do nothing" })
 keymap("n", "<up>", "<Nop>", { desc = "Do nothing" })
 
@@ -82,3 +80,6 @@ keymap("x", "a'", "2i'", { desc = "Better object quotes handling" })
 
 keymap("i", "jk", "<ESC>", { desc = "Esc" })
 keymap("t", "jk", [[<C-\><C-n>]], { desc = "Esc" })
+
+keymap("n", "<C-l>", "<C-w>l", { desc = "Move to window on left" })
+keymap("n", "<C-h>", "<C-w>h", { desc = "Move to window on right" })

@@ -25,9 +25,7 @@ function M.format()
 end
 
 function M.on_attach(_, buf)
-    if vim.o.filetype == "go" then
-        M.autoformat = true
-    end
+    M.autoformat = true
     vim.api.nvim_create_autocmd("BufWritePre", {
         group = vim.api.nvim_create_augroup("LspFormat." .. buf, {}),
         buffer = buf,

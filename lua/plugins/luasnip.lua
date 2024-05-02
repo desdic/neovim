@@ -1,12 +1,14 @@
 return {
     "L3MON4D3/LuaSnip", -- snippet completions
     event = { "BufReadPre", "BufNewFile" },
+    dependencies = { "rafamadriz/friendly-snippets" },
     build = "make install_jsregexp",
     config = function()
         local ls = require("luasnip")
 
         local lsloader = require("luasnip.loaders.from_lua")
 
+        require("luasnip.loaders.from_vscode").lazy_load()
         lsloader.load({ paths = "~/.config/nvim/snippets" })
 
         local types = require("luasnip.util.types")

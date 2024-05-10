@@ -45,8 +45,8 @@ return {
                         key = "n",
                     },
                     {
-                        action = "lua require('marlin').open_all()",
-                        desc = "Marlin",
+                        action = "Mason",
+                        desc = "Mason",
                         icon = " ",
                         key = "m",
                     },

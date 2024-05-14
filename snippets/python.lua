@@ -8,6 +8,7 @@ local c = ls.choice_node
 -- local f = ls.function_node
 local sn = ls.snippet_node
 -- local rep = require("luasnip.extras").rep
+local utils = require("core.utils")
 
 local snippets, autosnippets = {}, {}
 
@@ -27,16 +28,21 @@ local def = s(
 )
 table.insert(snippets, def)
 
-local is_top_empty_file = function()
-    local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-    local _, col = vim.api.nvim_win_get_cursor(0)
-    if #lines <= 1 and col == 2 then
-        return true
+local top_and_python = function()
+    local ftype = vim.bo.filetype
+    if ftype ~= "python" then
+        return false
     end
-    return false
+
+    local is_top = utils.is_top_empty_file()
+    if not is_top then
+        return false
+    end
+
+    return true
 end
 
-local empty_python = function(position)
+local boilerplate_python = function(position)
     return d(position, function()
         local nodes = { t("python3"), t("python") }
         return sn(nil, {
@@ -67,7 +73,7 @@ local empty_python = function(position)
     end, {})
 end
 
-local empty = s({ trig = "#!" }, empty_python(1), { condition = is_top_empty_file() })
-table.insert(autosnippets, empty)
+local empty = s({ trig = "boilerplate" }, boilerplate_python(1), { condition = top_and_python() })
+table.insert(snippets, empty)
 
 return snippets, autosnippets

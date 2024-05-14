@@ -33,6 +33,7 @@ return {
                 "bashls",
                 "clangd",
                 "dockerls",
+                "glsl_analyzer",
                 "gopls",
                 "jsonls",
                 "lua_ls",

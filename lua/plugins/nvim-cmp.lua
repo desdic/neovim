@@ -9,18 +9,44 @@ return {
         "hrsh7th/cmp-path",
         "f3fora/cmp-spell",
         "hrsh7th/cmp-nvim-lsp-signature-help",
-        "onsails/lspkind-nvim",
         "saadparwaiz1/cmp_luasnip",
         "lukas-reineke/cmp-under-comparator",
     },
     config = function()
+        local kind_icons = {
+            Text = "󰉿",
+            Method = "󰆧",
+            Function = "󰊕",
+            Constructor = "",
+            Field = "󰜢",
+            Variable = "󰀫",
+            Class = "󰠱",
+            Interface = "",
+            Module = "",
+            Property = "󰜢",
+            Unit = "󰑭",
+            Value = "󰎠",
+            Enum = "",
+            Keyword = "󰌋",
+            Snippet = "",
+            Color = "󰏘",
+            File = "󰈙",
+            Reference = "󰈇",
+            Folder = "󰉋",
+            EnumMember = "",
+            Constant = "󰏿",
+            Struct = "󰙅",
+            Event = "",
+            Operator = "󰆕",
+            TypeParameter = "",
+        }
+
         local cmp_autopairs = require("nvim-autopairs.completion.cmp")
         local cmp = require("cmp")
         cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
         local cmplsp = require("cmp_nvim_lsp")
         local compare = require("cmp.config.compare")
-        local lspkind = require("lspkind")
         local luasnip = require("luasnip")
 
         cmplsp.setup()
@@ -35,7 +61,17 @@ return {
                     luasnip.lsp_expand(args.body)
                 end,
             },
-            formatting = { format = lspkind.cmp_format({ maxwidth = 50, ellipsis_char = "..." }) },
+            formatting = {
+                fields = { "abbr", "kind", "menu" },
+                format = function(entry, vim_item)
+                    local kind = vim_item.kind
+                    vim_item.kind = " " .. (kind_icons[kind] or "?") .. ""
+                    local source = entry.source.name
+                    vim_item.menu = "[" .. source .. "]"
+
+                    return vim_item
+                end,
+            },
             sorting = {
                 priority_weight = 1.0,
                 comparators = {

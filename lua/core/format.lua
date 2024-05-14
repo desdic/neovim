@@ -1,5 +1,6 @@
 local M = {}
 
+-- TODO: make it global and not per LSP
 M.autoformat = false
 
 function M.toggle()

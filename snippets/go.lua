@@ -6,11 +6,11 @@ local fmt = require("luasnip.extras.fmt").fmt
 local fmta = require("luasnip.extras.fmt").fmta
 local d = ls.dynamic_node
 local c = ls.choice_node
--- local f = ls.function_node
--- local sn = ls.snippet_node
+local sn = ls.snippet_node
 local rep = require("luasnip.extras").rep
 local snippet_from_nodes = ls.sn
---
+local corets = require("core.treesitter")
+
 local snippets, autosnippets = {}, {}
 
 local iferrnil = s(
@@ -37,193 +37,115 @@ local ifshort = s(
 )
 table.insert(snippets, ifshort)
 
--- From TJ
--- local ts_locals = require("nvim-treesitter.locals")
--- local ts_utils = require("nvim-treesitter.ts_utils")
---
--- local get_node_text = vim.treesitter.get_node_text
---
--- local transforms = {
---     int = function(_, _)
---         return t("0")
---     end,
---
---     bool = function(_, _)
---         return t("false")
---     end,
---
---     string = function(_, _)
---         return t([[""]])
---     end,
---
---     error = function(_, info)
---         if info then
---             info.index = info.index + 1
---
---             return c(info.index, {
---                 t(info.err_name),
---                 t(string.format('errors.Wrap(%s, "%s")', info.err_name, info.func_name)),
---             })
---         else
---             return t("err")
---         end
---     end,
---
---     -- Types with a "*" mean they are pointers, so return nil
---     [function(text)
---         return string.find(text, "*", 1, true) ~= nil
---     end] = function(_, _)
---         return t("nil")
---     end,
--- }
---
--- local transform = function(text, info)
---     local condition_matches = function(condition, ...)
---         if type(condition) == "string" then
---             return condition == text
---         else
---             return condition(...)
---         end
---     end
---
---     for condition, result in pairs(transforms) do
---         if condition_matches(condition, text, info) then
---             return result(text, info)
---         end
---     end
---
---     return t(text)
--- end
---
--- local handlers = {
---     parameter_list = function(node, info)
---         local result = {}
---
---         local count = node:named_child_count()
---         for idx = 0, count - 1 do
---             local matching_node = node:named_child(idx)
---             local type_node = matching_node:field("type")[1]
---             table.insert(result, transform(get_node_text(type_node, 0), info))
---             if idx ~= count - 1 then
---                 table.insert(result, t({ ", " }))
---             end
---         end
---
---         return result
---     end,
---
---     type_identifier = function(node, info)
---         local text = get_node_text(node, 0)
---         return { transform(text, info) }
---     end,
--- }
---
--- local function_node_types = {
---     function_declaration = true,
---     method_declaration = true,
---     func_literal = true,
--- }
---
--- local function getmethod(expr)
---     if not expr then
---         return nil
---     end
---
---     while expr do
---         if function_node_types[expr:type()] then
---             return expr
---         end
---         expr = expr:parent()
---     end
---
---     return nil
--- end
---
--- local function go_result_type(info)
---     local cursor_node = ts_utils.get_node_at_cursor()
---
---     local function_node = getmethod(cursor_node)
---
---     -- This only returns a source_file and no longer decends into tree
---     -- local scope = ts_locals.get_scope_tree(cursor_node, 0)
---     --
---     if not function_node then
---         print("Not inside of a function")
---         return t("")
---     end
---
---     local query = vim.treesitter.parse_query(
---         "go",
---         [[
---       [
---         (method_declaration result: (_) @id)
---         (function_declaration result: (_) @id)
---         (func_literal result: (_) @id)
---       ]
---     ]]
---     )
---     for _, node in query:iter_captures(function_node, 0) do
---         if handlers[node:type()] then
---             return handlers[node:type()](node, info)
---         end
---     end
--- end
---
--- local go_ret_vals = function(args)
---     return snippet_from_nodes(
---         nil,
---         go_result_type({
---             index = 0,
---             err_name = args[1][1],
---             func_name = args[2][1],
---         })
---     )
--- end
---
--- local efi = s(
---     { trig = "efi", name = "iferr" },
---     fmta(
---         [[
--- <val>, <err> := <f>(<args>)
--- if <err_same> != nil {
--- 	return <result>
--- }
--- <finish>
--- ]],
---         {
---             val = i(1),
---             err = i(2, "err"),
---             f = i(3),
---             args = i(4),
---             err_same = rep(2),
---             result = d(5, go_ret_vals, { 2, 3 }),
---             finish = i(0),
---         }
---     )
--- )
---
--- table.insert(snippets, efi)
---
--- local efishort = s(
---     { trig = "efis", name = "iferr short" },
---     fmta(
---         [[
--- if <err> := <f>(<args>); <err_same> != nil {
--- 	return <result>
--- }
--- <finish>
--- ]],
---         {
---             err = i(1, "err"),
---             f = i(2),
---             args = i(3),
---             err_same = rep(1),
---             result = d(4, go_ret_vals, { 1, 2 }),
---             finish = i(0),
---         }
---     )
--- )
---
--- table.insert(snippets, efishort)
+-- The return Go bases snipped is based of TJ's TakeTuesday E04
+local M = {}
+
+M.transformations = {
+    int = function(_, info)
+        return i(info.index, "0")
+    end,
+
+    bool = function(_, info)
+        return i(info.index, "false")
+    end,
+
+    string = function(_, info)
+        return i(info.index, [[""]])
+    end,
+
+    error = function(_, info)
+        if info and info.err_name ~= nil then
+            return c(info.index, {
+                t(info.err_name),
+                t(string.format('errors.Wrap(%s, "%s")', info.err_name, info.func_name)),
+            })
+        end
+
+        return i(info.index, "nil")
+    end,
+
+    -- Types with a "*" mean they are pointers, so return nil
+    [function(text)
+        return string.find(text, "*", 1, true) ~= nil
+    end] = function(_, info)
+        return i(info.index, "nil")
+    end,
+}
+
+M.get_return_type = function(args)
+    local query = [[
+      [
+        (method_declaration result: (_) @id)
+        (function_declaration result: (_) @id)
+        (func_literal result: (_) @id)
+      ]
+    ]]
+
+    local err_name = nil
+    local func_name = nil
+    if type(args) == "table" and type(args[1]) == "table" then
+        err_name = args[1][1]
+        func_name = args[1][2]
+    end
+
+    local index = 0
+    local ret = corets.process_query_result(query, "go", corets.go_handlers, corets.go_function_node_types)
+    if #ret ~= 0 then
+        local result = {}
+        for idx, x in pairs(ret) do
+            index = index + 1
+            table.insert(
+                result,
+                corets.transform(x, { index = index, err_name = err_name, func_name = func_name }, M.transformations)
+            )
+
+            if idx ~= #ret then
+                table.insert(result, t(", "))
+            end
+        end
+        return snippet_from_nodes(nil, result)
+    end
+
+    -- Indicate we failed to handle this type
+    return sn(nil, t("unknown"))
+end
+
+local ret = s(
+    { trig = "ret", name = "return" },
+    fmta(
+        [[
+return <result>
+]],
+        {
+            result = d(1, M.get_return_type, {}),
+        }
+    )
+)
+
+table.insert(snippets, ret)
+
+local efi = s(
+    { trig = "efi", name = "iferr" },
+    fmta(
+        [[
+<val>, <err> := <f>(<args>)
+if <err_same> != nil {
+	return <result>
+}
+<finish>
+]],
+        {
+            val = i(1),
+            err = i(2, "err"),
+            f = i(3),
+            args = i(4),
+            err_same = rep(2),
+            result = d(5, M.get_return_type, { 2, 3 }),
+            finish = i(0),
+        }
+    )
+)
+
+table.insert(snippets, efi)
 
 return snippets, autosnippets

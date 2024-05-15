@@ -83,6 +83,13 @@ return {
                     compare.kind,
                 },
             },
+            matching = {
+                disallow_fuzzy_matching = true,
+                disallow_fullfuzzy_matching = true,
+                disallow_partial_fuzzy_matching = true,
+                disallow_partial_matching = false,
+                disallow_prefix_unmatching = true,
+            },
             min_length = 0, -- allow for `from package import _` in Python
             mapping = cmp.mapping.preset.insert({
                 ["<C-b>"] = cmp.mapping.scroll_docs(-4),
@@ -110,10 +117,10 @@ return {
                 end, { "i", "s" }),
             }),
             sources = {
-                { name = "luasnip", max_item_count = 5 },
+                { name = "luasnip", max_item_count = 3 },
                 { name = "nvim_lsp", max_item_count = 5 },
-                { name = "buffer", max_item_count = 5 },
                 { name = "nvim_lua", max_item_count = 5 },
+                { name = "buffer", max_item_count = 5, keyword_length = 5 },
                 { name = "path", max_item_count = 5 },
                 { name = "nvim_lsp_signature_help", max_item_count = 5 },
                 {

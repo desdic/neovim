@@ -91,7 +91,7 @@ M.get_return_type = function(args)
     local index = 0
     local ret = corets.process_query_result(query, "go", corets.go_handlers, corets.go_function_node_types)
     if #ret ~= 0 then
-        local result = {}
+        local result = { t(" ") }
         for idx, x in pairs(ret) do
             index = index + 1
             table.insert(
@@ -107,14 +107,14 @@ M.get_return_type = function(args)
     end
 
     -- Indicate we failed to handle this type
-    return sn(nil, t("unknown"))
+    return snippet_from_nodes(nil, {})
 end
 
 local ret = s(
     { trig = "ret", name = "return" },
     fmta(
         [[
-return <result>
+return<result>
 ]],
         {
             result = d(1, M.get_return_type, {}),
@@ -130,7 +130,7 @@ local efi = s(
         [[
 <val>, <err> := <f>(<args>)
 if <err_same> != nil {
-	return <result>
+	return<result>
 }
 <finish>
 ]],

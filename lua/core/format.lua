@@ -1,11 +1,18 @@
-local M = {}
-
--- TODO: make it global and not per LSP
-M.autoformat = false
+local M = {
+    -- Preferred defaults
+    filetypes = {
+        go = true,
+        rust = true,
+        zig = true,
+        lua = true,
+    },
+}
 
 function M.toggle()
-    M.autoformat = not M.autoformat
-    vim.notify(M.autoformat and "Enabled format on save" or "Disabled format on save")
+    local filetype = vim.o.filetype
+    M.filetypes[filetype] = vim.F.if_nil(not M.filetypes[filetype], false)
+    local state = M.filetypes[filetype] and "enabled" or "disabled"
+    vim.notify("Autoformat for " .. filetype .. " " .. state)
 end
 
 function M.format()
@@ -18,22 +25,20 @@ function M.format()
             async = false,
             timeout_ms = 1000,
         })
-    else
-        vim.lsp.buf.format({
-            bufnr = buf,
-        })
+        return
     end
+
+    vim.lsp.buf.format({
+        bufnr = buf,
+    })
 end
 
 function M.on_attach(_, buf)
-    if vim.o.filetype == "go" then
-        M.autoformat = true
-    end
     vim.api.nvim_create_autocmd("BufWritePre", {
         group = vim.api.nvim_create_augroup("LspFormat." .. buf, {}),
         buffer = buf,
         callback = function()
-            if M.autoformat then
+            if M.filetypes[vim.o.filetype] then
                 M.format()
             end
         end,

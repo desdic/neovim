@@ -83,3 +83,5 @@ keymap("t", "jk", [[<C-\><C-n>]], { desc = "Esc" })
 
 keymap("n", "<C-l>", "<C-w>l", { desc = "Move to window on left" })
 keymap("n", "<C-h>", "<C-w>h", { desc = "Move to window on right" })
+keymap("n", "<C-k>", "<C-w>k", { desc = "Move to window above" })
+keymap("n", "<C-j>", "<C-w>j", { desc = "Move to window below" })

@@ -1,1 +1,1 @@
-vim.api.nvim_buf_set_option(0, "commentstring", "# %s")
+vim.api.nvim_set_option_value("commentstring", "# %s", { buf = 0 })

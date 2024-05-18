@@ -11,7 +11,7 @@ local sn = ls.snippet_node
 local utils = require("core.utils")
 
 local snippets, autosnippets = {}, {}
---
+
 local all = ls.parser.parse_snippet({ trig = "$file$", name = "Current filename" }, "$TM_FILENAME")
 table.insert(snippets, all)
 

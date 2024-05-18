@@ -1,5 +1,6 @@
 return {
     "echasnovski/mini.comment",
+    enabled = false,
     event = { "BufReadPre", "BufNewFile" },
     version = "*",
     opts = {

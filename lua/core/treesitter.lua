@@ -64,7 +64,7 @@ M.transform = function(text, info, transforms)
         end
     end
 
-    return t(text)
+    return ""
 end
 
 M.process_query_result = function(query, lang, handlers, function_node_types)

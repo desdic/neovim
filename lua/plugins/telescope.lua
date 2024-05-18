@@ -150,13 +150,6 @@ function M.config()
     end
 
     ts.setup({
-        pickers = {
-            -- Make telescope able to jump to a specific line
-            find_files = {
-                on_input_filter_cb = require("core.telescope").jump_to_line_filter,
-                attach_mappings = require("core.telescope").jump_to_line_mapping,
-            },
-        },
         defaults = {
             file_ignore_patterns = { "^.git/", "^.cache/", "vendor", "^deps/mini.nvim/" },
             prompt_prefix = " ",

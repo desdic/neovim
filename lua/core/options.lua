@@ -61,13 +61,9 @@ buffer_option.expandtab = true
 buffer_option.autoindent = true
 buffer_option.smartindent = true
 
-opt.termguicolors = true
-
 -- Disable healthcheck
 global.loaded_perl_provider = 0
 global.loaded_python_provider = 0
-
-option.termguicolors = true
 
 option.swapfile = true
 option.conceallevel = 0 -- so that `` is visible in markdown files
@@ -92,8 +88,8 @@ vim.cmd("autocmd User TelescopePreviewerLoaded setlocal number")
 -- stabilize buffer content
 global.splitkeep = "screen"
 
-opt.spelllang = { 'en', 'da' }
+opt.spelllang = { "en", "da" }
 
-opt.shell = '/bin/zsh'
+opt.shell = "/bin/zsh"
 
 vim.cmd("let g:netrw_liststyle = 3")

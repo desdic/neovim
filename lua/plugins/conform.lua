@@ -10,7 +10,6 @@ return {
                 lua = { "stylua" },
                 python = { "isort", "black" },
                 go = { "golines", "goimports", "gofmt", "gofumpt", "gci" },
-                rust = { "rustfmt" },
                 sh = { "shfmt" },
                 c = { "clang-format" },
                 cpp = { "clang-format" },

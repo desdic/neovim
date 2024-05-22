@@ -3,7 +3,7 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     opts = {},
     keys = {
-        { "<Leader>xa", "<cmd>AerialToggle!<CR>", desc ="Toggle aerial" },
+        { "<Leader>xa", "<cmd>AerialToggle!<CR>", desc = "Toggle aerial" },
     },
     dependencies = {
         "nvim-treesitter/nvim-treesitter",

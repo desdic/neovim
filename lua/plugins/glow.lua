@@ -6,6 +6,6 @@ return {
     },
     cmd = "Glow",
     keys = {
-        { "<Leader>op", "<cmd>Glow<CR>", desc="Glow" },
+        { "<Leader>op", "<cmd>Glow<CR>", desc = "Glow" },
     },
 }

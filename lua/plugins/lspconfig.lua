@@ -40,7 +40,6 @@ return {
                 "perlnavigator",
                 "pylsp",
                 "pyright",
-                "rust_analyzer",
                 "solargraph",
                 "yamlls",
                 "zls",
@@ -230,20 +229,6 @@ return {
             },
         })
 
-        vim.g.rustaceanvim = {
-            -- Plugin configuration
-            tools = {},
-            -- LSP configuration
-            server = {
-                settings = {
-                    -- rust-analyzer language server configuration
-                    ["rust-analyzer"] = {},
-                },
-            },
-            -- DAP configuration
-            dap = {},
-        }
-
         local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
         for type, icon in pairs(signs) do
             local hl = "DiagnosticSign" .. type
@@ -262,7 +247,7 @@ return {
                 focusable = false,
                 style = "minimal",
                 border = "rounded",
-                source = "always",
+                source = "if_many",
                 header = "",
                 prefix = "",
             },

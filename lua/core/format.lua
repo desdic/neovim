@@ -2,7 +2,6 @@ local M = {
     -- Preferred defaults
     filetypes = {
         go = true,
-        rust = true,
         zig = true,
         lua = true,
     },

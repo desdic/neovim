@@ -49,7 +49,7 @@ return {
         dependencies = {
             { "theHamsta/nvim-dap-virtual-text" }, -- virtual text for debugger
             {
-                "mfussenegger/nvim-dap-python",    -- python debugger
+                "mfussenegger/nvim-dap-python", -- python debugger
                 config = function()
                     require("dap-python").setup("~/.virtualenvs/debugpy/bin/python")
                 end,
@@ -59,7 +59,7 @@ return {
                 config = function()
                     require("dap-go").setup()
                 end,
-            },                          -- go debugger
+            }, -- go debugger
             {
                 "rcarriga/nvim-dap-ui", -- debugger UI
                 config = function()
@@ -128,19 +128,6 @@ return {
             }
 
             dap.configurations.c = dap.configurations.cpp -- Reuse for c
-
-            dap.configurations.rust = {
-                {
-                    name = "Rust debug",
-                    type = "codelldb",
-                    request = "launch",
-                    program = function()
-                        return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/target/debug/", "file")
-                    end,
-                    cwd = "${workspaceFolder}",
-                    stopOnEntry = true,
-                },
-            }
         end,
     },
 }

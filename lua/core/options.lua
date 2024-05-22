@@ -80,7 +80,7 @@ opt.isfname:append("@-@")
 option.pumheight = 10 -- Maximum number of entries in a popup
 
 -- Fix highligts within markdown files
-global.markdown_fenched_languages = { "lua", "c", "cpp", "go", "rust", "ruby" }
+global.markdown_fenched_languages = { "lua", "c", "cpp", "go", "ruby" }
 
 -- Set line numbers in telescope preview window
 vim.cmd("autocmd User TelescopePreviewerLoaded setlocal number")

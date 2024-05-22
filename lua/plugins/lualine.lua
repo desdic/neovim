@@ -20,6 +20,8 @@ return {
             always_visible = true,
         }
 
+        local opt = { buf = 0 }
+
         local diff = {
             "diff",
             colored = false,
@@ -36,7 +38,7 @@ return {
 
         local filetype = {
             function()
-                local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
+                local buf_ft = vim.api.nvim_get_option_value("filetype", opt)
                 if buf_ft == "toggleterm" then
                     return ""
                 end
@@ -61,22 +63,22 @@ return {
         local location = { "location", padding = 0 }
 
         local spaces = function()
-            local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
+            local buf_ft = vim.api.nvim_get_option_value("filetype", opt)
             if buf_ft == "toggleterm" then
                 return ""
             end
 
             local indent = "tabs"
-            if vim.api.nvim_buf_get_option(0, "expandtab") then
+            if vim.api.nvim_get_option_value("expandtab", opt) then
                 indent = "spaces"
             end
 
-            return indent .. ":" .. vim.api.nvim_buf_get_option(0, "shiftwidth")
+            return indent .. ":" .. vim.api.nvim_get_option_value("shiftwidth", opt)
         end
 
         local filename = {
             function()
-                local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
+                local buf_ft = vim.api.nvim_get_option_value("filetype", opt)
                 if buf_ft == "toggleterm" then
                     return "terminal"
                 end

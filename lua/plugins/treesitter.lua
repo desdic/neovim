@@ -71,7 +71,6 @@ return {
                     "query",
                     "regex",
                     "ruby",
-                    "rust",
                     "sql",
                     "toml",
                     "vim",

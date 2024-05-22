@@ -22,8 +22,8 @@ M.setkeys = function(ev)
     local keymap = vim.keymap.set
     local ft = vim.bo.ft
 
-    local is_go = function(ft)
-        if ft == "go" or ft == "gomod" or ft == "gosum" then
+    local is_go = function(filetype)
+        if filetype == "go" or filetype == "gomod" or filetype == "gosum" then
             return true
         end
         return false
@@ -55,8 +55,6 @@ M.setkeys = function(ev)
     keymap({ "n", "v" }, "<leader>ca", function()
         if is_go(ft) then
             return vim.cmd("GoCodeAction")
-        elseif ft == "rust" then
-            return vim.cmd.RustLsp("codeAction")
         end
         return vim.lsp.buf.code_action()
     end, silent_bufnr("Code Action"))
@@ -77,11 +75,12 @@ M.setkeys = function(ev)
 
     keymap("n", "<leader>lh", function()
         if vim.fn.has("nvim-0.10") == 1 then
-            local ok = pcall(vim.lsp.inlay_hint.enable, vim.lsp.inlay_hint.is_enabled())
+            local opt = { buf = 0 }
+            local ok = pcall(vim.lsp.inlay_hint.enable, vim.lsp.inlay_hint.is_enabled(opt))
             if ok then
-                vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+                vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(opt))
             else
-                vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
+                vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(opt), opt)
             end
         end
     end, { desc = "LSP | Toggle Inlay Hints", silent = true })

@@ -65,6 +65,7 @@ M.setkeys = function(ev)
         if is_go(ft) then
             return vim.cmd("GoCodeLenAct")
         end
+        return vim.lsp.codelens.run()
     end)
 
     if has_cap("documentFormatting") then

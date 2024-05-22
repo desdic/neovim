@@ -107,6 +107,11 @@ return {
                                     parameterNames = true,
                                     rangeVariableTypes = true,
                                 },
+
+                                codelenses = {
+                                    generate = true,
+                                    gc_details = true,
+                                },
                             },
                         },
                         filetypes = { "go", "gomod", "gowork", "gotmpl" },

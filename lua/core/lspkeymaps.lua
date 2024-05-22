@@ -20,6 +20,15 @@ M.setkeys = function(ev)
     local format = require("core.format").format
 
     local keymap = vim.keymap.set
+    local ft = vim.bo.ft
+
+    local is_go = function(ft)
+        if ft == "go" or ft == "gomod" or ft == "gosum" then
+            return true
+        end
+        return false
+    end
+
     keymap("n", "<Leader>tf", require("core.format").toggle, { desc = "Toggle format on Save" })
     keymap("n", "gl", vim.diagnostic.open_float, silent_bufnr("Line diagnostics"))
     keymap("n", "gd", vim.lsp.buf.definition, silent_bufnr("Goto definition"))
@@ -44,13 +53,19 @@ M.setkeys = function(ev)
 
     -- Preferences for code actions
     keymap({ "n", "v" }, "<leader>ca", function()
-        if vim.bo.ft == "go" then
+        if is_go(ft) then
             return vim.cmd("GoCodeAction")
-        elseif vim.bo.ft == "rust" then
+        elseif ft == "rust" then
             return vim.cmd.RustLsp("codeAction")
         end
         return vim.lsp.buf.code_action()
     end, silent_bufnr("Code Action"))
+
+    keymap({ "n" }, "<leader>cl", function()
+        if is_go(ft) then
+            return vim.cmd("GoCodeLenAct")
+        end
+    end)
 
     if has_cap("documentFormatting") then
         keymap("n", "<leader>fm", format, silent_bufnr("[F]or[m]at Document"))

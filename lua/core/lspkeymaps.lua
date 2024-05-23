@@ -39,8 +39,8 @@ M.setkeys = function(ev)
     keymap("n", "K", vim.lsp.buf.hover, silent_bufnr("Hover"))
     keymap("n", "<leader>rn", vim.lsp.buf.rename, silent_bufnr("Rename"))
 
-    keymap("n", "<C-n>", vim.diagnostic.goto_next, silent_bufnr("Next Diagnostic"))
-    keymap("n", "<C-p>", vim.diagnostic.goto_prev, silent_bufnr("Prev Diagnostic"))
+    keymap("n", "]d", vim.diagnostic.goto_next, silent_bufnr("Next Diagnostic"))
+    keymap("n", "[d", vim.diagnostic.goto_prev, silent_bufnr("Prev Diagnostic"))
 
     if has_cap("signatureHelp") then
         keymap("n", "gss", vim.lsp.buf.signature_help, silent_bufnr("Signature Help"))

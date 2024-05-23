@@ -1,12 +1,5 @@
 return {
     {
-        "nvim-treesitter/playground",
-        cmd = "TSPlaygroundToggle",
-        keys = {
-            { "<Leader>tp", "<cmd>TSPlaygroundToggle<CR>", desc = "Treesitter playground" },
-        },
-    },
-    {
         "nvim-treesitter/nvim-treesitter-context",
         enabled = false,
         event = "BufReadPre",

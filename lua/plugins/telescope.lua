@@ -55,13 +55,6 @@ local M = {
             desc = "[S]how [m]arks",
         },
         {
-            "<Leader>ts",
-            function()
-                require("telescope.builtin").treesitter()
-            end,
-            desc = "[T]reesitter [s]ymbols",
-        },
-        {
             "<Leader>ht",
             function()
                 require("telescope.builtin").help_tags()

@@ -83,13 +83,13 @@ return {
                     return "terminal"
                 end
 
-                local filepath = vim.fn.expand("%:p")
+                local filepath = vim.fn.expand("%")
 
-                if #filepath > 52 then
-                    filepath = ".." .. string.sub(filepath, -50)
+                if #filepath > 50 then
+                    filepath = ".." .. string.sub(filepath, -48)
                 end
 
-                return filepath
+                return " " .. filepath .. " "
             end,
             padding = { right = 1 },
             cond = hide_in_width,
@@ -118,9 +118,16 @@ return {
             sections = {
                 lualine_a = { branch, diagnostics },
                 lualine_b = { mode },
-                lualine_c = { marlin_component, "aerial" },
+                lualine_c = {
+                    filename,
+                    marlin_component,
+                },
                 lualine_x = {
                     "%=",
+                    {
+                        "aerial",
+                        sep_icon = "", -- Trim spaces
+                    },
                     {
                         lazy_status.updates,
                         cond = lazy_status.has_updates,
@@ -135,7 +142,11 @@ return {
                 lualine_z = {},
             },
             winbar = {
-                lualine_c = { "%=", "%m", filename },
+                lualine_c = {
+                    "%=",
+                    "%m",
+                    filename,
+                },
             },
             inactive_winbar = {
                 lualine_c = { "%=", "%m", filename },

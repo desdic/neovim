@@ -46,11 +46,6 @@ M.setkeys = function(ev)
         keymap("n", "gss", vim.lsp.buf.signature_help, silent_bufnr("Signature Help"))
     end
 
-    if has_plugin("aerial") then
-        keymap("n", "{", "<cmd>AerialNext<cr>", silent_bufnr("Aerial next"))
-        keymap("n", "}", "<cmd>AerialPrev<cr>", silent_bufnr("Aerial prev"))
-    end
-
     -- Preferences for code actions
     keymap({ "n", "v" }, "<leader>ca", function()
         if is_go(ft) then

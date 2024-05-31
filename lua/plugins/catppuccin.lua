@@ -14,7 +14,6 @@ return {
             transparent_background = false,
             term_colors = false,
             integrations = {
-                aerial = true,
                 bufferline = true,
                 cmp = true,
                 dap = { enabled = true, enable_ui = true },

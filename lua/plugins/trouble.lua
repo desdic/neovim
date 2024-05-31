@@ -5,45 +5,33 @@ return {
     keys = {
         {
             "<leader>xx",
-            function()
-                require("trouble").toggle()
-            end,
+            "<cmd>Trouble diagnostics toggle<cr>",
             desc = "Toggle trouble",
         },
         {
-            "<leader>xw",
-            function()
-                require("trouble").toggle("workspace_diagnostics")
-            end,
-            desc = "Trouble workspace",
+            "<leader>xX",
+            "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+            desc = "Buffer Diagnostics (Trouble)",
         },
         {
-            "<leader>xd",
-            function()
-                require("trouble").toggle("document_diagnostics")
-            end,
-            desc = "Trouble document ",
+            "<leader>cs",
+            "<cmd>Trouble symbols toggle focus=false<cr>",
+            desc = "Symbols (Trouble)",
         },
         {
-            "<leader>xq",
-            function()
-                require("trouble").toggle("quickfix")
-            end,
-            desc = "Trouble quickfix ",
+            "<leader>cl",
+            "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+            desc = "LSP Definitions / references / ... (Trouble)",
         },
         {
-            "<leader>xl",
-            function()
-                require("trouble").toggle("loclist")
-            end,
-            desc = "Trouble loclist ",
+            "<leader>xL",
+            "<cmd>Trouble loclist toggle<cr>",
+            desc = "Location List (Trouble)",
         },
         {
-            "gR",
-            function()
-                require("trouble").toggle("lsp_references")
-            end,
-            desc = "Trouble LSP references ",
+            "<leader>xQ",
+            "<cmd>Trouble qflist toggle<cr>",
+            desc = "Quickfix List (Trouble)",
         },
     },
 }

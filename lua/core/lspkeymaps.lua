@@ -31,7 +31,7 @@ M.setkeys = function(ev)
 
     keymap("n", "<Leader>tf", require("core.format").toggle, { desc = "Toggle format on Save" })
     keymap("n", "gl", vim.diagnostic.open_float, silent_bufnr("Line diagnostics"))
-    keymap("n", "gd", vim.lsp.buf.definition, silent_bufnr("Goto definition"))
+    keymap("n", "gd", "<cmd>Telescope lsp_definitions", silent_bufnr("Goto definition"))
     keymap("n", "gD", vim.lsp.buf.declaration, silent_bufnr("Goto declaration"))
     keymap("n", "gr", "<cmd>Telescope lsp_references<cr>", silent_bufnr("References"))
     keymap("n", "gi", "<cmd>Telescope lsp_implementations<cr>", silent_bufnr("Goto Implementation"))

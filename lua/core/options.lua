@@ -64,6 +64,7 @@ buffer_option.smartindent = true
 -- Disable healthcheck
 global.loaded_perl_provider = 0
 global.loaded_python_provider = 0
+global.loaded_ruby_provider = 0
 
 option.swapfile = true
 option.conceallevel = 0 -- so that `` is visible in markdown files

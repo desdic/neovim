@@ -4,7 +4,7 @@ return {
     opts = { options = vim.opt.sessionoptions:get() },
     keys = {
         {
-            "<leader>qs",
+            "<leader>qq",
             function()
                 require("persistence").load()
             end,

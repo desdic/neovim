@@ -5,6 +5,15 @@ return {
         open_callback = require("marlin.callbacks").use_split,
         patterns = { ".git", ".svn", "Makefile", "Cargo.toml", "." },
     },
+    keys = {
+        {
+            "<Leader>0",
+            function()
+                require("marlin").open_all()
+            end,
+            { desc = "open all" },
+        },
+    },
     config = function(_, opts)
         local marlin = require("marlin")
         marlin.setup(opts)
@@ -26,9 +35,6 @@ return {
         keymap("n", "<Leader>fs", function()
             marlin.sort()
         end, { desc = "sort" })
-        keymap("n", "<Leader>0", function()
-            marlin.open_all()
-        end, { desc = "open all" })
         keymap("n", "<Leader>z", function()
             marlin.toggle()
         end, { desc = "toggle" })

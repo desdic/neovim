@@ -21,6 +21,14 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
 -- Check if we need to reload the file when it changed
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, { command = "checktime" })
 
+vim.api.nvim_create_autocmd("VimEnter", {
+    group = vim.api.nvim_create_augroup("restore_marlin", { clear = true }),
+    callback = function()
+        require("marlin").open_all()
+    end,
+    nested = true,
+})
+
 -- go to last loc when opening a buffer
 vim.api.nvim_create_autocmd("BufReadPost", {
     callback = function()

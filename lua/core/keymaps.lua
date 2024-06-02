@@ -5,7 +5,7 @@ keymap("", "<Leader>w", ":w!<CR>", { silent = true, noremap = true, desc = "Writ
 keymap("v", "<", "<gv", { silent = true, noremap = true, desc = "Align to left" })
 keymap("v", ">", ">gv", { silent = true, noremap = true, desc = "Align to right" })
 
-keymap("n", "<Leader>qa", ":qa!<CR>", { silent = true, noremap = true, desc = "Quit" })
+keymap("n", "QQ", ":qa!<CR>", { silent = true, noremap = true, desc = "Quit" })
 
 keymap("i", "<C-H>", "<C-W>", { silent = true, noremap = true, desc = "Delete word backwards" })
 

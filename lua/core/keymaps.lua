@@ -1,11 +1,13 @@
 local keymap = vim.keymap.set
 
 keymap("", "<Leader>w", ":w!<CR>", { silent = true, noremap = true, desc = "Write buffer" })
+keymap("n", "W", ":w", { silent = false, noremap = true, desc = "write" })
 
 keymap("v", "<", "<gv", { silent = true, noremap = true, desc = "Align to left" })
 keymap("v", ">", ">gv", { silent = true, noremap = true, desc = "Align to right" })
 
-keymap("n", "QQ", ":qa!<CR>", { silent = true, noremap = true, desc = "Quit" })
+keymap("n", "<Leader>qa", ":qa!<CR>", { silent = true, noremap = true, desc = "Quit" })
+keymap("n", "Q", ":q", { silent = false, noremap = true, desc = "quit" })
 
 keymap("i", "<C-H>", "<C-W>", { silent = true, noremap = true, desc = "Delete word backwards" })
 
@@ -46,9 +48,6 @@ keymap("n", "<Leader>sl", ":vsplit<CR>", { silent = true, noremap = true, desc =
 keymap("n", "<Leader>sx", ":close<CR>", { silent = true, noremap = true, desc = "Close split" })
 
 keymap("n", "<Leader>ne", vim.cmd.Ex, { silent = true, noremap = true, desc = "netrw" })
-
-keymap("n", "Q", ":q", { silent = false, noremap = true, desc = "quit" })
-keymap("n", "W", ":w", { silent = false, noremap = true, desc = "write" })
 
 keymap("n", "-", "<c-x>", { silent = true, noremap = true, desc = "decrease number" })
 keymap("n", "+", "<c-a>", { silent = true, noremap = true, desc = "increase number" })

@@ -20,14 +20,15 @@ local get_file_type = function(position)
         local nodes = {}
 
         local ftype = vim.bo.filetype
-        if ftype == "perl" then
+
+        if ftype == "" or ftype == "sh" then
+            table.insert(nodes, t("bash"))
+            table.insert(nodes, t("sh"))
+        elseif ftype == "perl" then
             table.insert(nodes, t("perl"))
         elseif ftype == "python" then
             table.insert(nodes, t("python3"))
             table.insert(nodes, t("python"))
-        elseif ftype == "sh" then
-            table.insert(nodes, t("bash"))
-            table.insert(nodes, t("sh"))
         end
 
         return sn(nil, {

@@ -24,6 +24,9 @@ vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, { comma
 vim.api.nvim_create_autocmd("VimEnter", {
     group = vim.api.nvim_create_augroup("restore_marlin", { clear = true }),
     callback = function()
+        if next(vim.fn.argv()) ~= nil then
+            return
+        end
         require("marlin").open_all()
     end,
     nested = true,

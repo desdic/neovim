@@ -81,3 +81,6 @@ keymap("n", "<C-l>", "<C-w>l", { desc = "Move to window on left" })
 keymap("n", "<C-h>", "<C-w>h", { desc = "Move to window on right" })
 keymap("n", "<C-k>", "<C-w>k", { desc = "Move to window above" })
 keymap("n", "<C-j>", "<C-w>j", { desc = "Move to window below" })
+
+keymap("n", "<S-l>", "<cmd>bnext<CR>", { desc = "Move to next buffer" })
+keymap("n", "<S-h>", "<cmd>bprev<CR>", { desc = "Move to previous buffer" })

@@ -33,5 +33,10 @@ return {
             "<cmd>Trouble qflist toggle<cr>",
             desc = "Quickfix List (Trouble)",
         },
+        {
+            "<leader>cd",
+            "<cmd>Trouble lsp_document_symbols toggle focus=false filter.buf=0 win.position=right<cr>",
+            desc = "LSP document symbols (Trouble)",
+        },
     },
 }

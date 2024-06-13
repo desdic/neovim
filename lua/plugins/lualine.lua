@@ -15,7 +15,6 @@ return {
     opts = function()
         local opt = { buf = 0 }
         local marlin = require("marlin")
-        local lazy_status = require("lazy.status") -- to configure lazy pending updates count
         local marlin_component = function()
             local indexes = marlin.num_indexes()
             if indexes == 0 then
@@ -26,17 +25,9 @@ return {
             return "  " .. cur_index .. "/" .. indexes
         end
 
-        local trouble = require("trouble")
-        local symbols = trouble.statusline({
-            mode = "lsp_document_symbols",
-            groups = {},
-            title = false,
-            filter = { range = true },
-            format = "{kind_icon}{symbol.name:Normal}",
-            -- The following line is needed to fix the background color
-            -- Set it to the lualine section you want to use
-            hl_group = "lualine_c_normal",
-        })
+        local hide_in_width = function()
+            return vim.fn.winwidth(0) > 80
+        end
 
         local spaces = function()
             local buf_ft = vim.api.nvim_get_option_value("filetype", opt)
@@ -50,10 +41,6 @@ return {
             end
 
             return indent .. ":" .. vim.api.nvim_get_option_value("shiftwidth", opt)
-        end
-
-        local hide_in_width = function()
-            return vim.fn.winwidth(0) > 80
         end
 
         local diagnostics = {
@@ -85,8 +72,13 @@ return {
                 if #filepath > 50 then
                     filepath = ".." .. string.sub(filepath, -48)
                 end
+                local modified = ""
+                local buf_modified = vim.api.nvim_get_option_value("modified", opt)
+                if buf_modified then
+                    modified = " ●"
+                end
 
-                return " " .. filepath
+                return " " .. filepath .. modified
             end,
             padding = { right = 1 },
             cond = hide_in_width,
@@ -117,16 +109,8 @@ return {
                 lualine_c = {
                     filename,
                     marlin_component,
-                    {
-                        symbols.get,
-                        cond = symbols.has,
-                    },
                 },
                 lualine_x = {
-                    {
-                        lazy_status.updates,
-                        cond = lazy_status.has_updates,
-                    },
                     diff,
                     spaces,
                     "encoding",
@@ -134,19 +118,9 @@ return {
                 },
                 lualine_y = {},
             },
-            winbar = {
-                lualine_c = {
-                    "%=",
-                    filename,
-                },
-            },
-            inactive_winbar = {
-                lualine_c = {
-                    "%=",
-                    filename,
-                },
-            },
-            extensions = { "lazy", "nvim-dap-ui" },
+            winbar = {},
+            inactive_winbar = {},
+            extensions = { "nvim-dap-ui" },
         }
     end,
 }

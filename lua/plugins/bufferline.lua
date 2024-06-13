@@ -2,6 +2,7 @@ return {
     "akinsho/nvim-bufferline.lua",
     dependencies = { "nvim-tree/nvim-web-devicons", "catppuccin/nvim" },
     event = "VeryLazy",
+    enabled = false,
     keys = {
         { "<S-l>", "<cmd>BufferLineCycleNext<CR>", desc = "Move to next buffer" },
         { "<S-h>", "<cmd>BufferLineCyclePrev<CR>", desc = "Move to previous buffer" },

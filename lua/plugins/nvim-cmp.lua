@@ -120,12 +120,12 @@ return {
                 { name = "luasnip", max_item_count = 3 },
                 { name = "nvim_lsp", max_item_count = 5 },
                 { name = "nvim_lua", max_item_count = 5 },
-                { name = "buffer", max_item_count = 5, keyword_length = 5 },
+                { name = "buffer", max_item_count = 5, keyword_length = 3 },
                 { name = "nvim_lsp_signature_help", max_item_count = 5 },
                 {
                     name = "spell",
                     max_item_count = 5,
-                    keyword_length = 5,
+                    keyword_length = 3,
                     option = {
                         keep_all_entries = false,
                         enable_in_context = function()

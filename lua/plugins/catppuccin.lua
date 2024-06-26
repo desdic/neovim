@@ -16,19 +16,45 @@ return {
             integrations = {
                 bufferline = true,
                 cmp = true,
-                dap = { enabled = true, enable_ui = true },
+                dap = true,
+                dap_ui = true,
                 gitsigns = true,
-                lsp_trouble = true,
+                indent_blankline = {
+                    enabled = true,
+                },
+                lsp_trouble = false,
                 markdown = false,
                 mason = true,
-                mini = true,
-                native_lsp = { enabled = true },
+                mini = {
+                    enabled = true,
+                },
+                native_lsp = {
+                    enabled = true,
+                    virtual_text = {
+                        errors = { "italic" },
+                        hints = { "italic" },
+                        warnings = { "italic" },
+                        information = { "italic" },
+                        ok = { "italic" },
+                    },
+                    underlines = {
+                        errors = { "underline" },
+                        hints = { "underline" },
+                        warnings = { "underline" },
+                        information = { "underline" },
+                        ok = { "underline" },
+                    },
+                    inlay_hints = {
+                        background = true,
+                    },
+                },
+                neogit = true,
                 notify = true,
                 rainbow_delimiters = true,
                 semantic_tokens = true,
-                telescope = true,
+                telescope = { enabled = true },
                 treesitter = true,
-                which_key = true,
+                which_key = false,
             },
             highlight_overrides = {
                 mocha = {

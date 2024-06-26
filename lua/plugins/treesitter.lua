@@ -77,6 +77,7 @@ return {
                     disable = function(lang, bufnr)
                         return lang == "yaml" and vim.api.nvim_buf_line_count(bufnr) > 5000
                     end,
+                    additional_vim_regex_highlighting = false,
                 },
                 incremental_selection = {
                     enable = true,

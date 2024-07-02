@@ -10,8 +10,6 @@ local indent = 2
 
 vim.lsp.set_log_level("OFF") -- turn complely off when not duing 'debug'
 
-global.mapleader = "," -- Set leader
-global.maplocalleader = "," -- Set local leader
 global.shada = "NONE"
 
 vim.opt.guicursor = "" -- Use fat cursor

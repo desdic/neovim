@@ -68,12 +68,6 @@ keymap("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move visual line up" })
 
 keymap("n", "<Leader>bd", ":bd<CR>", { silent = true, noremap = true, desc = "[B]uffer [D]elete" })
 
--- Better (v|c|)a objects with quotes
-keymap("v", 'a"', '2i"', { desc = "Better object quotes handling" })
-keymap("v", "a'", "2i'", { desc = "Better object quotes handling" })
-keymap("x", 'a"', '2i"', { desc = "Better object quotes handling" })
-keymap("x", "a'", "2i'", { desc = "Better object quotes handling" })
-
 keymap("i", "jk", "<ESC>", { desc = "Esc" })
 keymap("t", "jk", [[<C-\><C-n>]], { desc = "Esc" })
 

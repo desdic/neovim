@@ -1,13 +1,11 @@
 local keymap = vim.keymap.set
 
 keymap("", "<Leader>w", ":w!<CR>", { silent = true, noremap = true, desc = "Write buffer" })
-keymap("n", "W", ":w", { silent = false, noremap = true, desc = "write" })
 
 keymap("v", "<", "<gv", { silent = true, noremap = true, desc = "Align to left" })
 keymap("v", ">", ">gv", { silent = true, noremap = true, desc = "Align to right" })
 
 keymap("n", "<Leader>qa", ":qa!<CR>", { silent = true, noremap = true, desc = "Quit" })
-keymap("n", "Q", ":q", { silent = false, noremap = true, desc = "quit" })
 
 keymap("i", "<C-H>", "<C-W>", { silent = true, noremap = true, desc = "Delete word backwards" })
 

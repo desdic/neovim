@@ -50,7 +50,7 @@ keymap("n", "<Leader>ne", vim.cmd.Ex, { silent = true, noremap = true, desc = "n
 keymap("n", "-", "<c-x>", { silent = true, noremap = true, desc = "decrease number" })
 keymap("n", "+", "<c-a>", { silent = true, noremap = true, desc = "increase number" })
 
--- use blackhole register if we delete empty line by dd
+-- use blackhole register if we delete empty line with dd
 keymap("n", "dd", function()
     if vim.api.nvim_get_current_line():match("^%s*$") then
         return '"_dd'
@@ -73,6 +73,3 @@ keymap("n", "<C-l>", "<C-w>l", { desc = "Move to window on left" })
 keymap("n", "<C-h>", "<C-w>h", { desc = "Move to window on right" })
 keymap("n", "<C-k>", "<C-w>k", { desc = "Move to window above" })
 keymap("n", "<C-j>", "<C-w>j", { desc = "Move to window below" })
-
--- keymap("n", "<S-l>", "<cmd>bnext<CR>", { desc = "Move to next buffer" })
--- keymap("n", "<S-h>", "<cmd>bprev<CR>", { desc = "Move to previous buffer" })

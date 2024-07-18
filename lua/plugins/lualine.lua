@@ -53,6 +53,25 @@ return {
             always_visible = true,
         }
 
+        local trouble = require("trouble")
+        local troublesym = trouble.statusline({
+            mode = "lsp_document_symbols",
+            groups = {},
+            title = false,
+            filter = { range = true },
+            format = "{kind_icon}{symbol.name:Normal}",
+            -- The following line is needed to fix the background color
+            -- Set it to the lualine section you want to use
+            hl_group = "lualine_c_normal",
+        })
+
+        local troublewinbar = {
+            function()
+                return troublesym.get()
+            end,
+            cond = troublesym.has,
+        }
+
         local diff = {
             "diff",
             colored = false,
@@ -109,6 +128,7 @@ return {
                 lualine_c = {
                     filename,
                     marlin_component,
+                    troublewinbar,
                 },
                 lualine_x = {
                     diff,
@@ -118,8 +138,6 @@ return {
                 },
                 lualine_y = {},
             },
-            winbar = {},
-            inactive_winbar = {},
             extensions = { "nvim-dap-ui" },
         }
     end,

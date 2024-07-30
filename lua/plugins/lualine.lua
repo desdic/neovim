@@ -53,8 +53,15 @@ return {
             always_visible = true,
         }
 
+        local diff = {
+            "diff",
+            colored = false,
+            symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
+            cond = hide_in_width,
+        }
+
         local trouble = require("trouble")
-        local troublesym = trouble.statusline({
+        local symbols = trouble.statusline({
             mode = "lsp_document_symbols",
             groups = {},
             title = false,
@@ -65,42 +72,66 @@ return {
             hl_group = "lualine_c_normal",
         })
 
-        local troublewinbar = {
-            function()
-                return troublesym.get()
-            end,
-            cond = troublesym.has,
-        }
+        -- local filename = {
+        --     function()
+        --         local buf_ft = vim.api.nvim_get_option_value("filetype", opt)
+        --         if buf_ft == "toggleterm" then
+        --             return " terminal"
+        --         end
+        --
+        --         local filepath = vim.fn.expand("%:t")
+        --
+        --         if #filepath > 50 then
+        --             filepath = ".." .. string.sub(filepath, -48)
+        --         end
+        --         local modified = ""
+        --         local buf_modified = vim.api.nvim_get_option_value("modified", opt)
+        --         if buf_modified then
+        --             modified = " ●"
+        --         end
+        --
+        --         return " " .. filepath .. modified
+        --     end,
+        --     padding = { right = 1 },
+        --     cond = hide_in_width,
+        -- }
 
-        local diff = {
-            "diff",
-            colored = false,
-            symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
+        local filepath = {
+            function()
+                local curfile = vim.fs.dirname(vim.api.nvim_buf_get_name(0))
+
+                local rootdir = vim.fs.dirname(vim.fs.find({ ".git", "go.mod" }, { upward = true })[1])
+                if rootdir == nil then
+                    return curfile .. "/"
+                end
+
+                -- remove last element
+                local tmp = {}
+                for section in rootdir:gmatch("[^/]+") do
+                    table.insert(tmp, section)
+                end
+                table.remove(tmp, #tmp)
+
+                rootdir = table.concat(tmp, "/")
+
+                local sub = string.gsub(curfile, "/" .. rootdir, "")
+
+                if sub ~= "" then
+                    return "~" .. sub .. "/"
+                end
+
+                return rootdir
+            end,
             cond = hide_in_width,
         }
 
-        local filename = {
+        local filler = {
             function()
-                local buf_ft = vim.api.nvim_get_option_value("filetype", opt)
-                if buf_ft == "toggleterm" then
-                    return " terminal"
-                end
-
-                local filepath = vim.fn.expand("%:t")
-
-                if #filepath > 50 then
-                    filepath = ".." .. string.sub(filepath, -48)
-                end
-                local modified = ""
-                local buf_modified = vim.api.nvim_get_option_value("modified", opt)
-                if buf_modified then
-                    modified = " ●"
-                end
-
-                return " " .. filepath .. modified
+                return " "
             end,
-            padding = { right = 1 },
-            cond = hide_in_width,
+            padding = { right = 3 },
+            separator = "",
+            icons_enabled = false,
         }
 
         return {
@@ -126,9 +157,8 @@ return {
             sections = {
                 lualine_b = { "branch", diagnostics },
                 lualine_c = {
-                    filename,
+                    filepath,
                     marlin_component,
-                    troublewinbar,
                 },
                 lualine_x = {
                     diff,
@@ -137,6 +167,17 @@ return {
                     "filetype",
                 },
                 lualine_y = {},
+            },
+            winbar = {
+                lualine_c = {
+                    filler,
+                    { symbols.get, cond = symbols.has, separator = " " },
+                },
+            },
+            inactive_winbar = {
+                lualine_c = {
+                    { symbols.get, cond = symbols.has },
+                },
             },
             extensions = { "nvim-dap-ui" },
         }

@@ -91,6 +91,6 @@ global.splitkeep = "screen"
 
 opt.spelllang = { "en", "da" }
 
-opt.shell = "/bin/zsh"
+opt.shell = "zsh"
 
 vim.cmd("let g:netrw_liststyle = 3")

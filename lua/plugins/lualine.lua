@@ -125,6 +125,7 @@ return {
             cond = hide_in_width,
         }
 
+        -- Prevent winbar to disapear when no symbols are available
         local filler = {
             function()
                 return " "
@@ -171,14 +172,10 @@ return {
             winbar = {
                 lualine_c = {
                     filler,
-                    { symbols.get, cond = symbols.has, separator = " " },
-                },
-            },
-            inactive_winbar = {
-                lualine_c = {
                     { symbols.get, cond = symbols.has },
                 },
             },
+            inactive_winbar = {},
             extensions = { "nvim-dap-ui" },
         }
     end,

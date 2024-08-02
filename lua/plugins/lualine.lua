@@ -175,7 +175,11 @@ return {
                     { symbols.get, cond = symbols.has },
                 },
             },
-            inactive_winbar = {},
+            inactive_winbar = {
+                lualine_c = {
+                    "filename",
+                },
+            },
             extensions = { "nvim-dap-ui" },
         }
     end,

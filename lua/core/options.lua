@@ -60,6 +60,7 @@ buffer_option.shiftwidth = indent
 buffer_option.expandtab = true
 buffer_option.autoindent = true
 buffer_option.smartindent = true
+buffer_option.scrollback = 10000
 
 -- Disable healthcheck
 global.loaded_perl_provider = 0

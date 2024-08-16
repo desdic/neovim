@@ -1,7 +1,6 @@
 return {
     {
         "mfussenegger/nvim-dap",
-        enabled = false,
         keys = {
             {
                 "<F4>",
@@ -47,7 +46,6 @@ return {
             },
         },
         dependencies = {
-            { "theHamsta/nvim-dap-virtual-text" }, -- virtual text for debugger
             {
                 "mfussenegger/nvim-dap-python", -- python debugger
                 config = function()
@@ -59,75 +57,27 @@ return {
                 config = function()
                     require("dap-go").setup()
                 end,
-            }, -- go debugger
+            },
             {
                 "rcarriga/nvim-dap-ui", -- debugger UI
                 config = function()
                     require("dapui").setup()
                 end,
             },
+            {
+                "nvim-neotest/nvim-nio",
+            },
+            {
+                "julianolf/nvim-dap-lldb",
+                opts = { codelldb_path = "/sbin/codelldb" },
+            },
         },
         config = function()
-            local dap = require("dap")
             local sign = vim.fn.sign_define
 
             sign("DapBreakpoint", { text = "●", texthl = "DapBreakpoint", linehl = "", numhl = "" })
             sign("DapBreakpointCondition", { text = "●", texthl = "DapBreakpointCondition", linehl = "", numhl = "" })
             sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = "" })
-
-            -- https://github.com/microsoft/vscode-cpptools/releases/latest
-            -- download cpptools-linux.vsix
-            -- cd ~/software/cpptools-linux
-            -- unzip ~/Downloads/cpptools-linux.vsix
-            -- chmod +x extension/debugAdapters/bin/OpenDebugAD7
-            dap.adapters.cppdbg = {
-                type = "executable",
-                id = "cppdbg",
-                command = os.getenv("HOME") .. "/software/vscode-cpptools/extension/debugAdapters/bin/OpenDebugAD7",
-            }
-
-            dap.adapters.codelldb = {
-                type = "server",
-                port = "${port}",
-                executable = {
-                    command = "/usr/bin/codelldb",
-                    args = { "--port", "${port}", "--settings", '{"showDisassembly" : "never"}' },
-                },
-            }
-
-            dap.configurations.cpp = {
-                {
-                    name = "Launch file",
-                    type = "cppdbg",
-                    request = "launch",
-                    program = function()
-                        return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-                    end,
-                    cwd = "${workspaceFolder}",
-                    stopOnEntry = true,
-                    setupCommands = {
-                        {
-                            text = "-enable-pretty-printing",
-                            description = "enable pretty printing",
-                            ignoreFailures = false,
-                        },
-                    },
-                },
-                {
-                    name = "Attach to gdbserver :1234",
-                    type = "cppdbg",
-                    request = "launch",
-                    MIMode = "gdb",
-                    miDebuggerServerAddress = "localhost:1234",
-                    miDebuggerPath = "/usr/bin/gdb",
-                    cwd = "${workspaceFolder}",
-                    program = function()
-                        return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-                    end,
-                },
-            }
-
-            dap.configurations.c = dap.configurations.cpp -- Reuse for c
         end,
     },
 }

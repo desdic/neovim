@@ -122,6 +122,9 @@ return {
                     })
                 end,
 
+                -- {{ Disable rust in LSP since its handled by rustaceanvim
+                ["rust_analyzer"] = function() end,
+
                 -- {{ Python
                 ["pylsp"] = function()
                     lspconfig["pylsp"].setup({
@@ -252,6 +255,20 @@ return {
                 prefix = "",
             },
         })
+
+        vim.g.rustaceanvim = {
+            tools = {},
+            server = {
+                on_attach = function(client, bufnr)
+                    -- TODO: you can also put keymaps in here
+                end,
+                default_settings = {
+                    ["rust-analyzer"] = {},
+                },
+            },
+            -- DAP configuration
+            dap = {},
+        }
 
         require("lspconfig.ui.windows").default_options.border = "rounded"
 

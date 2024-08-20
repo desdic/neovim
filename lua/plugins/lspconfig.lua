@@ -217,18 +217,19 @@ return {
 
         mason_tool_installer.setup({
             ensure_installed = {
-                "stylua",
-                "isort",
                 "black",
+                "gci",
+                "gofumpt",
+                "goimports",
+                "golangci-lint",
+                "golines",
+                "isort",
                 "mypy",
                 "pylint",
                 "ruff",
-                "golines",
-                "goimports",
-                "golangci-lint",
-                "gofumpt",
-                "gci",
                 "shellcheck",
+                "shfmt",
+                "stylua",
             },
         })
 

@@ -1,6 +1,6 @@
 return {
     "folke/which-key.nvim",
-    -- event = { "BufReadPre", "BufNewFile" },
+    enabled = true,
     event = { "VeryLazy" },
     keys = {
         {

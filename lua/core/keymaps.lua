@@ -27,7 +27,7 @@ keymap("n", "<Leader>Y", '"+Y', { silent = true, noremap = true, desc = "yank li
 -- The mapping xnoremap p "_dP changes the behavior of p when pasting over selected text
 -- which is at the end of a line. That occurs because when text at the end of a line is deleted, the cursor
 -- moves back to the last character on the line, and P then pastes before that last character.
-keymap({ "n", "v" }, "<Leader>d", '"_d', { silent = true, noremap = true, desc = "delete, don't save in register" })
+-- keymap({ "n", "v" }, "<Leader>d", '"_d', { silent = true, noremap = true, desc = "delete, don't save in register" })
 
 -- Try to keep current line in center
 keymap("n", "n", "nzzzv", { silent = true, noremap = true, desc = "search next and center" })

@@ -125,21 +125,11 @@ return {
             cond = hide_in_width,
         }
 
-        -- Prevent winbar to disapear when no symbols are available
-        local filler = {
-            function()
-                return " "
-            end,
-            padding = { right = 3 },
-            separator = "",
-            icons_enabled = false,
-        }
-
         return {
             options = {
                 icons_enabled = true,
                 theme = "catppuccin",
-                -- component_separators = { left = "", right = "" },
+                component_separators = { left = "", right = "" },
                 -- section_separators = { left = "", right = "" },
                 disabled_filetypes = {
                     statusline = { "dashboard", "lazy" },
@@ -160,6 +150,7 @@ return {
                 lualine_c = {
                     filepath,
                     marlin_component,
+                    { symbols.get, cond = symbols.has },
                 },
                 lualine_x = {
                     diff,
@@ -169,17 +160,8 @@ return {
                 },
                 lualine_y = {},
             },
-            winbar = {
-                lualine_c = {
-                    filler,
-                    { symbols.get, cond = symbols.has },
-                },
-            },
-            inactive_winbar = {
-                lualine_c = {
-                    "filename",
-                },
-            },
+            winbar = {},
+            inactive_winbar = {},
             extensions = { "nvim-dap-ui" },
         }
     end,

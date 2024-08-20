@@ -54,7 +54,7 @@ return {
                 semantic_tokens = true,
                 telescope = { enabled = true },
                 treesitter = true,
-                which_key = false,
+                which_key = true,
             },
             highlight_overrides = {
                 mocha = {
@@ -70,7 +70,6 @@ return {
             },
         })
 
-        -- vim.g.catppuccin_flavour = "macchiato"
         vim.cmd([[colorscheme catppuccin]])
 
         vim.api.nvim_set_hl(0, "LeapBackdrop", { link = "Comment" })

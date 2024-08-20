@@ -1,6 +1,17 @@
 return {
     "echasnovski/mini.pairs",
     event = "VeryLazy",
+    keys = {
+        {
+            "<leader>tp",
+            function()
+                vim.b.minipairs_disable = not vim.b.minipairs_disable
+                local state = vim.b.minipairs_disable and "disabled" or "enabled"
+                vim.notify("mini-pairs " .. state)
+            end,
+            desc = "Toggle mini pairs",
+        },
+    },
     opts = {
         modes = { insert = true, command = true, terminal = false },
         -- -- skip autopair when next character is one of these

@@ -3,7 +3,7 @@ return {
     cmd = "ToggleTerm",
     keys = {
         { "<c-t>", "<cmd>ToggleTerm<cr>", desc = "Toggle term" },
-        { "<leader>ts", "<cmd>TermSelect<cr>", desc = "Toggle term select" },
+        { "<leader>tts", "<cmd>TermSelect<cr>", desc = "Toggle term select" },
     },
     opts = {
         size = 20,

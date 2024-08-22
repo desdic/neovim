@@ -8,12 +8,13 @@ return {
         local lint = require("lint")
 
         lint.linters_by_ft = {
-            python = { "ruff", "pylint", "mypy" },
             c = { "flawfinder" },
+            cmake = { "cmakelint" },
             go = { "golangcilint" },
-            sh = { "shellcheck" },
-            ruby = { "rubocop" },
             json = { "jq" },
+            python = { "ruff", "pylint", "mypy" },
+            ruby = { "rubocop" },
+            sh = { "shellcheck" },
         }
 
         lint.linters.golangcilint.args = {

@@ -32,6 +32,7 @@ return {
             ensure_installed = {
                 "bashls",
                 "clangd",
+                "cmake",
                 "dockerls",
                 "glsl_analyzer",
                 "gopls",
@@ -176,6 +177,10 @@ return {
                     })
                 end,
 
+                ["cmake"] = function()
+                    lspconfig["cmake"].setup({})
+                end,
+
                 -- {{ C/C++
                 ["clangd"] = function()
                     lspconfig["clangd"].setup({
@@ -218,6 +223,7 @@ return {
         mason_tool_installer.setup({
             ensure_installed = {
                 "black",
+                "cmakelint",
                 "gci",
                 "gofumpt",
                 "goimports",

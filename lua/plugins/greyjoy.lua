@@ -11,6 +11,7 @@ return {
     cmd = "Greyjoy",
     config = function()
         local greyjoy = require("greyjoy")
+        local condition = require("greyjoy.conditions")
         greyjoy.setup({
             output_results = "toggleterm",
             last_first = true,
@@ -31,6 +32,20 @@ return {
                         ["zig build"] = {
                             command = { "zig", "build" },
                             filetype = "zig",
+                        },
+                        ["cmake --build target"] = {
+                            command = { "cmake", "--build", "target" },
+                            condition = function(n)
+                                return condition.file_exists("CMakeLists.txt", n)
+                                    and condition.directory_exists("target", n)
+                            end,
+                        },
+                        ["cmake -S . -B target"] = {
+                            command = { "cmake", "-S", ".", "-B", "target" },
+                            condition = function(n)
+                                return condition.file_exists("CMakeLists.txt", n)
+                                    and not condition.directory_exists("target", n)
+                            end,
                         },
                     },
                 },

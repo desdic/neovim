@@ -74,3 +74,5 @@ keymap("n", "<C-j>", "<C-w>j", { desc = "Move to window below" })
 
 keymap("n", "<leader>tsh", ":sp term://zsh", { desc = "Open horizontal terminal" })
 keymap("n", "<leader>tsv", ":vsp term://zsh", { desc = "Open vertical terminal" })
+
+keymap("n", "<leader>tit", ":InspectTree<CR>", { desc = "Open treesitter object browser" })

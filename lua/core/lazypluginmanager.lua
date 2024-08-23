@@ -11,9 +11,6 @@ if not vim.uv.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-vim.g.mapleader = "," -- Set leader
-vim.g.maplocalleader = "," -- Set local leader
-
 require("lazy").setup({
     { import = "plugins" },
 }, {
@@ -24,7 +21,7 @@ require("lazy").setup({
                 "gzip",
                 "matchit",
                 -- "matchparen",
-                -- "netrwPlugin",
+                "netrwPlugin",
                 "tarPlugin",
                 "tohtml",
                 "tutor",

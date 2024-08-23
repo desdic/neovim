@@ -62,12 +62,14 @@ return {
         dependencies = {
             {
                 "mfussenegger/nvim-dap-python",
+                ft = { "python" },
                 config = function()
                     require("dap-python").setup("~/.virtualenvs/debugpy/bin/python")
                 end,
             },
             {
                 "leoluz/nvim-dap-go",
+                ft = { "go" },
                 config = function()
                     require("dap-go").setup()
                 end,
@@ -83,10 +85,12 @@ return {
             },
             {
                 "julianolf/nvim-dap-lldb",
+                ft = { "c", "cpp", "rust", "zig" },
                 opts = { codelldb_path = "/sbin/codelldb" },
             },
             {
                 "jbyuki/one-small-step-for-vimkind",
+                ft = { "lua" },
                 config = function()
                     local dap = require("dap")
                     dap.adapters.nlua = function(callback, conf)

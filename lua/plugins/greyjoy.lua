@@ -34,14 +34,14 @@ return {
                             filetype = "zig",
                         },
                         ["cmake --build target"] = {
-                            command = { "cmake", "--build", "target" },
+                            command = { "cd", "{rootdir}", "&&", "cmake", "--build", "{rootdir}/target" },
                             condition = function(n)
                                 return condition.file_exists("CMakeLists.txt", n)
                                     and condition.directory_exists("target", n)
                             end,
                         },
                         ["cmake -S . -B target"] = {
-                            command = { "cmake", "-S", ".", "-B", "target" },
+                            command = { "cd", "{rootdir}", "&&", "cmake", "-S", ".", "-B", "{rootdir}/target" },
                             condition = function(n)
                                 return condition.file_exists("CMakeLists.txt", n)
                                     and not condition.directory_exists("target", n)

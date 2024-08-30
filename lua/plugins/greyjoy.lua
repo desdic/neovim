@@ -1,14 +1,15 @@
 return {
     "desdic/greyjoy.nvim",
     keys = {
-        { "<Leader>gr", "<cmd>Greyjoy<CR>", desc = "[G]reyjoy [r]un" },
+        { "<Leader>gr", "<cmd>GreyjoyTelescope<CR>", desc = "[G]reyjoy [r]un" },
+        -- { "<Leader>gr", "<cmd>Greyjoy<CR>", desc = "[G]reyjoy [r]un" },
         { "<Leader>gg", "<cmd>Greyjoy fast<CR>", desc = "[G]reyjoy fast [g]roup" },
         { "<Leader>ge", "<cmd>Greyedit<CR>", desc = "[G]reyjoy [r]un" },
     },
     dependencies = {
         { "akinsho/toggleterm.nvim" },
     },
-    cmd = "Greyjoy",
+    cmd = { "Greyjoy", "Greyedit", "GreyjoyTelescope" },
     config = function()
         local greyjoy = require("greyjoy")
         local condition = require("greyjoy.conditions")
@@ -56,9 +57,9 @@ return {
             run_groups = { fast = { "generic", "makefile", "cargo", "docker_compose" } },
         })
 
-        greyjoy.load_extension("kitchen")
         greyjoy.load_extension("generic")
         greyjoy.load_extension("makefile")
+        greyjoy.load_extension("kitchen")
         greyjoy.load_extension("cargo")
         greyjoy.load_extension("docker_compose")
     end,

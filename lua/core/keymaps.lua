@@ -82,7 +82,3 @@ keymap("n", "<leader>cx", "<cmd>!chmod +x %<CR>", { desc = "Make file executable
 
 keymap("t", "<esc>", [[<C-\><C-n>]], { noremap = true, buffer = 0, desc = "Esc in terminal" })
 keymap("t", "jk", [[<C-\><C-n>]], { noremap = true, buffer = 0, desc = "Esc in terminal" })
-keymap("t", "<C-h>", [[<C-\><C-n><C-W>h]], { noremap = true, buffer = 0, desc = "Navigate to left window" })
-keymap("t", "<C-j>", [[<C-\><C-n><C-W>j]], { noremap = true, buffer = 0, desc = "Navigate to window below" })
-keymap("t", "<C-k>", [[<C-\><C-n><C-W>k]], { noremap = true, buffer = 0, desc = "Navigate to window above" })
-keymap("t", "<C-l>", [[<C-\><C-n><C-W>l]], { noremap = true, buffer = 0, desc = "Navigate to right window" })

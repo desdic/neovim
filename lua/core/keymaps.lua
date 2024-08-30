@@ -1,6 +1,6 @@
 local keymap = vim.keymap.set
 
-keymap("", "<Leader>w", ":w!<CR>", { silent = true, noremap = true, desc = "Write buffer" })
+keymap("n", "<Leader>w", ":w!<CR>", { silent = true, noremap = true, desc = "Write buffer" })
 
 keymap("v", "<", "<gv", { silent = true, noremap = true, desc = "Align to left" })
 keymap("v", ">", ">gv", { silent = true, noremap = true, desc = "Align to right" })
@@ -65,7 +65,6 @@ keymap("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move visual line up" })
 keymap("n", "<Leader>bd", ":bd<CR>", { silent = true, noremap = true, desc = "[B]uffer [D]elete" })
 
 keymap("i", "jk", "<ESC>", { desc = "Esc" })
-keymap("t", "jk", [[<C-\><C-n>]], { desc = "Esc" })
 
 keymap("n", "<C-l>", "<C-w>l", { desc = "Move to window on left" })
 keymap("n", "<C-h>", "<C-w>h", { desc = "Move to window on right" })
@@ -80,3 +79,10 @@ keymap("n", "<leader>tsv", ":vsp term://zsh", { desc = "Open vertical terminal" 
 keymap("n", "<leader>tit", ":InspectTree<CR>", { desc = "Open treesitter object browser" })
 
 keymap("n", "<leader>cx", "<cmd>!chmod +x %<CR>", { desc = "Make file executable" })
+
+keymap("t", "<esc>", [[<C-\><C-n>]], { noremap = true, buffer = 0, desc = "Esc in terminal" })
+keymap("t", "jk", [[<C-\><C-n>]], { noremap = true, buffer = 0, desc = "Esc in terminal" })
+keymap("t", "<C-h>", [[<C-\><C-n><C-W>h]], { noremap = true, buffer = 0, desc = "Navigate to left window" })
+keymap("t", "<C-j>", [[<C-\><C-n><C-W>j]], { noremap = true, buffer = 0, desc = "Navigate to window below" })
+keymap("t", "<C-k>", [[<C-\><C-n><C-W>k]], { noremap = true, buffer = 0, desc = "Navigate to window above" })
+keymap("t", "<C-l>", [[<C-\><C-n><C-W>l]], { noremap = true, buffer = 0, desc = "Navigate to right window" })

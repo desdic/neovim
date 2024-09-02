@@ -48,9 +48,19 @@ return {
                                     and not condition.directory_exists("target", n)
                             end,
                         },
+                        ["build-login"] = {
+                            command = { "kitchenlogin.sh" },
+                            condition = function(n)
+                                return condition.directory_exists("kitchen-build/.kitchen", n)
+                            end,
+                        },
                     },
                 },
-                kitchen = { group_id = 2, targets = { "converge", "verify", "destroy", "test" }, include_all = false },
+                kitchen = {
+                    group_id = 2,
+                    targets = { "converge", "verify", "destroy", "test", "login" },
+                    include_all = false,
+                },
                 docker_compose = { group_id = 3 },
                 cargo = { group_id = 4 },
             },

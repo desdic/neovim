@@ -44,6 +44,8 @@ keymap("n", "<Leader>pbd", ":PlenaryBustedDirectory. <CR>", { desc = "PlenaryTes
 
 keymap("n", "<Leader>sl", ":vsplit<CR>", { silent = true, noremap = true, desc = "Split vertical" })
 keymap("n", "<Leader>sx", ":close<CR>", { silent = true, noremap = true, desc = "Close split" })
+keymap("n", "<Leader>ss", ":%s/\\v", { noremap = true, desc = "Substitute" })
+keymap("n", "<Leader>S", [[:%s/<C-r><C-w>//g<Left><Left>]], { desc = "Substitute word" })
 
 keymap("n", "-", "<c-x>", { silent = true, noremap = true, desc = "decrease number" })
 keymap("n", "+", "<c-a>", { silent = true, noremap = true, desc = "increase number" })
@@ -55,9 +57,6 @@ keymap("n", "dd", function()
     end
     return "dd"
 end, { expr = true, desc = "Delete line but if empty don't put it in any regiester" })
-
--- Substitute all the occurrance of the current word
-keymap("n", "<Leader>S", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
 
 keymap("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move visual line down" })
 keymap("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move visual line up" })

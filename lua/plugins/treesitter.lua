@@ -18,6 +18,7 @@ return {
                     "glsl",
                     "go",
                     "gomod",
+                    "http",
                     "json",
                     "json5",
                     "jsonc",

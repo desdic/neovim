@@ -79,6 +79,7 @@ keymap("n", "<leader>tsv", ":vsp term://zsh", { desc = "Open vertical terminal" 
 keymap("n", "<leader>tit", ":InspectTree<CR>", { desc = "Open treesitter object browser" })
 
 keymap("n", "<leader>cx", "<cmd>!chmod +x %<CR>", { desc = "Make file executable" })
+keymap("n", "<leader>mm", "<cmd>make<CR>", { desc = "Run `set makeprg=make`" })
 
 keymap("t", "<esc>", [[<C-\><C-n>]], { noremap = true, buffer = 0, desc = "Esc in terminal" })
 keymap("t", "jk", [[<C-\><C-n>]], { noremap = true, buffer = 0, desc = "Esc in terminal" })

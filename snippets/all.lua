@@ -29,6 +29,8 @@ local get_file_type = function(position)
         elseif ftype == "python" then
             table.insert(nodes, t("python3"))
             table.insert(nodes, t("python"))
+        else
+            return sn(nil, { t("#!") })
         end
 
         return sn(nil, {

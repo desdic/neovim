@@ -9,7 +9,14 @@ return {
             function()
                 require("kulala").run()
             end,
-            desc = "Run URL",
+            desc = "Run request",
+        },
+        {
+            "<leader>kw",
+            function()
+                require("kulala").run_all()
+            end,
+            desc = "Run all request",
         },
         {
             "<leader>kt",

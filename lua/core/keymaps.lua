@@ -83,3 +83,7 @@ keymap("n", "<leader>mm", "<cmd>make<CR>", { desc = "Run `set makeprg=make`" })
 
 keymap("t", "<esc>", [[<C-\><C-n>]], { noremap = true, buffer = 0, desc = "Esc in terminal" })
 keymap("t", "jk", [[<C-\><C-n>]], { noremap = true, buffer = 0, desc = "Esc in terminal" })
+
+keymap("n", "<Leader>cc", function()
+    require("core.quickfix").toggle()
+end, { silent = true, noremap = true, desc = "Toggle quickfix" })

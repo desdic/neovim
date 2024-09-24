@@ -28,22 +28,19 @@ end
 )
 table.insert(snippets, pcallf)
 
-
-local viminspec = s(
-    { trig = "print.inspect", name = "print(vim.inspect(var))" },
-    fmt(
-        [[print(vim.inspect({}))]],
-        { i(1, "var") }
-    )
-)
+local viminspec =
+    s({ trig = "print.inspect", name = "print(vim.inspect(var))" }, fmt([[print(vim.inspect({}))]], { i(1, "var") }))
 table.insert(snippets, viminspec)
+
+local vimmeta = s(
+    { trig = "print.getmetatable", name = "print(vim.inspect(getmetatable(var)))" },
+    fmt([[print(vim.inspect(getmetatable({})))]], { i(1, "var") })
+)
+table.insert(snippets, vimmeta)
 
 local viminspecmeta = s(
     { trig = "print.meta", name = "print(vim.inspect(getmetatable(var)))" },
-    fmt(
-        [[print(vim.inspect(getmetatable({})))]],
-        { i(1, "var") }
-    )
+    fmt([[print(vim.inspect(getmetatable({})))]], { i(1, "var") })
 )
 
 table.insert(snippets, viminspecmeta)

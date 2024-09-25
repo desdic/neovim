@@ -21,13 +21,30 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
 -- Check if we need to reload the file when it changed
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, { command = "checktime" })
 
+local is_lazy_open = function()
+    local buffers = vim.api.nvim_list_bufs()
+    for _, buf in ipairs(buffers) do
+        local filetype = vim.bo[buf].filetype
+
+        if filetype == "lazy" then
+            return true
+        end
+        if filetype == "lazy_backdrop" then
+            return true
+        end
+    end
+    return false
+end
+
 vim.api.nvim_create_autocmd("VimEnter", {
     group = vim.api.nvim_create_augroup("restore_marlin", { clear = true }),
     callback = function()
         if next(vim.fn.argv()) ~= nil then
             return
         end
-        require("marlin").open_all()
+        if not is_lazy_open() then
+            require("marlin").open_all()
+        end
     end,
     nested = true,
 })

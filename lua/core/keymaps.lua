@@ -87,3 +87,5 @@ keymap("t", "jk", [[<C-\><C-n>]], { noremap = true, buffer = 0, desc = "Esc in t
 keymap("n", "<Leader>cc", function()
     require("core.quickfix").toggle()
 end, { silent = true, noremap = true, desc = "Toggle quickfix" })
+
+keymap("n", "<leader>ll", "<cmd>Lazy<CR>", { desc = "Run [l]azy" })

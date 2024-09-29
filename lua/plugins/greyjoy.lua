@@ -84,6 +84,12 @@ return {
                                 return condition.directory_exists("kitchen-build/.kitchen", n)
                             end,
                         },
+                        ["build-deb jammy"] = {
+                            command = { "build-deb.sh", "jammy" },
+                            condition = function(n)
+                                return condition.file_exists("debian/changelog", n)
+                            end,
+                        },
                     },
                 },
                 kitchen = {

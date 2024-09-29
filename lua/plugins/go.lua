@@ -7,7 +7,7 @@ return {
         dap_debug = true,
         dap_debug_gui = true,
         lsp_inlay_hints = { enable = false },
-        diagnostic = { virtual_text = false },
+        diagnostic = false,
     },
     config = function(_, opts)
         require("go").setup(opts)

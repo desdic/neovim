@@ -72,56 +72,27 @@ return {
             hl_group = "lualine_c_normal",
         })
 
-        -- local filename = {
-        --     function()
-        --         local buf_ft = vim.api.nvim_get_option_value("filetype", opt)
-        --         if buf_ft == "toggleterm" then
-        --             return " terminal"
-        --         end
-        --
-        --         local filepath = vim.fn.expand("%:t")
-        --
-        --         if #filepath > 50 then
-        --             filepath = ".." .. string.sub(filepath, -48)
-        --         end
-        --         local modified = ""
-        --         local buf_modified = vim.api.nvim_get_option_value("modified", opt)
-        --         if buf_modified then
-        --             modified = " ●"
-        --         end
-        --
-        --         return " " .. filepath .. modified
-        --     end,
-        --     padding = { right = 1 },
-        --     cond = hide_in_width,
-        -- }
-
-        local filepath = {
+        local filename = {
             function()
-                local curfile = vim.fs.dirname(vim.api.nvim_buf_get_name(0))
-
-                local rootdir = vim.fs.dirname(vim.fs.find({ ".git", "go.mod" }, { upward = true })[1])
-                if rootdir == nil then
-                    return curfile .. "/"
+                local buf_ft = vim.api.nvim_get_option_value("filetype", opt)
+                if buf_ft == "toggleterm" then
+                    return " terminal"
                 end
 
-                -- remove last element
-                local tmp = {}
-                for section in rootdir:gmatch("[^/]+") do
-                    table.insert(tmp, section)
+                local filepath = vim.fn.expand("%:p")
+
+                if #filepath > 25 then
+                    filepath = ".." .. string.sub(filepath, -23)
                 end
-                table.remove(tmp, #tmp)
-
-                rootdir = table.concat(tmp, "/")
-
-                local sub = string.gsub(curfile, "/" .. rootdir, "")
-
-                if sub ~= "" then
-                    return "~" .. sub .. "/"
+                local modified = ""
+                local buf_modified = vim.api.nvim_get_option_value("modified", opt)
+                if buf_modified then
+                    modified = " ●"
                 end
 
-                return rootdir
+                return " " .. filepath .. modified
             end,
+            padding = { right = 1 },
             cond = hide_in_width,
         }
 
@@ -148,7 +119,7 @@ return {
             sections = {
                 lualine_b = { "branch", diagnostics },
                 lualine_c = {
-                    filepath,
+                    filename,
                     marlin_component,
                     { symbols.get, cond = symbols.has },
                 },

@@ -45,8 +45,49 @@ return {
         local cmplsp = require("cmp_nvim_lsp")
         local compare = require("cmp.config.compare")
         local luasnip = require("luasnip")
+        local types = require("cmp.types")
 
         cmplsp.setup()
+
+        local modified_priority = {
+            [types.lsp.CompletionItemKind.Variable] = types.lsp.CompletionItemKind.Method,
+            [types.lsp.CompletionItemKind.Snippet] = 0, -- top
+            [types.lsp.CompletionItemKind.Keyword] = 0, -- top
+            [types.lsp.CompletionItemKind.Text] = 100, -- bottom
+        }
+
+        local function modified_kind(kind)
+            return modified_priority[kind] or kind
+        end
+
+        local buffers = {
+            name = "buffer",
+            option = {
+                keyword_length = 3,
+                get_bufnrs = function() -- from all buffers (less than 1MB)
+                    local bufs = {}
+                    for _, bufn in ipairs(vim.api.nvim_list_bufs()) do
+                        local buf_size = vim.api.nvim_buf_get_offset(bufn, vim.api.nvim_buf_line_count(bufn))
+                        if buf_size < 1024 * 1024 then
+                            table.insert(bufs, bufn)
+                        end
+                    end
+                    return bufs
+                end,
+            },
+        }
+
+        local spelling = {
+            name = "spell",
+            max_item_count = 5,
+            keyword_length = 3,
+            option = {
+                keep_all_entries = false,
+                enable_in_context = function()
+                    return true
+                end,
+            },
+        }
 
         cmp.setup({
             preselect = false,
@@ -74,8 +115,22 @@ return {
                 comparators = {
                     compare.offset,
                     compare.exact,
-                    compare.score,
+                    function(entry1, entry2) -- sort by length ignoring "=~"
+                        local len1 = string.len(string.gsub(entry1.completion_item.label, "[=~()_]", ""))
+                        local len2 = string.len(string.gsub(entry2.completion_item.label, "[=~()_]", ""))
+                        if len1 ~= len2 then
+                            return len1 - len2 < 0
+                        end
+                    end,
                     compare.recently_used,
+                    function(entry1, entry2) -- sort by compare kind (Variable, Function etc)
+                        local kind1 = modified_kind(entry1:get_kind())
+                        local kind2 = modified_kind(entry2:get_kind())
+                        if kind1 ~= kind2 then
+                            return kind1 - kind2 < 0
+                        end
+                    end,
+                    compare.score,
                     require("cmp-under-comparator").under,
                     compare.kind,
                 },
@@ -113,24 +168,16 @@ return {
                     end
                 end, { "i", "s" }),
             }),
-            sources = {
-                { name = "luasnip", max_item_count = 3 },
+            sources = cmp.config.sources({
                 { name = "nvim_lsp", max_item_count = 5 },
+                { name = "luasnip", max_item_count = 3 },
+                { name = "luasnip", max_item_count = 3 },
                 { name = "nvim_lua", max_item_count = 5 },
-                { name = "buffer", max_item_count = 5, keyword_length = 3 },
                 { name = "nvim_lsp_signature_help", max_item_count = 5 },
-                {
-                    name = "spell",
-                    max_item_count = 5,
-                    keyword_length = 3,
-                    option = {
-                        keep_all_entries = false,
-                        enable_in_context = function()
-                            return true
-                        end,
-                    },
-                },
-            },
+            }, {
+                buffers,
+                spelling,
+            }),
             performance = {
                 max_view_entries = 20,
             },

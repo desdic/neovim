@@ -3,7 +3,6 @@ return {
     keys = {
         { "<Leader>gr", "<cmd>GreyjoyTelescope<CR>", desc = "[G]reyjoy [r]un" },
         { "<Leader>gg", "<cmd>GreyjoyTelescope fast<CR>", desc = "[G]reyjoy fast [g]roup" },
-        { "<Leader>ge", "<cmd>Greyedit<CR>", desc = "[G]reyjoy [r]un" },
     },
     dependencies = {
         { "akinsho/toggleterm.nvim" },

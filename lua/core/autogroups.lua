@@ -96,6 +96,17 @@ vim.api.nvim_create_autocmd("FileType", {
 
 vim.api.nvim_create_autocmd("FileType", {
     pattern = {
+        "DiffviewFiles",
+        "DiffviewFileHistory",
+    },
+    callback = function(event)
+        vim.bo[event.buf].buflisted = false
+        vim.keymap.set("n", "q", "<cmd>DiffviewClose<cr>", { buffer = event.buf, silent = true, desc = "Close buffer" })
+    end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = {
         "qf",
     },
     callback = function(event)

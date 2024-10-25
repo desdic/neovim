@@ -4,6 +4,48 @@ return {
     keys = {
         { "<c-t>", "<cmd>ToggleTerm<cr>", desc = "Toggle term", mode = { "n", "t" } },
         { "<leader>tts", "<cmd>TermSelect<cr>", desc = "Toggle term select" },
+        {
+            "<leader>lg",
+            function()
+                local Terminal = require("toggleterm.terminal").Terminal
+                local lazygit = Terminal:new({
+                    cmd = "lazygit",
+                    dir = "git_dir",
+                    direction = "float",
+                    -- 90% width and height
+                    float_opts = {
+                        width = math.floor(vim.o.columns * 0.9),
+                        height = math.floor(vim.o.lines * 0.9),
+                    },
+                    -- function to run on opening the terminal
+                    on_open = function(term)
+                        vim.cmd("startinsert!")
+                        vim.api.nvim_buf_set_keymap(
+                            term.bufnr,
+                            "n",
+                            "q",
+                            "<cmd>close<CR>",
+                            { noremap = true, silent = true }
+                        )
+
+                        -- Allow to make it work for lazygit for Esc and ctrl + hjkl
+                        vim.keymap.set("t", "<c-h>", "<c-h>", { buffer = term.bufnr, nowait = true })
+                        vim.keymap.set("t", "<c-j>", "<c-j>", { buffer = term.bufnr, nowait = true })
+                        vim.keymap.set("t", "<c-k>", "<c-k>", { buffer = term.bufnr, nowait = true })
+                        vim.keymap.set("t", "<c-l>", "<c-l>", { buffer = term.bufnr, nowait = true })
+                        vim.keymap.set("t", "<esc>", "<esc>", { buffer = term.bufnr, nowait = true })
+                    end,
+                    -- function to run on closing the terminal
+                    on_close = function(_)
+                        vim.cmd("startinsert!")
+                    end,
+                })
+
+                lazygit:toggle()
+            end,
+            desc = "Lazygit Toggle",
+            mode = "n",
+        },
     },
     version = "*",
     opts = {

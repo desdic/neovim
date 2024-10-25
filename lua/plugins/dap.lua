@@ -14,7 +14,7 @@ return {
                 function()
                     require("dap").toggle_breakpoint()
                 end,
-                desc = "DAP Set breakpoint",
+                desc = "DAP Set/Toggle breakpoint",
             },
             {
                 "<leader>dB",
@@ -50,6 +50,13 @@ return {
                     require("dap").step_out()
                 end,
                 desc = "DAP Step out",
+            },
+            {
+                "<leader>dr",
+                function()
+                    require("dap").clear_breakpoints()
+                end,
+                desc = "DAP Clear all breakpoints",
             },
             {
                 "<leader>dl",

@@ -5,13 +5,13 @@ return {
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
         "WhoIsSethDaniel/mason-tool-installer.nvim",
-        "hrsh7th/cmp-nvim-lsp",
+        "saghen/blink.cmp",
+        -- "hrsh7th/cmp-nvim-lsp",
     },
     cmd = { "MasonUpdate", "Mason" },
     config = function()
         local lspconfig = require("lspconfig")
-        local cmp_nvim_lsp = require("cmp_nvim_lsp")
-        local capabilities = cmp_nvim_lsp.default_capabilities()
+        local capabilities = require("blink.cmp").get_lsp_capabilities()
 
         local mason = require("mason")
         local mason_lspconfig = require("mason-lspconfig")
@@ -230,7 +230,7 @@ return {
                 "golangci-lint",
                 "golines",
                 "isort",
-                "mypy",
+                -- "mypy",
                 "pylint",
                 "ruff",
                 "shellcheck",

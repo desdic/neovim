@@ -1,0 +1,13 @@
+{
+  "cpp header guard": {
+    "prefix": "ifndef",
+    "body": [
+      "#ifndef $1",
+      "",
+      "$0",
+      "",
+      "#endif //$1"
+    ],
+    "description": "header guard"
+  }
+}

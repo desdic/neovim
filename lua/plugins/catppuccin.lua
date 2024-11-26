@@ -15,7 +15,7 @@ return {
             term_colors = false,
             integrations = {
                 bufferline = true,
-                cmp = true,
+                cmp = false,
                 dap = true,
                 dap_ui = true,
                 gitsigns = true,
@@ -23,6 +23,7 @@ return {
                     enabled = true,
                 },
                 lsp_trouble = false,
+                blink_cmp = true,
                 markdown = false,
                 mason = true,
                 mini = {

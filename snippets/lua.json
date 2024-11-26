@@ -1,0 +1,31 @@
+{
+  "print inspect": {
+    "prefix": "print.inspect",
+    "body": [
+      "print(vim.inspect($1))",
+      "$0"
+    ],
+    "description": "print inspect() snippet"
+  },
+  "print meta": {
+    "prefix": "print.metatable",
+    "body": [
+      "print(vim.inspect(getmetatable($1)))",
+      "$0"
+    ],
+    "description": "print getmetatable() snippet"
+  },
+  "pcallguard": {
+    "prefix": "pcallguard",
+    "body": [
+      "local ${1|ok|}, ${2|fn|} = pcall(require, \"${3|library|}\")",
+      "if not $1 then",
+      "    vim.notify(\"Unable to require $3\", vim.lsp.log_levels.ERROR, ",
+      "               {title = \"Plugin error\"})",
+      "    return",
+      "end",
+      "$0"
+    ],
+    "description": "protective guard"
+  }
+}

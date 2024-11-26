@@ -12,7 +12,7 @@ return {
             cmake = { "cmakelint" },
             go = { "golangcilint" },
             json = { "jq" },
-            python = { "ruff", "pylint", "mypy" },
+            python = { "ruff", "pylint" },
             ruby = { "rubocop" },
             sh = { "shellcheck" },
         }

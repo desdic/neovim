@@ -20,6 +20,10 @@
       {
         "language": "python",
         "path": "./python.json"
+      },
+      {
+        "language": "debchangelog",
+        "path": "./debchangelog.json"
       }
     ]
   }

@@ -1,0 +1,9 @@
+{
+  "dep": {
+    "prefix": "dep",
+    "body": [
+      " -- Kim Gert Nielsen <$1@$0>  ${CURRENT_DAY_NAME_SHORT}, ${CURRENT_DATE} ${CURRENT_MONTH_NAME_SHORT} ${CURRENT_YEAR} ${CURRENT_HOUR}:${CURRENT_MINUTE}:${CURRENT_SECOND} +0100"
+    ],
+    "description": "debian changelog date"
+  }
+}

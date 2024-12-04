@@ -11,11 +11,6 @@ M.setkeys = function(ev)
         return client.server_capabilities[cap .. "Provider"]
     end
 
-    -- Check if plugin is loaded
-    local has_plugin = function(plugin)
-        return pcall(require, plugin)
-    end
-
     require("core.format").on_attach(ev, ev.buf)
     local format = require("core.format").format
 
@@ -29,13 +24,15 @@ M.setkeys = function(ev)
         return false
     end
 
+    keymap("n", "gd", "<cmd>FzfLua lsp_definitions<cr>", silent_bufnr("Goto definition"))
+    keymap("n", "gi", "<cmd>FzfLua lsp_implementations<cr>", silent_bufnr("Goto Implementation"))
+    keymap("n", "gr", "<cmd>FzfLua lsp_references<cr>", silent_bufnr("References"))
+    keymap("n", "gt", "<cmd>FzfLua lsp_typedefs<cr>", silent_bufnr("Goto Type Definition"))
+    keymap("n", "gl", "<cmd>FzfLua lsp_finder<cr>", silent_bufnr("LSP finder"))
+    keymap("n", "gp", "<cmd>FzfLua lsp_document_diagnostics<cr>", silent_bufnr("LSP diagnostic"))
+
     keymap("n", "<Leader>tf", require("core.format").toggle, { desc = "Toggle format on Save" })
-    keymap("n", "gl", vim.diagnostic.open_float, silent_bufnr("Line diagnostics"))
-    keymap("n", "gd", "<cmd>Telescope lsp_definitions<cr>", silent_bufnr("Goto definition"))
     keymap("n", "gD", vim.lsp.buf.declaration, silent_bufnr("Goto declaration"))
-    keymap("n", "gr", "<cmd>Telescope lsp_references<cr>", silent_bufnr("References"))
-    keymap("n", "gi", "<cmd>Telescope lsp_implementations<cr>", silent_bufnr("Goto Implementation"))
-    keymap("n", "gt", "<cmd>Telescope lsp_type_definitions<cr>", silent_bufnr("Goto Type Definition"))
     keymap("n", "K", vim.lsp.buf.hover, silent_bufnr("Hover"))
     keymap("n", "<leader>rn", vim.lsp.buf.rename, silent_bufnr("Rename"))
 

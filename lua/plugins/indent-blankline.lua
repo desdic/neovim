@@ -9,8 +9,6 @@ return {
         exclude = {
             filetypes = {
                 "help",
-                "dashboard",
-                "neo-tree",
                 "Trouble",
                 "trouble",
                 "lazy",

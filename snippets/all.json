@@ -1,0 +1,9 @@
+{
+  "filename": {
+    "prefix": "filename",
+    "body": [
+      "${TM_FILENAME}"
+    ],
+    "description": "filename"
+  }
+}

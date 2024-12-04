@@ -6,7 +6,6 @@ return {
         "williamboman/mason-lspconfig.nvim",
         "WhoIsSethDaniel/mason-tool-installer.nvim",
         "saghen/blink.cmp",
-        -- "hrsh7th/cmp-nvim-lsp",
     },
     cmd = { "MasonUpdate", "Mason" },
     config = function()
@@ -57,30 +56,56 @@ return {
                 -- Extra settings for LSP
 
                 -- {{ LUA
-                ["lua_ls"] = function()
-                    lspconfig.lua_ls.setup({
-                        filetypes = { "lua" },
-                        settings = { -- custom settings for lua
-                            Lua = {
-                                -- make the language server recognize "vim" global
-                                diagnostics = { globals = { "vim", "require" } },
-                                completion = {
-                                    callSnippet = "Replace",
-                                },
-                                workspace = {
-                                    -- make language server aware of runtime files
-                                    library = {
-                                        [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                                        [vim.fn.stdpath("config") .. "/lua"] = true,
-                                    },
-                                },
-                                hint = {
-                                    enable = true,
-                                },
-                            },
-                        },
-                    })
-                end,
+                -- ["lua_ls"] = function()
+                --     lspconfig.lua_ls.setup({
+                --
+                --         on_init = function(client)
+                --             if client.workspace_folders then
+                --                 local path = client.workspace_folders[1].name
+                --                 if
+                --                     vim.uv.fs_stat(path .. "/.luarc.json") or vim.uv.fs_stat(path .. "/.luarc.jsonc")
+                --                 then
+                --                     return
+                --                 end
+                --             end
+                --
+                --             client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
+                --                 runtime = {
+                --                     -- Tell the language server which version of Lua you're using
+                --                     -- (most likely LuaJIT in the case of Neovim)
+                --                     version = "LuaJIT",
+                --                 },
+                --                 -- Make the server aware of Neovim runtime files
+                --                 workspace = {
+                --                     checkThirdParty = false,
+                --                     library = {
+                --                         vim.env.VIMRUNTIME,
+                --                     },
+                --                 },
+                --             })
+                --         end,
+                --         filetypes = { "lua" },
+                --         settings = { -- custom settings for lua
+                --             Lua = {
+                --                 -- make the language server recognize "vim" global
+                --                 diagnostics = { globals = { "vim", "require" } },
+                --                 completion = {
+                --                     callSnippet = "Replace",
+                --                 },
+                --                 workspace = {
+                --                     -- make language server aware of runtime files
+                --                     library = {
+                --                         [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+                --                         [vim.fn.stdpath("config") .. "/lua"] = true,
+                --                     },
+                --                 },
+                --                 hint = {
+                --                     enable = true,
+                --                 },
+                --             },
+                --         },
+                --     })
+                -- end,
 
                 -- {{ Go
                 ["gopls"] = function()

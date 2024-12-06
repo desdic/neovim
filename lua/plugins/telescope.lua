@@ -12,8 +12,8 @@ local M = {
         -- { "z]", "<cmd>Telescope agrolens query=all jump=prev<CR>" },
     },
     dependencies = {
-        { "nvim-telescope/telescope-fzy-native.nvim" },
-        { "desdic/telescope-rooter.nvim" },
+        -- { "nvim-telescope/telescope-fzy-native.nvim" },
+        -- { "desdic/telescope-rooter.nvim" },
         { "nvim-tree/nvim-web-devicons" },
         { "desdic/macrothis.nvim" },
         -- { "desdic/agrolens.nvim" },
@@ -69,19 +69,8 @@ function M.config()
             },
         },
         extensions = {
-            fzy_native = { override_generic_sorter = false, override_file_sorter = true },
-            rooter = { patterns = { ".git", "go.sum", "Makefile" } },
-            -- agrolens = {
-            --     debug = false,
-            --     same_type = false,
-            --     include_hidden_buffers = false,
-            --     disable_indentation = true,
-            --     aliases = {
-            --         yamllist = "docker-compose,github-workflow-steps",
-            --         work = "cheflxchost,github-workflow-steps,pytest,ipam",
-            --         all = "cheflxchost,pytest,ipam,functions,labels",
-            --     },
-            -- },
+            -- fzy_native = { override_generic_sorter = false, override_file_sorter = true },
+            -- rooter = { patterns = { ".git", "go.sum", "Makefile" } },
             macrothis = {
                 -- mappings = {
                 --     load = "<CR>",
@@ -92,8 +81,8 @@ function M.config()
         },
     })
 
-    ts.load_extension("fzy_native")
-    ts.load_extension("rooter")
+    -- ts.load_extension("fzy_native")
+    -- ts.load_extension("rooter")
     -- ts.load_extension("agrolens")
     ts.load_extension("macrothis")
 end

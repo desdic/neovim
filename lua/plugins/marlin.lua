@@ -43,7 +43,30 @@ return {
             local results = require("marlin").get_indexes()
             local content = {}
 
-            require("fzf-lua").fzf_exec(function(fzf_cb)
+            local fzf_lua = require("fzf-lua")
+            local builtin = require("fzf-lua.previewer.builtin")
+            local fzfpreview = builtin.buffer_or_file:extend()
+
+            function fzfpreview:new(o, opts, fzf_win)
+                fzfpreview.super.new(self, o, opts, fzf_win)
+                setmetatable(self, fzfpreview)
+                return self
+            end
+
+            function fzfpreview.parse_entry(_, entry_str)
+                if entry_str == "" then
+                    return {}
+                end
+
+                local entry = content[entry_str]
+                return {
+                    path = entry.filename,
+                    line = entry.row or 1,
+                    col = 1,
+                }
+            end
+
+            fzf_lua.fzf_exec(function(fzf_cb)
                 for i, b in ipairs(results) do
                     local entry = i .. ":" .. b.filename .. ":" .. b.row
 
@@ -52,10 +75,12 @@ return {
                 end
                 fzf_cb()
             end, {
+                previewer = fzfpreview,
                 prompt = "Marlin> ",
                 actions = {
                     ["ctrl-d"] = {
                         fn = function(selected)
+                            print(selected)
                             require("marlin").remove(content[selected[1]].filename)
                         end,
                         reload = true,

@@ -14,12 +14,7 @@ return {
         {
             "<Leader>ff",
             function()
-                local rootdir = vim.fs.dirname(vim.fs.find({ ".git", "go.mod" }, { upward = true })[1])
-                if rootdir == nil then
-                    rootdir = vim.uv.cwd() or "."
-                end
-
-                require("fzf-lua").files({ cwd = rootdir })
+                require("fzf-lua").files()
             end,
             desc = "[F]ind [f]iles",
         },
@@ -74,25 +69,71 @@ return {
             desc = "[S]pell [s]uggest",
         },
     },
-    config = function()
+
+    opts = function()
         local actions = require("fzf-lua.actions")
-        local fzf = require("fzf-lua")
-        fzf.setup({
+        local config = require("fzf-lua.config")
+
+        config.defaults.actions.files["ctrl-r"] = function(_, ctx)
+            local opts = vim.deepcopy(ctx.__call_opts)
+
+            opts.buf = ctx.__CTX.bufnr
+            if opts.cwd ~= nil then
+                opts.cwd = nil
+            else
+                opts.cwd = vim.fs.dirname(vim.fs.find({ ".git", "go.mod" }, { upward = true })[1])
+            end
+            require("fzf-lua").files(opts)
+        end
+        config.set_action_helpstr(config.defaults.actions.files["ctrl-r"], "toggle-dir")
+
+        return {
+            "default-titles",
+            files = {
+                formatter = "path.dirname_first",
+            },
+            ui_select = function(fzf_opts, items)
+                return vim.tbl_deep_extend("force", fzf_opts, {
+                    prompt = " ",
+                    winopts = {
+                        title = " " .. vim.trim((fzf_opts.prompt or "Select"):gsub("%s*:%s*$", "")) .. " ",
+                        title_pos = "center",
+                    },
+                }, fzf_opts.kind == "codeaction" and {
+                    winopts = {
+                        layout = "vertical",
+                        -- height is number of items minus 15 lines for the preview, with a max of 80% screen height
+                        height = math.floor(math.min(vim.o.lines * 0.8 - 16, #items + 2) + 0.5) + 16,
+                        width = 0.5,
+                    },
+                } or {
+                    winopts = {
+                        width = 0.5,
+                        -- height is number of items, with a max of 80% screen height
+                        height = math.floor(math.min(vim.o.lines * 0.8, #items + 2) + 0.5),
+                    },
+                })
+            end,
             winopts = {
+                layout = "vertical",
+                width = 0.8,
+                height = 0.8,
+                row = 0.5,
+                col = 0.5,
                 preview = {
-                    default = "bat", -- override the default previewer?
+                    scrollchars = { "┃", "" },
                 },
             },
             keymap = {
                 builtin = {
                     true, -- inherit from default
-                    ["<C-d>"] = "preview-page-down",
-                    ["<C-u>"] = "preview-page-up",
+                    -- ["<C-d>"] = "preview-page-down",
+                    -- ["<C-u>"] = "preview-page-up",
                 },
                 fzf = {
                     true, -- inherit from default
-                    ["ctrl-d"] = "preview-page-down",
-                    ["ctrl-u"] = "preview-page-up",
+                    -- ["ctrl-d"] = "preview-page-down",
+                    -- ["ctrl-u"] = "preview-page-up",
                 },
             },
             actions = {
@@ -101,8 +142,10 @@ return {
                     ["enter"] = actions.file_edit,
                 },
             },
-        })
+        }
+    end,
 
-        fzf.register_ui_select()
+    config = function(_, opts)
+        require("fzf-lua").setup(opts)
     end,
 }

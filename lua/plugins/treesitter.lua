@@ -78,11 +78,6 @@ return {
                             ["ic"] = "@class.inner",
                         },
                     },
-                    -- swap = {
-                    --     enable = true,
-                    --     swap_next = { ["<leader>fa"] = "@parameter.inner" },
-                    --     swap_previous = { ["<leader>fA"] = "@parameter.inner" },
-                    -- },
                     move = {
                         enable = true,
                         set_jumps = true, -- whether to set jumps in the jumplist

@@ -40,7 +40,7 @@ keymap("n", "<leader><leader>x", function()
     else
         vim.cmd("bdelete")
     end
-end, { desc = "Close buffer if in split else delete buffer" })
+end, { desc = "Close window if in split else delete buffer" })
 
 keymap("n", "<leader>ss", ":%s/\\v", { noremap = true, desc = "Substitute" })
 keymap("n", "<leader>S", [[:%s/<C-r><C-w>//g<Left><Left>]], { desc = "Substitute word" })

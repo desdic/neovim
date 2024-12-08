@@ -48,7 +48,6 @@ return {
                         background = true,
                     },
                 },
-                notify = true,
                 rainbow_delimiters = true,
                 semantic_tokens = true,
                 treesitter = true,

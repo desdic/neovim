@@ -34,7 +34,7 @@ return {
                 end,
                 "fallback",
             },
-            ["<CR>"] = { "select_and_accept", "fallback" },
+            ["<CR>"] = { "accept", "fallback" },
             -- ["<C-b>"] = { "scroll_documentation_up", "fallback" },
             -- ["<C-f>"] = { "scroll_documentation_down", "fallback" },
         },
@@ -59,6 +59,9 @@ return {
                 draw = {
                     columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind" } },
                 },
+            },
+            list = {
+                selection = "manual",
             },
         },
 

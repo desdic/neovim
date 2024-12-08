@@ -1,33 +1,24 @@
 local keymap = vim.keymap.set
 
-keymap("n", "<Leader>w", ":w!<CR>", { silent = true, noremap = true, desc = "Write buffer" })
+keymap("n", "<leader>w", ":w!<CR>", { silent = true, noremap = true, desc = "Write buffer" })
 
 keymap("v", "<", "<gv", { silent = true, noremap = true, desc = "Align to left" })
 keymap("v", ">", ">gv", { silent = true, noremap = true, desc = "Align to right" })
 
-keymap("n", "<Leader>qa", ":qa!<CR>", { silent = true, noremap = true, desc = "Quit" })
+keymap("n", "<leader>qa", ":qa!<CR>", { silent = true, noremap = true, desc = "Quit" })
 
-keymap("i", "<C-H>", "<C-W>", { silent = true, noremap = true, desc = "Delete word backwards" })
-
-keymap(
-    "n",
-    "<Leader><space>",
-    ":nohlsearch<CR>",
-    { noremap = true, silent = false, expr = false, desc = "Remove search" }
-)
-
-keymap("n", "<Leader>mo", function()
+keymap("n", "<leader>mo", function()
     require("core.mouse").toggle()
 end, { silent = true, noremap = true, desc = "Toggle mouse" })
 
 keymap("n", "Y", "yg$", { silent = true, noremap = true, desc = "yank line" })
-keymap({ "n", "v" }, "<Leader>y", '"+y', { silent = true, noremap = true, desc = "yank to clipboard" })
-keymap("n", "<Leader>Y", '"+Y', { silent = true, noremap = true, desc = "yank line to clipboard" })
+keymap({ "n", "v" }, "<leader>y", '"+y', { silent = true, noremap = true, desc = "yank to clipboard" })
+keymap("n", "<leader>Y", '"+Y', { silent = true, noremap = true, desc = "yank line to clipboard" })
 
 -- The mapping xnoremap p "_dP changes the behavior of p when pasting over selected text
 -- which is at the end of a line. That occurs because when text at the end of a line is deleted, the cursor
 -- moves back to the last character on the line, and P then pastes before that last character.
-keymap({ "n", "v" }, "<Leader>dp", '"_d', { silent = true, noremap = true, desc = "delete, don't save in register" })
+keymap({ "n", "v" }, "<leader>dp", '"_d', { silent = true, noremap = true, desc = "delete, don't save in register" })
 
 -- Try to keep current line in center
 keymap("n", "n", "nzzzv", { silent = true, noremap = true, desc = "search next and center" })
@@ -40,12 +31,19 @@ keymap("n", "<C-u>", "<C-u>zz", { silent = true, noremap = true, desc = "jump ce
 keymap("n", "{", "{zzzv", { silent = true, noremap = true, desc = "jump and center" })
 keymap("n", "}", "}zzzv", { silent = true, noremap = true, desc = "jump and center" })
 
-keymap("n", "<Leader>pbd", ":PlenaryBustedDirectory. <CR>", { desc = "PlenaryTest" })
+keymap("n", "<leader><leader>s", ":vsplit<CR>", { silent = true, noremap = true, desc = "Split vertical" })
 
-keymap("n", "<Leader>sl", ":vsplit<CR>", { silent = true, noremap = true, desc = "Split vertical" })
-keymap("n", "<Leader>sx", ":close<CR>", { silent = true, noremap = true, desc = "Close split" })
-keymap("n", "<Leader>ss", ":%s/\\v", { noremap = true, desc = "Substitute" })
-keymap("n", "<Leader>S", [[:%s/<C-r><C-w>//g<Left><Left>]], { desc = "Substitute word" })
+keymap("n", "<leader><leader>x", function()
+    local wins = vim.api.nvim_tabpage_list_wins(0)
+    if #wins > 1 then
+        vim.cmd("close")
+    else
+        vim.cmd("bdelete")
+    end
+end, { desc = "Close buffer if in split else delete buffer" })
+
+keymap("n", "<leader>ss", ":%s/\\v", { noremap = true, desc = "Substitute" })
+keymap("n", "<leader>S", [[:%s/<C-r><C-w>//g<Left><Left>]], { desc = "Substitute word" })
 
 keymap("n", "-", "<c-x>", { silent = true, noremap = true, desc = "decrease number" })
 keymap("n", "+", "<c-a>", { silent = true, noremap = true, desc = "increase number" })
@@ -61,7 +59,7 @@ end, { expr = true, desc = "Delete line but if empty don't put it in any regiest
 keymap("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move visual line down" })
 keymap("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move visual line up" })
 
-keymap("n", "<Leader>bd", ":bd<CR>", { silent = true, noremap = true, desc = "[B]uffer [D]elete" })
+keymap("n", "<leader>bd", ":bd<CR>", { silent = true, noremap = true, desc = "[B]uffer [D]elete" })
 
 keymap("i", "jk", "<ESC>", { desc = "Esc" })
 
@@ -84,8 +82,12 @@ keymap("n", "<leader>mm", "<cmd>make<CR>", { desc = "Run `set makeprg=make`" })
 keymap("t", "<esc>", [[<C-\><C-n>]], { noremap = true, buffer = 0, desc = "Esc in terminal" })
 keymap("t", "jk", [[<C-\><C-n>]], { noremap = true, buffer = 0, desc = "Esc in terminal" })
 
-keymap("n", "<Leader>cc", function()
+keymap("n", "<leader>cc", function()
     require("core.quickfix").toggle()
 end, { silent = true, noremap = true, desc = "Toggle quickfix" })
 
 keymap("n", "<leader>ll", "<cmd>Lazy<CR>", { desc = "Run [l]azy" })
+
+keymap("n", "yc", "yy<cmd>normal gcc<CR>p", { desc = "Copy to a comment above" })
+
+keymap("n", "<esc>", "<cmd>nohlsearch<CR>", { desc = "stop highligting search" })

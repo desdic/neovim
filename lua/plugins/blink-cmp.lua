@@ -34,7 +34,7 @@ return {
                 end,
                 "fallback",
             },
-            ["<CR>"] = { "accept", "fallback" },
+            ["<CR>"] = { "select_and_accept", "fallback" },
             -- ["<C-b>"] = { "scroll_documentation_up", "fallback" },
             -- ["<C-f>"] = { "scroll_documentation_down", "fallback" },
         },

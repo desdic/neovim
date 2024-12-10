@@ -9,6 +9,7 @@ return {
             { "JoosepAlviste/nvim-ts-context-commentstring" },
         },
         config = function()
+            ---@diagnostic disable-next-line: missing-fields
             require("nvim-treesitter.configs").setup({
                 ensure_installed = {
                     "bash",
@@ -56,10 +57,10 @@ return {
                 incremental_selection = {
                     enable = true,
                     keymaps = {
-                        init_selection = "<C-space>",
-                        node_incremental = "<C-space>",
-                        scope_incremental = false,
-                        node_decremental = "<BS>",
+                        init_selection = "<CR>",
+                        node_incremental = "grn",
+                        scope_incremental = "grc",
+                        node_decremental = "grm",
                     },
                 },
                 textobjects = {

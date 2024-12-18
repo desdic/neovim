@@ -1,8 +1,8 @@
 return {
     "desdic/greyjoy.nvim",
     keys = {
-        { "<Leader>gr", "<cmd>GreyjoyFzf<CR>", desc = "[G]reyjoy [r]un" },
-        { "<Leader>gg", "<cmd>GreyjoyFzf fast<CR>", desc = "[G]reyjoy fast [g]roup" },
+        { "<leader>gr", "<cmd>GreyjoyFzf<CR>", desc = "[G]reyjoy [r]un" },
+        { "<leader>gg", "<cmd>GreyjoyFzf fast<CR>", desc = "[G]reyjoy fast [g]roup" },
     },
     dependencies = {
         { "akinsho/toggleterm.nvim" },

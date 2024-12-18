@@ -3,70 +3,70 @@ return {
     opts = { default_register = "a" },
     keys = {
         {
-            "<Leader>kkd",
+            "<leader>kkd",
             function()
                 require("macrothis").delete()
             end,
             desc = "delete",
         },
         {
-            "<Leader>kke",
+            "<leader>kke",
             function()
                 require("macrothis").edit()
             end,
             desc = "edit",
         },
         {
-            "<Leader>kkl",
+            "<leader>kkl",
             function()
                 require("macrothis").load()
             end,
             desc = "load",
         },
         {
-            "<Leader>kkn",
+            "<leader>kkn",
             function()
                 require("macrothis").rename()
             end,
             desc = "rename",
         },
         {
-            "<Leader>kkq",
+            "<leader>kkq",
             function()
                 require("macrothis").quickfix()
             end,
             desc = "run macro on all files in quickfix",
         },
         {
-            "<Leader>kkr",
+            "<leader>kkr",
             function()
                 require("macrothis").run()
             end,
             desc = "run macro",
         },
         {
-            "<Leader>kks",
+            "<leader>kks",
             function()
                 require("macrothis").save()
             end,
             desc = "save",
         },
         {
-            "<Leader>kkx",
+            "<leader>kkx",
             function()
                 require("macrothis").register()
             end,
             desc = "edit register",
         },
         {
-            "<Leader>kkp",
+            "<leader>kkp",
             function()
                 require("macrothis").copy_register_printable()
             end,
             desc = "Copy register as printable",
         },
         {
-            "<Leader>kkm",
+            "<leader>kkm",
             function()
                 require("macrothis").copy_macro_printable()
             end,

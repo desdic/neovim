@@ -7,7 +7,7 @@ return {
     },
     keys = {
         {
-            "<Leader>0",
+            "<leader>0",
             function()
                 require("marlin").open_all()
             end,
@@ -19,27 +19,27 @@ return {
         marlin.setup(opts)
         local keymap = vim.keymap.set
 
-        keymap("n", "<Leader>fa", function()
+        keymap("n", "<leader>fa", function()
             marlin.add()
         end, { desc = "add file" })
-        keymap("n", "<Leader>fd", function()
+        keymap("n", "<leader>fd", function()
             marlin.remove()
             vim.cmd("bdelete")
         end, { desc = "remove file" })
-        keymap("n", "<Leader>f]", function()
+        keymap("n", "<leader>f]", function()
             marlin.move_up()
         end, { desc = "move up" })
-        keymap("n", "<Leader>f[", function()
+        keymap("n", "<leader>f[", function()
             marlin.move_down()
         end, { desc = "move down" })
-        keymap("n", "<Leader>fs", function()
+        keymap("n", "<leader>fs", function()
             marlin.sort()
         end, { desc = "sort" })
-        keymap("n", "<Leader>z", function()
+        keymap("n", "<leader>z", function()
             marlin.toggle()
         end, { desc = "toggle" })
 
-        keymap("n", "<Leader>fx", function()
+        keymap("n", "<leader>fx", function()
             local results = require("marlin").get_indexes()
             local content = {}
 
@@ -107,7 +107,7 @@ return {
         end, { desc = "fzf marlin" })
 
         for index = 1, 4 do
-            keymap("n", "<Leader>" .. index, function()
+            keymap("n", "<leader>" .. index, function()
                 marlin.open(index, { use_split = true })
             end, { desc = "goto " .. index })
         end

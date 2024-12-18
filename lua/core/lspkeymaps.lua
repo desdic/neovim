@@ -34,7 +34,7 @@ M.setkeys = function(ev)
     keymap("n", "gl", "<cmd>FzfLua lsp_finder<cr>", silent_bufnr("LSP finder"))
     keymap("n", "gp", "<cmd>FzfLua lsp_document_diagnostics<cr>", silent_bufnr("LSP diagnostic"))
 
-    keymap("n", "<Leader>tf", require("core.format").toggle, { desc = "Toggle format on Save" })
+    keymap("n", "<leader>tf", require("core.format").toggle, { desc = "Toggle format on Save" })
     keymap("n", "gD", vim.lsp.buf.declaration, silent_bufnr("Goto declaration"))
     keymap("n", "K", vim.lsp.buf.hover, silent_bufnr("Hover"))
     keymap("n", "<leader>rn", vim.lsp.buf.rename, silent_bufnr("Rename"))

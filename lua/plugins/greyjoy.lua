@@ -8,7 +8,7 @@ return {
         { "akinsho/toggleterm.nvim" },
         { "ibhagwan/fzf-lua" },
     },
-    cmd = { "Greyjoy", "Greyedit", "GreyjoyTelescope", "GreyjoyFzf" },
+    cmd = { "Greyjoy", "Greyedit", "GreyjoyFzf" },
     config = function()
         local greyjoy = require("greyjoy")
         local condition = require("greyjoy.conditions")

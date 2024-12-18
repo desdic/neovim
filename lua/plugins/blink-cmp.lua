@@ -35,6 +35,7 @@ return {
                 "fallback",
             },
             ["<CR>"] = { "select_and_accept", "fallback" },
+            ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
             -- ["<C-b>"] = { "scroll_documentation_up", "fallback" },
             -- ["<C-f>"] = { "scroll_documentation_down", "fallback" },
         },
@@ -47,27 +48,33 @@ return {
                 auto_brackets = { enabled = true },
             },
             documentation = {
-                -- Snippets does not show their content without auto_show
-                auto_show = true,
+                -- Use <C-space> to show documentation
+                auto_show = false,
                 window = {
                     border = "rounded",
                 },
             },
+            ghost_text = {
+                enabled = true,
+            },
             menu = {
                 border = "rounded",
-                treesitter = true,
                 draw = {
                     columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind" } },
+                    treesitter = { "lsp" },
                 },
             },
             list = {
-                selection = "manual",
+                selection = "preselect",
             },
         },
 
         sources = {
             completion = {
                 enabled_providers = { "lsp", "snippets", "buffer", "lazydev" },
+                trigger = {
+                    show_on_insert_on_trigger_character = false,
+                },
             },
             providers = {
                 lazydev = {

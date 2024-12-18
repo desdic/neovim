@@ -47,8 +47,8 @@ return {
             local builtin = require("fzf-lua.previewer.builtin")
             local fzfpreview = builtin.buffer_or_file:extend()
 
-            function fzfpreview:new(o, opts, fzf_win)
-                fzfpreview.super.new(self, o, opts, fzf_win)
+            function fzfpreview:new(o, options, fzf_win)
+                fzfpreview.super.new(self, o, options, fzf_win)
                 setmetatable(self, fzfpreview)
                 return self
             end

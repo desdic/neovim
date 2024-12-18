@@ -128,3 +128,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("UserLspConfig", {}),
     callback = require("core.lspkeymaps").setkeys,
 })
+
+-- Create a local buffer keymap for fzf buffers to map esc to Ctrl-c
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "fzf",
+    callback = function()
+        vim.api.nvim_buf_set_keymap(0, "t", "<esc>", "<c-c>", { noremap = true, silent = true })
+    end,
+})

@@ -123,24 +123,24 @@ return {
                     scrollchars = { "┃", "" },
                 },
             },
-            keymap = {
-                builtin = {
-                    true, -- inherit from default
-                    -- ["<C-d>"] = "preview-page-down",
-                    -- ["<C-u>"] = "preview-page-up",
-                },
-                fzf = {
-                    true, -- inherit from default
-                    -- ["ctrl-d"] = "preview-page-down",
-                    -- ["ctrl-u"] = "preview-page-up",
-                },
-            },
-            actions = {
-                files = {
-                    true, -- inherit from default
-                    -- ["enter"] = actions.file_edit,
-                },
-            },
+            -- keymap = {
+            --     builtin = {
+            --         true, -- inherit from default
+            --         -- ["<C-d>"] = "preview-page-down",
+            --         -- ["<C-u>"] = "preview-page-up",
+            --     },
+            --     fzf = {
+            --         true, -- inherit from default
+            --         -- ["ctrl-d"] = "preview-page-down",
+            --         -- ["ctrl-u"] = "preview-page-up",
+            --     },
+            -- },
+            -- actions = {
+            --     files = {
+            --         true, -- inherit from default
+            --         -- ["enter"] = actions.file_edit,
+            --     },
+            -- },
         }
     end,
 

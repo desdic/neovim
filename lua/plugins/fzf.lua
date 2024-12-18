@@ -21,7 +21,7 @@ return {
         {
             "<Leader>fg",
             function()
-                require("fzf-lua").live_grep()
+                require("fzf-lua").live_grep_glob()
             end,
             desc = "[F]ile [g]rep",
         },
@@ -71,7 +71,6 @@ return {
     },
 
     opts = function()
-        local actions = require("fzf-lua.actions")
         local config = require("fzf-lua.config")
 
         config.defaults.actions.files["ctrl-r"] = function(_, ctx)
@@ -139,7 +138,7 @@ return {
             actions = {
                 files = {
                     true, -- inherit from default
-                    ["enter"] = actions.file_edit,
+                    -- ["enter"] = actions.file_edit,
                 },
             },
         }

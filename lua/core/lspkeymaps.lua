@@ -8,6 +8,9 @@ M.setkeys = function(ev)
     -- Check if we have capability
     local has_cap = function(cap)
         local client = vim.lsp.get_client_by_id(ev.data.client_id)
+        if client == nil then
+            return false
+        end
         return client.server_capabilities[cap .. "Provider"]
     end
 

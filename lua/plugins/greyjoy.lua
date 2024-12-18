@@ -44,7 +44,7 @@ return {
         end
 
         greyjoy.setup({
-            output_results = "toggleterm",
+            output_results = require("greyjoy.terminals").term,
             last_first = true,
             extensions = {
                 generic = {

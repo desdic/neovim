@@ -91,3 +91,14 @@ keymap("n", "<leader>ll", "<cmd>Lazy<CR>", { desc = "Run [l]azy" })
 keymap("n", "yc", "yy<cmd>normal gcc<CR>p", { desc = "Copy to a comment above" })
 
 keymap("n", "<esc>", "<cmd>nohlsearch<CR>", { desc = "stop highligting search" })
+
+keymap("n", "<M-j>", "<cmd>cnext<CR>", { desc = "quickfix next" })
+keymap("n", "<M-k>", "<cmd>cprev<CR>", { desc = "quickfix prev" })
+
+keymap("t", "<esc>", "<C-\\><C-N>", { desc = "esc in terminal" })
+
+keymap("n", "<leader><leader>x", "<cmd>:source %<CR>", {})
+
+keymap("n", "<leader>go", function()
+    require("core.git").open()
+end, { silent = true, noremap = true, desc = "[G]it [o]pen line in browser" })

@@ -41,15 +41,20 @@ return {
         },
 
         -- don't use in gitcommits
-        -- blocked_filetypes = { "gitcommit" },
+        enabled = function()
+            return not vim.tbl_contains({ "gitcommit" }, vim.bo.filetype)
+                and vim.bo.buftype ~= "prompt"
+                and vim.b.completion ~= false
+        end,
 
         completion = {
+            keyword = { range = "prefix" },
             accept = {
                 auto_brackets = { enabled = true },
             },
             documentation = {
                 -- Use <C-space> to show documentation
-                auto_show = false,
+                -- auto_show = false,
                 window = {
                     border = "rounded",
                 },
@@ -71,6 +76,8 @@ return {
 
         sources = {
             default = { "lsp", "snippets", "buffer", "lazydev" },
+            -- Disable cmdline completions
+            cmdline = {},
             providers = {
                 lazydev = {
                     name = "LazyDev",

@@ -70,12 +70,7 @@ return {
         },
 
         sources = {
-            completion = {
-                enabled_providers = { "lsp", "snippets", "buffer", "lazydev" },
-                trigger = {
-                    show_on_insert_on_trigger_character = false,
-                },
-            },
+            default = { "lsp", "snippets", "buffer", "lazydev" },
             providers = {
                 lazydev = {
                     name = "LazyDev",
@@ -85,7 +80,7 @@ return {
                 lsp = {
                     min_keyword_length = 2,
                     max_items = 20,
-                    fallback_for = { "lazydev" },
+                    fallbacks = { "lazydev" },
                 },
                 snippets = {
                     min_keyword_length = 2,
@@ -95,6 +90,8 @@ return {
                 },
             },
         },
+
+        -- signature = { enabled = true },
 
         appearance = {
             -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'

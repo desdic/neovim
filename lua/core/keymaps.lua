@@ -97,8 +97,13 @@ keymap("n", "<M-k>", "<cmd>cprev<CR>", { desc = "quickfix prev" })
 
 keymap("t", "<esc>", "<C-\\><C-N>", { desc = "esc in terminal" })
 
-keymap("n", "<leader><leader>x", "<cmd>:source %<CR>", {})
+keymap("n", "<leader><leader>x", "<cmd>:source %<CR>", { desc = "source current lua file" })
 
 keymap("n", "<leader>go", function()
     require("core.git").open()
 end, { silent = true, noremap = true, desc = "[G]it [o]pen line in browser" })
+
+-- keymap({ "n", "t" }, "<c-t>", "<cmd>TermToggle<CR>", { desc = "Toggle term" })
+keymap({ "n", "t" }, "<c-t>", function()
+    require("core.terminal").toggle()
+end, { desc = "Toggle term" })

@@ -63,6 +63,7 @@ return {
                     DiagnosticFloatingWarn = { bg = mocha.base, style = {} },
                     DiagnosticFloatingInfo = { bg = mocha.base, style = {} },
                     DiagnosticFloatingHint = { bg = mocha.base, style = {} },
+                    WinSeparator = { fg = mocha.mauve },
                 },
             },
         })

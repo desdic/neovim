@@ -5,7 +5,6 @@ return {
         { "<leader>gg", "<cmd>GreyjoyFzf fast<CR>", desc = "[G]reyjoy fast [g]roup" },
     },
     dependencies = {
-        { "akinsho/toggleterm.nvim" },
         { "ibhagwan/fzf-lua" },
     },
     cmd = { "Greyjoy", "Greyedit", "GreyjoyFzf" },

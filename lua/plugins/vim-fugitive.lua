@@ -30,15 +30,6 @@ return {
                     "<cmd>Git spull<cr>",
                     { buffer = bufnr, remap = false, desc = "Git stash/pull rebase" }
                 )
-
-                -- NOTE: It allows me to easily set the branch i am pushing and any tracking
-                -- needed if i did not set the branch up correctly
-                vim.keymap.set(
-                    "n",
-                    "<leader>t",
-                    ":Git push -u origin ",
-                    { buffer = bufnr, remap = false, desc = "Git push origin" }
-                )
             end,
         })
     end,

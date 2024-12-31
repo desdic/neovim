@@ -63,8 +63,14 @@ return {
 
         sources = {
             default = { "lsp", "snippets", "buffer", "luasnip", "lazydev" },
-            -- Disable cmdline completions
-            cmdline = {},
+            cmdline = function()
+                local type = vim.fn.getcmdtype()
+                -- Commands
+                if type == ":" then
+                    return { "cmdline" }
+                end
+                return {}
+            end,
             providers = {
                 lazydev = {
                     name = "LazyDev",

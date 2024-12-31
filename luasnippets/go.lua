@@ -35,8 +35,10 @@ vim.treesitter.query.set(
 )
 
 local transform = function(text, info)
-    if text == "int" then
+    if text:match("^(u?int%d*)$") then
         return t("0")
+    elseif text:match("^(float%d*)$") then
+        return t("0.0")
     elseif text == "error" then
         if info then
             info.index = info.index + 1
@@ -104,6 +106,7 @@ local handlers = {
 
 local function go_result_type(info)
     local cursor_node = ts_utils.get_node_at_cursor()
+    ---@diagnostic disable-next-line: param-type-mismatch
     local scope = ts_locals.get_scope_tree(cursor_node, 0)
 
     local function_node
@@ -115,13 +118,15 @@ local function go_result_type(info)
     end
 
     local query = vim.treesitter.query.get("go", "LuaSnip_Result")
+    ---@diagnostic disable-next-line: need-check-nil
     for _, node in query:iter_captures(function_node, 0) do
         if handlers[node:type()] then
             return handlers[node:type()](node, info)
         end
     end
 
-    return { t("nil") }
+    -- if there is no return don't return one
+    -- return
 end
 
 local go_ret_vals = function(args)

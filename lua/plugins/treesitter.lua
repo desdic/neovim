@@ -57,10 +57,8 @@ return {
                 incremental_selection = {
                     enable = true,
                     keymaps = {
-                        init_selection = "<CR>",
-                        node_incremental = "grn",
-                        scope_incremental = "grc",
-                        node_decremental = "grm",
+                        node_incremental = "v",
+                        node_decremental = "V",
                     },
                 },
                 textobjects = {

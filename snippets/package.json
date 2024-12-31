@@ -10,10 +10,6 @@
         "path": "./c.json"
       },
       {
-        "language": "cpp",
-        "path": "./cpp.json"
-      },
-      {
         "language": "go",
         "path": "./go.json"
       },
@@ -24,10 +20,6 @@
       {
         "language": "python",
         "path": "./python.json"
-      },
-      {
-        "language": "debchangelog",
-        "path": "./debchangelog.json"
       }
     ]
   }

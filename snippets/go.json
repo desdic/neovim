@@ -1,35 +1,4 @@
 {
-  "if err": {
-    "prefix": "ifn",
-    "body": [
-      "if err != nil {",
-      "\t$1",
-      "}",
-      "$0"
-    ],
-    "description": "if err != nil"
-  },
-  "if err short": {
-    "prefix": "ifns",
-    "body": [
-      "if err := $1; err != {",
-      "\t$2",
-      "}",
-      "$0"
-    ],
-    "description": "if err != nil"
-  },
-  "iferr": {
-    "prefix": "iferr",
-    "body": [
-      "$1, ${2|err|} := $3",
-      "if $2 != nil {",
-      "\t$3",
-      "}",
-      "$0"
-    ],
-    "description": "if err != nil"
-  },
   "go main() template": {
     "prefix": "main",
     "body": [
@@ -40,12 +9,5 @@
       "}"
     ],
     "description": "Standard main() snippet"
-  },
-  "test test": {
-    "prefix": "test",
-    "body": [
-      "==> ${1:${TM_SELECTED_TEXT}} <=="
-    ],
-    "description": "just testing"
   }
 }

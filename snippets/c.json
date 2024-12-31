@@ -7,6 +7,6 @@
       "    return 0;",
       "}"
     ],
-    "description": "Standard main() snippet"
+    "description": "Non Standard main() snippet"
   }
 }

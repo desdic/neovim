@@ -2,7 +2,7 @@ return {
     "saghen/blink.cmp",
     event = { "LspAttach" },
 
-    dependencies = { "rafamadriz/friendly-snippets", "folke/lazydev.nvim" },
+    dependencies = { "folke/lazydev.nvim", "L3MON4D3/LuaSnip" },
 
     -- use a release tag to download pre-built binaries
     version = "v0.*",
@@ -10,34 +10,7 @@ return {
     opts = {
         keymap = {
             preset = "default",
-            ["<Up>"] = { "select_prev", "fallback" },
-            ["<Down>"] = { "select_next", "fallback" },
-            ["<C-k>"] = { "select_prev", "fallback" },
-            ["<C-j>"] = { "select_next", "fallback" },
-            ["<Tab>"] = {
-                function(cmp)
-                    if cmp.snippet_active() then
-                        return cmp.snippet_forward()
-                    else
-                        return cmp.select_next()
-                    end
-                end,
-                "fallback",
-            },
-            ["<S-Tab>"] = {
-                function(cmp)
-                    if cmp.snippet_active() then
-                        return cmp.snippet_backward()
-                    else
-                        return cmp.select_prev()
-                    end
-                end,
-                "fallback",
-            },
             ["<CR>"] = { "select_and_accept", "fallback" },
-            ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
-            -- ["<C-b>"] = { "scroll_documentation_up", "fallback" },
-            -- ["<C-f>"] = { "scroll_documentation_down", "fallback" },
         },
 
         -- don't use in gitcommits
@@ -54,7 +27,7 @@ return {
             },
             documentation = {
                 -- Use <C-space> to show documentation
-                -- auto_show = false,
+                auto_show = true,
                 window = {
                     border = "rounded",
                 },
@@ -74,26 +47,41 @@ return {
             },
         },
 
+        snippets = {
+            expand = function(snippet)
+                require("luasnip").lsp_expand(snippet)
+            end,
+            active = function(filter)
+                if filter and filter.direction then
+                    return require("luasnip").jumpable(filter.direction)
+                end
+                return require("luasnip").in_snippet()
+            end,
+            jump = function(direction)
+                require("luasnip").jump(direction)
+            end,
+        },
+
         sources = {
-            default = { "lsp", "snippets", "buffer", "lazydev" },
+            default = { "lsp", "snippets", "buffer", "luasnip", "lazydev" },
             -- Disable cmdline completions
             cmdline = {},
             providers = {
                 lazydev = {
                     name = "LazyDev",
                     module = "lazydev.integrations.blink",
-                    min_keyword_length = 2,
+                    min_keyword_length = 3,
                 },
                 lsp = {
-                    min_keyword_length = 2,
+                    min_keyword_length = 3,
                     max_items = 20,
                     fallbacks = { "lazydev" },
                 },
                 snippets = {
-                    min_keyword_length = 2,
+                    min_keyword_length = 3,
                 },
                 buffer = {
-                    min_keyword_length = 2,
+                    min_keyword_length = 3,
                 },
             },
         },

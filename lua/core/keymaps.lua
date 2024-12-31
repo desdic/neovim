@@ -31,19 +31,19 @@ keymap("n", "<C-u>", "<C-u>zz", { silent = true, noremap = true, desc = "jump ce
 keymap("n", "{", "{zzzv", { silent = true, noremap = true, desc = "jump and center" })
 keymap("n", "}", "}zzzv", { silent = true, noremap = true, desc = "jump and center" })
 
-keymap("n", "<leader><leader>s", ":vsplit<CR>", { silent = true, noremap = true, desc = "Split vertical" })
+keymap("n", "<leader>sl", ":vsplit<CR>", { silent = true, noremap = true, desc = "Split vertical" })
 
-keymap("n", "<leader><leader>x", function()
+keymap("n", "<leader>sc", function()
     local wins = vim.api.nvim_tabpage_list_wins(0)
     if #wins > 1 then
         vim.cmd("close")
     else
         vim.cmd("bdelete")
     end
-end, { desc = "Close window if in split else delete buffer" })
+end, { desc = "[S]plit [c]lose or delete buffer" })
 
-keymap("n", "<leader>ss", ":%s/\\v", { noremap = true, desc = "Substitute" })
-keymap("n", "<leader>S", [[:%s/<C-r><C-w>//g<Left><Left>]], { desc = "Substitute word" })
+keymap("n", "<leader>su", ":%s/\\v", { noremap = true, desc = "[S][u]bstitute" })
+keymap("n", "<leader>sw", [[:%s/<C-r><C-w>//g<Left><Left>]], { desc = "[S]ubstitute [w]ord" })
 
 keymap("n", "-", "<c-x>", { silent = true, noremap = true, desc = "decrease number" })
 keymap("n", "+", "<c-a>", { silent = true, noremap = true, desc = "increase number" })
@@ -67,7 +67,7 @@ keymap("n", "<C-l>", "<C-w>l", { desc = "Move to window on left" })
 keymap("n", "<C-h>", "<C-w>h", { desc = "Move to window on right" })
 keymap("n", "<C-k>", "<C-w>k", { desc = "Move to window above" })
 keymap("n", "<C-j>", "<C-w>j", { desc = "Move to window below" })
-keymap("n", "Zz", function()
+keymap("n", "<leader>sz", function()
     require("core.window_zoom").toggle()
 end, { desc = "Toggle split" })
 
@@ -97,13 +97,16 @@ keymap("n", "<M-k>", "<cmd>cprev<CR>", { desc = "quickfix prev" })
 
 keymap("t", "<esc>", "<C-\\><C-N>", { desc = "esc in terminal" })
 
-keymap("n", "<leader><leader>x", "<cmd>:source %<CR>", { desc = "source current lua file" })
+keymap("n", "<leader>sf", "<cmd>:source %<CR>", { desc = "source current lua file" })
 
 keymap("n", "<leader>go", function()
     require("core.git").open()
 end, { silent = true, noremap = true, desc = "[G]it [o]pen line in browser" })
 
--- keymap({ "n", "t" }, "<c-t>", "<cmd>TermToggle<CR>", { desc = "Toggle term" })
-keymap({ "n", "t" }, "<c-t>", function()
+keymap({ "n", "t" }, "<leader>tt", function()
     require("core.terminal").toggle()
 end, { desc = "Toggle term" })
+
+keymap("n", "<leader>st", function()
+    vim.opt.spell = not (vim.opt.spell:get())
+end, { desc = "[S]pell [t]oggle" })

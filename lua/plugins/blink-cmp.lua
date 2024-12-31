@@ -21,12 +21,11 @@ return {
         end,
 
         completion = {
-            keyword = { range = "prefix" },
+            keyword = { range = "full" },
             accept = {
                 auto_brackets = { enabled = true },
             },
             documentation = {
-                -- Use <C-space> to show documentation
                 auto_show = true,
                 window = {
                     border = "rounded",

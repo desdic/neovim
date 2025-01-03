@@ -123,6 +123,12 @@ return {
                     scrollchars = { "┃", "" },
                 },
             },
+            keymap = {
+                builtin = {
+                    ["<M-S-j>"] = "preview-page-down",
+                    ["<M-S-k>"] = "preview-page-up",
+                },
+            },
         }
     end,
 

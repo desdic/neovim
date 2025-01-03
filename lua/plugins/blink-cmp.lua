@@ -13,9 +13,9 @@ return {
             ["<CR>"] = { "select_and_accept", "fallback" },
         },
 
-        -- don't use in gitcommits
+        -- don't use in gitcommits or dressings input box
         enabled = function()
-            return not vim.tbl_contains({ "gitcommit" }, vim.bo.filetype)
+            return not vim.tbl_contains({ "gitcommit", "DressingInput" }, vim.bo.filetype)
                 and vim.bo.buftype ~= "prompt"
                 and vim.b.completion ~= false
         end,
@@ -63,14 +63,7 @@ return {
 
         sources = {
             default = { "lsp", "snippets", "buffer", "luasnip", "lazydev" },
-            cmdline = function()
-                local type = vim.fn.getcmdtype()
-                -- Commands
-                if type == ":" then
-                    return { "cmdline" }
-                end
-                return {}
-            end,
+            cmdline = {},
             providers = {
                 lazydev = {
                     name = "LazyDev",

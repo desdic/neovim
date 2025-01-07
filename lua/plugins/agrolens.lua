@@ -1,6 +1,5 @@
 return {
     "desdic/agrolens.nvim",
-    dev = true,
     opts = {
         debug = false,
         force_long_filepath = false,

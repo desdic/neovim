@@ -27,7 +27,8 @@ M.setkeys = function(ev)
         return false
     end
 
-    keymap("n", "gd", "<cmd>FzfLua lsp_definitions<cr>", silent_bufnr("Goto definition"))
+    -- keymap("n", "gd", "<cmd>FzfLua lsp_definitions<cr>", silent_bufnr("Goto definition"))
+    keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", silent_bufnr("Goto definition"))
     keymap("n", "gi", "<cmd>FzfLua lsp_implementations<cr>", silent_bufnr("Goto Implementation"))
     keymap("n", "gr", "<cmd>FzfLua lsp_references<cr>", silent_bufnr("References"))
     keymap("n", "gt", "<cmd>FzfLua lsp_typedefs<cr>", silent_bufnr("Goto Type Definition"))

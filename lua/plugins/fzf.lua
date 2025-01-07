@@ -87,7 +87,7 @@ return {
         config.set_action_helpstr(config.defaults.actions.files["ctrl-r"], "toggle-dir")
 
         return {
-            "default-titles",
+            -- "default-titles",
             files = {
                 formatter = "path.dirname_first",
             },

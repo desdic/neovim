@@ -11,6 +11,9 @@ return {
         keymap = {
             preset = "default",
             ["<CR>"] = { "select_and_accept", "fallback" },
+            cmdline = {
+                preset = "enter",
+            },
         },
 
         -- don't use in gitcommits or dressings input box
@@ -35,6 +38,9 @@ return {
                 enabled = true,
             },
             menu = {
+                auto_show = function(ctx)
+                    return ctx.mode ~= "cmdline" or not vim.tbl_contains({ "/", "?" }, vim.fn.getcmdtype())
+                end,
                 border = "rounded",
                 draw = {
                     columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind" } },
@@ -42,28 +48,23 @@ return {
                 },
             },
             list = {
-                selection = "preselect",
+                selection = {
+                    -- Skip preselection in cmdline
+                    preselect = function(ctx)
+                        return ctx.mode ~= "cmdline"
+                    end,
+                    auto_insert = true,
+                },
             },
         },
 
         snippets = {
-            expand = function(snippet)
-                require("luasnip").lsp_expand(snippet)
-            end,
-            active = function(filter)
-                if filter and filter.direction then
-                    return require("luasnip").jumpable(filter.direction)
-                end
-                return require("luasnip").in_snippet()
-            end,
-            jump = function(direction)
-                require("luasnip").jump(direction)
-            end,
+            preset = "luasnip",
         },
 
         sources = {
-            default = { "lsp", "snippets", "buffer", "luasnip", "lazydev" },
-            cmdline = {},
+            default = { "lsp", "snippets", "buffer", "lazydev" },
+            -- cmdline = {},
             providers = {
                 lazydev = {
                     name = "LazyDev",
@@ -73,13 +74,16 @@ return {
                 lsp = {
                     min_keyword_length = 3,
                     max_items = 20,
-                    fallbacks = { "lazydev" },
+                    fallbacks = { "buffer", "lazydev" },
                 },
                 snippets = {
                     min_keyword_length = 3,
                 },
                 buffer = {
                     min_keyword_length = 3,
+                },
+                cmdline = {
+                    min_keyword_length = 2,
                 },
             },
         },

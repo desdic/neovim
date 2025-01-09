@@ -15,17 +15,11 @@ return {
 
         local types = require("luasnip.util.types")
 
-        ls.config.set_config({
-            -- Keep last snippet to jump around
-            history = true,
-
-            -- Enable dynamic snippets
-            updateevents = "TextChanged,TextChangedI",
-            -- For cleaning up snippets whose text was deleted
-            delete_check_events = "TextChanged",
-
+        ls.config.setup({
+            -- Prevent jumping to previous snippet
+            region_check_events = "InsertEnter",
+            update_events = "TextChanged,TextChangedI",
             enable_autosnippets = true,
-
             ext_opts = {
                 [types.choiceNode] = { active = { virt_text = { { "●", "Operator" } } } },
             },

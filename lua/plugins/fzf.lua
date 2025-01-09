@@ -5,11 +5,11 @@ return {
     cmd = "FzfLua",
     keys = {
         {
-            "<leader>vc",
+            "<leader>fv",
             function()
                 require("fzf-lua").live_grep({ cwd = "~/.config/nvim" })
             end,
-            desc = "[V]im [c]onfig",
+            desc = "[Fuzzy] [V]im config",
         },
         {
             "<leader>ff",
@@ -26,25 +26,25 @@ return {
             desc = "[F]ile [g]rep",
         },
         {
-            "<leader>gc",
+            "<leader>fw",
             function()
                 require("fzf-lua").grep_cword()
             end,
-            desc = "[F]ile [g]rep",
+            desc = "[F]ile [w]word grep",
         },
         {
-            "<leader>no",
+            "<leader>fn",
             function()
                 require("fzf-lua").live_grep({ cwd = "~/notes" })
             end,
-            desc = "[N]otes search",
+            desc = "[F]uzzy [N]otes search",
         },
         {
-            "<leader>ht",
+            "<leader>fh",
             function()
                 require("fzf-lua").help_tags()
             end,
-            desc = "[H]elp [t]ags",
+            desc = "[F]uzzy [H]elp tags",
         },
         {
             "<leader>fb",
@@ -54,7 +54,7 @@ return {
             desc = "[F]ind [b]buffer",
         },
         {
-            "<leader>ss",
+            "z=",
             function()
                 require("fzf-lua").spell_suggest({
                     winopts = {
@@ -66,7 +66,7 @@ return {
                     },
                 })
             end,
-            desc = "[S]pell [s]uggest",
+            desc = "Spell suggest",
         },
     },
 

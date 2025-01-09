@@ -3,7 +3,7 @@ local s = ls.s
 local i = ls.i
 local t = ls.t
 local f = ls.function_node
--- local fmt = require("luasnip.extras.fmt").fmt
+local fmt = require("luasnip.extras.fmt").fmt
 -- local fmta = require("luasnip.extras.fmt").fmta
 local d = ls.dynamic_node
 local c = ls.choice_node
@@ -24,6 +24,12 @@ local function same(index)
     end, { index })
 end
 
+-- TODO: look for variables of same type
+-- (var_declaration
+--  (var_spec
+--   name:(identifier) @varname
+--   type:(_) @vartype)) (#eq? @vartype "[4]int32")
+
 vim.treesitter.query.set(
     "go",
     "LuaSnip_Result",
@@ -43,7 +49,7 @@ local indexed = function(info, value)
 end
 
 local transform = function(text, info)
-    print(vim.inspect(text))
+    -- print(vim.inspect(text))
 
     if text:match("^(u?int%d*)$") then
         return indexed(info, "0")
@@ -119,6 +125,11 @@ local handlers = {
         local text = get_node_text(node, 0)
         return { transform(text, info) }
     end,
+
+    ["map_type"] = function(node, info)
+        local text = get_node_text(node, 0)
+        return { transform(text, info) }
+    end,
 }
 
 local function go_result_type(info)
@@ -142,6 +153,8 @@ local function go_result_type(info)
             for _, node in query:iter_captures(function_node, 0) do
                 if handlers[node:type()] then
                     return handlers[node:type()](node, info)
+                else
+                    print("unhandled type '" .. node:type() .. "'")
                 end
             end
         end
@@ -197,5 +210,25 @@ local ret = s("ret", {
 })
 
 table.insert(snippets, ret)
+
+local main = s(
+    { trig = "main", name = "main" },
+    fmt(
+        [[
+package main
+
+func main() {{
+{}{}
+}}
+        ]],
+        {
+
+            t({ "\t" }),
+            i(0),
+        }
+    )
+)
+
+table.insert(snippets, main)
 
 return snippets, autosnippets

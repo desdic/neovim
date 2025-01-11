@@ -72,21 +72,22 @@ vim.api.nvim_create_autocmd("BufEnter", {
 -- close some filetypes with <q>
 vim.api.nvim_create_autocmd("FileType", {
     pattern = {
-        "qf",
-        "help",
-        "man",
-        "notify",
-        "lspinfo",
-        "startuptime",
-        "tsplayground",
         "PlenaryTestPopup",
-        "macrothishelp",
-        "greyjoy",
+        "checkhealth",
         "fugitive",
         "fugitiveblame",
         "git",
-        "checkhealth",
+        "greyjoy",
+        "help",
+        "lazy",
+        "lspinfo",
+        "macrothishelp",
+        "man",
+        "notify",
+        "qf",
         "query",
+        "startuptime",
+        "tsplayground",
     },
     callback = function(event)
         vim.bo[event.buf].buflisted = false

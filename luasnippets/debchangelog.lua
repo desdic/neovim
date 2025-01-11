@@ -4,7 +4,6 @@ local i = ls.i
 local t = ls.text_node
 local d = ls.dynamic_node
 local sn = ls.snippet_node
--- local r = require("luasnip.extras").rep
 local fmt = require("luasnip.extras.fmt").fmt
 local f = ls.function_node
 

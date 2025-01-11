@@ -1,8 +1,6 @@
 local ls = require("luasnip")
 local s = ls.s
 local i = ls.i
--- local d = ls.dynamic_node
--- local sn = ls.snippet_node
 local r = require("luasnip.extras").rep
 local fmt = require("luasnip.extras.fmt").fmt
 

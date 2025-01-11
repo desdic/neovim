@@ -3,9 +3,6 @@ local s = ls.s
 local i = ls.i
 local t = ls.t
 local c = ls.choice_node
--- local d = ls.dynamic_node
--- local sn = ls.snippet_node
-local r = require("luasnip.extras").rep
 local fmt = require("luasnip.extras.fmt").fmt
 
 local snippets, autosnippets = {}, {}

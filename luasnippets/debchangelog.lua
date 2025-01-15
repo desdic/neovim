@@ -6,6 +6,7 @@ local d = ls.dynamic_node
 local sn = ls.snippet_node
 local fmt = require("luasnip.extras.fmt").fmt
 local f = ls.function_node
+local c = ls.choice_node
 
 local snippets, autosnippets = {}, {}
 
@@ -14,14 +15,29 @@ local get_debchangelog = function(position)
         local ret = {
             i(1, "mypackage"),
             t(" ("),
-            i(2, "1"),
-            t(") systems-focal systems-jammy; urgency=medium"),
+            i(2, "0.0.1"),
+            t(") systems-focal systems-jammy systems-noble; urgency=medium"),
         }
 
+        local latest = t("systems-jammy systems-noble")
+        local second = t("systems-focal systems-jammy systems-noble")
+
         local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-        for index = #lines, 1, -1 do
-            for dname, dversion, dpart in string.gmatch(lines[index], "([%w%p]+)%s%((%d+)%)%s(.+)") do
-                ret = { i(1, dname), t(" (" .. dversion + 1 .. ") " .. dpart) }
+        for _, line in ipairs(lines) do
+            for package, version, systems, urgency in line:gmatch("([%w%.%-]+) %(([%w%-%.]+)%) (.-); urgency=([%w]+)") do
+                local new_version = version:gsub("-(%d+)$", function(last_number)
+                    return "-" .. (tonumber(last_number) + 1)
+                end)
+
+                ret = {
+                    i(1, package),
+                    i(2, " ("),
+                    i(2, new_version),
+                    t(") "),
+                    c(3, { t(systems), latest, second }),
+                    t("; urgency=" .. urgency),
+                }
+                return sn(nil, ret)
             end
         end
         return sn(nil, ret)
@@ -29,7 +45,7 @@ local get_debchangelog = function(position)
 end
 
 local deb = s(
-    { trig = "cl", name = "debian changelog" },
+    { trig = "changelog", name = "debian changelog" },
     fmt(
         [[
 {}

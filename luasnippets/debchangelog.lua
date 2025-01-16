@@ -16,7 +16,7 @@ local get_debchangelog = function(position)
             i(1, "mypackage"),
             t(" ("),
             i(2, "0.0.1"),
-            t(") systems-focal systems-jammy systems-noble; urgency=medium"),
+            t(") systems-jammy systems-noble; urgency=medium"),
         }
 
         local latest = t("systems-jammy systems-noble")
@@ -25,8 +25,8 @@ local get_debchangelog = function(position)
         local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
         for _, line in ipairs(lines) do
             for package, version, systems, urgency in line:gmatch("([%w%.%-]+) %(([%w%-%.]+)%) (.-); urgency=([%w]+)") do
-                local new_version = version:gsub("-(%d+)$", function(last_number)
-                    return "-" .. (tonumber(last_number) + 1)
+                local new_version = version:gsub("(%D)(%d+)$", function(prefix, last_number)
+                    return prefix .. (tonumber(last_number) + 1)
                 end)
 
                 ret = {

@@ -5,8 +5,6 @@ keymap("n", "<leader>w", ":w!<CR>", { silent = true, noremap = true, desc = "Wri
 keymap("v", "<", "<gv", { silent = true, noremap = true, desc = "Align to left" })
 keymap("v", ">", ">gv", { silent = true, noremap = true, desc = "Align to right" })
 
-keymap("n", "<leader>qa", ":qa!<CR>", { silent = true, noremap = true, desc = "Quit" })
-
 keymap("n", "<leader>mo", function()
     require("core.mouse").toggle()
 end, { silent = true, noremap = true, desc = "Toggle mouse" })

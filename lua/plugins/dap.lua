@@ -58,13 +58,6 @@ return {
                 end,
                 desc = "DAP Clear all breakpoints",
             },
-            {
-                "<leader>dl",
-                function()
-                    require("osv").launch({ port = 8086 })
-                end,
-                desc = "Launch debug instance",
-            },
         },
         dependencies = {
             {
@@ -87,6 +80,18 @@ return {
                 "julianolf/nvim-dap-lldb",
                 ft = { "c", "cpp", "rust", "zig" },
                 opts = { codelldb_path = "/sbin/codelldb" },
+            },
+            {
+                "jbyuki/one-small-step-for-vimkind",
+                keys = {
+                    {
+                        "<leader>dl",
+                        function()
+                            require("osv").launch({ port = 8086 })
+                        end,
+                        desc = "Launch Lua adapter",
+                    },
+                },
             },
         },
         config = function()

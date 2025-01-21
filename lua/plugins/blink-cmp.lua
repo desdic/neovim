@@ -38,9 +38,6 @@ return {
                 enabled = true,
             },
             menu = {
-                auto_show = function(ctx)
-                    return ctx.mode ~= "cmdline" or not vim.tbl_contains({ "/", "?" }, vim.fn.getcmdtype())
-                end,
                 border = "rounded",
                 draw = {
                     columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind" } },
@@ -64,7 +61,7 @@ return {
 
         sources = {
             default = { "lsp", "snippets", "buffer", "lazydev" },
-            -- cmdline = {},
+            cmdline = {},
             providers = {
                 lazydev = {
                     name = "LazyDev",

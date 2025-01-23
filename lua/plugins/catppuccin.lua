@@ -5,19 +5,17 @@ return {
     lazy = false,
     config = function()
         local catppuccin = require("catppuccin")
-        local palettes = require("catppuccin.palettes")
-        local mocha = palettes.get_palette("mocha")
 
         catppuccin.setup({
             flavour = "mocha",
-            compile = { enabled = true, path = vim.fn.stdpath("cache") .. "/catppuccin" },
-            transparent_background = false,
-            term_colors = false,
+            default_integrations = false,
+            dim_inactive = { enabled = true },
             integrations = {
-                bufferline = true,
                 dap = true,
                 dap_ui = true,
+                render_markdown = true,
                 fzf = true,
+                fidget = true,
                 gitsigns = true,
                 indent_blankline = {
                     enabled = true,
@@ -53,24 +51,26 @@ return {
                 treesitter = true,
                 which_key = true,
             },
-            highlight_overrides = {
-                mocha = {
-                    DiagnosticVirtualTextError = { bg = mocha.base, style = {} },
-                    DiagnosticVirtualTextWarn = { bg = mocha.base, style = {} },
-                    DiagnosticVirtualTextInfo = { bg = mocha.base, style = {} },
-                    DiagnosticVirtualTextHint = { bg = mocha.base, style = {} },
-                    DiagnosticFloatingError = { bg = mocha.base, style = {} },
-                    DiagnosticFloatingWarn = { bg = mocha.base, style = {} },
-                    DiagnosticFloatingInfo = { bg = mocha.base, style = {} },
-                    DiagnosticFloatingHint = { bg = mocha.base, style = {} },
-                    WinSeparator = { fg = mocha.mauve },
-                },
-            },
+            custom_highlights = function(colors)
+                return {
+                    MiniTablineCurrent = {
+                        fg = colors.text,
+                        bg = colors.surface0,
+                        style = { "bold" },
+                    },
+                    MiniTablineModifiedCurrent = {
+                        fg = colors.text,
+                        bg = colors.surface0,
+                        style = { "bold" },
+                    },
+                    MiniTablineModifiedVisible = {
+                        fg = colors.text,
+                        style = {},
+                    },
+                }
+            end,
         })
 
         vim.cmd([[colorscheme catppuccin]])
-
-        vim.api.nvim_set_hl(0, "LeapBackdrop", { link = "Comment" })
-        vim.api.nvim_set_hl(0, "LspInlayHint", { link = "Comment" })
     end,
 }

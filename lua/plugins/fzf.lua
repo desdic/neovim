@@ -92,7 +92,6 @@ return {
             require("fzf-lua").files(opts)
         end
         config.set_action_helpstr(config.defaults.actions.files["ctrl-r"], "toggle-dir")
-        local actions = require("fzf-lua").actions
 
         return {
             files = {

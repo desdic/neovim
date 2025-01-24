@@ -33,6 +33,13 @@ return {
             desc = "[F]ile [w]word grep",
         },
         {
+            "<leader>fl",
+            function()
+                require("fzf-lua").lgrep_curbuf()
+            end,
+            desc = "Grep current buffer",
+        },
+        {
             "<leader>fn",
             function()
                 require("fzf-lua").live_grep({ cwd = "~/notes" })
@@ -85,10 +92,12 @@ return {
             require("fzf-lua").files(opts)
         end
         config.set_action_helpstr(config.defaults.actions.files["ctrl-r"], "toggle-dir")
+        local actions = require("fzf-lua").actions
 
         return {
             files = {
                 formatter = "path.dirname_first",
+                fd_opts = [[--color=never --type f --hidden --exclude .git]],
             },
             ui_select = function(fzf_opts, items)
                 return vim.tbl_deep_extend("force", fzf_opts, {

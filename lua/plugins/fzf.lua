@@ -96,7 +96,6 @@ return {
         return {
             files = {
                 formatter = "path.dirname_first",
-                fd_opts = [[--color=never --type f --hidden --exclude .git]],
             },
             ui_select = function(fzf_opts, items)
                 return vim.tbl_deep_extend("force", fzf_opts, {

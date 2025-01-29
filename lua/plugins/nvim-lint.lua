@@ -17,20 +17,6 @@ return {
             sh = { "shellcheck" },
         }
 
-        lint.linters.golangcilint.args = {
-            "run",
-            "--enable-all",
-            "--disable",
-            "lll",
-            "--disable",
-            "depguard",
-            "--out-format",
-            "json",
-            function()
-                return vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":h")
-            end,
-        }
-
         lint.linters.rubocop.args = {
             "--format",
             "json",

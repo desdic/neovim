@@ -1,0 +1,9 @@
+{
+    "slog.info": {
+        "prefix": "info",
+        "body": [
+            "slog.Info(\"$0\")"
+        ],
+        "description": "slog.info"
+    }
+}

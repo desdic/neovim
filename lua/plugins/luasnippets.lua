@@ -7,11 +7,11 @@ return {
     config = function()
         local ls = require("luasnip")
 
-        local lsloader = require("luasnip.loaders.from_lua")
-
         -- require("luasnip.loaders.from_vscode").lazy_load()
         ---@diagnostic disable-next-line: assign-type-mismatch
-        lsloader.load({ paths = "~/.config/nvim/luasnippets" })
+        require("luasnip.loaders.from_lua").load({ paths = vim.fn.stdpath("config") .. "/snippets" })
+
+        require("luasnip.loaders.from_vscode").load({ paths = { vim.fn.stdpath("config") .. "/snippets" } })
 
         local types = require("luasnip.util.types")
 

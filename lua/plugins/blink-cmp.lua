@@ -11,9 +11,6 @@ return {
         keymap = {
             preset = "default",
             ["<CR>"] = { "select_and_accept", "fallback" },
-            cmdline = {
-                preset = "enter",
-            },
         },
 
         -- don't use in gitcommits or dressings input box
@@ -24,10 +21,6 @@ return {
         end,
 
         completion = {
-            keyword = { range = "full" },
-            accept = {
-                auto_brackets = { enabled = true },
-            },
             documentation = {
                 auto_show = true,
                 window = {
@@ -46,10 +39,7 @@ return {
             },
             list = {
                 selection = {
-                    -- Skip preselection in cmdline
-                    preselect = function(ctx)
-                        return ctx.mode ~= "cmdline"
-                    end,
+                    preselect = true,
                     auto_insert = true,
                 },
             },
@@ -70,27 +60,31 @@ return {
                 },
                 lsp = {
                     min_keyword_length = 3,
-                    max_items = 20,
+                    max_items = 10,
                     fallbacks = { "buffer", "lazydev" },
+                    score_offset = 4,
                 },
                 snippets = {
-                    min_keyword_length = 3,
+                    min_keyword_length = 2, -- don't show when triggered manually, useful for JSON keys
+                    score_offset = 3,
+                    max_items = 4,
+                    should_show_items = function(ctx)
+                        return ctx.trigger.initial_kind ~= "trigger_character"
+                    end,
+                    opts = {
+                        use_show_condition = true,
+                        show_autosnippets = false,
+                    },
                 },
                 buffer = {
                     min_keyword_length = 3,
-                },
-                cmdline = {
-                    min_keyword_length = 2,
+                    score_offset = 2,
+                    max_items = 5,
+                    should_show_items = function(ctx)
+                        return ctx.trigger.initial_kind ~= "trigger_character"
+                    end,
                 },
             },
-        },
-
-        -- signature = { enabled = true },
-
-        appearance = {
-            -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-            -- Adjusts spacing to ensure icons are aligned
-            nerd_font_variant = "mono",
         },
     },
     opts_extend = { "sources.completion.enabled_providers" },

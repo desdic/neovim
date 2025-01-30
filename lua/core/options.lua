@@ -19,6 +19,8 @@ vim.opt.shortmess:append("I") -- Turn off splash
 vim.opt.shortmess:append("c") -- Avoid showing message extra message when using completion
 vim.opt.shortmess:append("s") -- Don't give "search hit BOTTOM, continuing at TOP" or "search
 
+vim.opt.formatoptions:remove({ "t" }) -- Don't wrap long lines when writing
+
 option.cmdheight = 2 -- Set height to prevent 'press enter to continue'
 option.hidden = true -- Allow to switch buffer without saving
 

@@ -40,6 +40,7 @@ return {
                 "perlnavigator",
                 "pylsp",
                 "pyright",
+                "rubocop",
                 "solargraph",
                 "yamlls",
                 "zls",
@@ -122,6 +123,12 @@ return {
                 ["solargraph"] = function()
                     lspconfig["solargraph"].setup({
                         filetypes = { "ruby", "eruby", "rakefile" },
+                    })
+                end,
+
+                ["rubocop"] = function()
+                    lspconfig["rubocop"].setup({
+                        cmd = { "rubocop", "--lsp" },
                     })
                 end,
 

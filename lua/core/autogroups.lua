@@ -60,15 +60,6 @@ vim.api.nvim_create_autocmd("BufReadPost", {
     end,
 })
 
-vim.api.nvim_create_autocmd("BufEnter", {
-    callback = function()
-        -- :h fo-table (default tcqj)
-        vim.opt.formatoptions:remove({ "c", "r", "o" })
-        vim.opt.formatoptions:append({ "n" })
-    end,
-    desc = "Disable New Line Comment",
-})
-
 -- close some filetypes with <q>
 vim.api.nvim_create_autocmd("FileType", {
     pattern = {
@@ -136,4 +127,12 @@ vim.api.nvim_create_autocmd("FileType", {
     callback = function()
         vim.api.nvim_buf_set_keymap(0, "t", "<esc>", "<c-c>", { noremap = true, silent = true })
     end,
+})
+
+vim.api.nvim_create_autocmd("VimLeave", {
+    group = vim.api.nvim_create_augroup("RestoreCursorShapeOnExit", { clear = true }),
+    callback = function()
+        vim.opt.guicursor = "a:block1"
+    end,
+    nested = true,
 })

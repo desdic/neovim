@@ -14,12 +14,17 @@ global.mapleader = "," -- Set leader
 global.maplocalleader = "," -- Set local leader
 global.shada = "NONE"
 
-vim.opt.guicursor = "" -- Use fat cursor
-vim.opt.shortmess:append("I") -- Turn off splash
-vim.opt.shortmess:append("c") -- Avoid showing message extra message when using completion
-vim.opt.shortmess:append("s") -- Don't give "search hit BOTTOM, continuing at TOP" or "search
+-- vim.opt.guicursor = "" -- Use fat cursor
+opt.guicursor = "a-i-ci:ver30-iCursor-blinkwait300-blinkon200-blinkoff150"
+opt.shortmess:append("I") -- Turn off splash
+opt.shortmess:append("c") -- Avoid showing message extra message when using completion
+opt.shortmess:append("s") -- Don't give "search hit BOTTOM, continuing at TOP" or "search
 
-vim.opt.formatoptions:remove({ "t" }) -- Don't wrap long lines when writing
+-- :h fo-table
+-- disable wrapping
+opt.formatoptions:remove({ "c", "r", "o", "t" })
+-- better indent
+opt.formatoptions:append({ "n" })
 
 option.cmdheight = 2 -- Set height to prevent 'press enter to continue'
 option.hidden = true -- Allow to switch buffer without saving
@@ -78,7 +83,7 @@ option.splitbelow = true
 option.splitright = true
 
 option.mouse = ""
-vim.wo.cursorline = true
+window_option.cursorline = true
 
 -- Include @ in filename
 opt.isfname:append("@-@")
@@ -87,9 +92,6 @@ option.pumheight = 10 -- Maximum number of entries in a popup
 
 -- Fix highligts within markdown files
 global.markdown_fenched_languages = { "lua", "c", "cpp", "go", "ruby" }
-
--- Set line numbers in telescope preview window
-vim.cmd("autocmd User TelescopePreviewerLoaded setlocal number")
 
 -- stabilize buffer content
 global.splitkeep = "screen"

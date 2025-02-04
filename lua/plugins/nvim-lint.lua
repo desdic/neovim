@@ -13,16 +13,7 @@ return {
             go = { "golangcilint" },
             json = { "jq" },
             python = { "ruff", "pylint" },
-            ruby = { "rubocop" },
             sh = { "shellcheck" },
-        }
-
-        lint.linters.rubocop.args = {
-            "--format",
-            "json",
-            "--force-exclusion",
-            "--config",
-            "~/.rubocop.yml",
         }
 
         local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })

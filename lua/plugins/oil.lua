@@ -13,22 +13,7 @@ return {
         },
         {
             "<leader>re",
-            function()
-                local filename = vim.fn.expand("$HOME/tmp/sshfzf.cache")
-                local file = io.open(filename, "rb")
-                if file then
-                    local lines = {}
-                    for line in io.lines(filename) do
-                        table.insert(lines, line)
-                    end
-                    file:close()
-                    vim.ui.select(lines, { prompt = "Choose remote host" }, function(choice)
-                        if choice then
-                            vim.cmd("Oil oil-ssh://" .. choice .. "/")
-                        end
-                    end)
-                end
-            end,
+            ":Oil oil-ssh://",
             desc = "Browse remote files/dirs",
         },
     },

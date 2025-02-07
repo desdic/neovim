@@ -65,9 +65,6 @@ M.setkeys = function(ev)
     if has_cap("documentFormatting") then
         keymap("n", "<leader>fm", format, silent_bufnr("[F]or[m]at Document"))
     end
-    if has_cap("documentRangeFormatting") then
-        keymap("v", "<leader>fm", format, silent_bufnr("[F]or[m]at Range"))
-    end
 
     keymap("n", "<leader>lh", function()
         local opt = { buf = 0 }

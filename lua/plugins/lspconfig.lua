@@ -2,196 +2,60 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-        "williamboman/mason.nvim",
-        "williamboman/mason-lspconfig.nvim",
-        "WhoIsSethDaniel/mason-tool-installer.nvim",
         "saghen/blink.cmp",
+
+        {
+            "folke/lazydev.nvim",
+            ft = "lua", -- only load on lua files
+            opts = {
+                library = {
+                    -- See the configuration section for more details
+                    -- Load luvit types when the `vim.uv` word is found
+                    { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+                },
+            },
+        },
     },
-    cmd = { "MasonUpdate", "Mason" },
     config = function()
         local lspconfig = require("lspconfig")
-        local capabilities = require("blink.cmp").get_lsp_capabilities()
 
-        local mason = require("mason")
-        local mason_lspconfig = require("mason-lspconfig")
-        local mason_tool_installer = require("mason-tool-installer")
+        -- Go
+        lspconfig.gopls.setup({})
+        lspconfig.golangci_lint_ls.setup({})
 
-        mason.setup({
-            ui = {
-                border = "rounded",
-                icons = {
-                    package_installed = "✓",
-                    package_pending = "➜",
-                    package_uninstalled = "✗",
+        -- Python
+        lspconfig.pyright.setup({})
+        lspconfig.pylsp.setup({
+            plugins = {
+                rope_import = {
+                    enabled = true,
                 },
             },
         })
+        lspconfig.ruff.setup({})
 
-        mason_lspconfig.setup({
-            ensure_installed = {
-                "bashls",
+        lspconfig.lua_ls.setup({})
+        lspconfig.bashls.setup({})
+        lspconfig.clangd.setup({
+            cmd = {
                 "clangd",
-                "cmake",
-                "dockerls",
-                "glsl_analyzer",
-                "gopls",
-                "jsonls",
-                "lua_ls",
-                "perlnavigator",
-                "pylsp",
-                "pyright",
-                "rubocop",
-                "solargraph",
-                "yamlls",
-                "zls",
-            },
-            -- auto-install configured servers (with lspconfig)
-            automatic_installation = true, -- not the same as ensure_installed
-            handlers = {
-                function(server_name)
-                    require("lspconfig")[server_name].setup({
-                        capabilities = capabilities,
-                    })
-                end,
-
-                -- {{ Go
-                ["gopls"] = function()
-                    lspconfig["gopls"].setup({
-                        settings = {
-                            gopls = {
-                                usePlaceholders = true,
-                                completeUnimported = true,
-                                analyses = {
-                                    nilness = true,
-                                    unusedparams = true,
-                                    unusedwrite = true,
-                                    useany = true,
-                                },
-                                staticcheck = true,
-                                gofumpt = true,
-
-                                hints = {
-                                    assignVariableTypes = true,
-                                    compositeLiteralFields = true,
-                                    compositeLiteralTypes = true,
-                                    constantValues = true,
-                                    functionTypeParameters = true,
-                                    parameterNames = true,
-                                    rangeVariableTypes = true,
-                                },
-
-                                codelenses = {
-                                    generate = true,
-                                    gc_details = true,
-                                },
-                            },
-                        },
-                        filetypes = { "go", "gomod", "gowork", "gotmpl" },
-                        root_dir = function()
-                            return vim.fs.dirname(
-                                vim.fs.find({ ".git", "go.mod", "go.work", "." }, { upward = true })[1]
-                            )
-                        end,
-                    })
-                end,
-
-                -- {{ Disable rust in LSP since its handled by rustaceanvim
-                ["rust_analyzer"] = function() end,
-
-                -- {{ Python
-                ["pylsp"] = function()
-                    lspconfig["pylsp"].setup({
-                        plugins = {
-                            rope_import = {
-                                enabled = true,
-                            },
-                        },
-                    })
-                end,
-
-                -- {{ JSON
-                ["jsonls"] = function()
-                    lspconfig["jsonls"].setup({})
-                end,
-
-                -- {{ YAML
-                ["yamlls"] = function()
-                    lspconfig["yamlls"].setup({})
-                end,
-
-                -- {{ Ruby
-                ["solargraph"] = function()
-                    lspconfig["solargraph"].setup({
-                        filetypes = { "ruby", "eruby", "rakefile" },
-                    })
-                end,
-
-                ["rubocop"] = function()
-                    lspconfig["rubocop"].setup({
-                        cmd = { "rubocop", "--lsp" },
-                    })
-                end,
-
-                ["cmake"] = function()
-                    lspconfig["cmake"].setup({})
-                end,
-
-                -- {{ C/C++
-                ["clangd"] = function()
-                    lspconfig["clangd"].setup({
-                        root_dir = function(fname)
-                            return require("lspconfig.util").root_pattern(
-                                "Makefile",
-                                "configure.ac",
-                                "configure.in",
-                                "config.h.in",
-                                "meson.build",
-                                "meson_options.txt",
-                                "build.ninja"
-                            )(fname) or require("lspconfig.util").root_pattern(
-                                "compile_commands.json",
-                                "compile_flags.txt"
-                            )(fname) or require("lspconfig.util").find_git_ancestor(fname)
-                        end,
-                        cmd = {
-                            "clangd",
-                            "--background-index",
-                            "--clang-tidy",
-                            "--header-insertion=iwyu",
-                            "--completion-style=detailed",
-                            "--function-arg-placeholders",
-                            "--fallback-style=llvm",
-                        },
-                        capabilities = {
-                            offsetEncoding = { "utf-16" },
-                        },
-                        init_options = {
-                            usePlaceholders = true,
-                            completeUnimported = true,
-                            clangdFileStatus = true,
-                        },
-                    })
-                end,
+                "--background-index",
+                "--clang-tidy",
+                "--header-insertion=iwyu",
+                "--completion-style=detailed",
+                "--function-arg-placeholders",
+                "--fallback-style=llvm",
             },
         })
 
-        mason_tool_installer.setup({
-            ensure_installed = {
-                "black",
-                "cmakelint",
-                "gci",
-                "gofumpt",
-                "goimports",
-                "golangci-lint",
-                "golines",
-                "isort",
-                -- "mypy",
-                "pylint",
-                "ruff",
-                "shellcheck",
-                "shfmt",
-                "stylua",
-            },
+        lspconfig.jsonls.setup({})
+        lspconfig.yamlls.setup({})
+        lspconfig.cmake.setup({})
+        lspconfig.dockerls.setup({})
+        lspconfig.zls.setup({})
+
+        lspconfig.solargraph.setup({
+            filetypes = { "ruby", "eruby", "rakefile" },
         })
 
         vim.diagnostic.config({

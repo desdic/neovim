@@ -6,13 +6,14 @@ return {
 
         conform.setup({
             formatters_by_ft = {
+                c = { name = "clangd", timeout_ms = 500, lsp_format = "prefer" },
+                cpp = { name = "clangd", timeout_ms = 500, lsp_format = "prefer" },
+                go = { "golines", "goimports", "gofmt", "gofumpt", "gci" },
                 json = { "jq" },
                 lua = { "stylua" },
                 python = { "isort", "black" },
-                go = { "golines", "goimports", "gofmt", "gofumpt", "gci" },
+                rust = { "rustfmt" },
                 sh = { "shfmt" },
-                c = { "clang-format" },
-                cpp = { "clang-format" },
                 zig = { "zigfmt" },
             },
         })

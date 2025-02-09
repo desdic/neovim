@@ -44,7 +44,6 @@ return {
 
         greyjoy.setup({
             output_results = require("greyjoy.terminals").term,
-            last_first = true,
             extensions = {
                 generic = {
                     commands = {
@@ -92,12 +91,11 @@ return {
                     },
                 },
                 kitchen = {
-                    group_id = 2,
                     targets = { "converge", "verify", "destroy", "test", "login" },
                     include_all = false,
                 },
-                docker_compose = { group_id = 3 },
-                cargo = { group_id = 4 },
+                docker_compose = {},
+                cargo = {},
                 makefile = {
                     pre_hook = pre_make,
                     post_hook = post_make,

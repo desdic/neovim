@@ -18,25 +18,28 @@ return {
     },
     config = function()
         local lspconfig = require("lspconfig")
+        local capabilities = require("blink.cmp").get_lsp_capabilities()
 
         -- Go
-        lspconfig.gopls.setup({})
-        lspconfig.golangci_lint_ls.setup({})
+        lspconfig.gopls.setup({ capabilities = capabilities })
+        lspconfig.golangci_lint_ls.setup({ capabilities = capabilities })
 
         -- Python
-        lspconfig.pyright.setup({})
+        lspconfig.pyright.setup({ capabilities = capabilities })
         lspconfig.pylsp.setup({
+            capabilities = capabilities,
             plugins = {
                 rope_import = {
                     enabled = true,
                 },
             },
         })
-        lspconfig.ruff.setup({})
+        lspconfig.ruff.setup({ capabilities = capabilities })
 
-        lspconfig.lua_ls.setup({})
-        lspconfig.bashls.setup({})
+        lspconfig.lua_ls.setup({ capabilities = capabilities })
+        lspconfig.bashls.setup({ capabilities = capabilities })
         lspconfig.clangd.setup({
+            capabilities = capabilities,
             cmd = {
                 "clangd",
                 "--background-index",
@@ -48,13 +51,14 @@ return {
             },
         })
 
-        lspconfig.jsonls.setup({})
-        lspconfig.yamlls.setup({})
-        lspconfig.cmake.setup({})
-        lspconfig.dockerls.setup({})
-        lspconfig.zls.setup({})
+        lspconfig.jsonls.setup({ capabilities = capabilities })
+        lspconfig.yamlls.setup({ capabilities = capabilities })
+        lspconfig.cmake.setup({ capabilities = capabilities })
+        lspconfig.dockerls.setup({ capabilities = capabilities })
+        lspconfig.zls.setup({ capabilities = capabilities })
 
         lspconfig.solargraph.setup({
+            capabilities = capabilities,
             filetypes = { "ruby", "eruby", "rakefile" },
         })
 

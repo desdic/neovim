@@ -14,8 +14,8 @@ global.mapleader = "," -- Set leader
 global.maplocalleader = "," -- Set local leader
 global.shada = "NONE"
 
--- vim.opt.guicursor = "" -- Use fat cursor
-opt.guicursor = "a-i-ci:ver30-iCursor-blinkwait300-blinkon200-blinkoff150"
+vim.opt.guicursor = "" -- Use fat cursor
+-- opt.guicursor = "a-i-ci:ver30-iCursor-blinkwait300-blinkon200-blinkoff150"
 opt.shortmess:append("I") -- Turn off splash
 opt.shortmess:append("c") -- Avoid showing message extra message when using completion
 opt.shortmess:append("s") -- Don't give "search hit BOTTOM, continuing at TOP" or "search

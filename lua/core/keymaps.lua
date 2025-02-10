@@ -1,6 +1,7 @@
 local keymap = vim.keymap.set
 
 keymap("n", "<leader>w", ":w!<CR>", { silent = true, noremap = true, desc = "Write buffer" })
+keymap("n", "QQ", ":q!<CR>", { silent = true, noremap = true, desc = "Write buffer" })
 
 keymap("v", "<", "<gv", { silent = true, noremap = true, desc = "Align to left" })
 keymap("v", ">", ">gv", { silent = true, noremap = true, desc = "Align to right" })
@@ -77,8 +78,8 @@ keymap("n", "<leader>tit", ":InspectTree<CR>", { desc = "Open treesitter object 
 keymap("n", "<leader>cx", "<cmd>!chmod +x %<CR>", { desc = "Make file executable" })
 keymap("n", "<leader>mm", "<cmd>make<CR>", { desc = "Run `set makeprg=make`" })
 
-keymap("t", "<esc>", [[<C-\><C-n>]], { noremap = true, buffer = 0, desc = "Esc in terminal" })
-keymap("t", "jk", [[<C-\><C-n>]], { noremap = true, buffer = 0, desc = "Esc in terminal" })
+keymap("t", "<esc><esc>", [[<C-\><C-N>]], { desc = "esc in terminal" })
+-- keymap("t", "jk", [[<C-\><C-N>]], { desc = "Esc in terminal" })
 
 keymap("n", "<leader>cc", function()
     require("core.quickfix").toggle()
@@ -92,8 +93,6 @@ keymap("n", "<esc>", "<cmd>nohlsearch<CR>", { desc = "stop highligting search" }
 
 keymap("n", "<M-j>", "<cmd>cnext<CR>", { desc = "quickfix next" })
 keymap("n", "<M-k>", "<cmd>cprev<CR>", { desc = "quickfix prev" })
-
-keymap("t", "<esc>", "<C-\\><C-N>", { desc = "esc in terminal" })
 
 keymap("n", "<leader>sf", "<cmd>:source %<CR>", { desc = "source current lua file" })
 

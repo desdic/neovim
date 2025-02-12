@@ -66,6 +66,11 @@ keymap("n", "<C-l>", "<C-w>l", { desc = "Move to window on left" })
 keymap("n", "<C-h>", "<C-w>h", { desc = "Move to window on right" })
 keymap("n", "<C-k>", "<C-w>k", { desc = "Move to window above" })
 keymap("n", "<C-j>", "<C-w>j", { desc = "Move to window below" })
+keymap("t", "<C-h>", [[<C-\><C-N><C-w>h]], { desc = "Move to split on the left" })
+keymap("t", "<C-j>", [[<C-\><C-N><C-w>j]], { desc = "Move to split below" })
+keymap("t", "<C-k>", [[<C-\><C-N><C-w>k]], { desc = "Move to split above" })
+keymap("t", "<C-l>", [[<C-\><C-N><C-w>l]], { desc = "Move to split on the right" })
+
 keymap("n", "<leader>sz", function()
     require("core.window_zoom").toggle()
 end, { desc = "Toggle split" })
@@ -77,9 +82,6 @@ keymap("n", "<leader>tit", ":InspectTree<CR>", { desc = "Open treesitter object 
 
 keymap("n", "<leader>cx", "<cmd>!chmod +x %<CR>", { desc = "Make file executable" })
 keymap("n", "<leader>mm", "<cmd>make<CR>", { desc = "Run `set makeprg=make`" })
-
-keymap("t", "<esc><esc>", [[<C-\><C-N>]], { desc = "esc in terminal" })
--- keymap("t", "jk", [[<C-\><C-N>]], { desc = "Esc in terminal" })
 
 keymap("n", "<leader>cc", function()
     require("core.quickfix").toggle()
@@ -95,10 +97,6 @@ keymap("n", "<M-j>", "<cmd>cnext<CR>", { desc = "quickfix next" })
 keymap("n", "<M-k>", "<cmd>cprev<CR>", { desc = "quickfix prev" })
 
 keymap("n", "<leader>sf", "<cmd>:source %<CR>", { desc = "source current lua file" })
-
-keymap("n", "<leader>go", function()
-    require("core.git").open()
-end, { silent = true, noremap = true, desc = "[G]it [o]pen line in browser" })
 
 keymap({ "n", "t" }, "<leader>tt", function()
     require("core.terminal").toggle()

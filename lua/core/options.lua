@@ -1,5 +1,8 @@
 DATA_PATH = vim.fn.stdpath("data")
-HOME_PATH = "/home/" .. vim.fn.expand("$USER")
+HOME_PATH = vim.env.HOME
+
+vim.g.personal_projects_dir = HOME_PATH .. "/src/private"
+vim.g.work_projects_dir = HOME_PATH .. "/git"
 
 local global = vim.g
 local option = vim.o

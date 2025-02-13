@@ -62,26 +62,44 @@ return {
 
         local filename = {
             function()
-                local buf_ft = vim.api.nvim_get_option_value("filetype", opt)
-                if buf_ft == "toggleterm" then
-                    return " terminal"
+                local path = vim.fs.normalize(vim.fn.expand("%:p"))
+                local prefix, prefix_path = "", ""
+
+                if vim.startswith(path, "term:/") then
+                    return "  "
                 end
 
-                local filepath = vim.fn.expand("%:p")
-
-                if #filepath > 25 then
-                    filepath = ".." .. string.sub(filepath, -23)
-                end
-                local modified = ""
-                local buf_modified = vim.api.nvim_get_option_value("modified", opt)
-                if buf_modified then
-                    modified = " ●"
+                if vim.startswith(path, "diffview") then
+                    return path
                 end
 
-                return " " .. filepath .. modified
+                if vim.api.nvim_win_get_width(0) < math.floor(vim.o.columns / 3) then
+                    path = vim.fn.pathshorten(path)
+                else
+                    local special_dirs = {
+                        DOTFILES = vim.env.XDG_CONFIG_HOME,
+                        HOME = vim.env.HOME,
+                        ONE = vim.g.work_projects_dir,
+                        PERSONAL = vim.g.personal_projects_dir,
+                    }
+                    for dir_name, dir_path in pairs(special_dirs) do
+                        if vim.startswith(path, vim.fs.normalize(dir_path)) and #dir_path > #prefix_path then
+                            prefix, prefix_path = dir_name, dir_path
+                        end
+                    end
+                    if prefix ~= "" then
+                        path = path:gsub("^" .. prefix_path, "")
+                        prefix = string.format(" 󰉋 %s", prefix)
+                    end
+                end
+
+                path = path:gsub("^/", "")
+                path = path:gsub("/", "  ")
+
+                return prefix .. " " .. path
             end,
-            padding = { right = 1 },
-            cond = hide_in_width,
+            -- padding = { right = 1 },
+            -- cond = hide_in_width,
         }
 
         return {
@@ -107,7 +125,7 @@ return {
             sections = {
                 lualine_b = { "branch", diagnostics },
                 lualine_c = {
-                    filename,
+                    -- filename,
                     marlin_component,
                 },
                 lualine_x = {
@@ -117,6 +135,18 @@ return {
                     "filetype",
                 },
                 lualine_y = {},
+            },
+
+            winbar = {
+                lualine_c = {
+                    filename,
+                },
+            },
+
+            inactive_winbar = {
+                lualine_c = {
+                    filename,
+                },
             },
             extensions = { "nvim-dap-ui" },
         }

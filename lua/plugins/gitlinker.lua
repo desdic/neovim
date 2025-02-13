@@ -3,16 +3,19 @@ return {
     requires = "nvim-lua/plenary.nvim",
     opts = {},
     config = function()
-        local privaterepo = os.getenv("GOPRIVATE")
-        if privaterepo then
-            local gitlinker = require("gitlinker")
+        local gitlinker = require("gitlinker")
+        local callbacks = {}
 
-            gitlinker.setup({
-                callbacks = {
-                    [privaterepo] = gitlinker.hosts.get_gitlab_type_url,
-                },
-            })
+        local privaterepo = os.getenv("GITLABS")
+        if privaterepo then
+            for repo in string.gmatch(privaterepo, "([^,]+)") do
+                callbacks[repo] = gitlinker.hosts.get_gitlab_type_url
+            end
         end
+
+        gitlinker.setup({
+            callbacks = callbacks,
+        })
     end,
     keys = {
         {

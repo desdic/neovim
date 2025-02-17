@@ -23,9 +23,6 @@ opt.shortmess:append("I") -- Turn off splash
 opt.shortmess:append("c") -- Avoid showing message extra message when using completion
 opt.shortmess:append("s") -- Don't give "search hit BOTTOM, continuing at TOP" or "search
 
--- :h fo-table
--- disable wrapping
-opt.formatoptions:remove({ "c", "r", "o", "t" })
 -- better indent
 opt.formatoptions:append({ "n" })
 

@@ -1,0 +1,101 @@
+return {
+    "folke/snacks.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    priority = 1000,
+    lazy = false,
+    opts = {
+        input = { enabled = true, relative = "cursor", row = -3, col = 0 },
+        notifier = { enabled = true },
+        lazygit = { enabled = true },
+        picker = { enabled = true },
+        bigfile = { enabled = true },
+        statuscolumn = { enabled = true },
+    },
+    keys = {
+        {
+            "<leader>lg",
+            function()
+                require("snacks").lazygit()
+            end,
+            desc = "[L]azy[G]it",
+        },
+        {
+            "<leader>ff",
+            function()
+                require("snacks").picker.files({ hidden = true })
+            end,
+            desc = "[F]ind [f]iles",
+        },
+        {
+            "<leader>fg",
+            function()
+                require("snacks").picker.grep()
+            end,
+            desc = "[F]ile [g]rep",
+        },
+        {
+            "<leader>fn",
+            function()
+                require("snacks").picker.grep({ dirs = { "~/notes" } })
+            end,
+            desc = "[F]uzzy [N]otes search",
+        },
+        {
+            "<leader>fh",
+            function()
+                require("snacks").picker.help()
+            end,
+            desc = "[F]uzzy [H]elp tags",
+        },
+        {
+            "<leader>fb",
+            function()
+                require("snacks").picker.buffers()
+            end,
+            desc = "[F]ind [b]buffer",
+        },
+        {
+            "<leader>fv",
+            function()
+                require("snacks").picker.grep({ dirs = { "~/.config/nvim" } })
+            end,
+            desc = "[Fuzzy] [V]im config",
+        },
+        {
+            "z=",
+            function()
+                require("snacks").picker.spelling()
+            end,
+            desc = "Spell suggest",
+        },
+        {
+            "<leader>gn",
+            function()
+                require("snacks").picker.notifications()
+            end,
+            desc = "Notifications",
+        },
+        {
+            "<leader>fu",
+            function()
+                require("snacks").picker.undo()
+            end,
+            desc = "Undo tree",
+        },
+        {
+            "<leader>sd",
+            function()
+                require("snacks").picker.diagnostics()
+            end,
+            desc = "Diagnostics",
+        },
+        {
+            "<leader>tt",
+            mode = { "n", "t" },
+            function()
+                require("snacks").terminal()
+            end,
+            { desc = "Toggle term" },
+        },
+    },
+}

@@ -1,5 +1,8 @@
 return {
     "desdic/agrolens.nvim",
+    dependencies = {
+        "folke/snacks.nvim",
+    },
     opts = {
         debug = false,
         force_long_filepath = false,
@@ -23,7 +26,7 @@ return {
         {
             "zu",
             function()
-                require("agrolens.fzf").run({
+                require("agrolens.snacks").run({
                     query = "functions,labels",
                 })
             end,
@@ -32,7 +35,7 @@ return {
         {
             "zi",
             function()
-                require("agrolens.fzf").run({
+                require("agrolens.snacks").run({
                     query = "functions,labels",
                     buffers = "all",
                     same_type = false,
@@ -43,7 +46,7 @@ return {
         {
             "zo",
             function()
-                require("agrolens.fzf").run({
+                require("agrolens.snacks").run({
                     query = "callings",
                     buffers = "all",
                     same_type = false,
@@ -55,7 +58,7 @@ return {
         {
             "zl",
             function()
-                require("agrolens.fzf").run({
+                require("agrolens.snacks").run({
                     query = "work",
                 })
             end,
@@ -64,7 +67,7 @@ return {
         {
             "zc",
             function()
-                require("agrolens.fzf").run({
+                require("agrolens.snacks").run({
                     query = "comments",
                     buffers = "all",
                     same_type = false,
@@ -75,7 +78,7 @@ return {
         {
             "z[",
             function()
-                require("agrolens.fzf").run({
+                require("agrolens.snacks").run({
                     query = "all",
                     jump = "next",
                 })
@@ -85,7 +88,7 @@ return {
         {
             "z]",
             function()
-                require("agrolens.fzf").run({
+                require("agrolens.snacks").run({
                     query = "all",
                     jump = "prev",
                 })

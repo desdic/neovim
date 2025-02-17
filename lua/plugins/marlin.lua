@@ -40,71 +40,60 @@ return {
         end, { desc = "toggle" })
 
         keymap("n", "<leader>fx", function()
-            local results = require("marlin").get_indexes()
-            local content = {}
+            local snacks = require("snacks")
+            local lookup = {}
 
-            local fzf_lua = require("fzf-lua")
-            local builtin = require("fzf-lua.previewer.builtin")
-            local fzfpreview = builtin.buffer_or_file:extend()
+            local function get_choices()
+                local results = require("marlin").get_indexes()
 
-            function fzfpreview:new(o, options, fzf_win)
-                fzfpreview.super.new(self, o, options, fzf_win)
-                setmetatable(self, fzfpreview)
-                return self
+                local items = {}
+                lookup = {}
+                for idx, b in ipairs(results) do
+                    local text = b.filename .. ":" .. b.row
+
+                    table.insert(items, {
+                        formatted = text,
+                        file = b.filename,
+                        text = text,
+                        idx = idx,
+                        pos = { tonumber(b.row), 0 },
+                    })
+
+                    lookup[text] = b
+                end
+                return items
             end
 
-            function fzfpreview.parse_entry(_, entry_str)
-                if entry_str == "" then
-                    return {}
-                end
-
-                local entry = content[entry_str]
-                return {
-                    path = entry.filename,
-                    line = entry.row or 1,
-                    col = 1,
-                }
-            end
-
-            fzf_lua.fzf_exec(function(fzf_cb)
-                for i, b in ipairs(results) do
-                    local entry = i .. ":" .. b.filename .. ":" .. b.row
-
-                    content[entry] = b
-                    fzf_cb(entry)
-                end
-                fzf_cb()
-            end, {
-                previewer = fzfpreview,
-                prompt = "Marlin> ",
+            snacks.picker.pick({
+                source = "select",
+                finder = get_choices,
+                title = "Marlin",
+                layout = { preview = true },
                 actions = {
-                    ["ctrl-d"] = {
-                        fn = function(selected)
-                            print(selected)
-                            require("marlin").remove(content[selected[1]].filename)
-                        end,
-                        reload = true,
-                        silent = true,
-                    },
-                    ["ctrl-k"] = {
-                        fn = function(selected)
-                            require("marlin").move_up(content[selected[1]].filename)
-                        end,
-                        reload = true,
-                        silent = false,
-                    },
-                    ["ctrl-j"] = {
-                        fn = function(selected)
-                            print(vim.inspect(selected))
-
-                            require("marlin").move_down(content[selected[1]].filename)
-                        end,
-                        reload = true,
-                        silent = false,
+                    marlin_up = function(picker, item)
+                        require("marlin").move_up(lookup[item.text].filename)
+                        picker:find({ refresh = true })
+                    end,
+                    marlin_down = function(picker, item)
+                        require("marlin").move_down(lookup[item.text].filename)
+                        picker:find({ refresh = true })
+                    end,
+                    marlin_delete = function(picker, item)
+                        require("marlin").remove(lookup[item.text].filename)
+                        picker:find({ refresh = true })
+                    end,
+                },
+                win = {
+                    input = {
+                        keys = {
+                            ["<C-k>"] = { "marlin_up", mode = { "n", "i" }, desc = "Move marlin up" },
+                            ["<C-j>"] = { "marlin_down", mode = { "n", "i" }, desc = "Move marlin down" },
+                            ["<C-d>"] = { "marlin_delete", mode = { "n", "i" }, desc = "Marlin delete" },
+                        },
                     },
                 },
             })
-        end, { desc = "fzf marlin" })
+        end, { desc = "marlin" })
 
         for index = 1, 4 do
             keymap("n", "<leader>" .. index, function()

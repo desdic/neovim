@@ -14,7 +14,6 @@ return {
                 dap = true,
                 dap_ui = true,
                 render_markdown = true,
-                fzf = true,
                 fidget = true,
                 gitsigns = true,
                 indent_blankline = {
@@ -48,6 +47,7 @@ return {
                 },
                 rainbow_delimiters = true,
                 semantic_tokens = true,
+                snacks = true,
                 treesitter = true,
                 which_key = true,
             },

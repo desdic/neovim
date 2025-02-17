@@ -75,9 +75,6 @@ keymap("n", "<leader>sz", function()
     require("core.window_zoom").toggle()
 end, { desc = "Toggle split" })
 
-keymap("n", "<leader>tsh", ":sp term://zsh", { desc = "Open horizontal terminal" })
-keymap("n", "<leader>tsv", ":vsp term://zsh", { desc = "Open vertical terminal" })
-
 keymap("n", "<leader>tit", ":InspectTree<CR>", { desc = "Open treesitter object browser" })
 
 keymap("n", "<leader>cx", "<cmd>!chmod +x %<CR>", { desc = "Make file executable" })
@@ -97,10 +94,6 @@ keymap("n", "<M-j>", "<cmd>cnext<CR>", { desc = "quickfix next" })
 keymap("n", "<M-k>", "<cmd>cprev<CR>", { desc = "quickfix prev" })
 
 keymap("n", "<leader>sf", "<cmd>:source %<CR>", { desc = "source current lua file" })
-
-keymap({ "n", "t" }, "<leader>tt", function()
-    require("core.terminal").toggle()
-end, { desc = "Toggle term" })
 
 keymap("n", "<leader>st", function()
     vim.opt.spell = not (vim.opt.spell:get())

@@ -27,13 +27,24 @@ M.setkeys = function(ev)
         return false
     end
 
-    -- keymap("n", "gd", "<cmd>FzfLua lsp_definitions<cr>", silent_bufnr("Goto definition"))
-    keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", silent_bufnr("Goto definition"))
-    keymap("n", "gi", "<cmd>FzfLua lsp_implementations<cr>", silent_bufnr("Goto Implementation"))
-    keymap("n", "gr", "<cmd>FzfLua lsp_references<cr>", silent_bufnr("References"))
-    keymap("n", "gt", "<cmd>FzfLua lsp_typedefs<cr>", silent_bufnr("Goto Type Definition"))
-    keymap("n", "gl", "<cmd>FzfLua lsp_finder<cr>", silent_bufnr("LSP finder"))
-    keymap("n", "gp", "<cmd>FzfLua lsp_document_diagnostics<cr>", silent_bufnr("LSP diagnostic"))
+    local hassnacks, snacks = pcall(require, "snacks")
+    if hassnacks then
+        keymap("n", "gd", function()
+            snacks.picker.lsp_definitions()
+        end, silent_bufnr("Goto definition"))
+        keymap("n", "gi", function()
+            snacks.picker.lsp_implementations()
+        end, silent_bufnr("Goto Implementation"))
+        keymap("n", "gr", function()
+            snacks.picker.lsp_references()
+        end, silent_bufnr("References"))
+        keymap("n", "gt", function()
+            snacks.picker.lsp_type_definitions()
+        end, silent_bufnr("Goto Type Definition"))
+        keymap("n", "gl", function()
+            snacks.picker.lsp_workspace_symbols()
+        end, silent_bufnr("LSP finder"))
+    end
 
     keymap("n", "<leader>tf", require("core.format").toggle, { desc = "Toggle format on Save" })
     keymap("n", "gD", vim.lsp.buf.declaration, silent_bufnr("Goto declaration"))

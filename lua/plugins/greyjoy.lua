@@ -1,13 +1,10 @@
 return {
     "desdic/greyjoy.nvim",
     keys = {
-        { "<leader>gr", "<cmd>GreyjoyFzf<CR>", desc = "[G]reyjoy [r]un" },
-        { "<leader>gg", "<cmd>GreyjoyFzf fast<CR>", desc = "[G]reyjoy fast [g]roup" },
+        { "<leader>gr", "<cmd>Greyjoy<CR>", desc = "[G]reyjoy [r]un" },
+        { "<leader>gg", "<cmd>Greyjoy fast<CR>", desc = "[G]reyjoy fast [g]roup" },
     },
-    dependencies = {
-        { "ibhagwan/fzf-lua" },
-    },
-    cmd = { "Greyjoy", "Greyedit", "GreyjoyFzf" },
+    cmd = { "Greyjoy", "Greyedit" },
     config = function()
         local greyjoy = require("greyjoy")
         local condition = require("greyjoy.conditions")

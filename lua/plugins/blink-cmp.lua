@@ -49,9 +49,10 @@ return {
             preset = "luasnip",
         },
 
+        cmdline = { enabled = false },
+
         sources = {
             default = { "lsp", "snippets", "buffer", "lazydev" },
-            cmdline = {},
             providers = {
                 lazydev = {
                     name = "LazyDev",

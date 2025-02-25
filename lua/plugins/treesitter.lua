@@ -61,45 +61,6 @@ return {
                         node_decremental = "V",
                     },
                 },
-                -- textobjects = {
-                --     select = {
-                --         enable = false,
-                --
-                --         -- Automatically jump forward to textobj, similar to targets.vim
-                --         lookahead = true,
-                --
-                --         keymaps = {
-                --             ["aa"] = "@parameter.outer",
-                --             ["ia"] = "@parameter.inner",
-                --             ["af"] = "@function.outer",
-                --             ["if"] = "@function.inner",
-                --             ["ac"] = "@class.outer",
-                --             ["ic"] = "@class.inner",
-                --         },
-                --     },
-                --     move = {
-                --         enable = true,
-                --         set_jumps = true, -- whether to set jumps in the jumplist
-                --         goto_next_start = {
-                --             ["]f"] = "@function.outer",
-                --             ["]b"] = "@block.inner",
-                --             ["]c"] = "@class.outer",
-                --             ["]l"] = "@loop.outer",
-                --             ["]i"] = "@conditional.outer",
-                --             ["]p"] = "@parameter.inner",
-                --             ["]o"] = "@call.outer",
-                --         },
-                --         goto_previous_start = {
-                --             ["[f"] = "@function.outer",
-                --             ["[b"] = "@block.inner",
-                --             ["[c"] = "@class.outer",
-                --             ["[l"] = "@loop.outer",
-                --             ["[i"] = "@conditional.outer",
-                --             ["[p"] = "@parameter.inner",
-                --             ["[o"] = "@call.outer",
-                --         },
-                --     },
-                -- },
             })
         end,
     },

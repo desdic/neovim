@@ -7,7 +7,20 @@ return {
         input = { enabled = true, relative = "cursor", row = -3, col = 0 },
         notifier = { enabled = true },
         lazygit = { enabled = true },
-        picker = { enabled = true },
+        picker = {
+            enabled = true,
+            formatters = {
+                file = {
+                    truncate = 120,
+                },
+            },
+
+            layout = {
+                layout = {
+                    min_width = 180,
+                },
+            },
+        },
         bigfile = { enabled = true },
         statuscolumn = { enabled = true },
     },
@@ -22,7 +35,10 @@ return {
         {
             "<leader>ff",
             function()
-                require("snacks").picker.files({ hidden = true })
+                require("snacks").picker.files({
+                    hidden = true,
+                    cwd = vim.fs.dirname(vim.fs.find({ ".git", "go.mod" }, { upward = true })[1]),
+                })
             end,
             desc = "[F]ind [f]iles",
         },

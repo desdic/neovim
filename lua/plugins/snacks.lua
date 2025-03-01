@@ -4,7 +4,6 @@ return {
     priority = 1000,
     lazy = false,
     opts = {
-        words = { enabled = true },
         input = { enabled = true, relative = "cursor", row = -3, col = 0 },
         notifier = { enabled = true },
         lazygit = { enabled = true },

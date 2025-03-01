@@ -4,6 +4,7 @@ return {
     priority = 1000,
     lazy = false,
     opts = {
+        words = { enabled = true },
         input = { enabled = true, relative = "cursor", row = -3, col = 0 },
         notifier = { enabled = true },
         lazygit = { enabled = true },
@@ -44,10 +45,19 @@ return {
         },
         {
             "<leader>fg",
+            mode = { "n" },
             function()
                 require("snacks").picker.grep()
             end,
             desc = "[F]ile [g]rep",
+        },
+        {
+            "<leader>fg",
+            mode = { "x" },
+            function()
+                require("snacks").picker.grep_word()
+            end,
+            desc = "[F]ile [g]rep visual word",
         },
         {
             "<leader>fn",
@@ -64,11 +74,11 @@ return {
             desc = "[F]uzzy [H]elp tags",
         },
         {
-            "<leader>fb",
+            "<leader>,",
             function()
                 require("snacks").picker.buffers()
             end,
-            desc = "[F]ind [b]buffer",
+            desc = "Buffer",
         },
         {
             "<leader>fv",
@@ -112,6 +122,13 @@ return {
                 require("snacks").terminal()
             end,
             { desc = "Toggle term" },
+        },
+        {
+            "<leader>gb",
+            function()
+                require("snacks").git.blame_line()
+            end,
+            { desc = "[G]it [b]lame line" },
         },
     },
 }

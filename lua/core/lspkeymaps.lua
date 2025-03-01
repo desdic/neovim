@@ -47,6 +47,12 @@ M.setkeys = function(ev)
         keymap("n", "ge", function()
             snacks.picker.diagnostics()
         end, silent_bufnr("diagnostic"))
+        keymap("n", "<leader>ss", function()
+            snacks.picker.lsp_symbols()
+        end, silent_bufnr("lsp_symbols"))
+        keymap("n", "<leader>sS", function()
+            snacks.picker.lsp_workspace_symbols()
+        end, silent_bufnr("lsp_workspace_symbols"))
     end
 
     keymap("n", "<leader>tf", require("core.format").toggle, { desc = "Toggle format on Save" })

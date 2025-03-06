@@ -25,7 +25,6 @@ return {
         lspconfig.golangci_lint_ls.setup({ capabilities = capabilities })
 
         -- Python
-        lspconfig.pyright.setup({ capabilities = capabilities })
         lspconfig.pylsp.setup({
             capabilities = capabilities,
             plugins = {

@@ -153,6 +153,7 @@ if hassnacks then
             if not client or type(value) ~= "table" then
                 return
             end
+
             local p = progress[client.id]
 
             for i = 1, #p + 1 do

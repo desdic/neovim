@@ -67,6 +67,7 @@ return {
                         fg = colors.text,
                         style = {},
                     },
+                    NormalFloat = { bg = colors.base, fg = colors.text }, -- https://github.com/catppuccin/nvim/issues/823
                 }
             end,
         })

@@ -1,5 +1,6 @@
 return {
     "stevearc/oil.nvim",
+    lazy = false,
     opts = {
         view_options = {
             show_hidden = true,
@@ -8,7 +9,7 @@ return {
     keys = {
         {
             "<leader>ne",
-            "<cmd>Oil<CR>",
+            "<cmd>Oil --float<CR>",
             desc = "Browse files/dirs",
         },
         {

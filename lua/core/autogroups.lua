@@ -75,6 +75,7 @@ vim.api.nvim_create_autocmd("FileType", {
         "macrothishelp",
         "man",
         "notify",
+        "oil",
         "qf",
         "query",
         "startuptime",

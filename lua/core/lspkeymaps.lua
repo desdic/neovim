@@ -57,11 +57,14 @@ M.setkeys = function(ev)
 
     keymap("n", "<leader>tf", require("core.format").toggle, { desc = "Toggle format on Save" })
     keymap("n", "gD", vim.lsp.buf.declaration, silent_bufnr("Goto declaration"))
-    keymap("n", "K", vim.lsp.buf.hover, silent_bufnr("Hover"))
-    keymap("n", "<leader>rn", vim.lsp.buf.rename, silent_bufnr("Rename"))
 
-    keymap("n", "]d", vim.diagnostic.goto_next, silent_bufnr("Next Diagnostic"))
-    keymap("n", "[d", vim.diagnostic.goto_prev, silent_bufnr("Prev Diagnostic"))
+    keymap("n", "]d", function()
+        vim.diagnostic.jump({ count = 1, float = true })
+    end, silent_bufnr("Next Diagnostic"))
+
+    keymap("n", "[d", function()
+        vim.diagnostic.jump({ count = -1, float = true })
+    end, silent_bufnr("Prev Diagnostic"))
 
     if has_cap("signatureHelp") then
         keymap("n", "gss", vim.lsp.buf.signature_help, silent_bufnr("Signature Help"))

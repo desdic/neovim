@@ -12,9 +12,9 @@ return {
                 json = { "jq" },
                 lua = { "stylua" },
                 python = { "isort", "black" },
-                rust = { "rustfmt" },
+                rust = { "rustfmt", lsp_format = "fallback" },
                 sh = { "shfmt" },
-                zig = { "zigfmt" },
+                zig = { "zigfmt", lsp_format = "fallback" },
             },
         })
     end,

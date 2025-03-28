@@ -101,3 +101,6 @@ opt.spelllang = { "en", "da" }
 opt.shell = "zsh"
 
 vim.cmd("let g:netrw_liststyle = 3")
+
+-- Give all floating windows a border
+option.winborder = "rounded"

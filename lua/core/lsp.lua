@@ -8,8 +8,6 @@ end
 vim.lsp.enable(vim.tbl_keys(configs))
 
 vim.diagnostic.config({
-    -- disable virtual text
-    virtual_text = false,
     -- show signs
     update_in_insert = true,
     underline = true,

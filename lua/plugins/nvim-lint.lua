@@ -7,6 +7,19 @@ return {
     config = function()
         local lint = require("lint")
 
+        -- Override options since latest golangcilint has changed options
+        local golangcilint = require("lint").linters.golangcilint
+        golangcilint.args = {
+            "run",
+            "--output.json.path",
+            "stdout",
+            "--issues-exit-code=0",
+            "--show-stats=false",
+            function()
+                return vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":h")
+            end,
+        }
+
         lint.linters_by_ft = {
             c = { "flawfinder" },
             cmake = { "cmakelint" },

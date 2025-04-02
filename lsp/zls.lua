@@ -7,5 +7,4 @@ return {
     end,
     filetypes = { "zig", "zir" },
     root_markers = { "zls.json", "build.zig", ".git" },
-    single_file_support = true,
 }

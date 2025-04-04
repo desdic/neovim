@@ -68,6 +68,7 @@ vim.api.nvim_create_autocmd("FileType", {
         "fugitive",
         "fugitiveblame",
         "git",
+        "gitsigns-blame",
         "greyjoy",
         "help",
         "lazy",

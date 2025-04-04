@@ -31,6 +31,13 @@ return {
                 desc = "Start/Continue",
             },
             {
+                "<leader>dl",
+                function()
+                    require("dap").run_last()
+                end,
+                desc = "Run last",
+            },
+            {
                 "<leader>do>",
                 function()
                     require("dap").step_over()
@@ -85,7 +92,7 @@ return {
                 "jbyuki/one-small-step-for-vimkind",
                 keys = {
                     {
-                        "<leader>dl",
+                        "<leader>da",
                         function()
                             require("osv").launch({ port = 8086 })
                         end,

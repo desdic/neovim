@@ -144,13 +144,13 @@ return {
             },
 
             winbar = {
-                lualine_c = {
+                lualine_x = {
                     filename,
                 },
             },
 
             inactive_winbar = {
-                lualine_c = {
+                lualine_x = {
                     filename,
                 },
             },

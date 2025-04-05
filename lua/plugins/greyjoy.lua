@@ -3,8 +3,13 @@ return {
     keys = {
         { "<leader>gr", "<cmd>Greyjoy<CR>", desc = "[G]reyjoy [r]un" },
         { "<leader>gg", "<cmd>Greyjoy fast<CR>", desc = "[G]reyjoy fast [g]roup" },
+        {
+            "<leader>rl",
+            "<cmd>GreyjoyRunLast<CR>",
+            desc = "Run last greyjoy",
+        },
     },
-    cmd = { "Greyjoy", "Greyedit" },
+    cmd = { "Greyjoy", "Greyedit", "GreyjoyRunLast" },
     config = function()
         local greyjoy = require("greyjoy")
         local condition = require("greyjoy.conditions")
@@ -59,18 +64,18 @@ return {
                             command = { "zig", "build" },
                             filetype = "zig",
                         },
-                        ["cmake --build target"] = {
-                            command = { "cd", "{rootdir}", "&&", "cmake", "--build", "{rootdir}/target" },
+                        ["cmake --build build"] = {
+                            command = { "cd", "{rootdir}", "&&", "cmake", "--build", "{rootdir}/build" },
                             condition = function(n)
                                 return condition.file_exists("CMakeLists.txt", n)
-                                    and condition.directory_exists("target", n)
+                                    and condition.directory_exists("build", n)
                             end,
                         },
-                        ["cmake -S . -B target"] = {
-                            command = { "cd", "{rootdir}", "&&", "cmake", "-S", ".", "-B", "{rootdir}/target" },
+                        ["cmake -S . -B build"] = {
+                            command = { "cd", "{rootdir}", "&&", "cmake", "-S", ".", "-B", "{rootdir}/build" },
                             condition = function(n)
                                 return condition.file_exists("CMakeLists.txt", n)
-                                    and not condition.directory_exists("target", n)
+                                    and not condition.directory_exists("build", n)
                             end,
                         },
                         ["build-login"] = {

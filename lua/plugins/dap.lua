@@ -124,12 +124,6 @@ return {
                     dap.configurations.rust = dap.configurations.cpp
                     dap.configurations.zig = dap.configurations.cpp
                 end,
-                -- opts = {
-                --     codelldb_path = "/sbin/codelldb",
-                --     program = function()
-                --         return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-                --     end,
-                -- },
             },
             {
                 "jbyuki/one-small-step-for-vimkind",

@@ -60,16 +60,12 @@ keymap("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move visual line up" })
 
 keymap("n", "<leader>bd", ":bd<CR>", { silent = true, noremap = true, desc = "[B]uffer [D]elete" })
 
-keymap("i", "jk", "<ESC>", { desc = "Esc" })
-
-keymap("n", "<C-l>", "<C-w>l", { desc = "Move to window on left" })
-keymap("n", "<C-h>", "<C-w>h", { desc = "Move to window on right" })
-keymap("n", "<C-k>", "<C-w>k", { desc = "Move to window above" })
-keymap("n", "<C-j>", "<C-w>j", { desc = "Move to window below" })
 keymap("t", "<C-h>", [[<C-\><C-N><C-w>h]], { desc = "Move to split on the left" })
 keymap("t", "<C-j>", [[<C-\><C-N><C-w>j]], { desc = "Move to split below" })
 keymap("t", "<C-k>", [[<C-\><C-N><C-w>k]], { desc = "Move to split above" })
 keymap("t", "<C-l>", [[<C-\><C-N><C-w>l]], { desc = "Move to split on the right" })
+-- Ctrl+\Ctrl+n to exit insert mode in terminal
+keymap("t", "<C-q>", [[<C-\><C-N>]], { desc = "ESC" })
 
 keymap("n", "<leader>sz", function()
     require("core.window_zoom").toggle()

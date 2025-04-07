@@ -45,6 +45,11 @@ return {
         end
 
         greyjoy.setup({
+            ui = {
+                term = {
+                    height = 10,
+                },
+            },
             output_results = require("greyjoy.terminals").term,
             extensions = {
                 generic = {

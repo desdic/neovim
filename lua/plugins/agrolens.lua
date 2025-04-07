@@ -17,7 +17,7 @@ return {
     },
     keys = {
         {
-            "ag",
+            "<leader>ag",
             function()
                 require("agrolens").generate({ all_captures = true })
             end,

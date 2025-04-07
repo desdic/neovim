@@ -23,6 +23,7 @@ return {
         },
         bigfile = { enabled = true },
         statuscolumn = { enabled = true },
+        quickfile = { enabled = true },
     },
     keys = {
         {

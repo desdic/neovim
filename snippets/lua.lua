@@ -7,10 +7,10 @@ local fmt = require("luasnip.extras.fmt").fmt
 local snippets, autosnippets = {}, {}
 
 local print_inspect = s(
-    { trig = "print.inspect", name = "print inspect" },
+    { trig = "print.vim", name = "print inspect" },
     fmt(
         [[
-print(vim.inspect({}))
+vim.print({})
 {}
         ]],
         { i(1), i(0) }
@@ -23,7 +23,7 @@ local print_meta = s(
     { trig = "print.meta", name = "print metatable" },
     fmt(
         [[
-print(vim.inspect(getmetatable({})))
+vim.print(getmetatable({}))
 {}
         ]],
         { i(1), i(0) }

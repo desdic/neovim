@@ -4,9 +4,6 @@ return {
         event = { "BufReadPre", "BufNewFile" },
         build = ":TSUpdate",
         cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
-        dependencies = {
-            { "JoosepAlviste/nvim-ts-context-commentstring" },
-        },
         main = "nvim-treesitter.configs",
         opts = {
             ensure_installed = {
@@ -51,13 +48,6 @@ return {
                     return lang == "yaml" and vim.api.nvim_buf_line_count(bufnr) > 5000
                 end,
                 additional_vim_regex_highlighting = false,
-            },
-            incremental_selection = {
-                enable = true,
-                keymaps = {
-                    node_incremental = "v",
-                    node_decremental = "V",
-                },
             },
         },
     },

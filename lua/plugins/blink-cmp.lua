@@ -2,7 +2,18 @@ return {
     "saghen/blink.cmp",
     event = { "LspAttach" },
 
-    dependencies = { "folke/lazydev.nvim", "L3MON4D3/LuaSnip" },
+    dependencies = {
+        {
+            "folke/lazydev.nvim",
+            opts = {
+                library = { "nvim-dap-ui" },
+            },
+            config = function(_, opts)
+                require("lazydev").setup(opts)
+            end,
+        },
+        "L3MON4D3/LuaSnip",
+    },
 
     -- use a release tag to download pre-built binaries
     version = "v0.*",

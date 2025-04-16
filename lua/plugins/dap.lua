@@ -3,13 +3,6 @@ return {
         "mfussenegger/nvim-dap",
         keys = {
             {
-                "<leader>du",
-                function()
-                    require("dapui").toggle()
-                end,
-                desc = "Start DAP UI",
-            },
-            {
                 "<leader>db",
                 function()
                     require("dap").toggle_breakpoint()
@@ -69,12 +62,22 @@ return {
         dependencies = {
             {
                 "rcarriga/nvim-dap-ui",
+                keys = {
+                    {
+                        "<leader>du",
+                        function()
+                            require("dapui").toggle()
+                        end,
+                        desc = "Start DAP UI",
+                    },
+                },
                 dependencies = {
                     "nvim-neotest/nvim-nio",
                 },
-                config = function()
-                    require("dapui").setup()
-                end,
+                opts = {},
+                -- config = function()
+                --     require("dapui").setup()
+                -- end,
             },
             {
                 "leoluz/nvim-dap-go",

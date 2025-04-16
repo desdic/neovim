@@ -53,10 +53,12 @@ M.setkeys = function(ev)
         keymap("n", "<leader>sS", function()
             snacks.picker.lsp_workspace_symbols()
         end, silent_bufnr("lsp_workspace_symbols"))
+        keymap("n", "gD", function()
+            snacks.picker.lsp_declarations()
+        end, silent_bufnr("Goto declaration"))
     end
 
     keymap("n", "<leader>tf", require("core.format").toggle, { desc = "Toggle format on Save" })
-    keymap("n", "gD", vim.lsp.buf.declaration, silent_bufnr("Goto declaration"))
 
     keymap("n", "]d", function()
         vim.diagnostic.jump({ count = 1, float = true })

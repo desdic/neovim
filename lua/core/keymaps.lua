@@ -1,7 +1,6 @@
 local keymap = vim.keymap.set
 
 keymap("n", "<leader>w", ":w!<CR>", { silent = true, noremap = true, desc = "Write buffer" })
-keymap("n", "QQ", ":q!<CR>", { silent = true, noremap = true, desc = "Write buffer" })
 
 keymap("v", "<", "<gv", { silent = true, noremap = true, desc = "Align to left" })
 keymap("v", ">", ">gv", { silent = true, noremap = true, desc = "Align to right" })
@@ -12,7 +11,6 @@ end, { silent = true, noremap = true, desc = "Toggle mouse" })
 
 keymap("n", "Y", "yg$", { silent = true, noremap = true, desc = "yank line" })
 keymap({ "n", "v" }, "<leader>y", '"+y', { silent = true, noremap = true, desc = "yank to clipboard" })
-keymap("n", "<leader>Y", '"+Y', { silent = true, noremap = true, desc = "yank line to clipboard" })
 
 -- The mapping xnoremap p "_dP changes the behavior of p when pasting over selected text
 -- which is at the end of a line. That occurs because when text at the end of a line is deleted, the cursor
@@ -30,22 +28,8 @@ keymap("n", "<C-u>", "<C-u>zz", { silent = true, noremap = true, desc = "jump ce
 keymap("n", "{", "{zzzv", { silent = true, noremap = true, desc = "jump and center" })
 keymap("n", "}", "}zzzv", { silent = true, noremap = true, desc = "jump and center" })
 
-keymap("n", "<leader>sl", ":vsplit<CR>", { silent = true, noremap = true, desc = "Split vertical" })
-
-keymap("n", "<leader>sc", function()
-    local wins = vim.api.nvim_tabpage_list_wins(0)
-    if #wins > 1 then
-        vim.cmd("close")
-    else
-        vim.cmd("bdelete")
-    end
-end, { desc = "[S]plit [c]lose or delete buffer" })
-
 keymap("n", "<leader>su", ":%s/\\v", { noremap = true, desc = "[S][u]bstitute" })
 keymap("n", "<leader>sw", [[:%s/<C-r><C-w>//g<Left><Left>]], { desc = "[S]ubstitute [w]ord" })
-
-keymap("n", "-", "<c-x>", { silent = true, noremap = true, desc = "decrease number" })
-keymap("n", "+", "<c-a>", { silent = true, noremap = true, desc = "increase number" })
 
 -- use blackhole register if we delete empty line with dd
 keymap("n", "dd", function()
@@ -64,6 +48,7 @@ keymap("t", "<C-h>", [[<C-\><C-N><C-w>h]], { desc = "Move to split on the left" 
 keymap("t", "<C-j>", [[<C-\><C-N><C-w>j]], { desc = "Move to split below" })
 keymap("t", "<C-k>", [[<C-\><C-N><C-w>k]], { desc = "Move to split above" })
 keymap("t", "<C-l>", [[<C-\><C-N><C-w>l]], { desc = "Move to split on the right" })
+
 -- Ctrl+\Ctrl+n to exit insert mode in terminal
 keymap("t", "<C-q>", [[<C-\><C-N>]], { desc = "ESC" })
 
@@ -84,7 +69,18 @@ keymap("n", "<leader>ll", "<cmd>Lazy<CR>", { desc = "Run [l]azy" })
 
 keymap("n", "yc", "yy<cmd>normal gcc<CR>p", { desc = "Copy to a comment above" })
 
-keymap("n", "<esc>", "<cmd>nohlsearch<CR>", { desc = "stop highligting search" })
+keymap({ "i", "s", "n" }, "<esc>", function()
+    if require("luasnip").expand_or_jumpable() then
+        require("luasnip").unlink_current()
+    end
+    vim.cmd("noh")
+    return "<esc>"
+end, { desc = "Escape, clear hlsearch, and stop snippet session", expr = true })
+
+keymap("n", "U", "<C-r>", { desc = "Redo" })
+
+keymap("n", "j", [[(v:count > 1 ? 'm`' . v:count : 'g') . 'j']], { expr = true })
+keymap("n", "k", [[(v:count > 1 ? 'm`' . v:count : 'g') . 'k']], { expr = true })
 
 keymap("n", "<M-j>", "<cmd>cnext<CR>", { desc = "quickfix next" })
 keymap("n", "<M-k>", "<cmd>cprev<CR>", { desc = "quickfix prev" })

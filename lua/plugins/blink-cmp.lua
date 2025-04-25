@@ -1,7 +1,7 @@
 return {
-    "saghen/blink.cmp",
-    event = { "LspAttach" },
 
+    "saghen/blink.cmp",
+    version = "v0.*",
     dependencies = {
         {
             "folke/lazydev.nvim",
@@ -14,33 +14,29 @@ return {
         },
         "L3MON4D3/LuaSnip",
     },
-
-    -- use a release tag to download pre-built binaries
-    version = "v0.*",
-
+    event = "InsertEnter",
     opts = {
         keymap = {
-            preset = "default",
-            ["<CR>"] = { "select_and_accept", "fallback" },
+            ["<CR>"] = { "accept", "fallback" },
+            ["<C-\\>"] = { "hide", "fallback" },
+            ["<C-n>"] = { "select_next", "show" },
+            ["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
+            ["<C-p>"] = { "select_prev" },
+            ["<C-b>"] = { "scroll_documentation_up", "fallback" },
+            ["<C-f>"] = { "scroll_documentation_down", "fallback" },
         },
-
-        -- don't use in gitcommits or dressings input box
+        -- don't use in gitcommits or prompts
         enabled = function()
-            return not vim.tbl_contains({ "gitcommit", "DressingInput" }, vim.bo.filetype)
+            return not vim.tbl_contains({ "gitcommit" }, vim.bo.filetype)
                 and vim.bo.buftype ~= "prompt"
                 and vim.b.completion ~= false
         end,
-
         completion = {
-            documentation = {
-                auto_show = true,
-                window = {
-                    border = "rounded",
-                },
+            list = {
+                selection = { preselect = true, auto_insert = true },
+                max_items = 10,
             },
-            ghost_text = {
-                enabled = false,
-            },
+
             menu = {
                 border = "rounded",
                 draw = {
@@ -48,22 +44,28 @@ return {
                     treesitter = { "lsp" },
                 },
             },
-            list = {
-                selection = {
-                    preselect = true,
-                    auto_insert = true,
-                },
-            },
+            documentation = { auto_show = true },
         },
-
-        snippets = {
-            preset = "luasnip",
-        },
-
+        snippets = { preset = "luasnip" },
         cmdline = { enabled = false },
-
         sources = {
-            default = { "lsp", "snippets", "buffer", "lazydev" },
+            -- Disable some sources in comments and strings.
+            default = function()
+                local sources = { "lsp", "buffer", "lazydev" }
+                local ok, node = pcall(vim.treesitter.get_node)
+
+                if ok and node then
+                    -- if not vim.tbl_contains({ "comment", "line_comment", "block_comment" }, node:type()) then
+                    --     table.insert(sources, "path")
+                    -- end
+                    if node:type() ~= "string" then
+                        table.insert(sources, "snippets")
+                    end
+                end
+
+                return sources
+            end,
+
             providers = {
                 lazydev = {
                     name = "LazyDev",
@@ -71,7 +73,7 @@ return {
                     min_keyword_length = 3,
                 },
                 lsp = {
-                    min_keyword_length = 3,
+                    -- min_keyword_length = 3,
                     max_items = 10,
                     fallbacks = { "buffer", "lazydev" },
                     score_offset = 4,
@@ -99,5 +101,10 @@ return {
             },
         },
     },
-    opts_extend = { "sources.completion.enabled_providers" },
+    config = function(_, opts)
+        require("blink.cmp").setup(opts)
+
+        -- Extend neovim's client capabilities with the completion ones.
+        vim.lsp.config("*", { capabilities = require("blink.cmp").get_lsp_capabilities(nil, true) })
+    end,
 }

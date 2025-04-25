@@ -15,6 +15,7 @@ return {
                 rust = { "rustfmt", lsp_format = "fallback" },
                 sh = { "shfmt" },
                 zig = { "zigfmt", lsp_format = "fallback" },
+                glsl = { "clang-format" },
             },
         })
     end,

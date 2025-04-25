@@ -5,6 +5,7 @@ local M = {
         lua = true,
         rust = true,
         zig = true,
+        glsl = true,
     },
 }
 

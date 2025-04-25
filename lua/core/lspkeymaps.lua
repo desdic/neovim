@@ -14,8 +14,8 @@ M.setkeys = function(ev)
         return client.server_capabilities[cap .. "Provider"]
     end
 
-    require("core.format").on_attach(ev, ev.buf)
-    local format = require("core.format").format
+    -- require("core.format").on_attach(ev, ev.buf)
+    -- local format = require("core.format").format
 
     local keymap = vim.keymap.set
     local ft = vim.bo.ft
@@ -58,7 +58,7 @@ M.setkeys = function(ev)
         end, silent_bufnr("Goto declaration"))
     end
 
-    keymap("n", "<leader>tf", require("core.format").toggle, { desc = "Toggle format on Save" })
+    -- keymap("n", "<leader>tf", require("core.format").toggle, { desc = "Toggle format on Save" })
 
     keymap("n", "]d", function()
         vim.diagnostic.jump({ count = 1, float = true })
@@ -86,10 +86,6 @@ M.setkeys = function(ev)
         end
         return vim.lsp.codelens.run()
     end)
-
-    if has_cap("documentFormatting") then
-        keymap("n", "<leader>fm", format, silent_bufnr("[F]or[m]at Document"))
-    end
 
     keymap("n", "<leader>lh", function()
         local opt = { buf = 0 }

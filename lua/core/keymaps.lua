@@ -90,3 +90,6 @@ keymap("n", "<leader>sf", "<cmd>:source %<CR>", { desc = "source current lua fil
 keymap("n", "<leader>st", function()
     vim.opt.spell = not (vim.opt.spell:get())
 end, { desc = "[S]pell [t]oggle" })
+
+keymap("n", "<leader>tf", require("core.format").toggle, { desc = "Toggle format on Save" })
+keymap("n", "<leader>fm", require("core.format").format, { desc = "[F]or[m]at Document" })

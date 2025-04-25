@@ -123,6 +123,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
     callback = require("core.lspkeymaps").setkeys,
 })
 
+vim.api.nvim_create_autocmd("BufReadPost", {
+    group = vim.api.nvim_create_augroup("UserBufConfig", {}),
+    callback = function(ev)
+        require("core.format").on_attach(ev, ev.buf)
+    end,
+})
+
 vim.api.nvim_create_autocmd("VimLeave", {
     group = vim.api.nvim_create_augroup("RestoreCursorShapeOnExit", { clear = true }),
     callback = function()

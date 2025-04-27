@@ -14,14 +14,12 @@ return {
                 dap = true,
                 dap_ui = true,
                 render_markdown = true,
-                fidget = true,
                 gitsigns = true,
                 indent_blankline = {
                     enabled = true,
                 },
                 blink_cmp = true,
                 markdown = false,
-                mason = true,
                 mini = {
                     enabled = true,
                 },

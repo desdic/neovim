@@ -3,7 +3,7 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     opts = {
         open_callback = require("marlin.callbacks").use_split,
-        patterns = { ".git", ".svn", "Makefile", "Cargo.toml", "." },
+        patterns = { ".git", "Makefile", "Cargo.toml", "." },
     },
     keys = {
         {

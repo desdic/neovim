@@ -131,7 +131,6 @@ return {
             sections = {
                 lualine_b = { "branch", diagnostics },
                 lualine_c = {
-                    -- filename,
                     marlin_component,
                 },
                 lualine_x = {

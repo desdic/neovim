@@ -75,9 +75,6 @@ return {
                     "nvim-neotest/nvim-nio",
                 },
                 opts = {},
-                -- config = function()
-                --     require("dapui").setup()
-                -- end,
             },
             {
                 "leoluz/nvim-dap-go",

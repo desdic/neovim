@@ -1,6 +1,5 @@
 return {
     "echasnovski/mini.tabline",
-    -- event = "VeryLazy",
     event = "BufRead",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {

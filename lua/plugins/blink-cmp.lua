@@ -55,9 +55,6 @@ return {
                 local ok, node = pcall(vim.treesitter.get_node)
 
                 if ok and node then
-                    -- if not vim.tbl_contains({ "comment", "line_comment", "block_comment" }, node:type()) then
-                    --     table.insert(sources, "path")
-                    -- end
                     if node:type() ~= "string" then
                         table.insert(sources, "snippets")
                     end

@@ -14,9 +14,6 @@ M.setkeys = function(ev)
         return client.server_capabilities[cap .. "Provider"]
     end
 
-    -- require("core.format").on_attach(ev, ev.buf)
-    -- local format = require("core.format").format
-
     local keymap = vim.keymap.set
     local ft = vim.bo.ft
 
@@ -57,8 +54,6 @@ M.setkeys = function(ev)
             snacks.picker.lsp_declarations()
         end, silent_bufnr("Goto declaration"))
     end
-
-    -- keymap("n", "<leader>tf", require("core.format").toggle, { desc = "Toggle format on Save" })
 
     keymap("n", "]d", function()
         vim.diagnostic.jump({ count = 1, float = true })

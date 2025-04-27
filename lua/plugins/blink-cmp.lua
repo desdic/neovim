@@ -27,7 +27,7 @@ return {
         },
         -- don't use in gitcommits or prompts
         enabled = function()
-            return not vim.tbl_contains({ "gitcommit" }, vim.bo.filetype)
+            return not vim.tbl_contains({ "gitcommit", "oil" }, vim.bo.filetype)
                 and vim.bo.buftype ~= "prompt"
                 and vim.b.completion ~= false
         end,

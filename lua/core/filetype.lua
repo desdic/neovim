@@ -19,4 +19,14 @@ vim.filetype.add({
     },
 })
 
-vim.filetype.add({ extension = { frag = "glsl", vert = "glsl", vtc = "varnish", vlc = "varnish", rest = "rest" } })
+vim.filetype.add({
+    extension = {
+        vs = "glsl",
+        fs = "glsl",
+        frag = "glsl",
+        vert = "glsl",
+        vtc = "varnish",
+        vlc = "varnish",
+        rest = "rest",
+    },
+})

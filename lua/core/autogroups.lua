@@ -148,3 +148,11 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
         vim.opt_local.fo:remove("t")
     end,
 })
+
+-- Clear jumps
+vim.api.nvim_create_autocmd("VimEnter", {
+    group = vim.api.nvim_create_augroup("ClearJumps", { clear = true }),
+    callback = function()
+        vim.cmd.clearjumps()
+    end,
+})

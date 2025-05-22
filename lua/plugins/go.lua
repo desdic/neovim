@@ -1,6 +1,7 @@
 return {
     "ray-x/go.nvim",
     ft = { "go", "gomod" },
+    event = { "CmdlineEnter" },
     dependencies = { "ray-x/guihua.lua", "nvim-treesitter/nvim-treesitter" },
     build = ':lua require("go.install").update_all_sync()',
     opts = {
@@ -9,7 +10,4 @@ return {
         lsp_inlay_hints = { enable = false },
         diagnostic = false,
     },
-    config = function(_, opts)
-        require("go").setup(opts)
-    end,
 }

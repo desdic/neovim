@@ -153,7 +153,7 @@ return {
                     filename,
                 },
             },
-            extensions = { "nvim-dap-ui" },
+            extensions = { "nvim-dap-ui", "oil", "quickfix" },
         }
     end,
 }

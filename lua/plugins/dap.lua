@@ -126,18 +126,6 @@ return {
                 end,
             },
             {
-                "jbyuki/one-small-step-for-vimkind",
-                keys = {
-                    {
-                        "<leader>da",
-                        function()
-                            require("osv").launch({ port = 8086 })
-                        end,
-                        desc = "Launch Lua adapter",
-                    },
-                },
-            },
-            {
                 "mfussenegger/nvim-dap-python",
                 config = function()
                     local dap_python = require("dap-python")

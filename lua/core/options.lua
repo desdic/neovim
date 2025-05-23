@@ -17,9 +17,14 @@ g.maplocalleader = "," -- Set local leader
 g.shada = "NONE"
 g.markdown_fenched_languages = { "lua", "c", "cpp", "go", "ruby" } -- Fix highligts within markdown files
 g.splitkeep = "screen" -- stabilize buffer content
+-- Disable healthcheck
+g.loaded_perl_provider = 0
+g.loaded_python_provider = 0
+g.loaded_python3_provider = 0
+g.loaded_ruby_provider = 0
+g.loaded_node_provider = 0
 
 opt.guicursor = "" -- Use fat cursor
--- opt.guicursor = "a-i-ci:ver30-iCursor-blinkwait300-blinkon200-blinkoff150"
 opt.shortmess:append("I") -- Turn off splash
 opt.shortmess:append("c") -- Avoid showing message extra message when using completion
 opt.shortmess:append("s") -- Don't give "search hit BOTTOM, continuing at TOP" or "search
@@ -66,7 +71,6 @@ o.winborder = "rounded" -- Give all floating windows a border
 wo.signcolumn = "yes" -- Always show signcolumn // number
 wo.number = true -- Show numbers
 wo.relativenumber = true -- Show relative numbers
-wo.signcolumn = "yes" -- Make room for gitsigns + numbers
 wo.list = true -- Show hidden chars
 wo.cursorline = true
 
@@ -77,12 +81,5 @@ bo.expandtab = true
 bo.autoindent = true
 bo.smartindent = true
 bo.scrollback = 10000
-
--- Disable healthcheck
-g.loaded_perl_provider = 0
-g.loaded_python_provider = 0
-g.loaded_python3_provider = 0
-g.loaded_ruby_provider = 0
-g.loaded_node_provider = 0
 
 vim.cmd("let g:netrw_liststyle = 3")

@@ -65,6 +65,14 @@ return {
                         style = {},
                     },
                     NormalFloat = { bg = colors.base, fg = colors.text }, -- https://github.com/catppuccin/nvim/issues/823
+                    SnacksIndent1 = { fg = "#ababab" },
+                    SnacksIndent2 = { fg = "#9d9d9d" },
+                    SnacksIndent3 = { fg = "#8f8f8f" },
+                    SnacksIndent4 = { fg = "#818181" },
+                    SnacksIndent5 = { fg = "#737373" },
+                    SnacksIndent6 = { fg = "#656565" },
+                    SnacksIndent7 = { fg = "#575757" },
+                    SnacksIndent8 = { fg = "#4a4a4a" },
                 }
             end,
         })

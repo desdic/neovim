@@ -8,9 +8,6 @@ return {
             opts = {
                 library = { "nvim-dap-ui" },
             },
-            config = function(_, opts)
-                require("lazydev").setup(opts)
-            end,
         },
         "L3MON4D3/LuaSnip",
     },
@@ -66,7 +63,6 @@ return {
                 lazydev = {
                     name = "LazyDev",
                     module = "lazydev.integrations.blink",
-                    min_keyword_length = 3,
                 },
                 lsp = {
                     -- min_keyword_length = 3,

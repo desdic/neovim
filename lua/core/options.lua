@@ -1,6 +1,8 @@
 DATA_PATH = vim.fn.stdpath("data")
 HOME_PATH = vim.env.HOME
 
+vim.fn.mkdir(vim.fn.stdpath("data") .. "site/spell", "p") -- make sure spelldir is created
+
 local g = vim.g -- Global
 local o = vim.o -- Options
 local opt = vim.opt
@@ -32,6 +34,7 @@ opt.formatoptions:append({ "n" }) -- Better indent
 opt.iskeyword:append("-") -- Add - to be part of word
 opt.nrformats:append("unsigned") -- Increment
 opt.spelllang = { "en", "da" }
+g.spellfile_URL = "https://ftp.nluug.nl/vim/runtime/spell/"
 opt.shell = "zsh"
 opt.isfname:append("@-@") -- Include @ in filename
 

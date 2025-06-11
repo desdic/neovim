@@ -24,7 +24,7 @@ require("lazy").setup({
                 "gzip",
                 "matchit",
                 -- "matchparen",
-                "netrwPlugin",
+                "netrwPlugin", -- Needed to download spell files
                 "tarPlugin",
                 "tohtml",
                 "tutor",

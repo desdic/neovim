@@ -25,8 +25,6 @@ keymap("n", "<C-o>", "<C-o>zzzv", { silent = true, noremap = true, desc = "last 
 keymap("n", "J", "mzJ`z", { silent = true, noremap = true, desc = "join next line and center" })
 keymap("n", "<C-d>", "<C-d>zz", { silent = true, noremap = true, desc = "jump center" })
 keymap("n", "<C-u>", "<C-u>zz", { silent = true, noremap = true, desc = "jump center" })
-keymap("n", "{", "{zzzv", { silent = true, noremap = true, desc = "jump and center" })
-keymap("n", "}", "}zzzv", { silent = true, noremap = true, desc = "jump and center" })
 
 keymap("n", "<leader>su", ":%s/\\v", { noremap = true, desc = "[S][u]bstitute" })
 keymap("n", "<leader>sw", [[:%s/<C-r><C-w>//g<Left><Left>]], { desc = "[S]ubstitute [w]ord" })
@@ -61,11 +59,7 @@ keymap("n", "<leader>tit", ":InspectTree<CR>", { desc = "Open treesitter object 
 keymap("n", "<leader>cx", "<cmd>!chmod +x %<CR>", { desc = "Make file executable" })
 keymap("n", "<leader>mm", "<cmd>make<CR>", { desc = "Run `set makeprg=make`" })
 
-keymap("n", "<leader>cc", function()
-    require("core.quickfix").toggle()
-end, { silent = true, noremap = true, desc = "Toggle quickfix" })
-
-keymap("n", "<leader>ll", "<cmd>Lazy<CR>", { desc = "Run [l]azy" })
+keymap("n", "<leader>L", "<cmd>Lazy<CR>", { desc = "Run [L]azy" })
 
 keymap("n", "yc", "yy<cmd>normal gcc<CR>p", { desc = "Copy to a comment above" })
 
@@ -93,3 +87,8 @@ end, { desc = "[S]pell [t]oggle" })
 
 keymap("n", "<leader>tf", require("core.format").toggle, { desc = "Toggle format on Save" })
 keymap("n", "<leader>fm", require("core.format").format, { desc = "[F]or[m]at Document" })
+
+keymap("n", "U", "<C-r>", { desc = "Redo" })
+
+-- Quickly go to the end of the line while in insert mode.
+keymap({ "i", "c" }, "<C-l>", "<C-o>A", { desc = "Go to the end of the line" })

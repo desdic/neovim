@@ -8,7 +8,7 @@ return {
         local lint = require("lint")
 
         -- Override options since latest golangcilint has changed options
-        local golangcilint = require("lint").linters.golangcilint
+        local golangcilint = lint.linters.golangcilint
         golangcilint.args = {
             "run",
             "--output.json.path",

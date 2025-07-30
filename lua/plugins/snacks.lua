@@ -72,6 +72,7 @@ return {
                 require("snacks").picker.files({
                     hidden = true,
                     cwd = vim.fs.dirname(vim.fs.find({ ".git", "go.mod" }, { upward = true })[1]),
+                    exclude = { ".zig-cache" },
                 })
             end,
             desc = "[F]ind [f]iles",

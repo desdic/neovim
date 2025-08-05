@@ -50,10 +50,6 @@ keymap("t", "<C-l>", [[<C-\><C-N><C-w>l]], { desc = "Move to split on the right"
 -- Ctrl+\Ctrl+n to exit insert mode in terminal
 keymap("t", "<C-q>", [[<C-\><C-N>]], { desc = "ESC" })
 
-keymap("n", "<leader>sz", function()
-    require("core.window_zoom").toggle()
-end, { desc = "Toggle split" })
-
 keymap("n", "<leader>tit", ":InspectTree<CR>", { desc = "Open treesitter object browser" })
 
 keymap("n", "<leader>cx", "<cmd>!chmod +x %<CR>", { desc = "Make file executable" })

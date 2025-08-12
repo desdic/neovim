@@ -1,7 +1,7 @@
 return {
 
     "saghen/blink.cmp",
-    version = "v0.*",
+    version = "1.*",
     dependencies = {
         {
             "folke/lazydev.nvim",
@@ -14,7 +14,7 @@ return {
     event = "InsertEnter",
     opts = {
         keymap = {
-            ["<CR>"] = { "accept", "fallback" },
+            -- ["<CR>"] = { "accept", "fallback" },
             ["<C-\\>"] = { "hide", "fallback" },
             ["<C-n>"] = { "select_next", "snippet_forward", "fallback" },
             ["<C-p>"] = { "select_prev" },

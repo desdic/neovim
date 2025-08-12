@@ -10,7 +10,7 @@ local bo = vim.bo -- Buffer option
 local wo = vim.wo -- Window option
 local indent = 2
 
-vim.lsp.set_log_level("OFF") -- turn complely off when not duing 'debug'
+vim.lsp.set_log_level("OFF") -- turn complely off when not during 'debug'
 
 g.personal_projects_dir = HOME_PATH .. "/src/private"
 g.work_projects_dir = HOME_PATH .. "/git"

@@ -4,7 +4,7 @@ local i = ls.i
 local t = ls.t
 local f = ls.function_node
 local fmt = require("luasnip.extras.fmt").fmt
--- local fmta = require("luasnip.extras.fmt").fmta
+local fmta = require("luasnip.extras.fmt").fmta
 local d = ls.dynamic_node
 local c = ls.choice_node
 -- local sn = ls.snippet_node
@@ -230,5 +230,28 @@ func main() {{
 )
 
 table.insert(snippets, main)
+
+local func = s(
+    { trig = "([^s]+)t", regTrig = true },
+    fmt(
+        [[
+    func {}({}) {}{{
+    {}{}
+    }}
+
+    ]],
+        {
+            f(function(_, snip)
+                return snip.captures[1]
+            end, {}),
+            i(1),
+            i(2),
+            t({ "\t" }),
+            i(0),
+        }
+    )
+)
+
+table.insert(snippets, func)
 
 return snippets, autosnippets

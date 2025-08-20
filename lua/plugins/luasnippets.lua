@@ -32,5 +32,15 @@ return {
                 ls.change_choice(1)
             end
         end)
+
+        vim.keymap.set("i", "<C-e>", function()
+            ls.expand()
+        end)
+        vim.keymap.set({ "i", "s" }, "<C-j>", function()
+            ls.jump(1)
+        end)
+        vim.keymap.set({ "i", "s" }, "<C-k>", function()
+            ls.jump(-1)
+        end)
     end,
 }

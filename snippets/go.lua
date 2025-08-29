@@ -232,7 +232,7 @@ func main() {{
 table.insert(snippets, main)
 
 local func = s(
-    { trig = "([^s]+)t", regTrig = true },
+    { trig = "(%S+)t", regTrig = true },
     fmt(
         [[
     func {}({}) {}{{

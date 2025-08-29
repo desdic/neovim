@@ -38,6 +38,14 @@ g.spellfile_URL = "https://ftp.nluug.nl/vim/runtime/spell/"
 opt.shell = "zsh"
 opt.isfname:append("@-@") -- Include @ in filename
 
+-- Default to tabs, override with .editorconfig
+opt.tabstop = 4
+opt.shiftwidth = 4
+opt.expandtab = false
+opt.softtabstop = 4
+opt.smartindent = true
+opt.autoindent = true
+
 o.cmdheight = 2 -- Set height to prevent 'press enter to continue'
 o.hidden = true -- Allow to switch buffer without saving
 o.backspace = "indent,eol,start" -- allow backspace on indent, end of line or insert mode start position
@@ -77,12 +85,6 @@ wo.relativenumber = true -- Show relative numbers
 wo.list = true -- Show hidden chars
 wo.cursorline = true
 
-bo.tabstop = indent -- Default set to spaces
-bo.softtabstop = indent
-bo.shiftwidth = indent
-bo.expandtab = true
-bo.autoindent = true
-bo.smartindent = true
 bo.scrollback = 10000
 
 vim.cmd("let g:netrw_liststyle = 3")

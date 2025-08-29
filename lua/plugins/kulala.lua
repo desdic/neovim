@@ -5,25 +5,32 @@ return {
     },
     keys = {
         {
-            "<leader>kr",
+            "<leader>Rs",
             function()
                 require("kulala").run()
             end,
             desc = "Run request",
         },
         {
-            "<leader>kw",
+            "<leader>Ra",
             function()
                 require("kulala").run_all()
             end,
             desc = "Run all request",
         },
         {
-            "<leader>kt",
+            "<leader>Rt",
             function()
                 require("kulala").toggle_view()
             end,
             desc = "Toggle view",
+        },
+        {
+            "<leader>Rr",
+            function()
+                require("kulala").replay()
+            end,
+            desc = "Replay requests",
         },
     },
 }

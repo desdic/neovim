@@ -53,7 +53,7 @@ return {
         statuscolumn = { enabled = true },
         quickfile = { enabled = true },
         indent = {
-            enabled = true,
+            enabled = true, -- disables listchars
             animate = { enabled = false },
             scope = { enabled = false },
         },

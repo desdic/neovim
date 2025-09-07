@@ -8,7 +8,6 @@ local o = vim.o -- Options
 local opt = vim.opt
 local bo = vim.bo -- Buffer option
 local wo = vim.wo -- Window option
-local indent = 2
 
 vim.lsp.set_log_level("OFF") -- turn complely off when not during 'debug'
 

@@ -40,7 +40,7 @@ return {
                 indent = "spaces"
             end
 
-            return indent .. ":" .. vim.api.nvim_get_option_value("shiftwidth", opt)
+            return indent .. ":" .. vim.api.nvim_get_option_value("tabstop", opt)
         end
 
         local diagnostics = {

@@ -65,6 +65,7 @@ return {
                         style = {},
                     },
                     NormalFloat = { bg = colors.base, fg = colors.text }, -- https://github.com/catppuccin/nvim/issues/823
+                    GutterMarksLocal = { fg = "#8ccfcb" },
                 }
             end,
         })

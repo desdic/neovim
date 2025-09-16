@@ -21,6 +21,7 @@ return {
             ["<C-b>"] = { "scroll_documentation_up", "fallback" },
             ["<C-f>"] = { "scroll_documentation_down", "fallback" },
             ["<C-e>"] = false, -- disable
+            ["<C-c>"] = { "cancel", "fallback" },
         },
         -- don't use in gitcommits or prompts
         enabled = function()
@@ -30,7 +31,7 @@ return {
         end,
         completion = {
             list = {
-                selection = { preselect = false, auto_insert = true },
+                selection = { preselect = true, auto_insert = true },
                 max_items = 10,
             },
 

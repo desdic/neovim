@@ -1,5 +1,6 @@
 return {
     "desdic/greyjoy.nvim",
+    -- dev = true,
     keys = {
         { "<leader>gr", "<cmd>Greyjoy<CR>", desc = "[G]reyjoy [r]un" },
         { "<leader>gg", "<cmd>Greyjoy fast<CR>", desc = "[G]reyjoy fast [g]roup" },
@@ -54,7 +55,7 @@ return {
             extensions = {
                 generic = {
                     commands = {
-                        ["run {filename}"] = { command = { "python3", "{filename}" }, filetype = "python" },
+                        ["run {filename}"] = { command = { "python3 {filename}" }, filetype = "python" },
                         ["run main.go"] = {
                             command = { "go", "run", "main.go" },
                             filetype = "go",
@@ -66,7 +67,7 @@ return {
                             filename = "main.go",
                         },
                         ["zig build"] = {
-                            command = { "zig", "build" },
+                            command = { "zig build" },
                             filetype = "zig",
                         },
                         ["cmake --build build"] = {
@@ -112,6 +113,7 @@ return {
         })
 
         greyjoy.load_extension("generic")
+        greyjoy.load_extension("file")
         greyjoy.load_extension("makefile")
         greyjoy.load_extension("kitchen")
         greyjoy.load_extension("cargo")

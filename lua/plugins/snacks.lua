@@ -44,7 +44,7 @@ return {
                 require("snacks").picker.files({
                     hidden = true,
                     cwd = vim.fs.dirname(vim.fs.find({ ".git", "go.mod" }, { upward = true })[1]),
-                    exclude = { ".zig-cache" },
+                    exclude = { ".zig-cache", "vendor" },
                 })
             end,
             desc = "[F]ind [f]iles",
@@ -53,7 +53,7 @@ return {
             "<leader>fg",
             mode = { "n" },
             function()
-                require("snacks").picker.grep()
+                require("snacks").picker.grep({ exclude = { "vendor" } })
             end,
             desc = "[F]ile [g]rep",
         },
@@ -61,7 +61,7 @@ return {
             "<leader>fg",
             mode = { "x" },
             function()
-                require("snacks").picker.grep_word()
+                require("snacks").picker.grep_word({ exclude = { "vendor" } })
             end,
             desc = "[F]ile [g]rep visual word",
         },

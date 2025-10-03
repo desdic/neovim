@@ -2,6 +2,7 @@ return {
     {
         "nvim-treesitter/nvim-treesitter",
         event = { "BufReadPre", "BufNewFile" },
+        lazy = false,
         build = ":TSUpdate",
         cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
         main = "nvim-treesitter.configs",
@@ -22,7 +23,7 @@ return {
                 "json",
                 "json5",
                 "jsonc",
-                "kulala_http",
+                "kdl",
                 "lua",
                 "make",
                 "markdown",

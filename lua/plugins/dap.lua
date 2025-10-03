@@ -125,14 +125,6 @@ return {
                     dap.configurations.zig = dap.configurations.cpp
                 end,
             },
-            {
-                "mfussenegger/nvim-dap-python",
-                config = function()
-                    local dap_python = require("dap-python")
-                    dap_python.setup("~/.virtualenvs/debugpy/bin/python")
-                    dap_python.test_runner = "pytest"
-                end,
-            },
         },
         config = function()
             local sign = vim.fn.sign_define

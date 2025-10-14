@@ -29,6 +29,7 @@ return {
                 "markdown",
                 "markdown_inline",
                 "meson",
+                "mermaid",
                 "perl",
                 "php",
                 "python",

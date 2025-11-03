@@ -29,6 +29,9 @@ return {
             animate = { enabled = false },
             scope = { enabled = false },
         },
+        image = {
+            enabled = false,
+        },
     },
     keys = {
         {

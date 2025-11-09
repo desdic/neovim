@@ -3,7 +3,7 @@ return {
         "mfussenegger/nvim-dap",
         keys = {
             {
-                "<leader>db",
+                "<leader>tb",
                 function()
                     require("dap").toggle_breakpoint()
                 end,

@@ -139,5 +139,12 @@ return {
             end,
             { desc = "[G]it [b]lame line" },
         },
+        {
+            "<leader>db",
+            function()
+                require("snacks").bufdelete()
+            end,
+            { desc = "[D]elete [b]buffer without disrupting window layout" },
+        },
     },
 }

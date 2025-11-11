@@ -140,7 +140,7 @@ return {
             { desc = "[G]it [b]lame line" },
         },
         {
-            "<leader>db",
+            "<leader>bd",
             function()
                 require("snacks").bufdelete()
             end,

@@ -40,8 +40,6 @@ end, { expr = true, desc = "Delete line but if empty don't put it in any regiest
 keymap("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move visual line down" })
 keymap("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move visual line up" })
 
-keymap("n", "<leader>bd", ":bd<CR>", { silent = true, noremap = true, desc = "[B]uffer [D]elete" })
-
 keymap("t", "<C-h>", [[<C-\><C-N><C-w>h]], { desc = "Move to split on the left" })
 keymap("t", "<C-j>", [[<C-\><C-N><C-w>j]], { desc = "Move to split below" })
 keymap("t", "<C-k>", [[<C-\><C-N><C-w>k]], { desc = "Move to split above" })

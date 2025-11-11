@@ -24,7 +24,6 @@ return {
         end, { desc = "add file" })
         keymap("n", "<leader>fd", function()
             marlin.remove()
-            vim.cmd("bdelete")
         end, { desc = "remove file" })
         keymap("n", "<leader>f]", function()
             marlin.move_up()

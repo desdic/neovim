@@ -86,3 +86,9 @@ keymap("n", "U", "<C-r>", { desc = "Redo" })
 
 -- Quickly go to the end of the line while in insert mode.
 keymap({ "i", "c" }, "<C-l>", "<C-o>A", { desc = "Go to the end of the line" })
+
+-- Easy surround selections
+keymap("v", '"', 'c"<C-r>""<Esc>', { noremap = true, silent = true })
+keymap("v", "'", "c'<C-r>\"'<Esc>", { noremap = true, silent = true })
+keymap("v", "(", 'c(<C-r>")<Esc>', { noremap = true, silent = true })
+keymap("v", "{", 'c{<C-r>"}<Esc>', { noremap = true, silent = true })

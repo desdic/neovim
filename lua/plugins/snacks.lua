@@ -25,7 +25,7 @@ return {
         statuscolumn = { enabled = true },
         quickfile = { enabled = true },
         indent = {
-            enabled = true, -- disables listchars
+            enabled = false, -- disables listchars
             animate = { enabled = false },
             scope = { enabled = false },
         },

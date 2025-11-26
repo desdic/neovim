@@ -88,7 +88,9 @@ keymap("n", "U", "<C-r>", { desc = "Redo" })
 keymap({ "i", "c" }, "<C-l>", "<C-o>A", { desc = "Go to the end of the line" })
 
 -- Easy surround selections
-keymap("x", '"', 'c"<C-r>""<Esc>', { noremap = true, silent = true })
-keymap("x", "'", "c'<C-r>\"'<Esc>", { noremap = true, silent = true })
-keymap("x", "(", 'c(<C-r>")<Esc>', { noremap = true, silent = true })
-keymap("x", "{", 'c{<C-r>"}<Esc>', { noremap = true, silent = true })
+keymap("x", '"', 'c"<C-r>""<Esc>')
+keymap("x", "'", "c'<C-r>\"'<Esc>")
+keymap("x", "(", 'c(<C-r>")<Esc>')
+keymap("x", "{", 'c{<C-r>"}<Esc>')
+
+keymap("n", "Q", "<cmd>q<CR>", { noremap = true, silent = true })

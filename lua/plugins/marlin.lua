@@ -24,6 +24,7 @@ return {
         end, { desc = "add file" })
         keymap("n", "<leader>fd", function()
             marlin.remove()
+            require("snacks").bufdelete()
         end, { desc = "remove file" })
         keymap("n", "<leader>f]", function()
             marlin.move_up()

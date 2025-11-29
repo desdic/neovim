@@ -56,6 +56,14 @@ return {
                             return not ctx:text_after_cursor():match("[^%)%]%}'\"]")
                         end,
                     },
+                    {
+                        '"""',
+                        when = function(ctx)
+                            return ctx:text_before_cursor(2) == '""'
+                                and not ctx:text_after_cursor():match("[^%)%]%}'\"]")
+                        end,
+                        languages = { "python" },
+                    },
                 },
                 ["'"] = {
                     {

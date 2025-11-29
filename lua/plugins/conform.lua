@@ -8,7 +8,8 @@ return {
             formatters_by_ft = {
                 c = { name = "clangd", timeout_ms = 500, lsp_format = "prefer" },
                 cpp = { name = "clangd", timeout_ms = 500, lsp_format = "prefer" },
-                go = { "golines", "goimports", "gofmt", "gofumpt" },
+                -- go = { "golines", "goimports", "gofmt", "gofumpt" },
+                go = { "goimports", "gofmt" },
                 json = { "jq" },
                 lua = { "stylua" },
                 python = { "isort", "black" },

@@ -7,7 +7,7 @@ M.on_attach = function(client, bufnr)
 
     -- Check if we have capability
     local has_cap = function(cap)
-        return client.server_capabilities[cap .. "Provider"]
+        return client:supports_method("textDocument/" .. cap)
     end
 
     local keymap = vim.keymap.set

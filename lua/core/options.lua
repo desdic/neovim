@@ -74,7 +74,7 @@ o.swapfile = true
 o.conceallevel = 0 -- so that `` is visible in markdown files
 o.splitbelow = true
 o.splitright = true
-o.mouse = ""
+o.mouse = "a"
 o.pumheight = 10 -- Maximum number of entries in a popup
 o.winborder = "rounded" -- Give all floating windows a border
 

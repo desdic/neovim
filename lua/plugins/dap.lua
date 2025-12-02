@@ -31,7 +31,7 @@ return {
                 desc = "Run last",
             },
             {
-                "<leader>do>",
+                "<leader>do",
                 function()
                     require("dap").step_over()
                 end,

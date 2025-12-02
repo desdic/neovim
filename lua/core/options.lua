@@ -45,6 +45,10 @@ opt.softtabstop = 4
 opt.smartindent = true
 opt.autoindent = true
 
+-- Case insensitive searching UNLESS /C or the search has capitals.
+opt.ignorecase = true
+opt.smartcase = true
+
 o.cmdheight = 2 -- Set height to prevent 'press enter to continue'
 o.hidden = true -- Allow to switch buffer without saving
 o.backspace = "indent,eol,start" -- allow backspace on indent, end of line or insert mode start position
@@ -75,6 +79,10 @@ o.splitright = true
 o.mouse = "a"
 o.pumheight = 10 -- Maximum number of entries in a popup
 o.winborder = "rounded" -- Give all floating windows a border
+-- Update times and timeouts.
+o.updatetime = 300
+o.timeoutlen = 500
+o.ttimeoutlen = 10
 
 wo.signcolumn = "yes" -- Always show signcolumn // number
 wo.number = true -- Show numbers

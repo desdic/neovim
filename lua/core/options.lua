@@ -92,4 +92,5 @@ wo.cursorline = true
 
 bo.scrollback = 10000
 
+-- Needed to download spelling
 vim.cmd("let g:netrw_liststyle = 3")

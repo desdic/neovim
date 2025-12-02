@@ -1,16 +1,12 @@
 local M = {}
 
-M.setkeys = function(ev)
+M.on_attach = function(client, bufnr)
     local silent_bufnr = function(desc)
-        return { silent = true, buffer = ev.buf, desc = desc }
+        return { silent = true, buffer = bufnr, desc = desc }
     end
 
     -- Check if we have capability
     local has_cap = function(cap)
-        local client = vim.lsp.get_client_by_id(ev.data.client_id)
-        if client == nil then
-            return false
-        end
         return client.server_capabilities[cap .. "Provider"]
     end
 

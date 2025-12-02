@@ -115,10 +115,29 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
+local register_capability = vim.lsp.handlers["client/registerCapability"]
+vim.lsp.handlers["client/registerCapability"] = function(err, res, ctx)
+    local client = vim.lsp.get_client_by_id(ctx.client_id)
+    if not client then
+        return
+    end
+
+    require("core.lspkeymaps").on_attach(client, vim.api.nvim_get_current_buf())
+
+    return register_capability(err, res, ctx)
+end
+
 -- Attach my keymappins for all LSPs
 vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-    callback = require("core.lspkeymaps").setkeys,
+    callback = function(args)
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        if not client then
+            return
+        end
+
+        require("core.lspkeymaps").on_attach(client, args.buf)
+    end,
 })
 
 vim.api.nvim_create_autocmd("BufReadPost", {
@@ -172,3 +191,8 @@ vim.api.nvim_create_autocmd("VimResized", {
         vim.cmd("wincmd =")
     end,
 })
+
+vim.api.nvim_create_user_command("ToggleFormat", function()
+    vim.g.autoformat = not vim.g.autoformat
+    vim.notify(string.format("%s formatting...", vim.g.autoformat and "Enabling" or "Disabling"), vim.log.levels.INFO)
+end, { desc = "Toggle conform.nvim auto-formatting", nargs = 0 })

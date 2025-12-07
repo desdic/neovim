@@ -1,4 +1,11 @@
 local keymap = vim.keymap.set
+keymap("n", "k", function()
+    return vim.v.count == 0 and "gk" or "k"
+end, { expr = true, noremap = true })
+
+keymap("n", "j", function()
+    return vim.v.count == 0 and "gj" or "j"
+end, { expr = true, noremap = true })
 
 keymap("n", "<leader>w", ":w!<CR>", { silent = true, noremap = true, desc = "Write buffer" })
 

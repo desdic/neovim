@@ -14,8 +14,12 @@ return {
     end,
     opts = function()
         local opt = { buf = 0 }
-        local marlin = require("marlin")
+        local have_marlin, marlin = pcall(require, "marlin")
         local marlin_component = function()
+            if not have_marlin then
+                return ""
+            end
+
             local indexes = marlin.num_indexes()
             if indexes == 0 then
                 return ""

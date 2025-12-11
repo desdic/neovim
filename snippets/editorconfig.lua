@@ -20,8 +20,12 @@ charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
 
-[*.{{yml,yaml,json}}]
+[*.{{yml,yaml,json,md,mmd,txt}}]
 indent_style = space
+indent_size = 2
+
+[Makefile]
+indent_style = tab
 indent_size = 2
         ]],
         {}

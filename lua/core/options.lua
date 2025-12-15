@@ -25,7 +25,6 @@ g.loaded_python3_provider = 0
 g.loaded_ruby_provider = 0
 g.loaded_node_provider = 0
 
-opt.guicursor = "" -- Use fat cursor
 opt.shortmess:append("I") -- Turn off splash
 opt.shortmess:append("c") -- Avoid showing message extra message when using completion
 opt.shortmess:append("s") -- Don't give "search hit BOTTOM, continuing at TOP" or "search
@@ -94,3 +93,10 @@ bo.scrollback = 10000
 
 -- Needed to download spelling
 vim.cmd("let g:netrw_liststyle = 3")
+
+opt.guicursor = {
+    "n-v-c:block", -- Normal, Visual, Command-line: block cursor
+    "i-ci:ver25", -- Insert, Insert-completion: vertical bar (25%)
+    "r-cr:hor20", -- Replace, Command-line replace: horizontal bar (20%)
+    "o:hor50", -- Operator-pending
+}

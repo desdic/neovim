@@ -20,6 +20,10 @@
       {
         "language": "editorconfig",
         "path": "./editorconfig.json"
+      },
+      {
+        "language": "python",
+        "path": "./python.json"
       }
     ]
   }

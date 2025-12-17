@@ -1,0 +1,25 @@
+{
+    "main": {
+        "prefix": "main",
+        "body": [
+            "#!/usr/bin/env ${1|python3,python|}",
+            "",
+            "import argparse",
+            "import logging",
+            "",
+            "logger = logging.getLogger(__name__)",
+            "",
+            "def main() -> None:",
+            "\targ_parser = argparse.ArgumentParser()",
+            "\targ_parser.add_argument(\"--debug\", \"-d\", action=\"store_true\", help=\"enable debug\")",
+            "\targs = arg_parser.parse_args()",
+            "",
+            "\tlogging.basicConfig(level=logging.DEBUG if args.debug else logging.INFO)",
+            "\t${0}",
+            "",
+            "if __name__ == \"__main__\":",
+            "\tmain()"
+        ],
+        "description": "python main"
+    }
+}

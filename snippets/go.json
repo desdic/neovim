@@ -5,5 +5,16 @@
             "slog.Info(\"$0\")"
         ],
         "description": "slog.info"
+    },
+    "main": {
+        "prefix": "main",
+        "body": [
+            "package main",
+			"",
+			"func main() {",
+			"\t${0}",
+			"}"
+        ],
+        "description": "main"
     }
 }

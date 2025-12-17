@@ -2,6 +2,10 @@
   "contributes": {
     "snippets": [
       {
+        "language": "all",
+        "path": "./all.json"
+      },
+      {
         "language": "go",
         "path": "./go.json"
       },
@@ -12,6 +16,10 @@
       {
         "language": "cpp",
         "path": "./cpp.json"
+      },
+      {
+        "language": "editorconfig",
+        "path": "./editorconfig.json"
       }
     ]
   }

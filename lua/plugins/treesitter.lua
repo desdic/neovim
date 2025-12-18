@@ -5,9 +5,9 @@ return {
         lazy = false,
         build = ":TSUpdate",
         cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
-        main = "nvim-treesitter.configs",
-        opts = {
-            ensure_installed = {
+        branch = "main",
+        config = function()
+            local parsers = {
                 "bash",
                 "c",
                 "comment",
@@ -43,15 +43,26 @@ return {
                 "vimdoc",
                 "yaml",
                 "zig",
-            },
-            indent = { enable = true, disable = {} },
-            highlight = {
-                enable = true, -- false will disable the whole extension
-                disable = function(lang, bufnr)
-                    return lang == "yaml" and vim.api.nvim_buf_line_count(bufnr) > 5000
+            }
+
+            local ts = require("nvim-treesitter")
+            ts.install(parsers):wait(300000)
+
+            vim.api.nvim_create_autocmd("FileType", {
+                group = vim.api.nvim_create_augroup("TreesitterSetup", { clear = true }),
+                desc = "Enable treesitter highlighting and indentation",
+                callback = function(event)
+                    local lang = vim.treesitter.language.get_lang(event.match) or event.match
+                    -- local buf = event.buf
+
+                    if vim.treesitter.query.get(lang, "highlights") then
+                        vim.treesitter.start()
+                    end
+                    if vim.treesitter.query.get(lang, "indents") then
+                        vim.bo.indentexpr = "v:lua.require('nvim-treesitter').indentexpr()"
+                    end
                 end,
-                additional_vim_regex_highlighting = false,
-            },
-        },
+            })
+        end,
     },
 }

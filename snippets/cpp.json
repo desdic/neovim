@@ -1,13 +1,16 @@
 {
-	"main": {
-		"prefix": "main",
-		"body": [
-"int main(${1|void,int argc\\, char *argv[]|}) {",
-"\t${2}",
-"}"
-		],
-		"description": "main"
-	},
+    "main": {
+        "prefix": "main",
+        "body": [
+            "#include <stdlib.h>",
+			"",
+            "int main(${1|void,int argc\\, char *argv[]|}) {",
+            "\t${2}",
+			"\treturn EXIT_SUCCESS;",
+            "}"
+        ],
+        "description": "main"
+    },
 	"ifndef": {
 		"prefix": "#ifndef",
 		"body": [

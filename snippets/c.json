@@ -1,23 +1,26 @@
 {
-	"main": {
-		"prefix": "main",
-		"body": [
-"int main(${1|void,int argc\\, char *argv[]|}) {",
-"\t${2}",
-"}"
-		],
-		"description": "main"
-	},
-	"ifndef": {
-		"prefix": "#ifndef",
-		"body": [
-"#ifndef __${TM_FILENAME/([^.]+)\\.(.*)/${1:/upcase}_${2:/upcase}/}__",
-"#define __${TM_FILENAME/([^.]+)\\.(.*)/${1:/upcase}_${2:/upcase}/}__",
-"",
-"${0}",
-"",
-"#endif"
-		],
-		"description": "safe guard"
-	}
+    "main": {
+        "prefix": "main",
+        "body": [
+            "#include <stdlib.h>",
+			"",
+            "int main(${1|void,int argc\\, char *argv[]|}) {",
+            "\t${2}",
+			"\treturn EXIT_SUCCESS;",
+            "}"
+        ],
+        "description": "main"
+    },
+    "ifndef": {
+        "prefix": "#ifndef",
+        "body": [
+            "#ifndef __${TM_FILENAME/([^.]+)\\.(.*)/${1:/upcase}_${2:/upcase}/}__",
+            "#define __${TM_FILENAME/([^.]+)\\.(.*)/${1:/upcase}_${2:/upcase}/}__",
+            "",
+            "${0}",
+            "",
+            "#endif"
+        ],
+        "description": "safe guard"
+    }
 }

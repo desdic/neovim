@@ -1,11 +1,11 @@
 {
-	"main": {
-		"prefix": "`",
-		"body": [
-			"```${1}",
-			"${2}",
-			"```"
-		],
-		"description": "wrap in backticks"
-	}
+    "tick": {
+        "prefix": "`",
+        "body": [
+            "```${1}",
+            "${2}",
+            "```"
+        ],
+        "description": "wrap in backticks"
+    }
 }

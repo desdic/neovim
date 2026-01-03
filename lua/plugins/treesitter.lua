@@ -22,7 +22,6 @@ return {
                 "http",
                 "json",
                 "json5",
-                "jsonc",
                 "kdl",
                 "lua",
                 "make",

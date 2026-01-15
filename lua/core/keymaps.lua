@@ -87,7 +87,7 @@ keymap("n", "<leader>st", function()
 end, { desc = "[S]pell [t]oggle" })
 
 keymap("n", "<leader>tf", require("core.format").toggle, { desc = "Toggle format on Save" })
-keymap("n", "<leader>fm", require("core.format").format, { desc = "[F]or[m]at Document" })
+keymap({ "n", "v" }, "<leader>fm", require("core.format").format, { desc = "[F]or[m]at Document" })
 
 keymap("n", "U", "<C-r>", { desc = "Redo" })
 

@@ -24,57 +24,50 @@ return {
             disabled_filetypes = {},
             -- see the defaults:
             -- https://github.com/Saghen/blink.pairs/blob/main/lua/blink/pairs/config/mappings.lua#L14
-            pairs = {
-                ["("] = {
-                    {
-                        ")",
-                        when = function(ctx)
-                            return not ctx:text_after_cursor():match("[^%)%]%}'\"]")
-                        end,
-                    },
-                },
-                ["{"] = {
-                    {
-                        "}",
-                        when = function(ctx)
-                            return not ctx:text_after_cursor():match("[^%)%]%}'\"]")
-                        end,
-                    },
-                },
-                ["["] = {
-                    {
-                        "]",
-                        when = function(ctx)
-                            return not ctx:text_after_cursor():match("[^%)%]%}'\"]")
-                        end,
-                    },
-                },
-                ['"'] = {
-                    {
-                        '"',
-                        when = function(ctx)
-                            return not ctx:text_after_cursor():match("[^%)%]%}'\"]")
-                        end,
-                    },
-                    {
-                        '"""',
-                        when = function(ctx)
-                            return ctx:text_before_cursor(2) == '""'
-                                and not ctx:text_after_cursor():match("[^%)%]%}'\"]")
-                        end,
-                        languages = { "python" },
-                    },
-                },
-                ["'"] = {
-                    {
-                        "'",
-                        when = function(ctx)
-                            return not ctx:text_after_cursor():match("[^%)%]%}'\"]")
-                        end,
-                    },
-                },
-                ["`"] = "`",
-            },
+            -- pairs = {
+            --     ["("] = {
+            --         {
+            --             ")",
+            --             when = function(ctx)
+            --                 return not ctx:text_after_cursor():match("[^%)%]%}'\"]")
+            --             end,
+            --         },
+            --     },
+            --     ["{"] = {
+            --         {
+            --             "}",
+            --             when = function(ctx)
+            --                 return not ctx:text_after_cursor():match("[^%)%]%}'\"]")
+            --             end,
+            --         },
+            --     },
+            --     ["["] = {
+            --         {
+            --             "]",
+            --             when = function(ctx)
+            --                 return not ctx:text_after_cursor():match("[^%)%]%}'\"]")
+            --             end,
+            --         },
+            --     },
+            --     ['"'] = {
+            --         {
+            --             '"',
+            --             when = function(ctx)
+            --                 return not ctx:text_after_cursor():match("[^%)%]%}'\"]")
+            --             end,
+            --         },
+            --         {
+            --             '"""',
+            --             when = function(ctx)
+            --                 return ctx:text_before_cursor(2) == '""'
+            --                     and not ctx:text_after_cursor():match("[^%)%]%}'\"]")
+            --             end,
+            --             languages = { "python" },
+            --         },
+            --     },
+            --     ["'"] = "'",
+            --     ["`"] = "`",
+            -- },
         },
         highlights = {
             enabled = true,

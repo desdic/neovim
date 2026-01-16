@@ -4,7 +4,7 @@
         "body": [
             "```${1}",
             "${2}",
-            "```"
+            "``"
         ],
         "description": "wrap in backticks"
     }

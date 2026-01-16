@@ -138,6 +138,7 @@ return {
                     marlin_component,
                 },
                 lualine_x = {
+                    require("opencode").statusline,
                     diff,
                     spaces,
                     "encoding",

@@ -99,5 +99,6 @@ keymap("x", '"', 'c"<C-r>""<Esc>')
 keymap("x", "'", "c'<C-r>\"'<Esc>")
 keymap("x", "(", 'c(<C-r>")<Esc>')
 keymap("x", "{", 'c{<C-r>"}<Esc>')
+keymap("x", "`", 'c`<C-r>"`<Esc>')
 
 keymap("n", "Q", "<cmd>q<CR>")

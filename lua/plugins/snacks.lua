@@ -146,5 +146,12 @@ return {
             end,
             { desc = "[D]elete [b]buffer without disrupting window layout" },
         },
+        {
+            "<leader><space>",
+            function()
+                require("snacks").picker.smart()
+            end,
+            desc = "Snacks smart picker",
+        },
     },
 }

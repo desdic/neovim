@@ -14,7 +14,7 @@ return {
         },
         {
             "<leader>re",
-            ":Oil oil-ssh://",
+            ":Oil oil-ssh:///<left>",
             desc = "Browse remote files/dirs",
         },
     },

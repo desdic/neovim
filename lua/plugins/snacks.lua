@@ -111,13 +111,6 @@ return {
             desc = "Notifications",
         },
         {
-            "<leader>fu",
-            function()
-                require("snacks").picker.undo()
-            end,
-            desc = "Undo tree",
-        },
-        {
             "<leader>sd",
             function()
                 require("snacks").picker.diagnostics()

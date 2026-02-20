@@ -53,9 +53,17 @@ return {
                 local ok, node = pcall(vim.treesitter.get_node)
 
                 if ok and node then
-                    if node:type() ~= "string" then
+                    if
+                        node:type() ~= "string"
+                        and node:type() ~= "comment"
+                        and node:type() ~= "string_content"
+                        and node:type() ~= "interpreted_string_literal_content"
+                        and node:type() ~= "statement_list"
+                    then
                         table.insert(sources, "snippets")
                     end
+                else
+                    table.insert(sources, "snippets")
                 end
 
                 return sources

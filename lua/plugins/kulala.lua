@@ -12,6 +12,13 @@ return {
             desc = "Run request",
         },
         {
+            "<leader>Ra",
+            function()
+                require("kulala").run_all()
+            end,
+            desc = "Run all request",
+        },
+        {
             "<leader>Rt",
             function()
                 require("kulala").toggle_view()

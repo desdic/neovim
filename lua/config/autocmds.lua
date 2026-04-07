@@ -21,34 +21,6 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
 -- Check if we need to reload the file when it changed
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, { command = "checktime" })
 
-local is_lazy_open = function()
-    local buffers = vim.api.nvim_list_bufs()
-    for _, buf in ipairs(buffers) do
-        local filetype = vim.bo[buf].filetype
-
-        if filetype == "lazy" then
-            return true
-        end
-        if filetype == "lazy_backdrop" then
-            return true
-        end
-    end
-    return false
-end
-
-vim.api.nvim_create_autocmd("VimEnter", {
-    group = vim.api.nvim_create_augroup("restore_marlin", { clear = true }),
-    callback = function()
-        if next(vim.fn.argv()) ~= nil then
-            return
-        end
-        if not is_lazy_open() then
-            require("marlin").open_all()
-        end
-    end,
-    nested = true,
-})
-
 -- go to last loc when opening a buffer
 vim.api.nvim_create_autocmd("BufReadPost", {
     callback = function()
@@ -74,6 +46,7 @@ vim.api.nvim_create_autocmd("FileType", {
         "macrothishelp",
         "man",
         "notify",
+        "nvim-pack",
         "oil",
         "qf",
         "query",
@@ -83,17 +56,6 @@ vim.api.nvim_create_autocmd("FileType", {
     callback = function(event)
         vim.bo[event.buf].buflisted = false
         vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true, desc = "Close buffer" })
-    end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = {
-        "DiffviewFiles",
-        "DiffviewFileHistory",
-    },
-    callback = function(event)
-        vim.bo[event.buf].buflisted = false
-        vim.keymap.set("n", "q", "<cmd>DiffviewClose<cr>", { buffer = event.buf, silent = true, desc = "Close buffer" })
     end,
 })
 
@@ -122,7 +84,7 @@ vim.lsp.handlers["client/registerCapability"] = function(err, res, ctx)
         return
     end
 
-    require("core.lspkeymaps").on_attach(client, vim.api.nvim_get_current_buf())
+    require("config.lspkeymaps").on_attach(client, vim.api.nvim_get_current_buf())
 
     return register_capability(err, res, ctx)
 end
@@ -136,7 +98,23 @@ vim.api.nvim_create_autocmd("LspAttach", {
             return
         end
 
-        require("core.lspkeymaps").on_attach(client, args.buf)
+        require("config.lspkeymaps").on_attach(client, args.buf)
+    end,
+})
+
+-- Set up LSP servers.
+vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {
+    once = true,
+    callback = function()
+        -- Extend neovim's client capabilities with the completion ones.
+        vim.lsp.config("*", { capabilities = require("blink.cmp").get_lsp_capabilities(nil, true) })
+
+        local servers = vim.iter(vim.api.nvim_get_runtime_file("lsp/*.lua", true))
+            :map(function(file)
+                return vim.fn.fnamemodify(file, ":t:r")
+            end)
+            :totable()
+        vim.lsp.enable(servers)
     end,
 })
 
@@ -145,14 +123,6 @@ vim.api.nvim_create_autocmd("BufReadPost", {
     callback = function(ev)
         require("core.format").on_attach(ev, ev.buf)
     end,
-})
-
-vim.api.nvim_create_autocmd("VimLeave", {
-    group = vim.api.nvim_create_augroup("RestoreCursorShapeOnExit", { clear = true }),
-    callback = function()
-        vim.opt.guicursor = "a:block1"
-    end,
-    nested = true,
 })
 
 vim.api.nvim_create_autocmd({ "FileType" }, {
@@ -186,6 +156,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     end,
 })
 
+-- Auto-resize splits when window is resized
 vim.api.nvim_create_autocmd("VimResized", {
     callback = function()
         vim.cmd("wincmd =")
@@ -205,3 +176,25 @@ vim.api.nvim_create_user_command("Scratch", function()
         vim.api.nvim_set_option_value(name, value, { buf = buf })
     end
 end, { desc = "Open a scratch buffer", nargs = 0 })
+
+vim.api.nvim_create_user_command("LspClients", function()
+    local enabled = {}
+    for _, c in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
+        enabled[c.name] = true
+    end
+    vim.print(vim.tbl_keys(enabled))
+end, { desc = "list enabled LSPs", nargs = 0 })
+
+-- vim.api.nvim_create_autocmd({ "FileType", "LspAttach" }, {
+--     group = vim.api.nvim_create_augroup("TreesitterSetup", { clear = true }),
+--     callback = function(event)
+--         local lang = vim.treesitter.language.get_lang(event.match) or event.match
+--
+--         if vim.treesitter.query.get(lang, "highlights") then
+--             vim.treesitter.start()
+--         end
+--         if vim.treesitter.query.get(lang, "indents") then
+-- vim.bo.indentexpr = "v:lua.require('nvim-treesitter').indentexpr()"
+--         end
+--     end,
+-- })

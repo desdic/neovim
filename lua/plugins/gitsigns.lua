@@ -1,8 +1,9 @@
-return {
-    "lewis6991/gitsigns.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    cmd = { "Gitsigns" },
-    opts = {
+vim.pack.add({
+    { src = "https://github.com/lewis6991/gitsigns.nvim" },
+}, { confirm = false })
+
+vim.defer_fn(function()
+    require("gitsigns").setup({
         signs = {
             add = { text = "│" },
             change = { text = "│" },
@@ -31,5 +32,5 @@ return {
             map("n", "<leader>ghb", function() gs.blame_line({ full = true }) end, "Blame Line")
             map("n", "<leader>ght", function() gs.toggle_current_line_blame() end, "Toggle line blame")
         end,
-    },
-}
+    })
+end, 100)

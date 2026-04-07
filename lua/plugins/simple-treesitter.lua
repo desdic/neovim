@@ -1,0 +1,60 @@
+vim.pack.add({
+    { src = "https://github.com/desdic/simple-treesitter.nvim" },
+}, { confirm = false })
+
+-- vim.cmd("packadd simple-treesitter.nvim")
+
+require("simple-treesitter").setup({
+    parsers = {
+        bash = {
+            revision = "a06c2e4415e9bc0346c6b86d401879ffb44058f7",
+            url = "https://github.com/tree-sitter/tree-sitter-bash",
+        },
+
+        hlsl = {
+            url = "https://github.com/tree-sitter-grammars/tree-sitter-hlsl",
+            revision = "bab9111922d53d43668fabb61869bec51bbcb915",
+        },
+        go = {
+            revision = "2346a3ab1bb3857b48b29d779a1ef9799a248cd7",
+            url = "https://github.com/tree-sitter/tree-sitter-go",
+        },
+        gomod = {
+            revision = "2e886870578eeba1927a2dc4bd2e2b3f598c5f9a",
+            url = "https://github.com/camdencheek/tree-sitter-go-mod",
+        },
+        gosum = {
+            revision = "27816eb6b7315746ae9fcf711e4e1396dc1cf237",
+            url = "https://github.com/tree-sitter-grammars/tree-sitter-go-sum",
+        },
+        -- gotmpl = {
+        --     revision = "aa71f63de226c5592dfbfc1f29949522d7c95fac",
+        --     url = "https://github.com/ngalaiko/tree-sitter-go-template",
+        -- },
+        gowork = {
+            revision = "949a8a470559543857a62102c84700d291fc984c",
+            url = "https://github.com/omertuc/tree-sitter-go-work",
+        },
+
+        json = {
+            revision = "001c28d7a29832b06b0e831ec77845553c89b56d",
+            url = "https://github.com/tree-sitter/tree-sitter-json",
+        },
+        json5 = {
+            revision = "aa630ef48903ab99e406a8acd2e2933077cc34e1",
+            url = "https://github.com/Joakker/tree-sitter-json5",
+        },
+        c = {
+            revision = "ae19b676b13bdcc13b7665397e6d9b14975473dd",
+            url = "https://github.com/tree-sitter/tree-sitter-c",
+        },
+        cpp = {
+            revision = "8b5b49eb196bec7040441bee33b2c9a4838d6967",
+            url = "https://github.com/tree-sitter/tree-sitter-cpp",
+        },
+        dockerfile = {
+            revision = "971acdd908568b4531b0ba28a445bf0bb720aba5",
+            url = "https://github.com/camdencheek/tree-sitter-dockerfile",
+        },
+    },
+})

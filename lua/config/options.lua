@@ -9,7 +9,7 @@ local opt = vim.opt
 local bo = vim.bo -- Buffer option
 local wo = vim.wo -- Window option
 
-vim.lsp.set_log_level("OFF") -- turn complely off when not during 'debug'
+vim.lsp.log.set_level("OFF") -- turn complely off when not during 'debug'
 
 g.personal_projects_dir = HOME_PATH .. "/src/private"
 g.work_projects_dir = HOME_PATH .. "/git"
@@ -44,11 +44,7 @@ opt.softtabstop = 4
 opt.smartindent = true
 opt.autoindent = true
 
--- Case insensitive searching UNLESS /C or the search has capitals.
-opt.ignorecase = true
-opt.smartcase = true
-
-o.cmdheight = 2 -- Set height to prevent 'press enter to continue'
+o.cmdheight = 1 -- Set height to prevent 'press enter to continue'
 o.hidden = true -- Allow to switch buffer without saving
 o.backspace = "indent,eol,start" -- allow backspace on indent, end of line or insert mode start position
 o.jumpoptions = "view" -- save 'view' when jumping
@@ -69,7 +65,7 @@ o.showcmd = false -- Don't show commands
 o.undodir = DATA_PATH .. "/undo" -- Save and set undo/redo levels
 o.undofile = true
 o.listchars = "tab:▸ ,trail:·,nbsp:␣,extends:❯,precedes:❮" -- Hidden chars
--- o.clipboard = "unnamedplus"
+-- o.clipboard = "unnamedplus" -- Use system clipboard
 o.foldenable = false
 o.swapfile = true
 o.conceallevel = 0 -- so that `` is visible in markdown files
@@ -78,10 +74,16 @@ o.splitright = true
 o.mouse = "a"
 o.pumheight = 10 -- Maximum number of entries in a popup
 o.winborder = "rounded" -- Give all floating windows a border
+o.more = false -- Don't wait on `more`
+
 -- Update times and timeouts.
 o.updatetime = 300
 o.timeoutlen = 500
 o.ttimeoutlen = 10
+
+-- Case insensitive searching UNLESS /C or the search has capitals.
+opt.ignorecase = true
+opt.smartcase = true
 
 wo.signcolumn = "yes" -- Always show signcolumn // number
 wo.number = true -- Show numbers

@@ -1,23 +1,12 @@
-return {
-    "stevearc/oil.nvim",
-    lazy = false,
-    opts = {
+vim.pack.add({ { src = "https://github.com/stevearc/oil.nvim" } }, { confirm = false })
+
+vim.defer_fn(function()
+    require("oil").setup({
+        default_file_explorer = false, -- we need netrw to download spellings
         view_options = {
             show_hidden = true,
         },
-    },
-    keys = {
-        {
-            "<leader>ne",
-            "<cmd>Oil --float<CR>",
-            desc = "Browse files/dirs",
-        },
-        {
-            "<leader>re",
-            ":Oil oil-ssh:///<left>",
-            desc = "Browse remote files/dirs",
-        },
-    },
-    cmd = { "Oil" },
-    dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
-}
+    })
+
+    vim.keymap.set("n", "<leader>ne", ":Oil<CR>", { desc = "Oil" })
+end, 500)

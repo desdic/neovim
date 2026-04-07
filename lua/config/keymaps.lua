@@ -1,4 +1,5 @@
 local keymap = vim.keymap.set
+
 keymap("n", "k", function()
     return vim.v.count == 0 and "gk" or "k"
 end, { expr = true, noremap = true })
@@ -8,6 +9,9 @@ keymap("n", "j", function()
 end, { expr = true, noremap = true })
 
 keymap("n", "<leader>w", ":w!<CR>", { silent = true, noremap = true, desc = "Write buffer" })
+
+keymap("n", "<S-l>", "<cmd>bnext<CR>", { desc = "Move to next buffer" })
+keymap("n", "<S-h>", "<cmd>bprev<CR>", { desc = "Move to previous buffer" })
 
 keymap("v", "<", "<gv", { silent = true, noremap = true, desc = "Align to left" })
 keymap("v", ">", ">gv", { silent = true, noremap = true, desc = "Align to right" })
@@ -60,17 +64,15 @@ keymap("n", "<leader>tit", ":InspectTree<CR>", { desc = "Open treesitter object 
 keymap("n", "<leader>cx", "<cmd>!chmod +x %<CR>", { desc = "Make file executable" })
 keymap("n", "<leader>mm", "<cmd>make<CR>", { desc = "Run `set makeprg=make`" })
 
-keymap("n", "<leader>L", "<cmd>Lazy<CR>", { desc = "Run [L]azy" })
+keymap("n", "<leader>L", function()
+    vim.pack.update()
+end, { desc = "Run Updater" })
+
+keymap("n", "<leader>pc", function()
+    require("core.utils").pack_clean()
+end, { desc = "Clean up unused plugins" })
 
 keymap("n", "yc", "yy<cmd>normal gcc<CR>p", { desc = "Copy to a comment above" })
-
-keymap({ "i", "s", "n" }, "<esc>", function()
-    if require("luasnip").expand_or_jumpable() then
-        require("luasnip").unlink_current()
-    end
-    vim.cmd("noh")
-    return "<esc>"
-end, { desc = "Escape, clear hlsearch, and stop snippet session", expr = true })
 
 keymap("n", "U", "<C-r>", { desc = "Redo" })
 
@@ -95,5 +97,3 @@ keymap("n", "U", "<C-r>", { desc = "Redo" })
 keymap({ "i", "c" }, "<C-l>", "<C-o>A", { desc = "Go to the end of the line" })
 
 keymap("n", "Q", "<cmd>q<CR>")
-
-keymap("i", "jk", "<Esc>", { desc = "Esc" })

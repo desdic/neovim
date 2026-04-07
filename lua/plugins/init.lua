@@ -1,0 +1,35 @@
+-- Order how I want to load plugins
+
+require("plugins.nvim-treesitter") -- archived
+require("plugins.simple-treesitter")
+
+require("plugins.nvim-web-devicons")
+require("plugins.catppuccin")
+
+require("plugins.snacks")
+require("plugins.marlin")
+require("plugins.gitsigns")
+require("plugins.guttermarks")
+require("plugins.lualine")
+
+require("plugins.oil")
+require("plugins.mini")
+require("plugins.luasnippets")
+require("plugins.lazydev")
+require("plugins.blink-cmp")
+require("plugins.blink-indent")
+require("plugins.blink-pairs")
+require("plugins.quicker")
+require("plugins.vim-tmux-navigator")
+require("plugins.conform")
+require("plugins.gitlinker")
+require("plugins.macrothis")
+require("plugins.markdown-preview")
+require("plugins.nvim-lint")
+require("plugins.greyjoy")
+require("plugins.agrolens")
+require("plugins.kulala")
+require("plugins.go")
+require("plugins.rustaceanvim")
+require("plugins.which-key")
+require("plugins.opencode")

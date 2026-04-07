@@ -1,6 +1,9 @@
-return {
-    "saghen/blink.indent",
-    opts = {
+vim.pack.add({
+    { src = "https://github.com/Saghen/blink.indent", version = vim.version.range("v2.*") },
+}, { confirm = false })
+
+vim.defer_fn(function()
+    require("blink.indent").setup({
         blocked = {
             -- default: 'terminal', 'quickfix', 'nofile', 'prompt'
             buftypes = { include_defaults = true },
@@ -44,5 +47,5 @@ return {
                 highlights = { "BlinkIndentOrangeUnderline", "BlinkIndentVioletUnderline", "BlinkIndentBlueUnderline" },
             },
         },
-    },
-}
+    })
+end, 100)

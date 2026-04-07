@@ -1,9 +1,9 @@
-return {
-    "folke/snacks.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    priority = 1000,
-    lazy = false,
-    opts = {
+vim.pack.add({
+    { src = "https://github.com/folke/snacks.nvim" },
+}, { confirm = false })
+
+vim.defer_fn(function()
+    require("snacks").setup({
         input = { enabled = true, relative = "cursor", row = -3, col = 0 },
         notifier = { enabled = true },
         lazygit = { enabled = true },
@@ -32,119 +32,69 @@ return {
         image = {
             enabled = false,
         },
-    },
-    keys = {
-        {
-            "<leader>lg",
-            function()
-                require("snacks").lazygit()
-            end,
-            desc = "[L]azy[G]it",
-        },
-        {
-            "<leader>ff",
-            function()
-                require("snacks").picker.files({
-                    hidden = true,
-                    cwd = vim.fs.dirname(vim.fs.find({ ".git", "go.mod" }, { upward = true })[1]),
-                    exclude = { ".zig-cache", "vendor", ".cache" },
-                })
-            end,
-            desc = "[F]ind [f]iles",
-        },
-        {
-            "<leader>fg",
-            mode = { "n" },
-            function()
-                require("snacks").picker.grep({ exclude = { "vendor", ".cache" } })
-            end,
-            desc = "[F]ile [g]rep",
-        },
-        {
-            "<leader>fg",
-            mode = { "x" },
-            function()
-                require("snacks").picker.grep_word({ exclude = { "vendor", ".cache" } })
-            end,
-            desc = "[F]ile [g]rep visual word",
-        },
-        {
-            "<leader>fn",
-            function()
-                require("snacks").picker.grep({ dirs = { "~/notes" } })
-            end,
-            desc = "[F]uzzy [N]otes search",
-        },
-        {
-            "<leader>fh",
-            function()
-                require("snacks").picker.help()
-            end,
-            desc = "[F]uzzy [H]elp tags",
-        },
-        {
-            "<leader>,",
-            function()
-                require("snacks").picker.buffers()
-            end,
-            desc = "Buffer",
-        },
-        {
-            "<leader>fv",
-            function()
-                require("snacks").picker.grep({ dirs = { "~/.config/nvim" } })
-            end,
-            desc = "[Fuzzy] [V]im config",
-        },
-        {
-            "z=",
-            function()
-                require("snacks").picker.spelling()
-            end,
-            desc = "Spell suggest",
-        },
-        {
-            "<leader>gn",
-            function()
-                require("snacks").picker.notifications()
-            end,
-            desc = "Notifications",
-        },
-        {
-            "<leader>sd",
-            function()
-                require("snacks").picker.diagnostics()
-            end,
-            desc = "Diagnostics",
-        },
-        {
-            "<leader>tt",
-            mode = { "n", "t" },
-            function()
-                require("snacks").terminal()
-            end,
-            { desc = "Toggle term" },
-        },
-        {
-            "<leader>gb",
-            function()
-                require("snacks").git.blame_line()
-            end,
-            { desc = "[G]it [b]lame line" },
-        },
-        {
-            "<leader>bd",
-            function()
-                require("snacks").bufdelete()
-            end,
-            { desc = "[D]elete [b]buffer without disrupting window layout" },
-        },
-        {
-            "<leader><space>",
-            function()
-                require("snacks").picker.smart()
-            end,
-            desc = "Snacks smart picker",
-        },
-    },
-}
+    })
+
+    vim.keymap.set("n", "<leader>ff", function()
+        require("snacks").picker.files({
+            hidden = true,
+            cwd = vim.fs.dirname(vim.fs.find({ ".git", "go.mod" }, { upward = true })[1]),
+            exclude = { ".zig-cache", "vendor", ".cache" },
+        })
+    end, { desc = "[F]ind [f]iles" })
+
+    vim.keymap.set("n", "<leader>lg", function()
+        require("snacks").lazygit()
+    end, { desc = "[L]azy[G]it" })
+
+    vim.keymap.set("n", "<leader>fg", function()
+        require("snacks").picker.grep({ exclude = { "vendor", ".cache" } })
+    end, { desc = "[F]ile [g]rep" })
+
+    vim.keymap.set("x", "<leader>fg", function()
+        require("snacks").picker.grep_word({ exclude = { "vendor", ".cache" } })
+    end, { desc = "[F]ile [g]rep visual word" })
+
+    vim.keymap.set("n", "<leader>fn", function()
+        require("snacks").picker.grep({ dirs = { "~/notes" } })
+    end, { desc = "[F]uzzy [N]otes search" })
+
+    vim.keymap.set("n", "<leader>fh", function()
+        require("snacks").picker.help()
+    end, { desc = "[F]uzzy [H]elp tags" })
+
+    vim.keymap.set("n", "<leader>,", function()
+        require("snacks").picker.buffers()
+    end, { desc = "Buffer" })
+
+    vim.keymap.set("n", "<leader>fv", function()
+        require("snacks").picker.grep({ dirs = { "~/.config/nvim" } })
+    end, { desc = "[Fuzzy] [V]im config" })
+
+    vim.keymap.set("n", "z=", function()
+        require("snacks").picker.spelling()
+    end, { desc = "Spell suggest" })
+
+    vim.keymap.set("n", "<leader>gn", function()
+        require("snacks").picker.notifications()
+    end, { desc = "Notifications" })
+
+    vim.keymap.set("n", "<leader>sd", function()
+        require("snacks").picker.diagnostics()
+    end, { desc = "Diagnostics" })
+
+    vim.keymap.set({ "n", "t" }, "<leader>tt", function()
+        require("snacks").terminal()
+    end, { desc = "Toggle term" })
+
+    vim.keymap.set("n", "<leader>gb", function()
+        require("snacks").git.blame_line()
+    end, { desc = "[G]it [b]lame line" })
+
+    vim.keymap.set("n", "<leader>bd", function()
+        require("snacks").bufdelete()
+    end, { desc = "[D]elete [b]buffer without disrupting window layout" })
+
+    vim.keymap.set("n", "<leader><space>", function()
+        require("snacks").picker.smart()
+    end, { desc = "Snacks smart picker" })
+end, 100)

@@ -1,18 +1,9 @@
-return {
+vim.pack.add({
+    { src = "https://github.com/Saghen/blink.cmp", version = vim.version.range("v1.*") },
+}, { confirm = false })
 
-    "saghen/blink.cmp",
-    version = "1.*",
-    dependencies = {
-        {
-            "folke/lazydev.nvim",
-            opts = {
-                library = { "nvim-dap-ui" },
-            },
-        },
-        "L3MON4D3/LuaSnip",
-    },
-    event = "InsertEnter",
-    opts = {
+vim.defer_fn(function()
+    require("blink.cmp").setup({
         keymap = {
             ["<CR>"] = { "accept", "fallback" },
             ["<C-\\>"] = { "hide", "fallback" },
@@ -102,11 +93,5 @@ return {
                 },
             },
         },
-    },
-    config = function(_, opts)
-        require("blink.cmp").setup(opts)
-
-        -- Extend neovim's client capabilities with the completion ones.
-        vim.lsp.config("*", { capabilities = require("blink.cmp").get_lsp_capabilities(nil, true) })
-    end,
-}
+    })
+end, 300)

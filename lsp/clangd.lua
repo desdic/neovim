@@ -5,9 +5,9 @@ return {
         "--clang-tidy",
         "--header-insertion=iwyu",
         "--completion-style=detailed",
-        "--function-arg-placeholders",
-        "--fallback-style=llvm",
+        "--fallback-style=none",
+        "--function-arg-placeholders=false",
     },
-    root_markers = { "compile_commands.json", "compile_flags.txt" },
+    root_markers = { "compile_commands.json", "compile_flags.txt", ".clang-format", ".clangd" },
     filetypes = { "c", "cpp" },
 }

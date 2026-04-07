@@ -1,21 +1,17 @@
-return {
-    "mrcjkb/rustaceanvim",
-    version = "^6", -- Recommended
-    -- lazy = false, -- This plugin is already lazy
-    ft = { "rust" },
-    init = function()
-        vim.g.rustaceanvim = {
-            tools = {},
-            server = {
-                on_attach = function(client, bufnr)
-                    -- TODO: you can also put keymaps in here
-                end,
-                default_settings = {
-                    ["rust-analyzer"] = {},
-                },
-            },
-            -- DAP configuration
-            dap = {},
-        }
-    end,
+vim.pack.add({
+    { src = "https://github.com/mrcjkb/rustaceanvim", version = vim.version.range("v7.*") },
+}, { confirm = false })
+
+vim.g.rustaceanvim = {
+    tools = {},
+    server = {
+        on_attach = function(client, bufnr)
+            -- TODO: you can also put keymaps in here
+        end,
+        default_settings = {
+            ["rust-analyzer"] = {},
+        },
+    },
+    -- DAP configuration
+    dap = {},
 }

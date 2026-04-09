@@ -5,7 +5,7 @@ vim.pack.add({
 vim.defer_fn(function()
     require("snacks").setup({
         input = { enabled = true, relative = "cursor", row = -3, col = 0 },
-        notifier = { enabled = true },
+        notifier = { enabled = false },
         lazygit = { enabled = true },
         picker = {
             enabled = true,

@@ -113,3 +113,5 @@ require("vim._core.ui2").enable({
         cmd = { height = 0.5 },
     },
 })
+
+vim.cmd.packadd("nvim.undotree")

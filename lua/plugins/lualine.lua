@@ -18,52 +18,6 @@ vim.defer_fn(function()
         return "  " .. cur_index .. "/" .. indexes
     end
 
-    -- From https://github.com/MariaSolOs
-    vim.api.nvim_create_autocmd("LspProgress", {
-        group = vim.api.nvim_create_augroup("lspstatusprogress", { clear = true }),
-        desc = "Update LSP progress in statusline",
-        pattern = { "begin", "end" },
-        callback = function(args)
-            -- This should in theory never happen, but I've seen weird errors.
-            if not args.data then
-                return
-            end
-
-            PROGRESS_STATUS = {
-                client = vim.lsp.get_client_by_id(args.data.client_id).name,
-                kind = args.data.params.value.kind,
-                title = args.data.params.value.title,
-            }
-
-            if PROGRESS_STATUS.kind == "end" then
-                PROGRESS_STATUS.title = nil
-                -- Wait a bit before clearing the status.
-                vim.defer_fn(function()
-                    vim.cmd.redrawstatus()
-                end, 3000)
-            else
-                vim.cmd.redrawstatus()
-            end
-        end,
-    })
-
-    local lsp_progress_component = function()
-        if not PROGRESS_STATUS.client or not PROGRESS_STATUS.title then
-            return ""
-        end
-
-        -- Avoid noisy messages while typing.
-        if vim.startswith(vim.api.nvim_get_mode().mode, "i") then
-            return ""
-        end
-
-        return table.concat({
-            "󱥸 ",
-            string.format("%s  ", PROGRESS_STATUS.client),
-            string.format("%s...", PROGRESS_STATUS.title),
-        })
-    end
-
     local hide_in_width = function()
         return vim.fn.winwidth(0) > 80
     end
@@ -169,8 +123,6 @@ vim.defer_fn(function()
                 marlin_component,
             },
             lualine_x = {
-                lsp_progress_component,
-                require("opencode").statusline,
                 diff,
                 spaces,
                 "encoding",

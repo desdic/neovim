@@ -4,8 +4,6 @@ vim.pack.add({
 
 vim.defer_fn(function()
     require("go").setup({
-        dap_debug = true,
-        dap_debug_gui = true,
         lsp_inlay_hints = { enable = false },
         diagnostic = false,
     })

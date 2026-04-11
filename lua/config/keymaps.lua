@@ -85,7 +85,7 @@ keymap("n", "<M-k>", "<cmd>cprev<CR>", { desc = "quickfix prev" })
 keymap("n", "<leader>sf", "<cmd>:source %<CR>", { desc = "source current lua file" })
 
 keymap("n", "<leader>st", function()
-    vim.opt.spell = not (vim.opt.spell:get())
+    vim.cmd("setlocal spell!")
 end, { desc = "[S]pell [t]oggle" })
 
 keymap("n", "<leader>tf", require("core.format").toggle, { desc = "Toggle format on Save" })

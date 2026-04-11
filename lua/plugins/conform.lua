@@ -7,7 +7,7 @@ vim.defer_fn(function()
         formatters_by_ft = {
             c = { name = "clangd", timeout_ms = 500, lsp_format = "prefer" },
             cpp = { name = "clangd", timeout_ms = 500, lsp_format = "prefer" },
-            go = { "golines", "goimports", "gofmt", "gofumpt" },
+            go = { "goimports", "gofmt", "gofumpt" },
             json = { "jq" },
             lua = { "stylua" },
             python = { "isort", "black" },

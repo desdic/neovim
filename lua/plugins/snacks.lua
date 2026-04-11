@@ -22,7 +22,7 @@ vim.defer_fn(function()
             },
         },
         bigfile = { enabled = true },
-        statuscolumn = { enabled = true },
+        statuscolumn = { enabled = false },
         quickfile = { enabled = true },
         indent = {
             enabled = false, -- disables listchars

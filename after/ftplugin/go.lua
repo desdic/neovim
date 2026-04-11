@@ -1,1 +1,1 @@
-vim.wo.list = false -- nolist
+-- vim.wo.list = false -- nolist

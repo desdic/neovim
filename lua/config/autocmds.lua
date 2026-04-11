@@ -41,18 +41,14 @@ vim.api.nvim_create_autocmd("FileType", {
         "gitsigns-blame",
         "greyjoy",
         "help",
-        "lazy",
-        "lspinfo",
         "macrothishelp",
         "man",
         "notify",
         "nvim-pack",
+        "nvim-undotree",
         "oil",
         "qf",
         "query",
-        "startuptime",
-        "tsplayground",
-        "nvim-undotree",
     },
     callback = function(event)
         vim.bo[event.buf].buflisted = false
@@ -178,13 +174,7 @@ vim.api.nvim_create_user_command("Scratch", function()
     end
 end, { desc = "Open a scratch buffer", nargs = 0 })
 
-vim.api.nvim_create_user_command("LspClients", function()
-    local enabled = {}
-    for _, c in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
-        enabled[c.name] = true
-    end
-end, { desc = "list enabled LSPs", nargs = 0 })
-
+-- Enable treesitter
 vim.api.nvim_create_autocmd({ "FileType", "LspAttach" }, {
     group = vim.api.nvim_create_augroup("TreesitterSetup", { clear = true }),
     callback = function(event)
@@ -198,58 +188,3 @@ vim.api.nvim_create_autocmd({ "FileType", "LspAttach" }, {
         end
     end,
 })
-
-vim.api.nvim_create_autocmd("LspProgress", {
-    callback = function(ev)
-        local value = ev.data.params.value
-        vim.api.nvim_echo({ { value.message or "done" } }, false, {
-            id = "lsp." .. ev.data.client_id,
-            kind = "progress",
-            source = "vim.lsp",
-            title = value.title,
-            status = value.kind ~= "end" and "running" or "success",
-            percent = value.percentage,
-        })
-    end,
-})
-
--- vim.api.nvim_create_autocmd("LspProgress", {
---     callback = function(ev)
---         local client = vim.lsp.get_client_by_id(ev.data.client_id)
---         local value = ev.data.params.value
---         local msg = ("[%s] %s %s"):format(client.name, value.kind == "end" and "✓" or "", value.title or "")
---         vim.notify(msg)
---     end,
--- })
-
--- vim.api.nvim_create_autocmd("FileType", {
---     pattern = "msg",
---     callback = function()
---         local ui2 = require("vim._core.ui2")
---         local win = ui2.wins and ui2.wins.msg
---         if win and vim.api.nvim_win_is_valid(win) then
---             vim.api.nvim_set_option_value(
---                 "winhighlight",
---                 "Normal:NormalFloat,FloatBorder:FloatBorder",
---                 { scope = "local", win = win }
---             )
---         end
---     end,
--- })
-
--- vim.api.nvim_create_autocmd("LspAttach", {
---     group = vim.api.nvim_create_augroup("my.lsp", {}),
---     callback = function(ev)
---         local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
---         if client:supports_method("textDocument/implementation") then
---             -- Create a keymap for vim.lsp.buf.implementation ...
---         end
---         -- Enable auto-completion. Note: Use CTRL-Y to select an item. |complete_CTRL-Y|
---         if client:supports_method("textDocument/completion") then
---             -- Optional: trigger autocompletion on EVERY keypress. May be slow!
---             -- local chars = {}; for i = 32, 126 do table.insert(chars, string.char(i)) end
---             -- client.server_capabilities.completionProvider.triggerCharacters = chars
---             vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
---         end
---     end,
--- })

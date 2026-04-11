@@ -18,6 +18,33 @@ vim.defer_fn(function()
         return "  " .. cur_index .. "/" .. indexes
     end
 
+    vim.api.nvim_create_autocmd("LspProgress", {
+        callback = function(ev)
+            local value = ev.data.params.value
+
+            if value.kind ~= "end" and "running" or "success" then
+                if value.kind == "end" then
+                    vim.defer_fn(function()
+                        LSPPROGRESS = ""
+                        require("lualine").refresh()
+                    end, 3000)
+                else
+                    local pct = value.percentage or ""
+                    LSPPROGRESS = table.concat({
+                        "󱥸 ",
+                        string.format("%s ", pct),
+                        string.format("%s", value.title),
+                    })
+                    require("lualine").refresh()
+                end
+            end
+        end,
+    })
+
+    local lsp_progress_component = function()
+        return LSPPROGRESS or ""
+    end
+
     local hide_in_width = function()
         return vim.fn.winwidth(0) > 80
     end
@@ -123,6 +150,7 @@ vim.defer_fn(function()
                 marlin_component,
             },
             lualine_x = {
+                lsp_progress_component,
                 diff,
                 spaces,
                 "encoding",

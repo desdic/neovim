@@ -5,13 +5,8 @@ require("catppuccin").setup({
     default_integrations = false,
     dim_inactive = { enabled = true },
     integrations = {
-        dap = true,
-        dap_ui = true,
         render_markdown = true,
         gitsigns = true,
-        indent_blankline = {
-            enabled = true,
-        },
         blink_cmp = true,
         markdown = false,
         mini = {
@@ -58,7 +53,6 @@ require("catppuccin").setup({
                 fg = colors.text,
                 style = {},
             },
-            NormalFloat = { bg = colors.base, fg = colors.text }, -- https://github.com/catppuccin/nvim/issues/823
         }
     end,
 })

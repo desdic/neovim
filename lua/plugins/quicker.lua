@@ -1,8 +1,8 @@
-vim.pack.add({
-    { src = "https://github.com/stevearc/quicker.nvim" },
-}, { confirm = false })
-
 vim.defer_fn(function()
+    vim.pack.add({
+        { src = "https://github.com/stevearc/quicker.nvim" },
+    }, { confirm = false })
+
     require("quicker").setup({
         borders = {
             vert = "│", -- Thinner separator.

@@ -1,8 +1,8 @@
-vim.pack.add({
-    { src = "https://github.com/stevearc/conform.nvim" },
-}, { confirm = false })
-
 vim.defer_fn(function()
+    vim.pack.add({
+        { src = "https://github.com/stevearc/conform.nvim" },
+    }, { confirm = false })
+
     require("conform").setup({
         formatters_by_ft = {
             c = { name = "clangd", timeout_ms = 500, lsp_format = "prefer" },

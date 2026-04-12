@@ -1,8 +1,8 @@
-vim.pack.add({
-    { src = "https://github.com/desdic/macrothis.nvim" },
-}, { confirm = false })
-
 vim.defer_fn(function()
+    vim.pack.add({
+        { src = "https://github.com/desdic/macrothis.nvim" },
+    }, { confirm = false })
+
     require("macrothis").setup({ default_register = "a" })
 
     vim.keymap.set("n", "<leader>kkd", function()

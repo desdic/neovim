@@ -1,9 +1,9 @@
-vim.pack.add({
-    { src = "https://github.com/nvim-lua/plenary.nvim" },
-    { src = "https://github.com/ruifm/gitlinker.nvim" },
-}, { confirm = false })
-
 vim.defer_fn(function()
+    vim.pack.add({
+        { src = "https://github.com/nvim-lua/plenary.nvim" },
+        { src = "https://github.com/ruifm/gitlinker.nvim" },
+    }, { confirm = false })
+
     local gitlinker = require("gitlinker")
     local callbacks = {}
 

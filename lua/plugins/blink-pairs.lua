@@ -1,9 +1,9 @@
-vim.pack.add({
-    { src = "https://github.com/Saghen/blink.download" },
-    { src = "https://github.com/Saghen/blink.pairs", version = vim.version.range("*") },
-}, { confirm = false })
-
 vim.defer_fn(function()
+    vim.pack.add({
+        { src = "https://github.com/Saghen/blink.download" },
+        { src = "https://github.com/Saghen/blink.pairs", version = vim.version.range("*") },
+    }, { confirm = false })
+
     require("blink.pairs").setup({
         mappings = {
             -- you can call require("blink.pairs.mappings").enable()

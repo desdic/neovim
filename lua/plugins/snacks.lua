@@ -1,8 +1,8 @@
-vim.pack.add({
-    { src = "https://github.com/folke/snacks.nvim" },
-}, { confirm = false })
-
 vim.defer_fn(function()
+    vim.pack.add({
+        { src = "https://github.com/folke/snacks.nvim" },
+    }, { confirm = false })
+
     require("snacks").setup({
         input = { enabled = true, relative = "cursor", row = -3, col = 0 },
         notifier = { enabled = false },

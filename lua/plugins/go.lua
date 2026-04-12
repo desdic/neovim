@@ -1,8 +1,8 @@
-vim.pack.add({
-    { src = "https://github.com/ray-x/go.nvim" },
-}, { confirm = false })
-
 vim.defer_fn(function()
+    vim.pack.add({
+        { src = "https://github.com/ray-x/go.nvim" },
+    }, { confirm = false })
+
     require("go").setup({
         lsp_inlay_hints = { enable = false },
         diagnostic = false,

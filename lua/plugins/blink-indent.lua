@@ -1,8 +1,8 @@
-vim.pack.add({
-    { src = "https://github.com/Saghen/blink.indent", version = vim.version.range("v2.*") },
-}, { confirm = false })
-
 vim.defer_fn(function()
+    vim.pack.add({
+        { src = "https://github.com/Saghen/blink.indent", version = vim.version.range("v2.*") },
+    }, { confirm = false })
+
     require("blink.indent").setup({
         blocked = {
             -- default: 'terminal', 'quickfix', 'nofile', 'prompt'

@@ -1,8 +1,8 @@
-vim.pack.add({
-    { src = "https://github.com/desdic/agrolens.nvim" },
-}, { confirm = false })
-
 vim.defer_fn(function()
+    vim.pack.add({
+        { src = "https://github.com/desdic/agrolens.nvim" },
+    }, { confirm = false })
+
     require("agrolens").setup({
         debug = false,
         force_long_filepath = false,

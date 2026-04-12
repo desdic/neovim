@@ -1,8 +1,8 @@
-vim.pack.add({
-    { src = "https://github.com/mfussenegger/nvim-lint" },
-}, { confirm = false })
-
 vim.defer_fn(function()
+    vim.pack.add({
+        { src = "https://github.com/mfussenegger/nvim-lint" },
+    }, { confirm = false })
+
     local lint = require("lint")
 
     -- Override options since latest golangcilint has changed options

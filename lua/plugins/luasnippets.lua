@@ -1,8 +1,8 @@
-vim.pack.add({
-    { src = "https://github.com/L3MON4D3/LuaSnip", version = vim.version.range("v2.*") },
-}, { confirm = false })
-
 vim.defer_fn(function()
+    vim.pack.add({
+        { src = "https://github.com/L3MON4D3/LuaSnip", version = vim.version.range("v2.*") },
+    }, { confirm = false })
+
     local ls = require("luasnip")
 
     ---@diagnostic disable-next-line: assign-type-mismatch

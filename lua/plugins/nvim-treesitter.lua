@@ -40,9 +40,7 @@ local parsers = {
     "zig",
 }
 
-vim.defer_fn(function()
-    local ts = require("nvim-treesitter")
-    ts.install(parsers):wait(300000)
+local ts = require("nvim-treesitter")
+ts.install(parsers):wait(300000)
 
-    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-end, 10)
+vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"

@@ -1,6 +1,5 @@
 vim.pack.add({
     { src = "https://github.com/nvim-mini/mini.tabline" },
-    { src = "https://github.com/nvim-mini/mini.surround" },
 }, { confirm = false })
 
 require("mini.tabline").setup({
@@ -12,6 +11,10 @@ require("mini.tabline").setup({
 })
 
 vim.defer_fn(function()
+    vim.pack.add({
+        { src = "https://github.com/nvim-mini/mini.surround" },
+    }, { confirm = false })
+
     require("mini.surround").setup({
         mappings = {
             add = "gsa", -- Add surrounding in Normal and Visual modes

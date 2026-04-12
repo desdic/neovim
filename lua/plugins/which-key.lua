@@ -1,8 +1,8 @@
-vim.pack.add({
-    { src = "https://github.com/folke/which-key.nvim" },
-}, { confirm = false })
-
 vim.defer_fn(function()
+    vim.pack.add({
+        { src = "https://github.com/folke/which-key.nvim" },
+    }, { confirm = false })
+
     require("which-key").setup({
         plugins = {
             marks = false,

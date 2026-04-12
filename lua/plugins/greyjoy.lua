@@ -1,8 +1,8 @@
-vim.pack.add({
-    { src = "https://github.com/desdic/greyjoy.nvim" },
-}, { confirm = false })
-
 vim.defer_fn(function()
+    vim.pack.add({
+        { src = "https://github.com/desdic/greyjoy.nvim" },
+    }, { confirm = false })
+
     local greyjoy = require("greyjoy")
     local condition = require("greyjoy.conditions")
 

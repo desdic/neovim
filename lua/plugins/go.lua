@@ -1,6 +1,7 @@
 vim.defer_fn(function()
     vim.pack.add({
         { src = "https://github.com/ray-x/go.nvim" },
+        { src = "https://github.com/ray-x/guihua.lua" },
     }, { confirm = false })
 
     require("go").setup({

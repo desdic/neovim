@@ -1,4 +1,4 @@
--- No share or backup files in /mnt or /boot
+-- No shada or backup files in /mnt or /boot
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     pattern = { "/mnt/*", "/boot/*" },
     callback = function()

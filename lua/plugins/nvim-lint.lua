@@ -25,7 +25,7 @@ vim.defer_fn(function()
     lint.linters_by_ft = {
         c = { "flawfinder" },
         cmake = { "cmakelint" },
-        go = { "golangcilint" },
+        -- go = { "golangcilint" },
         json = { "jq" },
         python = { "ruff", "pylint" },
         sh = { "shellcheck" },

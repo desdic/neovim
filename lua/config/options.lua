@@ -44,11 +44,12 @@ opt.softtabstop = 4
 opt.smartindent = true
 opt.autoindent = true
 
+opt.laststatus = 3 -- Single status line
+
 o.cmdheight = 1 -- Set height to prevent 'press enter to continue'
 o.hidden = true -- Allow to switch buffer without saving
 o.backspace = "indent,eol,start" -- allow backspace on indent, end of line or insert mode start position
 o.jumpoptions = "view" -- save 'view' when jumping
-o.updatetime = 300 -- Faster completion
 o.showmode = false -- We don't need to see things like -- INSERT -- anymore
 o.ruler = true -- Make search act like search in modern browsers
 o.incsearch = true
@@ -77,7 +78,7 @@ o.winborder = "rounded" -- Give all floating windows a border
 o.more = false -- Don't wait on `more`
 
 -- Update times and timeouts.
-o.updatetime = 300
+o.updatetime = 300 -- Faster completion
 o.timeoutlen = 500
 o.ttimeoutlen = 10
 
@@ -102,16 +103,5 @@ opt.guicursor = {
     "r-cr:hor20", -- Replace, Command-line replace: horizontal bar (20%)
     "o:hor50", -- Operator-pending
 }
-
-require("vim._core.ui2").enable({
-    enable = true,
-    msg = {
-        target = "cmd", -- options: cmd(classic), msg(similar to noice)
-        pager = { height = 1 },
-        msg = { height = 0.5, timeout = 4500 },
-        dialog = { height = 0.5 },
-        cmd = { height = 0.5 },
-    },
-})
 
 vim.cmd.packadd("nvim.undotree")

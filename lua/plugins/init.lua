@@ -1,16 +1,18 @@
 -- Order how I want to load plugins
 
-require("plugins.nvim-treesitter") -- archived
-require("plugins.simple-treesitter")
+-- require("plugins.nvim-treesitter") -- archived
+-- require("plugins.simple-treesitter")
+require("plugins.arborist")
 
 require("plugins.nvim-web-devicons")
-require("plugins.catppuccin")
 
 require("plugins.snacks")
 require("plugins.marlin")
 require("plugins.gitsigns")
 require("plugins.guttermarks")
-require("plugins.lualine")
+-- require("plugins.lualine")
+
+require("plugins.catppuccin")
 
 require("plugins.oil")
 require("plugins.mini")

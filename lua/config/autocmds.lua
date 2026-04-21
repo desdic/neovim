@@ -170,17 +170,11 @@ vim.api.nvim_create_user_command("Scratch", function()
     end
 end, { desc = "Open a scratch buffer", nargs = 0 })
 
--- Enable treesitter
-vim.api.nvim_create_autocmd({ "FileType", "LspAttach" }, {
-    group = vim.api.nvim_create_augroup("TreesitterSetup", { clear = true }),
-    callback = function(event)
-        local lang = vim.treesitter.language.get_lang(event.match) or event.match
-
-        if vim.treesitter.query.get(lang, "highlights") then
-            vim.treesitter.start()
-        end
-        if vim.treesitter.query.get(lang, "indents") then
-            vim.bo.indentexpr = "v:lua.require('nvim-treesitter').indentexpr()"
-        end
+local statusline = require("core/statusline")
+local stl_group = vim.api.nvim_create_augroup("StatusLineGroup", { clear = true })
+vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter", "ModeChanged", "VimResized", "BufDelete", "LspProgress" }, {
+    group = stl_group,
+    callback = function()
+        statusline.update()
     end,
 })

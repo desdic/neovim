@@ -170,11 +170,10 @@ vim.api.nvim_create_user_command("Scratch", function()
     end
 end, { desc = "Open a scratch buffer", nargs = 0 })
 
-local statusline = require("core/statusline")
-local stl_group = vim.api.nvim_create_augroup("StatusLineGroup", { clear = true })
 vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter", "ModeChanged", "VimResized", "BufDelete", "LspProgress" }, {
-    group = stl_group,
+    group = vim.api.nvim_create_augroup("StatuslineFix", { clear = true }),
+    pattern = "*:*",
     callback = function()
-        statusline.update()
+        vim.cmd("redrawstatus!")
     end,
 })

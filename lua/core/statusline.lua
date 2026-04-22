@@ -1,5 +1,3 @@
-local M = {}
-
 local function setup_hl()
     local mocha = {
         bg = "#1e1e2e",
@@ -98,30 +96,22 @@ local function get_git_branch()
     return string.format("%s", branch)
 end
 
+local lsp_msg = ""
 vim.api.nvim_create_autocmd("LspProgress", {
-    callback = function(ev)
-        local value = ev.data.params.value
-
-        if value.kind ~= "end" and "running" or "success" then
-            if value.kind == "end" then
-                LSPPROGRESS = ""
-            else
-                local pct = value.percentage or ""
-                LSPPROGRESS = table.concat({
-                    "󱥸 ",
-                    string.format("%s ", pct),
-                    string.format("%s", value.title),
-                })
-            end
+    callback = function(args)
+        local data = args.data.params.value
+        if data.kind == "end" then
+            lsp_msg = ""
+        else
+            local title = data.title or "LSP"
+            local percentage = data.percentage and (data.percentage .. "%%") or ""
+            lsp_msg = string.format(" 󱥸  %3s %s ", percentage, title)
         end
+        vim.cmd("redrawstatus!")
     end,
 })
 
-local lsp_progress_component = function()
-    return LSPPROGRESS or ""
-end
-
-function M.update()
+function _G.simple_statusline()
     local mode_settings = {
         ["n"] = { name = "N", hl = "Normal" },
         ["no"] = { name = "OP-PENDING", hl = "Pending" },
@@ -178,7 +168,7 @@ function M.update()
     local clients = vim.lsp.get_clients and vim.lsp.get_clients({ bufnr = 0 })
     local lsp_status = (#clients > 0) and "  " or " "
 
-    vim.opt.statusline = table.concat({
+    return table.concat({
         hl_l,
         " ",
         m_char .. " ", -- mode char
@@ -192,7 +182,7 @@ function M.update()
         hl_bg,
         marlin_component(),
         "%=", -- Fill rest of bar with vibrant color
-        lsp_progress_component(),
+        lsp_msg,
         spaces(),
         "  ",
         icon .. " " .. ft .. lsp_status, -- filetype/lsp status
@@ -203,4 +193,4 @@ function M.update()
     })
 end
 
-return M
+vim.opt.statusline = "%!v:lua.simple_statusline()"

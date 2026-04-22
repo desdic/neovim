@@ -107,9 +107,46 @@ vim.api.nvim_create_autocmd("LspProgress", {
             local percentage = data.percentage and (data.percentage .. "%%") or ""
             lsp_msg = string.format(" 󱥸  %3s %s ", percentage, title)
         end
-        vim.cmd("redrawstatus!")
     end,
 })
+
+local function get_filename()
+    local path = vim.fs.normalize(vim.fn.expand("%:p"))
+    local prefix, prefix_path = "", ""
+
+    if vim.startswith(path, "term:/") then
+        return "  "
+    end
+
+    if vim.startswith(path, "diffview") then
+        return path
+    end
+
+    if vim.api.nvim_win_get_width(0) < math.floor(vim.o.columns / 3) then
+        path = vim.fn.pathshorten(path)
+    else
+        local special_dirs = {
+            DOTFILES = vim.env.XDG_CONFIG_HOME,
+            HOME = vim.env.HOME,
+            ONE = vim.g.work_projects_dir,
+            PERSONAL = vim.g.personal_projects_dir,
+        }
+        for dir_name, dir_path in pairs(special_dirs) do
+            if vim.startswith(path, vim.fs.normalize(dir_path)) and #dir_path > #prefix_path then
+                prefix, prefix_path = dir_name, dir_path
+            end
+        end
+        if prefix ~= "" then
+            path = path:gsub("^" .. prefix_path, "")
+            prefix = string.format(" 󰉋 %s", prefix)
+        end
+    end
+
+    path = path:gsub("^/", "")
+    path = path:gsub("/", "  ")
+
+    return prefix .. " " .. path
+end
 
 function _G.simple_statusline()
     local mode_settings = {
@@ -181,8 +218,9 @@ function _G.simple_statusline()
         "",
         hl_bg,
         marlin_component(),
-        "%=", -- Fill rest of bar with vibrant color
+        "%=",
         lsp_msg,
+        "%=",
         spaces(),
         "  ",
         icon .. " " .. ft .. lsp_status, -- filetype/lsp status
@@ -193,4 +231,9 @@ function _G.simple_statusline()
     })
 end
 
+function _G.simple_winbar()
+    return "%=" .. get_filename() .. " %m%r"
+end
+
 vim.opt.statusline = "%!v:lua.simple_statusline()"
+vim.opt.winbar = "%!v:lua.simple_winbar()"

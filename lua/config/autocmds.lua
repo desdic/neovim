@@ -170,10 +170,41 @@ vim.api.nvim_create_user_command("Scratch", function()
     end
 end, { desc = "Open a scratch buffer", nargs = 0 })
 
-vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter", "ModeChanged", "VimResized", "BufDelete", "LspProgress" }, {
-    group = vim.api.nvim_create_augroup("StatuslineFix", { clear = true }),
-    pattern = "*:*",
+local group = vim.api.nvim_create_augroup("StatuslineFix", { clear = true })
+local function safe_redraw(buf)
+    local success, ft = pcall(vim.api.nvim_get_option_value, "filetype", { buf = buf })
+    if not success or ft == "snacks_picker_input" then
+        return
+    end
+
+    local mode = vim.api.nvim_get_mode().mode
+
+    -- Do not redraw if we are actively typing (Insert/Command)
+    -- This prevents the "cursor bounce" in pickers and command line.
+    if mode == "i" or mode == "c" or mode == "ic" then
+        return
+    end
+
+    vim.cmd("redrawstatus!")
+end
+
+vim.api.nvim_create_autocmd("ModeChanged", {
+    group = group,
+    -- Pattern: Any mode TO Visual (v), Visual Line (V), or Visual Block (\22)
+    pattern = "*:[vV\22]*",
     callback = function()
-        vim.cmd("redrawstatus!")
+        if vim.bo.filetype:find("snacks_picker") then
+            return
+        end
+
+        vim.cmd("redrawstatus")
+    end,
+})
+
+vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter", "VimResized", "LspProgress" }, {
+    group = group,
+    pattern = "*",
+    callback = function(args)
+        safe_redraw(args.buf)
     end,
 })

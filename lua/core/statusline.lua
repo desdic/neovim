@@ -101,7 +101,10 @@ vim.api.nvim_create_autocmd("LspProgress", {
     callback = function(args)
         local data = args.data.params.value
         if data.kind == "end" then
-            lsp_msg = ""
+            vim.defer_fn(function()
+                lsp_msg = ""
+                vim.cmd("redrawstatus!")
+            end, 1000)
         else
             local title = data.title or "LSP"
             local percentage = data.percentage and (data.percentage .. "%%") or ""

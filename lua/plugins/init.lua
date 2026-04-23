@@ -10,7 +10,6 @@ require("plugins.snacks")
 require("plugins.marlin")
 require("plugins.gitsigns")
 require("plugins.guttermarks")
--- require("plugins.lualine")
 
 require("plugins.catppuccin")
 

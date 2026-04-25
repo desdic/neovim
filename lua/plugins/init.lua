@@ -9,7 +9,6 @@ require("plugins.nvim-web-devicons")
 require("plugins.snacks")
 require("plugins.marlin")
 require("plugins.gitsigns")
-require("plugins.guttermarks")
 
 require("plugins.catppuccin")
 

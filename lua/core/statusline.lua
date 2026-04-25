@@ -29,6 +29,31 @@ local function setup_hl()
 end
 
 setup_hl()
+local hide_in_width = function(fns, size)
+    if vim.fn.winwidth(0) > size then
+        local func_list = type(fns) == "table" and fns or { fns }
+
+        local results = {}
+
+        for _, fn in ipairs(func_list) do
+            if type(fn) == "function" then
+                local res = fn()
+
+                if res and res ~= "" then
+                    table.insert(results, tostring(res))
+                end
+            else
+                if type(fn) == "string" then
+                    table.insert(results, fn)
+                end
+            end
+        end
+
+        return string.format("%s", table.concat(results, " "))
+    end
+
+    return ""
+end
 
 local function get_file_icon(filename, extension)
     local has_devicons, devicons = pcall(require, "nvim-web-devicons")
@@ -91,7 +116,7 @@ local function get_git_branch()
         return ""
     end
 
-    local branch = "  " .. gs.head
+    local branch = "  " .. gs.head .. "  "
 
     return string.format("%s", branch)
 end
@@ -112,6 +137,10 @@ vim.api.nvim_create_autocmd("LspProgress", {
         end
     end,
 })
+
+local function get_lsp_msg()
+    return lsp_msg
+end
 
 local function get_filename()
     local path = vim.fs.normalize(vim.fn.expand("%:p"))
@@ -215,14 +244,13 @@ function _G.simple_statusline()
         left_arrow,
         "",
         get_git_branch(),
-        "  ",
         statusline_diagnostics(),
         hl_arrow,
         "",
         hl_bg,
         marlin_component(),
         "%=",
-        lsp_msg,
+        hide_in_width({ get_lsp_msg() }, 80),
         "%=",
         spaces(),
         "  ",

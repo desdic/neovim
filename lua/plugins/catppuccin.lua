@@ -53,10 +53,6 @@ require("catppuccin").setup({
                 fg = colors.text,
                 style = {},
             },
-            GutterMarksLocal = {
-                fg = colors.mauve,
-                style = {},
-            },
         }
     end,
 })

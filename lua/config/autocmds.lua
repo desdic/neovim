@@ -208,3 +208,11 @@ vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter", "VimResized", "LspProgress
         safe_redraw(args.buf)
     end,
 })
+
+vim.api.nvim_create_autocmd("User", {
+    pattern = "MarlinPost",
+    group = group,
+    callback = function(args)
+        safe_redraw(args.buf)
+    end,
+})

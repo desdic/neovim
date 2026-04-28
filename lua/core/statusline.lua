@@ -55,13 +55,13 @@ local hide_in_width = function(fns, size)
     return ""
 end
 
-local function get_file_icon(filename, extension)
-    local has_devicons, devicons = pcall(require, "nvim-web-devicons")
-    if has_devicons then
-        local icon, _ = devicons.get_icon(filename, extension, { default = true })
-        return icon
+local function get_file_icon(filename)
+    local has_minicons, miniicons = pcall(require, "mini.icons")
+    if has_minicons then
+        local icon, hl, _ = miniicons.get("file", filename)
+        return "%#" .. hl .. "#" .. icon
     end
-    return " "
+    return ""
 end
 
 local function get_diagnostic_count(severity)
@@ -232,8 +232,7 @@ function _G.simple_statusline()
 
     local ft = (vim.bo.filetype ~= "" and vim.bo.filetype or "none"):lower()
     local fname = vim.fn.expand("%:t") ~= "" and vim.fn.expand("%:t") or "init"
-    local extension = vim.fn.fnamemodify(fname, ":e")
-    local icon = get_file_icon(fname, extension)
+    local icon = get_file_icon(fname)
     local clients = vim.lsp.get_clients and vim.lsp.get_clients({ bufnr = 0 })
     local lsp_status = (#clients > 0) and "  " or " "
 
@@ -254,7 +253,11 @@ function _G.simple_statusline()
         "%=",
         spaces(),
         "  ",
-        icon .. " " .. ft .. lsp_status, -- filetype/lsp status
+        icon,
+        " ",
+        ft,
+        hl_bg,
+        lsp_status, -- filetype/lsp status
         right_arrow,
         "",
         left_arrow,

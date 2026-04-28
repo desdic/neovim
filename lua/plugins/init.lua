@@ -4,16 +4,14 @@
 -- require("plugins.simple-treesitter")
 require("plugins.arborist")
 
-require("plugins.nvim-web-devicons")
-
 require("plugins.snacks")
 require("plugins.marlin")
 require("plugins.gitsigns")
+require("plugins.mini")
 
 require("plugins.catppuccin")
 
 require("plugins.oil")
-require("plugins.mini")
 require("plugins.luasnippets")
 require("plugins.lazydev")
 require("plugins.blink-cmp")

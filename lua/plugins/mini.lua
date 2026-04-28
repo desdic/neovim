@@ -13,7 +13,9 @@ require("mini.tabline").setup({
 vim.defer_fn(function()
     vim.pack.add({
         { src = "https://github.com/nvim-mini/mini.surround" },
+        { src = "https://github.com/nvim-mini/mini.icons" },
     }, { confirm = false })
+    require("mini.icons").setup({})
 
     require("mini.surround").setup({
         mappings = {

@@ -1,3 +1,7 @@
+function trim(s)
+    return s:match("^%s*(.-)%s*$")
+end
+
 local function setup_hl()
     local mocha = {
         bg = "#1e1e2e",
@@ -93,7 +97,12 @@ local spaces = function()
         indent = "spaces"
     end
 
-    return indent .. ":" .. vim.api.nvim_get_option_value("shiftwidth", opt)
+    local indents = vim.api.nvim_get_option_value("shiftwidth", opt)
+    if indents == 0 then
+        indents = vim.api.nvim_get_option_value("tabstop", opt)
+    end
+
+    return indent .. ":" .. indents
 end
 
 local marlin_component = function()
@@ -132,8 +141,17 @@ vim.api.nvim_create_autocmd("LspProgress", {
             end, 1000)
         else
             local title = data.title or "LSP"
-            local percentage = data.percentage and (data.percentage .. "%%") or ""
-            lsp_msg = string.format(" 󱥸  %3s %s ", percentage, title)
+            local percentage = data.percentage and tostring(data.percentage) or ""
+            if percentage ~= "" then
+                percentage = trim(percentage) .. "%%"
+            end
+            local msg
+            if percentage ~= "" then
+                msg = string.format(" 󱥸  %3s %s ", percentage, trim(title))
+            else
+                msg = string.format(" 󱥸  %s ", trim(title))
+            end
+            lsp_msg = msg
         end
     end,
 })

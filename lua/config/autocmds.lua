@@ -7,7 +7,6 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     end,
 })
 
--- Show yanking for 200ms
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
     callback = function()
         vim.hl.on_yank({})

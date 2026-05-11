@@ -1,4 +1,4 @@
-function trim(s)
+local function trim(s)
     return s:match("^%s*(.-)%s*$")
 end
 

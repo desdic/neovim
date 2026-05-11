@@ -35,7 +35,6 @@ keymap("n", "<leader>z", function()
 end, { desc = "toggle" })
 
 keymap("n", "<leader>fx", function()
-    local snacks = require("snacks")
     local lookup = {}
 
     local function get_choices()
@@ -59,7 +58,7 @@ keymap("n", "<leader>fx", function()
         return items
     end
 
-    snacks.picker.pick({
+    require("snacks").picker.pick({
         source = "select",
         finder = get_choices,
         title = "Marlin",
@@ -95,21 +94,6 @@ for index = 1, 4 do
         marlin.open(index, { use_split = true })
     end, { desc = "goto " .. index })
 end
-
--- local is_lazy_open = function()
---     local buffers = vim.api.nvim_list_bufs()
---     for _, buf in ipairs(buffers) do
---         local filetype = vim.bo[buf].filetype
---
---         if filetype == "lazy" then
---             return true
---         end
---         if filetype == "lazy_backdrop" then
---             return true
---         end
---     end
---     return false
--- end
 
 vim.api.nvim_create_autocmd("VimEnter", {
     group = vim.api.nvim_create_augroup("restore_marlin", { clear = true }),

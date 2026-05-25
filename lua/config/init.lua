@@ -1,0 +1,6 @@
+require("config.options")
+-- require("config.ui2")
+require("config.keymaps")
+require("config.lsp")
+require("config.autocmds")
+require("config.filetype")

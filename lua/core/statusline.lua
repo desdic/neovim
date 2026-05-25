@@ -59,15 +59,6 @@ local hide_in_width = function(fns, size)
     return ""
 end
 
-local function get_file_icon(filename)
-    local has_minicons, miniicons = pcall(require, "mini.icons")
-    if has_minicons then
-        local icon, hl, _ = miniicons.get("file", filename)
-        return "%#" .. hl .. "#" .. icon
-    end
-    return ""
-end
-
 local function get_diagnostic_count(severity)
     if not vim.diagnostic.is_enabled() then
         return 0
@@ -250,7 +241,7 @@ function _G.simple_statusline()
 
     local ft = (vim.bo.filetype ~= "" and vim.bo.filetype or "none"):lower()
     local fname = vim.fn.expand("%:t") ~= "" and vim.fn.expand("%:t") or "init"
-    local icon = get_file_icon(fname)
+    local icon = require("core.utils").get_mini_file_icon(fname, true)
     local clients = vim.lsp.get_clients and vim.lsp.get_clients({ bufnr = 0 })
     local lsp_status = (#clients > 0) and "  " or " "
 

@@ -3,9 +3,7 @@ vim.defer_fn(function()
         { src = "https://github.com/mistweaverco/kulala.nvim" },
     }, { confirm = false })
 
-    require("kulala").setup({
-        additional_curl_options = { "-n" },
-    })
+    require("kulala").setup({})
 
     vim.keymap.set("n", "<leader>Rs", function()
         require("kulala").run()

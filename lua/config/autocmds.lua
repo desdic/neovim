@@ -7,6 +7,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     end,
 })
 
+-- Highlight on yank
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
     callback = function()
         vim.hl.on_yank({})
@@ -138,6 +139,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
     end,
 })
 
+-- Auto imports in zig
 vim.api.nvim_create_autocmd("BufWritePre", {
     pattern = { "*.zig", "*.zon" },
     callback = function(_)
@@ -154,20 +156,6 @@ vim.api.nvim_create_autocmd("VimResized", {
         vim.cmd("wincmd =")
     end,
 })
-
-vim.api.nvim_create_user_command("Scratch", function()
-    vim.cmd("bel new")
-    local buf = vim.api.nvim_get_current_buf()
-    for name, value in pairs({
-        filetype = "scratch",
-        buftype = "nofile",
-        bufhidden = "wipe",
-        swapfile = false,
-        modifiable = true,
-    }) do
-        vim.api.nvim_set_option_value(name, value, { buf = buf })
-    end
-end, { desc = "Open a scratch buffer", nargs = 0 })
 
 local group = vim.api.nvim_create_augroup("StatuslineFix", { clear = true })
 local function safe_redraw(buf)
@@ -215,3 +203,24 @@ vim.api.nvim_create_autocmd("User", {
         safe_redraw(args.buf)
     end,
 })
+
+vim.api.nvim_create_user_command("SaveMacro", function(params)
+    local name = params.args
+    local dir = vim.fn.expand("~/.config/nvim/macros/")
+    local file = dir .. name .. ".macro"
+    local content = vim.fn.getreg("q")
+
+    vim.fn.mkdir(dir, "p")
+
+    vim.fn.writefile({ content }, file, "a")
+end, { nargs = 1 })
+
+vim.api.nvim_create_user_command("LoadMacro", function(params)
+    local name = params.args
+    local dir = vim.fn.expand("~/.config/nvim/macros/")
+    local file = dir .. name .. ".macro"
+
+    local content = vim.fn.readfile(file)
+
+    vim.fn.setreg("q", content)
+end, { nargs = 1 })

@@ -1,7 +1,6 @@
 -- Order how I want to load plugins
 
 -- require("plugins.nvim-treesitter") -- archived
--- require("plugins.simple-treesitter")
 require("plugins.arborist")
 
 require("plugins.snacks")

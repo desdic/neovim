@@ -5,7 +5,6 @@ require("plugins.arborist")
 
 require("plugins.snacks")
 require("plugins.marlin")
-require("plugins.gitsigns")
 require("plugins.mini")
 
 require("plugins.catppuccin")

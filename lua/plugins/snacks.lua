@@ -96,3 +96,7 @@ end, { desc = "[D]elete [b]buffer without disrupting window layout" })
 vim.keymap.set("n", "<leader><space>", function()
     require("snacks").picker.smart()
 end, { desc = "Snacks smart picker" })
+
+vim.keymap.set("n", "<leader>sR", function()
+    require("snacks").picker.resume()
+end, { desc = "Snacks resume" })

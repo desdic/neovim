@@ -1,7 +1,7 @@
 vim.opt.showtabline = 2
 
 function _G.BuildInTabline()
-    local s = ""
+    local s = " "
 
     local bufs = vim.fn.getbufinfo({ buflisted = 1 })
     local current_buf = vim.api.nvim_get_current_buf()

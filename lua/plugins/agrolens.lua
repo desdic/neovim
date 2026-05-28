@@ -1,5 +1,6 @@
 vim.defer_fn(function()
     vim.pack.add({
+        { src = "https://github.com/nvim-lua/plenary.nvim.git" },
         { src = "https://github.com/desdic/agrolens.nvim" },
     }, { confirm = false })
 

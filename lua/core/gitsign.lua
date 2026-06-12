@@ -84,3 +84,35 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "TextChanged", "Insert
     pattern = "*",
     callback = update_git_signs,
 })
+
+local timer = vim.uv.new_timer()
+
+--   1000: Wait 1 second before starting the first check
+--   5000: Repeat every 5 seconds
+timer:start(
+    1000,
+    5000,
+    vim.schedule_wrap(function()
+        local bufnr = vim.api.nvim_get_current_buf()
+        if not vim.api.nvim_buf_is_valid(bufnr) then
+            return
+        end
+
+        local buftype = vim.bo[bufnr].buftype
+        if buftype == "" then
+            update_git_signs()
+        end
+    end)
+)
+
+-- Cleanup timer
+vim.api.nvim_create_autocmd("VimLeavePre", {
+    group = signs_group,
+    pattern = "*",
+    callback = function()
+        if timer and not timer:is_closing() then
+            timer:stop()
+            timer:close()
+        end
+    end,
+})

@@ -11,7 +11,6 @@ require("plugins.catppuccin")
 
 require("plugins.oil")
 require("plugins.luasnippets")
-require("plugins.lazydev")
 require("plugins.blink-cmp")
 require("plugins.quicker")
 require("plugins.vim-tmux-navigator")

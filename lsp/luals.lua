@@ -30,6 +30,10 @@ return {
                 -- (most likely LuaJIT in the case of Neovim)
                 version = "LuaJIT",
             },
+            diagnostics = {
+                -- Tells LuaLS that 'vim' is a safe, valid global variable
+                globals = { "vim" },
+            },
             -- Make the server aware of Neovim runtime files
             workspace = {
                 checkThirdParty = false,

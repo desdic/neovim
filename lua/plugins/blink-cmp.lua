@@ -39,7 +39,7 @@ require("blink.cmp").setup({
     sources = {
         -- Disable some sources in comments and strings.
         default = function()
-            local sources = { "lsp", "buffer", "lazydev" }
+            local sources = { "lsp", "buffer" }
             local ok, node = pcall(vim.treesitter.get_node)
 
             if ok and node then
@@ -60,14 +60,10 @@ require("blink.cmp").setup({
         end,
 
         providers = {
-            lazydev = {
-                name = "LazyDev",
-                module = "lazydev.integrations.blink",
-            },
             lsp = {
                 -- min_keyword_length = 3,
                 max_items = 10,
-                fallbacks = { "buffer", "lazydev" },
+                fallbacks = { "buffer" },
                 score_offset = 4,
             },
             snippets = {

@@ -1,6 +1,6 @@
 vim.pack.add({
-    { src = "https://github.com/ray-x/go.nvim" },
-    { src = "https://github.com/ray-x/guihua.lua" },
+    { src = "https://github.com/ray-x/go.nvim", load = false },
+    { src = "https://github.com/ray-x/guihua.lua", load = false },
 }, { confirm = false })
 
 vim.api.nvim_create_autocmd({ "PackChanged" }, {
@@ -25,6 +25,8 @@ vim.api.nvim_create_autocmd("FileType", {
         if vim.g.go_nvim_loaded then
             return
         end
+
+        vim.cmd("packadd go.nvim")
 
         require("go").setup({
             lsp_inlay_hints = { enable = false },

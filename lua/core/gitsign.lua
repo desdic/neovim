@@ -104,6 +104,10 @@ local function update_git_branch()
         cwd = file_dir,
         stdout_buffered = true,
         on_stdout = function(_, data)
+            if not vim.api.nvim_buf_is_valid(bufnr) then
+                return
+            end
+
             if data and data[1] and data[1] ~= "" then
                 vim.b[bufnr].git_branch = trim(data[1])
             else

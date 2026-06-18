@@ -1,15 +1,17 @@
+local trim = require("core.utils").trim
+
 local function update_git_signs()
     local bufnr = vim.api.nvim_get_current_buf()
 
     if not vim.api.nvim_buf_is_valid(bufnr) or vim.bo[bufnr].buftype ~= "" then
         return
     end
+
     local file_path = vim.api.nvim_buf_get_name(bufnr)
-    if file_path == "" then
+    if file_path == "" or vim.startswith(file_path, "oil://") or vim.startswith(file_path, "term://") then
         return
     end
 
-    -- Define explicit colors for your signs here
     vim.cmd([[
     hi default GitSignsAdd    guifg=#83a598
     hi default GitSignsChange guifg=#fe8019
@@ -45,12 +47,10 @@ local function update_git_signs()
 
             for _, line in ipairs(output) do
                 if vim.startswith(line, "@@") then
-                    -- Robustly parse the hunk header format: @@ -old_start[,old_len] +new_start[,new_len] @@
                     local old_info, new_info = line:match("@@ %-(%S+) %+(%S+) @@")
 
                     if old_info and new_info then
-                        -- Split standard "start,len" strings into separate components
-                        local old_start, old_len = old_info:match("(%d+),?(%d*)")
+                        local _, old_len = old_info:match("(%d+),?(%d*)")
                         local new_start, new_len = new_info:match("(%d+),?(%d*)")
 
                         old_len = tonumber(old_len) or (old_info:find(",") and 0 or 1)
@@ -69,6 +69,7 @@ local function update_git_signs()
                             vim.fn.sign_place(0, "SimpleGitSigns", sign_type, bufnr, {
                                 lnum = start_line + i,
                                 priority = 10,
+                                signtype = sign_type,
                             })
                         end
                     end
@@ -78,17 +79,59 @@ local function update_git_signs()
     })
 end
 
--- Automatically trigger the function on buffer events
-vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "TextChanged", "InsertLeave" }, {
-    group = vim.api.nvim_create_augroup("SimpleGitSignsGroup", { clear = true }),
+local function update_git_branch()
+    local bufnr = vim.api.nvim_get_current_buf()
+    if not vim.api.nvim_buf_is_valid(bufnr) or vim.bo[bufnr].buftype ~= "" then
+        return
+    end
+
+    local file_dir = vim.fn.expand("%:p:h")
+    if file_dir == "" or vim.startswith(file_dir, "term://") then
+        return
+    end
+
+    -- Clean up Oil prefix protocols so git job is run inside a normal OS path string
+    if vim.startswith(file_dir, "oil://") then
+        file_dir = file_dir:gsub("^oil://", "")
+    end
+
+    -- If cleaning up left it unresolvable or missing, default fallback context to shell root context
+    if not vim.fn.isdirectory(file_dir) or file_dir == "" then
+        return
+    end
+
+    vim.fn.jobstart("git branch --show-current", {
+        cwd = file_dir,
+        stdout_buffered = true,
+        on_stdout = function(_, data)
+            if data and data[1] and data[1] ~= "" then
+                vim.b[bufnr].git_branch = trim(data[1])
+            else
+                vim.b[bufnr].git_branch = ""
+            end
+        end,
+        on_exit = function(_, code)
+            if code ~= 0 then
+                vim.b[bufnr].git_branch = ""
+            end
+            vim.cmd("redrawstatus!")
+        end,
+    })
+end
+
+local simple_git_group = vim.api.nvim_create_augroup("SimpleGitSignsGroup", { clear = true })
+
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "TextChanged", "InsertLeave", "FocusGained" }, {
+    group = simple_git_group,
     pattern = "*",
-    callback = update_git_signs,
+    callback = function()
+        update_git_signs()
+        update_git_branch()
+    end,
 })
 
 local timer = vim.uv.new_timer()
 
---   1000: Wait 1 second before starting the first check
---   5000: Repeat every 5 seconds
 timer:start(
     1000,
     5000,
@@ -98,16 +141,15 @@ timer:start(
             return
         end
 
-        local buftype = vim.bo[bufnr].buftype
-        if buftype == "" then
+        if vim.bo[bufnr].buftype == "" then
             update_git_signs()
+            update_git_branch()
         end
     end)
 )
 
--- Cleanup timer
 vim.api.nvim_create_autocmd("VimLeavePre", {
-    group = signs_group,
+    group = simple_git_group,
     pattern = "*",
     callback = function()
         if timer and not timer:is_closing() then

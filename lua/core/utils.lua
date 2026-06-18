@@ -53,4 +53,8 @@ M.get_mini_file_icon = function(filename, is_active)
     return ""
 end
 
+M.trim = function(s)
+    return s:match("^%s*(.-)%s*$")
+end
+
 return M

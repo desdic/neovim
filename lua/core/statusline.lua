@@ -1,6 +1,4 @@
-local function trim(s)
-    return s:match("^%s*(.-)%s*$")
-end
+local trim = require("core.utils").trim
 
 local function setup_hl()
     local mocha = {
@@ -12,37 +10,38 @@ local function setup_hl()
         v = "#cba6f7", -- Mauve
         r = "#f38ba8", -- Red
         c = "#fab387", -- Peach
+        p = "#f9e2af", -- Yellow (For Pending mode)
     }
 
     local modes = {
-        n = { name = "Normal", cols = mocha.n },
-        i = { name = "Insert", cols = mocha.i },
-        v = { name = "Visual", cols = mocha.v },
-        r = { name = "Replace", cols = mocha.r },
-        c = { name = "Command", cols = mocha.c },
+        Normal = mocha.n,
+        Insert = mocha.i,
+        Visual = mocha.v,
+        Replace = mocha.r,
+        Command = mocha.c,
+        Pending = mocha.p,
     }
 
-    for _, m in pairs(modes) do
-        vim.api.nvim_set_hl(0, "SL" .. m.name .. "Norm", { fg = mocha.base, bg = m.cols, bold = true })
-        vim.api.nvim_set_hl(0, "SL" .. m.name .. "Invert", { fg = m.cols, bg = mocha.base, bold = true })
-        vim.api.nvim_set_hl(0, "SL" .. m.name .. "Left", { fg = m.cols, bg = mocha.special, bold = true })
-        vim.api.nvim_set_hl(0, "SL" .. m.name .. "Right", { fg = mocha.special, bg = mocha.bg, bold = true })
+    for name, cols in pairs(modes) do
+        vim.api.nvim_set_hl(0, "SL" .. name .. "Norm", { fg = mocha.base, bg = cols, bold = true })
+        vim.api.nvim_set_hl(0, "SL" .. name .. "Invert", { fg = cols, bg = mocha.base, bold = true })
+        vim.api.nvim_set_hl(0, "SL" .. name .. "Left", { fg = cols, bg = mocha.special, bold = true })
+        vim.api.nvim_set_hl(0, "SL" .. name .. "Right", { fg = mocha.special, bg = mocha.bg, bold = true })
     end
     vim.api.nvim_set_hl(0, "SLBG", { bg = mocha.bg, bold = true })
     vim.api.nvim_set_hl(0, "SLARROW", { fg = mocha.special, bg = mocha.bg, bold = true })
 end
 
 setup_hl()
+
 local hide_in_width = function(fns, size)
     if vim.fn.winwidth(0) > size then
         local func_list = type(fns) == "table" and fns or { fns }
-
         local results = {}
 
         for _, fn in ipairs(func_list) do
             if type(fn) == "function" then
                 local res = fn()
-
                 if res and res ~= "" then
                     table.insert(results, tostring(res))
                 end
@@ -55,7 +54,6 @@ local hide_in_width = function(fns, size)
 
         return string.format("%s", table.concat(results, " "))
     end
-
     return ""
 end
 
@@ -63,8 +61,6 @@ local function get_diagnostic_count(severity)
     if not vim.diagnostic.is_enabled() then
         return 0
     end
-
-    -- 0 refers to the current buffer
     local count = #vim.diagnostic.get(0, { severity = severity })
     return count > 0 and count or 0
 end
@@ -72,7 +68,6 @@ end
 local function statusline_diagnostics()
     local errors = get_diagnostic_count(vim.diagnostic.severity.ERROR)
     local warnings = get_diagnostic_count(vim.diagnostic.severity.WARN)
-
     return "  " .. errors .. "  " .. warnings .. " "
 end
 
@@ -111,14 +106,11 @@ local marlin_component = function()
 end
 
 local function get_git_branch()
-    local gs = vim.b.gitsigns_status_dict
-    if not gs or gs.head == "" then
+    local branch = vim.b.git_branch
+    if not branch or branch == "" then
         return ""
     end
-
-    local branch = "  " .. gs.head .. "  "
-
-    return string.format("%s", branch)
+    return "  " .. branch .. "  "
 end
 
 local lsp_msg = ""
@@ -229,26 +221,33 @@ function _G.simple_statusline()
         ["t"] = { name = "T", hl = "Command" },
     }
 
-    local mode_name = mode_settings[vim.fn.mode()] or {}
-    local m_char = mode_name.name
+    local mode_info = mode_settings[vim.fn.mode()] or { name = "N", hl = "Normal" }
+    local m_char = mode_info.name
+    local hl_group = mode_info.hl
 
-    local hl_l = "%#SL" .. mode_name.hl .. "Norm#"
+    local hl_l = "%#SL" .. hl_group .. "Norm#"
     local hl_bg = "%#SLBG#"
     local hl_arrow = "%#SLARROW#"
 
-    local left_arrow = "%#SL" .. mode_name.hl .. "Left#"
-    local right_arrow = "%#SL" .. mode_name.hl .. "Right#"
+    local left_arrow = "%#SL" .. hl_group .. "Left#"
+    local right_arrow = "%#SL" .. hl_group .. "Right#"
 
     local ft = (vim.bo.filetype ~= "" and vim.bo.filetype or "none"):lower()
     local fname = vim.fn.expand("%:t") ~= "" and vim.fn.expand("%:t") or "init"
-    local icon = require("core.utils").get_mini_file_icon(fname, true)
-    local clients = vim.lsp.get_clients and vim.lsp.get_clients({ bufnr = 0 })
+
+    local icon = ""
+    local has_utils, utils = pcall(require, "core.utils")
+    if has_utils and utils.get_mini_file_icon then
+        icon = utils.get_mini_file_icon(fname, true)
+    end
+
+    local clients = vim.lsp.get_clients and vim.lsp.get_clients({ bufnr = 0 }) or {}
     local lsp_status = (#clients > 0) and "  " or " "
 
     return table.concat({
         hl_l,
         " ",
-        m_char .. " ", -- mode char
+        m_char .. " ",
         left_arrow,
         "",
         get_git_branch(),
@@ -266,11 +265,11 @@ function _G.simple_statusline()
         " ",
         ft,
         hl_bg,
-        lsp_status, -- filetype/lsp status
+        lsp_status,
         right_arrow,
         "",
         left_arrow,
-        " %3l:%-2c ", -- line/column
+        " %3l:%-2c ",
     })
 end
 

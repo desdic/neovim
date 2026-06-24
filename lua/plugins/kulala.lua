@@ -5,13 +5,12 @@ vim.pack.add({
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "http",
     callback = function(event)
-        if vim.g.kulala_nvim_loaded then
-            return
+        if not vim.g.kulala_nvim_loaded then
+            vim.cmd("packadd kulala.nvim")
+
+            require("kulala").setup({})
+            vim.g.kulala_nvim_loaded = true
         end
-
-        vim.cmd("packadd kulala.nvim")
-
-        require("kulala").setup({})
 
         local opts = { buffer = event.buf, remap = false }
 
@@ -34,7 +33,5 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.keymap.set("n", "<leader>Rr", function()
             require("kulala").replay()
         end, opts)
-
-        vim.g.kulala_nvim_loaded = true
     end,
 })

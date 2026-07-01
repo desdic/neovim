@@ -2,6 +2,34 @@ vim.pack.add({
     { src = "https://github.com/folke/snacks.nvim" },
 }, { confirm = false })
 
+local function natural_compare(a, b)
+    local function chunk_string(s)
+        local chunks = {}
+        for text, num in string.gmatch(s, "([^0-9]*)([0-9]*)") do
+            if text ~= "" then
+                table.insert(chunks, text)
+            end
+            if num ~= "" then
+                table.insert(chunks, tonumber(num))
+            end
+        end
+        return chunks
+    end
+
+    local a_chunks = chunk_string(a.text or "")
+    local b_chunks = chunk_string(b.text or "")
+
+    for i = 1, math.min(#a_chunks, #b_chunks) do
+        local ac, bc = a_chunks[i], b_chunks[i]
+        if type(ac) ~= type(bc) then
+            return type(ac) == "number" -- Numbers take precedence over text, or vice versa
+        elseif ac ~= bc then
+            return ac < bc
+        end
+    end
+    return #a_chunks < #b_chunks
+end
+
 require("snacks").setup({
     input = { enabled = true, relative = "cursor", row = -3, col = 0 },
     notifier = { enabled = false },
@@ -19,6 +47,12 @@ require("snacks").setup({
                 min_width = 180,
             },
         },
+        sort = function(a, b)
+            if a.score ~= b.score then
+                return a.score > b.score
+            end
+            return natural_compare(a, b)
+        end,
     },
     bigfile = { enabled = true },
     statuscolumn = { enabled = false },

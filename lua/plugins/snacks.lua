@@ -41,18 +41,11 @@ require("snacks").setup({
                 truncate = 120,
             },
         },
-
         layout = {
             layout = {
                 min_width = 180,
             },
         },
-        sort = function(a, b)
-            if a.score ~= b.score then
-                return a.score > b.score
-            end
-            return natural_compare(a, b)
-        end,
     },
     bigfile = { enabled = true },
     statuscolumn = { enabled = false },
@@ -70,6 +63,12 @@ require("snacks").setup({
 vim.keymap.set("n", "<leader>ff", function()
     require("snacks").picker.files({
         hidden = true,
+        sort = function(a, b)
+            if a.score ~= b.score then
+                return a.score > b.score
+            end
+            return natural_compare(a, b)
+        end,
         cwd = vim.fs.dirname(vim.fs.find({ ".git", "go.mod" }, { upward = true })[1]),
         exclude = { ".zig-cache", "vendor", ".cache" },
     })

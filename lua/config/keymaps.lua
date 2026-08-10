@@ -47,6 +47,8 @@ keymap("t", "<C-h>", [[<C-\><C-N><C-w>h]], { desc = "Move to split on the left" 
 keymap("t", "<C-j>", [[<C-\><C-N><C-w>j]], { desc = "Move to split below" })
 keymap("t", "<C-k>", [[<C-\><C-N><C-w>k]], { desc = "Move to split above" })
 keymap("t", "<C-l>", [[<C-\><C-N><C-w>l]], { desc = "Move to split on the right" })
+keymap("n", "<C-h>", [[<C-w>h]], { desc = "Move to split on the left" })
+keymap("n", "<C-l>", [[<C-w>l]], { desc = "Move to split on the right" })
 
 -- Ctrl+q to exit insert mode in terminal
 keymap("t", "<C-q>", [[<C-\><C-N>]], { desc = "ESC" })

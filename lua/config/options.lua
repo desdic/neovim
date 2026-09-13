@@ -45,6 +45,7 @@ opt.smartindent = true
 opt.autoindent = true
 
 opt.laststatus = 3 -- Single status line
+opt.autoread = true -- Auto refresh changed files
 
 o.cmdheight = 1 -- Set height to prevent 'press enter to continue'
 o.hidden = true -- Allow to switch buffer without saving

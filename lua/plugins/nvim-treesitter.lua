@@ -18,7 +18,7 @@ local parsers = {
     "json",
     "json5",
     "kdl",
-    -- "kulala_http",
+    "http",
     "lua",
     "make",
     "markdown",

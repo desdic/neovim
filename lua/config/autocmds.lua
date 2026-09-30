@@ -226,7 +226,7 @@ vim.api.nvim_create_user_command("LoadMacro", function(params)
 end, { nargs = 1 })
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "c", "cpp", "rust", "python", "lua", "markdown", "ruby" },
+    pattern = { "c", "cpp", "rust", "python", "lua", "markdown", "ruby", "http", "go", "gomod", "gosum", "json" },
     callback = function()
         vim.treesitter.start()
     end,

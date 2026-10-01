@@ -12,8 +12,8 @@ vim.defer_fn(function()
         disable_indentation = true,
         aliases = {
             yamllist = "docker-compose,github-workflow-steps",
-            work = "cheflxchost,github-workflow-steps,pytest,ipam",
-            all = "cheflxchost,pytest,ipam,functions,labels",
+            work = "cheflxchost,github-workflow-steps,pytest,http",
+            all = "cheflxchost,pytest,functions,labels,http",
         },
     })
 

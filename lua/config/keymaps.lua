@@ -90,6 +90,4 @@ keymap("n", "U", "<C-r>", { desc = "Redo" })
 -- Quickly go to the end of the line while in insert mode.
 keymap({ "i", "c" }, "<C-l>", "<C-o>A", { desc = "Go to the end of the line" })
 
-keymap("n", "Q", "<cmd>q<CR>")
-
 keymap("n", "<leader>qq", ":silent! cfdo norm! @q", { desc = "Run macro on quickfix list" })

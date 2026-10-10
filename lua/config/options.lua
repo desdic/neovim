@@ -1,6 +1,8 @@
 DATA_PATH = vim.fn.stdpath("data")
 HOME_PATH = vim.env.HOME
 
+require("vim._core.ui2").enable({})
+
 vim.fn.mkdir(vim.fn.stdpath("data") .. "site/spell", "p") -- make sure spelldir is created
 
 local g = vim.g -- Global

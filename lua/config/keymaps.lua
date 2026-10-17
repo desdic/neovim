@@ -12,13 +12,13 @@ keymap("n", "<leader>mo", function()
     require("core.mouse").toggle()
 end, { silent = true, noremap = true, desc = "Toggle mouse" })
 
-keymap("n", "Y", "yg$", { silent = true, noremap = true, desc = "yank line" })
+-- keymap("n", "Y", "yg$", { silent = true, noremap = true, desc = "yank line" })
 keymap({ "n", "v" }, "<leader>y", '"+y', { silent = true, noremap = true, desc = "yank to clipboard" })
 
 -- The mapping xnoremap p "_dP changes the behavior of p when pasting over selected text
 -- which is at the end of a line. That occurs because when text at the end of a line is deleted, the cursor
 -- moves back to the last character on the line, and P then pastes before that last character.
-keymap({ "n", "v" }, "<leader>dp", '"_d', { silent = true, noremap = true, desc = "delete, don't save in register" })
+-- keymap({ "n", "v" }, "<leader>dp", '"_d', { silent = true, noremap = true, desc = "delete, don't save in register" })
 
 -- Try to keep current line in center
 keymap("n", "n", "nzzzv", { silent = true, noremap = true, desc = "search next and center" })
@@ -43,15 +43,8 @@ end, { expr = true, desc = "Delete line but if empty don't put it in any regiest
 keymap("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move visual line down" })
 keymap("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move visual line up" })
 
-keymap("t", "<C-h>", [[<C-\><C-N><C-w>h]], { desc = "Move to split on the left" })
-keymap("t", "<C-j>", [[<C-\><C-N><C-w>j]], { desc = "Move to split below" })
-keymap("t", "<C-k>", [[<C-\><C-N><C-w>k]], { desc = "Move to split above" })
-keymap("t", "<C-l>", [[<C-\><C-N><C-w>l]], { desc = "Move to split on the right" })
-keymap("n", "<C-h>", [[<C-w>h]], { desc = "Move to split on the left" })
-keymap("n", "<C-l>", [[<C-w>l]], { desc = "Move to split on the right" })
-
 -- Ctrl+q to exit insert mode in terminal
-keymap("t", "<C-q>", [[<C-\><C-N>]], { desc = "ESC" })
+keymap("t", "<C-q>", [[<C-\><C-N>]], { desc = "Escape the terminal" })
 
 keymap("n", "<leader>tit", ":InspectTree<CR>", { desc = "Open treesitter object browser" })
 
@@ -73,10 +66,10 @@ keymap("n", "U", "<C-r>", { desc = "Redo" })
 keymap("n", "j", [[(v:count > 1 ? 'm`' . v:count : 'g') . 'j']], { expr = true })
 keymap("n", "k", [[(v:count > 1 ? 'm`' . v:count : 'g') . 'k']], { expr = true })
 
-keymap("n", "<M-j>", "<cmd>cnext<CR>", { desc = "quickfix next" })
-keymap("n", "<M-k>", "<cmd>cprev<CR>", { desc = "quickfix prev" })
+-- keymap("n", "<M-j>", "<cmd>cnext<CR>", { desc = "quickfix next" })
+-- keymap("n", "<M-k>", "<cmd>cprev<CR>", { desc = "quickfix prev" })
 
-keymap("n", "<leader>sf", "<cmd>:source %<CR>", { desc = "source current lua file" })
+-- keymap("n", "<leader>sf", "<cmd>:source %<CR>", { desc = "source current lua file" })
 
 keymap("n", "<leader>st", function()
     vim.cmd("setlocal spell!")

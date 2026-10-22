@@ -43,6 +43,13 @@ end, { expr = true, desc = "Delete line but if empty don't put it in any regiest
 keymap("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move visual line down" })
 keymap("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move visual line up" })
 
+keymap("n", "<C-h>", [[<C-w>h]], { desc = "Move to split on the left" })
+keymap("n", "<C-l>", [[<C-w>l]], { desc = "Move to split on the right" })
+keymap("t", "<C-h>", [[<C-\><C-N><C-w>h]], { desc = "Move to split on the left" })
+keymap("t", "<C-j>", [[<C-\><C-N><C-w>j]], { desc = "Move to split below" })
+keymap("t", "<C-k>", [[<C-\><C-N><C-w>k]], { desc = "Move to split above" })
+keymap("t", "<C-l>", [[<C-\><C-N><C-w>l]], { desc = "Move to split on the right" })
+
 -- Ctrl+q to exit insert mode in terminal
 keymap("t", "<C-q>", [[<C-\><C-N>]], { desc = "Escape the terminal" })
 
@@ -84,3 +91,9 @@ keymap("n", "U", "<C-r>", { desc = "Redo" })
 keymap({ "i", "c" }, "<C-l>", "<C-o>A", { desc = "Go to the end of the line" })
 
 keymap("n", "<leader>qq", ":silent! cfdo norm! @q", { desc = "Run macro on quickfix list" })
+
+-- remap C-l to C-q
+keymap("n", "<C-q>", function()
+    local mc_ns = vim.api.nvim_create_namespace("nvim.multicursor")
+    vim.api.nvim_buf_clear_namespace(0, mc_ns, 0, -1)
+end, { desc = "Clear multicursor" })

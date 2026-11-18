@@ -7,7 +7,9 @@ vim.api.nvim_create_autocmd("FileType", {
     pattern = "http",
     callback = function(event)
         if not vim.g.axon_nvim_loaded then
-            require("axon").setup({})
+            require("axon").setup({
+                win_options = { number = true, relativenumber = true },
+            })
             vim.g.axon_nvim_loaded = true
         end
 
